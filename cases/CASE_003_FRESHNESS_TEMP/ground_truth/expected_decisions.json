@@ -1,0 +1,51 @@
+[
+  {
+    "decision_id": "D001",
+    "decision": "Classify the lot as short-dated and freshness-noncompliant, not expired.",
+    "importance": "REQUIRED",
+    "depends_on": ["F001", "F002", "F003", "F004", "F005", "F006", "F007"],
+    "policy_basis": ["company/northstar/handbook/02_PRODUCT_FRESHNESS.md"]
+  },
+  {
+    "decision_id": "D002",
+    "decision": "Treat the MRL failure as a commercial freshness issue requiring Freshness Hold and separate exception/disposition analysis; do not infer a safety failure or recall from short dating alone.",
+    "importance": "REQUIRED",
+    "depends_on": ["F007", "F008", "F009", "F016"],
+    "policy_basis": ["company/northstar/handbook/02_PRODUCT_FRESHNESS.md"]
+  },
+  {
+    "decision_id": "D003",
+    "decision": "Recognize that the two initial product readings above 41°F triggered Temperature Hold and expanded sampling.",
+    "importance": "REQUIRED",
+    "depends_on": ["F010", "F011", "F012"],
+    "policy_basis": ["company/northstar/handbook/07_DISTRIBUTION_CENTER_RECEIVING.md"]
+  },
+  {
+    "decision_id": "D004",
+    "decision": "Maintain Temperature Hold for all 240 cases because expanded sampling still contains out-of-spec readings and Q&R has not issued technical disposition.",
+    "importance": "REQUIRED",
+    "depends_on": ["F013", "F014", "F015"],
+    "policy_basis": ["company/northstar/handbook/06_QUALITY_AND_COMPLIANCE.md", "company/northstar/handbook/07_DISTRIBUTION_CENTER_RECEIVING.md"]
+  },
+  {
+    "decision_id": "D005",
+    "decision": "Route technical time/temperature evaluation and any release, restricted disposition, or rejection decision to the Director Q&R or delegated Q&R authority.",
+    "importance": "REQUIRED",
+    "depends_on": ["F013", "F015"],
+    "policy_basis": ["company/northstar/handbook/06_QUALITY_AND_COMPLIANCE.md", "company/northstar/handbook/07_DISTRIBUTION_CENTER_RECEIVING.md"]
+  },
+  {
+    "decision_id": "D006",
+    "decision": "If Northstar considers accepting the R3 short-dated product after the temperature concern is technically resolved, require a lot/quantity-specific Freshness Exception with Merchandising Manager and Director Q&R approval and a written reason for the retroactive request; any safety concern remains non-waivable.",
+    "importance": "IMPORTANT",
+    "depends_on": ["F001", "F007", "F008"],
+    "policy_basis": ["company/northstar/handbook/02_PRODUCT_FRESHNESS.md"]
+  },
+  {
+    "decision_id": "D007",
+    "decision": "Synthesize the shipment status as held pending authorized Q&R disposition, with the commercial freshness branch still open and no declared recall.",
+    "importance": "REQUIRED",
+    "depends_on": ["F007", "F009", "F014", "F015", "F017"],
+    "policy_basis": ["company/northstar/handbook/02_PRODUCT_FRESHNESS.md", "company/northstar/handbook/06_QUALITY_AND_COMPLIANCE.md", "company/northstar/handbook/07_DISTRIBUTION_CENTER_RECEIVING.md"]
+  }
+]

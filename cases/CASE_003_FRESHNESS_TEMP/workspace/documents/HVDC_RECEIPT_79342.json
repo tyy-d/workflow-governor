@@ -1,0 +1,19 @@
+{
+  "receipt_id": "HVDC-RCPT-260910-061",
+  "facility": "HVDC",
+  "po": "PO-79342",
+  "asn": "ASN-79342",
+  "appointment": "DS-100381",
+  "gate_arrival_time": "2026-09-10T08:18:00-04:00",
+  "northstar_receipt_date": "2026-09-10",
+  "door_assigned_time": "2026-09-10T08:31:00-04:00",
+  "unload_start": "2026-09-10T08:39:00-04:00",
+  "unload_end": "2026-09-10T09:28:00-04:00",
+  "item": "ITEM-48217",
+  "lot": "GVK-260823-A",
+  "cases_presented": 240,
+  "cases_saleable": 0,
+  "cases_held": 240,
+  "receiving_disposition": "HELD",
+  "linked_records": ["RER-260910-031", "TH-260910-014", "FH-260910-009"]
+}

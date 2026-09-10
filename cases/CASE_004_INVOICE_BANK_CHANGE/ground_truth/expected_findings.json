@@ -1,0 +1,104 @@
+[
+  {
+    "finding_id": "F001",
+    "finding": "PO-80417 Rev 2 is the latest authorized PO revision; Rev 1 is superseded.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/PO_80417_REV1.md", "workspace/documents/PO_80417_REV2.md", "workspace/spreadsheets/VENDORLINK_PO_TRANSMISSION_LOG_80417.csv"]
+  },
+  {
+    "finding_id": "F002",
+    "finding": "The authorized line is 10 CASE of ITEM-73118 at $20.00 per CASE in USD, for a $200.00 PO line value, with no separate charges authorized.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/PO_80417_REV2.md", "workspace/documents/ACK_PO_80417_REV2.json"]
+  },
+  {
+    "finding_id": "F003",
+    "finding": "HVDC accepted 10 CASE against PO-80417 line 1; no units were rejected.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/RECEIPT_80417.json", "workspace/spreadsheets/HVDC_RECEIPT_EXPORT_2026-09-04.csv"]
+  },
+  {
+    "finding_id": "F004",
+    "finding": "INV-SB-10492 invoices 10 CASE at $20.08 per CASE in USD, line and invoice total $200.80, with all separate charges at $0.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/INVOICE_INV-SB-10492.md", "workspace/documents/EDI_INVOICE_INV-SB-10492.json"]
+  },
+  {
+    "finding_id": "F005",
+    "finding": "Cumulative invoiced quantity equals accepted receipt quantity (10 CASE), so the quantity condition passes.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/RECEIPT_80417.json", "workspace/documents/EDI_INVOICE_INV-SB-10492.json"]
+  },
+  {
+    "finding_id": "F006",
+    "finding": "Invoice currency and UOM match the PO (USD and CASE), and unauthorized freight, handling, tax, deposit, and miscellaneous charges total $0.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/PO_80417_REV2.md", "workspace/documents/EDI_INVOICE_INV-SB-10492.json"]
+  },
+  {
+    "finding_id": "F007",
+    "finding": "The invoice line variance is $200.80 minus $200.00 = $0.80.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/PO_80417_REV2.md", "workspace/documents/EDI_INVOICE_INV-SB-10492.json"]
+  },
+  {
+    "finding_id": "F008",
+    "finding": "The price variance is $0.80 / $200.00 = 0.40% of PO line value.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/PO_80417_REV2.md", "workspace/documents/EDI_INVOICE_INV-SB-10492.json"]
+  },
+  {
+    "finding_id": "F009",
+    "finding": "The $0.80 line variance passes the $1.00-per-invoice-line cap but exceeds the 0.25% cap of $0.50; because both conditions are required, auto-match fails.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/INVOICE_EXCEPTION_IER-260908-022.md"]
+  },
+  {
+    "finding_id": "F010",
+    "finding": "The invoice passed structural validation, is not identified as a duplicate, and is in Exception Review with open IER-260908-022 rather than Approved for Payment.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/VENDORLINK_INVOICE_INV-SB-10492.json", "workspace/documents/INVOICE_EXCEPTION_IER-260908-022.md"]
+  },
+  {
+    "finding_id": "F011",
+    "finding": "A known vendor AR contact requested new bank instructions by email and attached a plausible account notice referencing the correct NVID and invoice.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/inbox/EMAIL_BANK_CHANGE_2026-09-09.md", "workspace/documents/BANK_INFORMATION_SILVER_BIRCH_2026-09-09.md", "workspace/documents/VENDOR_CONTACT_ROSTER_NVID-57264.md"]
+  },
+  {
+    "finding_id": "F012",
+    "finding": "No secure VendorLink bank-change submission exists and independent AP verification has not started.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/AP_VERIFICATION_STATUS_NVID-57264.json", "workspace/documents/VENDORLINK_PAYMENT_PROFILE_NVID-57264.json"]
+  },
+  {
+    "finding_id": "F013",
+    "finding": "The existing North Coast Commerce Bank profile remains the current verified payment profile; the requested Harbor Lantern account is not effective.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/VENDORLINK_PAYMENT_PROFILE_NVID-57264.json", "workspace/documents/AP_VERIFICATION_STATUS_NVID-57264.json"]
+  },
+  {
+    "finding_id": "F014",
+    "finding": "Payment Hold PH-260909-006 is active pending secure submission and independent AP verification.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/PAYMENT_HOLD_PH-260909-006.json", "workspace/inbox/INTERNAL_AP_REVIEW_2026-09-10.md"]
+  },
+  {
+    "finding_id": "F015",
+    "finding": "NVID-57264 remains Active; the Payment Hold has not changed vendor standing.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/VENDORLINK_VENDOR_PROFILE_NVID-57264.json", "workspace/documents/PAYMENT_HOLD_PH-260909-006.json"]
+  },
+  {
+    "finding_id": "F016",
+    "finding": "The invoice exception and the bank-change control are independent branches: evidence supporting one does not resolve or authenticate the other.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/VENDORLINK_INVOICE_INV-SB-10492.json", "workspace/documents/AP_VERIFICATION_STATUS_NVID-57264.json", "workspace/inbox/INTERNAL_AP_REVIEW_2026-09-10.md"]
+  },
+  {
+    "finding_id": "F017",
+    "finding": "Procurement has not authorized a post-Rev-2 surcharge or price change.",
+    "importance": "IMPORTANT",
+    "evidence_refs": ["workspace/inbox/EMAIL_PROCUREMENT_CONTEXT_2026-09-10.md", "workspace/spreadsheets/VENDORLINK_PO_TRANSMISSION_LOG_80417.csv"]
+  }
+]

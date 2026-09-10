@@ -1,0 +1,14 @@
+{
+  "record_type": "BANK_CHANGE_VERIFICATION_STATUS",
+  "nvid": "NVID-57264",
+  "reviewed_at": "2026-09-09T15:02:00-04:00",
+  "request_received_channel": "EMAIL",
+  "secure_vendorlink_submission": "NOT_RECEIVED",
+  "vendorlink_change_request_id": null,
+  "independent_ap_verification": "NOT_STARTED",
+  "established_verification_contact": "Iris Bell, Treasury Director",
+  "established_contact_method_on_file": "Previously verified callback profile VC-57264-02",
+  "new_banking_effective_in_vendorlink": false,
+  "current_verified_profile": "Existing North Coast Commerce Bank profile",
+  "control_status": "INCOMPLETE"
+}

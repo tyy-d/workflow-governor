@@ -1,0 +1,12 @@
+{
+  "appointment_id": "DS-100381",
+  "status": "CONFIRMED",
+  "confirmed_at": "2026-09-04T11:12:00-04:00",
+  "appointment_time": "2026-09-10T08:30:00-04:00",
+  "facility": "HVDC",
+  "shipment": "ASN-79342",
+  "po": "PO-79342",
+  "type": "LIVE_UNLOAD",
+  "temperature_controlled": true,
+  "door": "R-06"
+}

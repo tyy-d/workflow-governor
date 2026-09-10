@@ -1,0 +1,4 @@
+ier_id,nvid,invoice_number,po_number,invoice_status,exception_category,opened_at,owner,status,invoice_total,payment_hold_id
+IER-260907-019,NVID-33018,INV-AC-8801,PO-80411,Exception Review,RECEIPT_QUANTITY,2026-09-07T13:20:00-04:00,DC Operations,OPEN,640.00,
+IER-260908-022,NVID-57264,INV-SB-10492,PO-80417,Exception Review,PRICE_VARIANCE,2026-09-08T09:08:00-04:00,Procurement,OPEN,200.80,PH-260909-006
+IER-260909-024,NVID-14095,INV-DM-7786,PO-80426,Exception Review,MISSING_LINE_ID,2026-09-09T10:11:00-04:00,Accounts Payable,OPEN,918.00,

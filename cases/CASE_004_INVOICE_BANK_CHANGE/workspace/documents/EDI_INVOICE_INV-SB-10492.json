@@ -1,0 +1,29 @@
+{
+  "transaction_type": "INVOICE",
+  "channel": "APPROVED_EDI",
+  "received_at": "2026-09-08T09:05:00-04:00",
+  "structural_validation": "PASSED",
+  "nvid": "NVID-57264",
+  "legal_vendor_name": "Silver Birch Supply Co.",
+  "invoice_number": "INV-SB-10492",
+  "invoice_date": "2026-09-08",
+  "po_number": "PO-80417",
+  "receipt_reference": "HVDC-RCPT-260904-073",
+  "currency": "USD",
+  "lines": [
+    {
+      "po_line": 1,
+      "item": "ITEM-73118",
+      "quantity": 10,
+      "uom": "CASE",
+      "unit_price": 20.08,
+      "line_extension": 200.80
+    }
+  ],
+  "freight": 0.00,
+  "handling": 0.00,
+  "tax": 0.00,
+  "deposit": 0.00,
+  "miscellaneous": 0.00,
+  "invoice_total": 200.80
+}

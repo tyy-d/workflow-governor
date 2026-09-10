@@ -1,0 +1,17 @@
+{
+  "hold_id": "PH-260909-006",
+  "hold_type": "Payment Hold",
+  "nvid": "NVID-57264",
+  "status": "ACTIVE",
+  "opened_at": "2026-09-09T15:05:00-04:00",
+  "opened_by": "Noah Kim, AP Supervisor — Merchandise",
+  "reason": "Emailed bank-account change request received; secure VendorLink submission and independent AP verification incomplete",
+  "applies_to": ["INV-SB-10492", "All pending disbursements for NVID-57264"],
+  "release_conditions": [
+    "Secure VendorLink bank-change workflow submitted",
+    "Independent AP verification completed through established or approved fraud-control method",
+    "AP records disposition and effective payment profile"
+  ],
+  "vendor_status_effect": "NONE",
+  "released_at": null
+}

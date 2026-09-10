@@ -1,0 +1,47 @@
+[
+  {
+    "work_type": "Latest PO revision selection, record-key joins, duplicate-key check, and PO/receipt/invoice field comparison",
+    "acceptable_executors": ["DETERMINISTIC", "MODEL", "HUMAN_WITH_RELEVANT_SKILL", "MULTIPLE_ACCEPTABLE"],
+    "notes": "P003 is a strong fit when the record-authority and matching rules are supplied; P006 can perform the full AP comparison."
+  },
+  {
+    "work_type": "Quantity comparison, line extensions, absolute variance, percentage variance, tolerance comparisons, currency/UOM equality, and unauthorized-charge checks",
+    "acceptable_executors": ["DETERMINISTIC"],
+    "notes": "Arithmetic must be reproducible. A human or model may explain the result but should not be the sole reasonable calculator."
+  },
+  {
+    "work_type": "Invoice-status and IER interpretation",
+    "acceptable_executors": ["MODEL", "HUMAN_WITH_RELEVANT_SKILL", "MULTIPLE_ACCEPTABLE"],
+    "notes": "P006 is the strongest persona fit. P003 may identify structured mismatches but should not be assumed to know AP procedure without the policy rule."
+  },
+  {
+    "work_type": "Commercial determination that a price other than PO-80417 Rev 2 is authorized",
+    "acceptable_executors": ["AUTHORIZED_HUMAN"],
+    "notes": "Procurement owns PO pricing and commercial terms. P006 owns the AP consequence but does not invent or approve the commercial price."
+  },
+  {
+    "work_type": "Bank-change evidence review and identification of missing control steps",
+    "acceptable_executors": ["MODEL", "HUMAN_WITH_RELEVANT_SKILL", "MULTIPLE_ACCEPTABLE"],
+    "notes": "P006 is the strongest fit; P003 can compare status fields but has no bank-change authority."
+  },
+  {
+    "work_type": "Independent bank-change verification using the established contact or another approved fraud-control procedure",
+    "acceptable_executors": ["AUTHORIZED_HUMAN"],
+    "notes": "This is an AP-controlled action. Technical ability to understand the records does not confer authority; P006 may perform or supervise it within AP."
+  },
+  {
+    "work_type": "Bank-profile change authorization/completion and Payment Hold release",
+    "acceptable_executors": ["AUTHORIZED_HUMAN"],
+    "notes": "AP must complete the controlled workflow only after secure VendorLink submission and independent verification."
+  },
+  {
+    "work_type": "Separation of invoice matching from banking authorization and synthesis of payment constraints",
+    "acceptable_executors": ["MODEL", "HUMAN_WITH_RELEVANT_SKILL", "MULTIPLE_ACCEPTABLE"],
+    "notes": "P006 can own the AP synthesis. P003 is useful for the analytical branch and should narrow away from AP authorization."
+  },
+  {
+    "work_type": "Final approval of INV-SB-10492 for payment",
+    "acceptable_executors": ["AUTHORIZED_HUMAN"],
+    "notes": "An authorized AP operator may approve only after the invoice exception and applicable payment controls are resolved."
+  }
+]

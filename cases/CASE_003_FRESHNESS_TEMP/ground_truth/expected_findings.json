@@ -1,0 +1,104 @@
+[
+  {
+    "finding_id": "F001",
+    "finding": "ITEM-48217 is an R3 refrigerated ready-to-eat TCS food governed by active AFP-48217-03.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/ITEM_MASTER_ITEM-48217.json", "workspace/documents/AFP_ITEM-48217.json", "workspace/documents/PRODUCT_SPEC_ITEM-48217.md"]
+  },
+  {
+    "finding_id": "F002",
+    "finding": "The approved DTSL is 45 calendar days from pack date and the controlling ELD is the printed USE BY date.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/AFP_ITEM-48217.json", "workspace/documents/LOT_RECORD_ITEM-48217_LOT-GVK-260823-A.md"]
+  },
+  {
+    "finding_id": "F003",
+    "finding": "The applicable MRL is 65% of DTSL, rounded up: ceil(45 × 0.65) = 30 calendar days.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/AFP_ITEM-48217.json"]
+  },
+  {
+    "finding_id": "F004",
+    "finding": "Gate Arrival Time establishes the Northstar Receipt Date as 2026-09-10.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/HVDC_RECEIPT_79342.json", "workspace/spreadsheets/RECEIVING_LOG_HVDC_2026-09-10.csv"]
+  },
+  {
+    "finding_id": "F005",
+    "finding": "All 240 cases are lot GVK-260823-A with controlling ELD 2026-10-07.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/LOT_RECORD_ITEM-48217_LOT-GVK-260823-A.md", "workspace/documents/PACKING_LIST_79342.md", "workspace/documents/FRESHNESS_INSPECTION_79342.md"]
+  },
+  {
+    "finding_id": "F006",
+    "finding": "Actual Remaining Life is 27 calendar days because receipt date is day 0 and 2026-10-07 minus 2026-09-10 equals 27 days.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/HVDC_RECEIPT_79342.json", "workspace/documents/LOT_RECORD_ITEM-48217_LOT-GVK-260823-A.md"]
+  },
+  {
+    "finding_id": "F007",
+    "finding": "The lot fails MRL by 3 days (27 actual versus 30 required) but is not expired because actual Remaining Life is positive.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/AFP_ITEM-48217.json", "workspace/documents/HVDC_RECEIPT_79342.json", "workspace/documents/LOT_RECORD_ITEM-48217_LOT-GVK-260823-A.md"]
+  },
+  {
+    "finding_id": "F008",
+    "finding": "No approved Freshness Exception is attached, and the vendor confirms none was requested before shipment.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/FRESHNESS_INSPECTION_79342.md", "workspace/documents/FRESHNESS_HOLD_FH-260910-009.json", "workspace/documents/VENDOR_RESPONSE_2026-09-10.md"]
+  },
+  {
+    "finding_id": "F009",
+    "finding": "Failed MRL is ordinarily a commercial freshness failure and does not by itself establish unsafe product or a recall.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/AFP_ITEM-48217.json", "workspace/inbox/EMAIL_OPERATIONS_FRESHNESS_2026-09-10.md"]
+  },
+  {
+    "finding_id": "F010",
+    "finding": "The applicable product-temperature receiving maximum is 41°F.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/AFP_ITEM-48217.json", "workspace/documents/PRODUCT_SPEC_ITEM-48217.md"]
+  },
+  {
+    "finding_id": "F011",
+    "finding": "The required three initial spatially separated product readings were taken: 38.9°F, 42.4°F, and 43.1°F; two were out of specification.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/spreadsheets/TEMP_READINGS_INITIAL_79342.csv", "workspace/inbox/EMAIL_RECEIVING_TEAM_2026-09-10.md"]
+  },
+  {
+    "finding_id": "F012",
+    "finding": "Any out-of-spec product reading triggers Temperature Hold and expanded sampling rather than averaging the readings.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/spreadsheets/TEMP_READINGS_INITIAL_79342.csv", "workspace/documents/TEMPERATURE_HOLD_TH-260910-014.json"]
+  },
+  {
+    "finding_id": "F013",
+    "finding": "Six expanded product readings were taken; four remain out of specification at 42.0°F, 42.7°F, 43.3°F, and 41.8°F.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/spreadsheets/TEMP_READINGS_EXPANDED_79342.csv"]
+  },
+  {
+    "finding_id": "F014",
+    "finding": "All 240 cases remain segregated in refrigerated hold zone H-C2 and are not saleable.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/HVDC_RECEIPT_79342.json", "workspace/documents/RECEIVING_EXCEPTION_RER-260910-031.md", "workspace/documents/TEMPERATURE_HOLD_TH-260910-014.json"]
+  },
+  {
+    "finding_id": "F015",
+    "finding": "The Temperature Hold has no release record and Q&R technical disposition is unresolved.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/TEMPERATURE_HOLD_TH-260910-014.json", "workspace/documents/QR_INTAKE_QI-260910-088.md"]
+  },
+  {
+    "finding_id": "F016",
+    "finding": "Eric Nolan's recall statement is an unverified human interpretation, not a declared recall or authoritative policy record.",
+    "importance": "IMPORTANT",
+    "evidence_refs": ["workspace/inbox/EMAIL_OPERATIONS_FRESHNESS_2026-09-10.md", "workspace/documents/QR_INTAKE_QI-260910-088.md"]
+  },
+  {
+    "finding_id": "F017",
+    "finding": "The freshness and temperature concerns are independent observations affecting the same shipment.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/RECEIVING_EXCEPTION_RER-260910-031.md", "workspace/inbox/EMAIL_QR_NOTIFICATION_2026-09-10.md"]
+  }
+]

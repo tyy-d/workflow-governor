@@ -1,0 +1,21 @@
+{
+  "receipt_id": "HVDC-RCPT-260904-073",
+  "status": "CLOSED_ACCEPTED",
+  "northstar_receipt_date": "2026-09-04",
+  "closed_at": "2026-09-04T11:36:00-04:00",
+  "po_number": "PO-80417",
+  "po_revision": 2,
+  "asn_id": "ASN-80417",
+  "nvid": "NVID-57264",
+  "lines": [
+    {
+      "po_line": 1,
+      "item": "ITEM-73118",
+      "quantity_presented": 10,
+      "quantity_accepted": 10,
+      "quantity_rejected": 0,
+      "uom": "CASE"
+    }
+  ],
+  "receiving_exception": null
+}

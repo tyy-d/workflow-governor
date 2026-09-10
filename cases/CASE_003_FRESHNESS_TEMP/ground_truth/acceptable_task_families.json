@@ -1,0 +1,66 @@
+{
+  "required_work": [
+    {
+      "task_family": "identify_applicable_freshness_profile",
+      "description": "Match the item and lot evidence to the active AFP and its DTSL, date meaning, storage, MRL, and temperature fields."
+    },
+    {
+      "task_family": "calculate_remaining_shelf_life",
+      "description": "Calculate required MRL days and actual Remaining Life using the Northstar Receipt Date as day 0."
+    },
+    {
+      "task_family": "evaluate_freshness_compliance",
+      "description": "Determine short-dated versus compliant versus expired status and check for an approved Freshness Exception."
+    },
+    {
+      "task_family": "review_receiving_temperature_evidence",
+      "description": "Identify the applicable limit and compare the initial spatially separated product readings."
+    },
+    {
+      "task_family": "apply_expanded_temperature_check",
+      "description": "Verify the expansion trigger, sampling count, and results without averaging away exceptions."
+    },
+    {
+      "task_family": "distinguish_commercial_and_safety_issues",
+      "description": "Keep short-date freshness, potential temperature safety/quality concern, and recall authority conceptually separate."
+    },
+    {
+      "task_family": "determine_hold_and_authority_requirements",
+      "description": "Confirm containment and identify the authority required for technical disposition or release."
+    },
+    {
+      "task_family": "reconcile_shipment_disposition",
+      "description": "Combine the two branches into the current shipment-level state while preserving unresolved decisions."
+    },
+    {
+      "task_family": "prepare_case_summary",
+      "description": "Communicate facts, calculations, current holds, owners, and next actions without overstating the evidence."
+    }
+  ],
+  "optional_work": [
+    {
+      "task_family": "verify_visible_lot_and_date",
+      "description": "Have a receiving-capable human verify the recorded visible case date and lot evidence."
+    },
+    {
+      "task_family": "request_supporting_temperature_history",
+      "description": "Q&R may request vendor loading/cold-room evidence as part of technical disposition."
+    },
+    {
+      "task_family": "coordinate_freshness_exception_review",
+      "description": "Explore an FE only if Northstar wants commercial acceptance and all required technical/commercial approvals can be obtained."
+    }
+  ],
+  "acceptable_groupings": [
+    "AFP identification, MRL arithmetic, and freshness classification may be combined.",
+    "Initial and expanded temperature comparisons may be one structured receiving-evidence task.",
+    "Hold-state reconciliation and the final shipment summary may be combined.",
+    "A specialist may evaluate both branches, but must preserve their distinct policy consequences and authorities."
+  ],
+  "unnecessary_work": [
+    "Transportation responsibility analysis; receiving evidence is sufficient and no carrier-causation decision is needed.",
+    "Recall execution or store notification because no recall or withdrawal has been declared.",
+    "Full supplier facility audit or unrelated product testing review.",
+    "Recalculating OTIF or invoice consequences."
+  ]
+}

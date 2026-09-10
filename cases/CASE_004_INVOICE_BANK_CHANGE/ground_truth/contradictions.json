@@ -1,0 +1,24 @@
+[
+  {
+    "contradiction_id": "C001",
+    "sources": [
+      "workspace/inbox/EMAIL_BANK_CHANGE_2026-09-09.md",
+      "workspace/documents/VENDORLINK_PAYMENT_PROFILE_NVID-57264.json",
+      "workspace/documents/AP_VERIFICATION_STATUS_NVID-57264.json"
+    ],
+    "description": "The vendor email describes its new bank information as an account update to apply, while Northstar's controlled records show no submitted VendorLink change and retain the existing verified profile.",
+    "resolution": "The email expresses a request, not an effective Northstar master-data change. The existing verified profile remains controlling until secure submission and independent AP verification are complete.",
+    "must_resolve": true
+  },
+  {
+    "contradiction_id": "C002",
+    "sources": [
+      "workspace/inbox/EMAIL_VENDOR_PAYMENT_FOLLOWUP_2026-09-10.md",
+      "workspace/documents/PO_80417_REV2.md",
+      "workspace/inbox/EMAIL_PROCUREMENT_CONTEXT_2026-09-10.md"
+    ],
+    "description": "The vendor says the $20.08 invoice price is correct for a September paper-cost update, but the latest authorized PO price is $20.00 and Procurement has no later revision or approved surcharge.",
+    "resolution": "PO-80417 Rev 2 remains the commercial authority. The invoice stays in Exception Review unless Procurement authorizes a change through the proper process or the vendor corrects the invoice.",
+    "must_resolve": true
+  }
+]

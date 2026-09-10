@@ -1,0 +1,36 @@
+{
+  "case_status": "PAYMENT_BLOCKED_PENDING_RESOLUTION",
+  "required_conclusions": [
+    "INV-SB-10492 does not satisfy Northstar auto-match criteria because its $0.80 line-price variance exceeds the smaller 0.25% tolerance cap of $0.50, even though it passes the $1.00 line cap.",
+    "The quantity condition passes at 10 invoiced CASE versus 10 accepted CASE; UOM and USD currency match; unauthorized separate charges are $0.",
+    "The invoice remains in Exception Review under IER-260908-022 and is not Approved for Payment.",
+    "The emailed bank-change request and attached notice are insufficient to change controlled banking data.",
+    "No secure VendorLink bank-change request exists, independent AP verification has not started, and the requested Harbor Lantern account is not effective.",
+    "Payment Hold PH-260909-006 remains active, and payment must not be redirected to the requested new account.",
+    "The invoice exception and bank-change controls are independent and both must be resolved before applicable payment release.",
+    "Silver Birch Supply Co. remains an Active vendor; Payment Hold does not itself alter vendor standing."
+  ],
+  "required_next_actions": [
+    "Keep IER-260908-022 open and obtain a corrected invoice at the authorized $20.00 price or a proper Procurement commercial determination reflected through controlled records.",
+    "Require Silver Birch to submit the bank change through the secure VendorLink workflow.",
+    "Have authorized AP perform independent verification using the established contact method or another approved fraud-control procedure.",
+    "Maintain PH-260909-006 until AP documents the bank-change disposition and release conditions are satisfied.",
+    "Approve and schedule payment only after the invoice exception and all applicable banking/payment controls are resolved."
+  ],
+  "acceptable_uncertainties": [
+    "Whether the vendor will correct the invoice or Procurement will authorize a different commercial price through the proper process.",
+    "Whether independent verification will validate or reject the requested bank change.",
+    "Which verified account will be effective when a later payment is ultimately scheduled."
+  ],
+  "must_not_claim": [
+    "The invoice auto-matches or is Approved for Payment.",
+    "The requested Harbor Lantern account is verified or effective.",
+    "The email or attached account notice is sufficient bank-change authority.",
+    "Payment may be sent to the requested new account.",
+    "Invoice legitimacy authenticates payment instructions.",
+    "The invoice mismatch proves fraud.",
+    "The vendor is Restricted, Suspended, or inactive.",
+    "P003 may authorize or complete the bank change.",
+    "AP may invent a new commercial price."
+  ]
+}

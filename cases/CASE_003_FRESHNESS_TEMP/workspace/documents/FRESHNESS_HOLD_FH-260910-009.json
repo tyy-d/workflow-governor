@@ -1,0 +1,14 @@
+{
+  "hold_id": "FH-260910-009",
+  "hold_type": "Freshness Hold",
+  "status": "ACTIVE_PENDING_COMMERCIAL_AND_QR_REVIEW",
+  "opened_at": "2026-09-10T09:09:00-04:00",
+  "facility": "HVDC",
+  "receipt": "HVDC-RCPT-260910-061",
+  "item": "ITEM-48217",
+  "lot": "GVK-260823-A",
+  "scope_cases": 240,
+  "reason": "Receipt-date remaining life requires comparison to active AFP MRL; no approved FE attached",
+  "freshness_exception_id": null,
+  "final_disposition": null
+}

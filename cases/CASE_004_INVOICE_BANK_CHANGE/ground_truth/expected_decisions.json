@@ -1,0 +1,58 @@
+[
+  {
+    "decision_id": "D001",
+    "decision": "Use PO-80417 Rev 2, not superseded Rev 1, as the commercial price and quantity authority for the three-way match.",
+    "importance": "REQUIRED",
+    "depends_on": ["F001", "F002"],
+    "policy_basis": ["company/northstar/handbook/01_PURCHASE_ORDERS_AND_DELIVERY_PERFORMANCE.md", "company/northstar/handbook/09_VENDOR_PORTAL_AND_INVOICING.md"]
+  },
+  {
+    "decision_id": "D002",
+    "decision": "Determine that quantity, UOM, currency, and separate-charge conditions pass, but the price condition fails because the line variance must satisfy both tolerance caps.",
+    "importance": "REQUIRED",
+    "depends_on": ["F002", "F003", "F004", "F005", "F006", "F007", "F008", "F009"],
+    "policy_basis": ["company/northstar/handbook/09_VENDOR_PORTAL_AND_INVOICING.md"]
+  },
+  {
+    "decision_id": "D003",
+    "decision": "Keep INV-SB-10492 in Exception Review under IER-260908-022; it cannot auto-match or be Approved for Payment as submitted.",
+    "importance": "REQUIRED",
+    "depends_on": ["F009", "F010"],
+    "policy_basis": ["company/northstar/handbook/09_VENDOR_PORTAL_AND_INVOICING.md"]
+  },
+  {
+    "decision_id": "D004",
+    "decision": "Resolve the price exception through the IER: Procurement owns any commercial-price determination, while AP owns the resulting invoice status and may process a corrected invoice consistent with controls.",
+    "importance": "REQUIRED",
+    "depends_on": ["F010", "F017"],
+    "policy_basis": ["company/northstar/handbook/09_VENDOR_PORTAL_AND_INVOICING.md"]
+  },
+  {
+    "decision_id": "D005",
+    "decision": "Do not change vendor banking based on the email, the known-contact status, or the attached account notice; require secure VendorLink submission plus independent AP verification through an established or approved fraud-control method.",
+    "importance": "REQUIRED",
+    "depends_on": ["F011", "F012", "F013"],
+    "policy_basis": ["company/northstar/handbook/09_VENDOR_PORTAL_AND_INVOICING.md"]
+  },
+  {
+    "decision_id": "D006",
+    "decision": "Maintain Payment Hold PH-260909-006 and do not send payment to the requested Harbor Lantern account while bank-change controls are incomplete.",
+    "importance": "REQUIRED",
+    "depends_on": ["F012", "F013", "F014"],
+    "policy_basis": ["company/northstar/handbook/09_VENDOR_PORTAL_AND_INVOICING.md"]
+  },
+  {
+    "decision_id": "D007",
+    "decision": "Do not change the vendor's Active standing merely because an AP Payment Hold is in effect.",
+    "importance": "REQUIRED",
+    "depends_on": ["F014", "F015"],
+    "policy_basis": ["company/northstar/handbook/09_VENDOR_PORTAL_AND_INVOICING.md"]
+  },
+  {
+    "decision_id": "D008",
+    "decision": "Keep invoice resolution and bank verification independent: resolving either branch does not satisfy the other, and payment release requires all applicable AP controls to be complete.",
+    "importance": "REQUIRED",
+    "depends_on": ["F010", "F012", "F014", "F016"],
+    "policy_basis": ["company/northstar/handbook/09_VENDOR_PORTAL_AND_INVOICING.md"]
+  }
+]

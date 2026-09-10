@@ -1,0 +1,17 @@
+{
+  "hold_id": "TH-260910-014",
+  "hold_type": "Temperature Hold",
+  "status": "ACTIVE_PENDING_QR_DISPOSITION",
+  "opened_at": "2026-09-10T08:58:00-04:00",
+  "facility": "HVDC",
+  "receipt": "HVDC-RCPT-260910-061",
+  "item": "ITEM-48217",
+  "lot": "GVK-260823-A",
+  "scope_cases": 240,
+  "storage_location": "Refrigerated hold zone H-C2",
+  "trigger": "One or more initial product readings exceeded the applicable 41°F maximum",
+  "expanded_sampling_completed": true,
+  "qr_owner": "Q&R Intake Queue — Refrigerated Foods",
+  "release_authority": "Director, Quality & Regulatory or delegated Q&R authority",
+  "release_record": null
+}

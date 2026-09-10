@@ -1,0 +1,66 @@
+{
+  "required_work": [
+    {
+      "task_family": "identify_authoritative_po_and_receipt",
+      "description": "Select the latest authorized PO revision and authoritative accepted receipt quantity."
+    },
+    {
+      "task_family": "perform_three_way_match",
+      "description": "Compare the authorized PO, Northstar receipt, and vendor invoice across identity, quantity, UOM, currency, price, and charges."
+    },
+    {
+      "task_family": "calculate_invoice_variance",
+      "description": "Calculate line values, absolute price variance, percentage variance, and both tolerance results reproducibly."
+    },
+    {
+      "task_family": "determine_invoice_exception_reason",
+      "description": "Explain why structural validation passed but auto-match failed and identify the open IER/status."
+    },
+    {
+      "task_family": "review_bank_change_request",
+      "description": "Identify the requested account, sender, channel, referenced invoice, and attached support without treating them as authorization."
+    },
+    {
+      "task_family": "verify_bank_change_control_status",
+      "description": "Check the current verified profile, secure VendorLink request state, independent verification state, and Payment Hold."
+    },
+    {
+      "task_family": "separate_invoice_and_payment_control_issues",
+      "description": "Preserve independence between invoice legitimacy/matching and authority to redirect payment."
+    },
+    {
+      "task_family": "determine_payment_release_constraints",
+      "description": "Identify every unresolved control that blocks approval or payment to the requested account."
+    },
+    {
+      "task_family": "prepare_vendor_payment_status_summary",
+      "description": "Communicate current invoice, bank-control, Payment Hold, vendor-status, ownership, and next steps accurately."
+    }
+  ],
+  "optional_work": [
+    {
+      "task_family": "check_duplicate_invoice_key",
+      "description": "Confirm no active or paid invoice uses the same NVID plus invoice-number key."
+    },
+    {
+      "task_family": "request_corrected_invoice",
+      "description": "After Procurement confirms the controlling price, AP may ask the vendor to correct the invoice through the authorized channel."
+    },
+    {
+      "task_family": "perform_independent_bank_verification",
+      "description": "An authorized AP operator may execute the established verification workflow when a secure VendorLink request exists."
+    }
+  ],
+  "acceptable_groupings": [
+    "Authoritative-record selection, three-way matching, and tolerance arithmetic may be grouped.",
+    "Bank-request review, verification-status review, and Payment Hold assessment may be grouped.",
+    "Invoice and bank branches may be summarized together only if their evidence and resolution conditions remain separate.",
+    "P003 may prepare deterministic reconciliation for P006 or another AP owner without being assigned the banking action."
+  ],
+  "unnecessary_work": [
+    "Fraud adjudication; the request is procedurally insufficient but not proven malicious.",
+    "Vendor suspension or restriction review absent separate evidence of misconduct.",
+    "Chargeback, credit-memo, or formal appeal processing.",
+    "OTIF or transportation-performance calculation."
+  ]
+}

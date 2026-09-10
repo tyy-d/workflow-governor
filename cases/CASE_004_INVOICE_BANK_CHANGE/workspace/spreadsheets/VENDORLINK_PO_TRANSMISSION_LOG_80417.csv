@@ -1,0 +1,3 @@
+po_number,revision,transmitted_at,status,superseded_at,nvid,line,item,quantity,uom,unit_price,currency
+PO-80417,1,2026-08-24T10:15:00-04:00,SUPERSEDED,2026-08-25T14:20:00-04:00,NVID-57264,1,ITEM-73118,10,CASE,19.80,USD
+PO-80417,2,2026-08-25T14:20:00-04:00,AUTHORIZED_LATEST,,NVID-57264,1,ITEM-73118,10,CASE,20.00,USD

@@ -1,0 +1,32 @@
+{
+  "case_status": "HELD_PENDING_QR_DISPOSITION",
+  "required_conclusions": [
+    "ITEM-48217 lot GVK-260823-A fails its freshness requirement: 27 days actual Remaining Life versus 30 days required.",
+    "The product is short-dated but not expired.",
+    "Freshness failure is ordinarily a commercial freshness problem and alone does not establish unsafe product or a recall.",
+    "Separate receiving-temperature evidence exceeded the applicable 41°F maximum in two of three initial readings and four of six expanded readings.",
+    "All 240 cases remain segregated under Temperature Hold TH-260910-014, with linked Freshness Hold FH-260910-009.",
+    "Director Q&R or delegated Q&R authority must make the technical temperature disposition before any release.",
+    "No recall, withdrawal, Q&R release, rejection, or approved Freshness Exception is established in the initial case."
+  ],
+  "required_next_actions": [
+    "Maintain refrigerated segregation and the active Temperature Hold for all 240 cases.",
+    "Route the initial and expanded product-temperature evidence to authorized Q&R for technical evaluation and disposition.",
+    "Handle freshness separately through rejection/other commercial disposition or, after technical resolution of the temperature concern, a properly scoped retroactive R3 Freshness Exception process if acceptance is considered.",
+    "Communicate a final shipment or product disposition only after the relevant authorized decision is recorded."
+  ],
+  "acceptable_uncertainties": [
+    "Whether Q&R will ultimately release, restrict, reject, or require additional evidence for the temperature-affected lot.",
+    "Whether Northstar will pursue an R3 Freshness Exception or choose rejection/another commercial disposition after Q&R confirms the safety/regulatory position.",
+    "The root cause and responsibility for the elevated product temperatures."
+  ],
+  "must_not_claim": [
+    "The lot is expired.",
+    "A recall or withdrawal has been declared.",
+    "Short dating proves the product is unsafe.",
+    "The temperature concern was cured by expanded sampling or by acceptable readings elsewhere in the load.",
+    "The shipment may enter saleable inventory.",
+    "Procurement, Merchandising, DC Operations, P004, or P008 may override the Q&R technical hold.",
+    "A Freshness Exception has been approved."
+  ]
+}

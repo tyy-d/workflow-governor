@@ -1,0 +1,12 @@
+[
+  {
+    "contradiction_id": "C001",
+    "sources": [
+      "workspace/inbox/EMAIL_OPERATIONS_FRESHNESS_2026-09-10.md",
+      "workspace/documents/QR_INTAKE_QI-260910-088.md"
+    ],
+    "description": "Eric Nolan interprets insufficient shelf life as requiring recall, while the controlled records show separate holds, no linked recall/withdrawal, and no final product action.",
+    "resolution": "Apply current Northstar handbook authority: a failed MRL is ordinarily a commercial freshness failure, not an automatic safety failure or recall. The independent temperature issue remains on hold for Q&R disposition.",
+    "must_resolve": true
+  }
+]

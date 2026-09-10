@@ -1,0 +1,80 @@
+[
+  {
+    "event_id": "T001",
+    "timestamp": "2026-08-23T07:30:00-04:00",
+    "event": "Green Vale packed lot GVK-260823-A; the approved 45-day shelf life yields an End-of-Life Date of 2026-10-07.",
+    "evidence_refs": ["workspace/documents/LOT_RECORD_ITEM-48217_LOT-GVK-260823-A.md"]
+  },
+  {
+    "event_id": "T002",
+    "timestamp": "2026-09-01T09:10:00-04:00",
+    "event": "Northstar issued authorized PO-79342 Rev 1 for 240 cases to HVDC.",
+    "evidence_refs": ["workspace/documents/PO_79342_REV1.md"]
+  },
+  {
+    "event_id": "T003",
+    "timestamp": "2026-09-04T11:12:00-04:00",
+    "event": "DockSchedule confirmed appointment DS-100381 for September 10 at 08:30 ET.",
+    "evidence_refs": ["workspace/documents/DOCKSCHEDULE_APPOINTMENT_DS-100381.json"]
+  },
+  {
+    "event_id": "T004",
+    "timestamp": "2026-09-08T14:20:00-04:00",
+    "event": "Green Vale submitted ASN-79342 for the single lot and date group.",
+    "evidence_refs": ["workspace/documents/ASN_79342.json"]
+  },
+  {
+    "event_id": "T005",
+    "timestamp": "2026-09-09T18:10:00-04:00",
+    "event": "Pine Ridge Cold Freight departed Green Vale with trailer PRCF-2718 and seal GV982144.",
+    "evidence_refs": ["workspace/documents/BOL_79342.md"]
+  },
+  {
+    "event_id": "T006",
+    "timestamp": "2026-09-10T08:18:00-04:00",
+    "event": "The carrier presented at the HVDC gate; this establishes Northstar Receipt Date 2026-09-10.",
+    "evidence_refs": ["workspace/documents/HVDC_RECEIPT_79342.json", "workspace/spreadsheets/RECEIVING_LOG_HVDC_2026-09-10.csv"]
+  },
+  {
+    "event_id": "T007",
+    "timestamp": "2026-09-10T08:53:00-04:00",
+    "event": "Receiving completed three spatially separated initial product readings; two exceeded the 41°F maximum.",
+    "evidence_refs": ["workspace/spreadsheets/TEMP_READINGS_INITIAL_79342.csv"]
+  },
+  {
+    "event_id": "T008",
+    "timestamp": "2026-09-10T08:58:00-04:00",
+    "event": "HVDC opened Temperature Hold TH-260910-014 for all 240 cases.",
+    "evidence_refs": ["workspace/documents/TEMPERATURE_HOLD_TH-260910-014.json"]
+  },
+  {
+    "event_id": "T009",
+    "timestamp": "2026-09-10T09:09:00-04:00",
+    "event": "Receiving completed six expanded product readings; four exceeded 41°F. Freshness inspection confirmed lot/date identity and Freshness Hold was opened.",
+    "evidence_refs": ["workspace/spreadsheets/TEMP_READINGS_EXPANDED_79342.csv", "workspace/documents/FRESHNESS_INSPECTION_79342.md", "workspace/documents/FRESHNESS_HOLD_FH-260910-009.json"]
+  },
+  {
+    "event_id": "T010",
+    "timestamp": "2026-09-10T09:14:00-04:00",
+    "event": "RER-260910-031 recorded the two independent concerns and refrigerated segregation of all 240 cases.",
+    "evidence_refs": ["workspace/documents/RECEIVING_EXCEPTION_RER-260910-031.md"]
+  },
+  {
+    "event_id": "T011",
+    "timestamp": "2026-09-10T09:17:00-04:00",
+    "event": "Eric Nolan emailed an unsupported interpretation that insufficient shelf life meant recall; he had not notified stores and found no recall record.",
+    "evidence_refs": ["workspace/inbox/EMAIL_OPERATIONS_FRESHNESS_2026-09-10.md"]
+  },
+  {
+    "event_id": "T012",
+    "timestamp": "2026-09-10T09:25:00-04:00",
+    "event": "Q&R acknowledged intake and directed continued segregation without issuing technical disposition or a product action.",
+    "evidence_refs": ["workspace/documents/QR_INTAKE_QI-260910-088.md", "workspace/inbox/EMAIL_QR_NOTIFICATION_2026-09-10.md"]
+  },
+  {
+    "event_id": "T013",
+    "timestamp": "2026-09-10T10:06:00-04:00",
+    "event": "The vendor confirmed the lot/date and absence of a pre-shipment Freshness Exception.",
+    "evidence_refs": ["workspace/documents/VENDOR_RESPONSE_2026-09-10.md"]
+  }
+]

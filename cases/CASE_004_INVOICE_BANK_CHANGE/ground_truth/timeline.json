@@ -1,0 +1,74 @@
+[
+  {
+    "event_id": "T001",
+    "timestamp": "2026-08-24T10:15:00-04:00",
+    "event": "Northstar transmitted PO-80417 Rev 1 at $19.80 per CASE.",
+    "evidence_refs": ["workspace/documents/PO_80417_REV1.md", "workspace/spreadsheets/VENDORLINK_PO_TRANSMISSION_LOG_80417.csv"]
+  },
+  {
+    "event_id": "T002",
+    "timestamp": "2026-08-25T14:20:00-04:00",
+    "event": "Northstar transmitted PO-80417 Rev 2 at $20.00 per CASE, superseding Rev 1.",
+    "evidence_refs": ["workspace/documents/PO_80417_REV2.md", "workspace/spreadsheets/VENDORLINK_PO_TRANSMISSION_LOG_80417.csv"]
+  },
+  {
+    "event_id": "T003",
+    "timestamp": "2026-08-25T15:03:00-04:00",
+    "event": "Silver Birch acknowledged Rev 2 line 1 as Accepted at 10 CASE and $20.00 per CASE.",
+    "evidence_refs": ["workspace/documents/ACK_PO_80417_REV2.json"]
+  },
+  {
+    "event_id": "T004",
+    "timestamp": "2026-09-04T11:36:00-04:00",
+    "event": "HVDC closed receipt HVDC-RCPT-260904-073 with all 10 cases accepted and no rejection.",
+    "evidence_refs": ["workspace/documents/RECEIPT_80417.json", "workspace/spreadsheets/HVDC_RECEIPT_EXPORT_2026-09-04.csv"]
+  },
+  {
+    "event_id": "T005",
+    "timestamp": "2026-09-08T09:05:00-04:00",
+    "event": "VendorLink structurally received EDI invoice INV-SB-10492 for 10 CASE at $20.08 per CASE, total $200.80.",
+    "evidence_refs": ["workspace/documents/EDI_INVOICE_INV-SB-10492.json", "workspace/documents/INVOICE_INV-SB-10492.md"]
+  },
+  {
+    "event_id": "T006",
+    "timestamp": "2026-09-08T09:08:00-04:00",
+    "event": "Three-way matching opened IER-260908-022 and placed the invoice in Exception Review because the $0.80 line variance exceeded the $0.50 percentage cap.",
+    "evidence_refs": ["workspace/documents/INVOICE_EXCEPTION_IER-260908-022.md", "workspace/documents/VENDORLINK_INVOICE_INV-SB-10492.json"]
+  },
+  {
+    "event_id": "T007",
+    "timestamp": "2026-09-09T14:16:00-04:00",
+    "event": "Known vendor AR contact Lena Morris emailed new banking instructions and asked that they apply to INV-SB-10492.",
+    "evidence_refs": ["workspace/inbox/EMAIL_BANK_CHANGE_2026-09-09.md", "workspace/documents/BANK_INFORMATION_SILVER_BIRCH_2026-09-09.md"]
+  },
+  {
+    "event_id": "T008",
+    "timestamp": "2026-09-09T15:02:00-04:00",
+    "event": "AP recorded that no secure VendorLink bank-change submission had been received and independent verification had not started.",
+    "evidence_refs": ["workspace/documents/AP_VERIFICATION_STATUS_NVID-57264.json", "workspace/documents/VENDORLINK_PAYMENT_PROFILE_NVID-57264.json"]
+  },
+  {
+    "event_id": "T009",
+    "timestamp": "2026-09-09T15:05:00-04:00",
+    "event": "AP opened Payment Hold PH-260909-006 for NVID-57264 pending bank-change controls; vendor standing remained Active.",
+    "evidence_refs": ["workspace/documents/PAYMENT_HOLD_PH-260909-006.json", "workspace/documents/VENDORLINK_VENDOR_PROFILE_NVID-57264.json"]
+  },
+  {
+    "event_id": "T010",
+    "timestamp": "2026-09-10T08:42:00-04:00",
+    "event": "The vendor followed up, asserting the invoiced price was correct and asking that payment avoid the existing account.",
+    "evidence_refs": ["workspace/inbox/EMAIL_VENDOR_PAYMENT_FOLLOWUP_2026-09-10.md"]
+  },
+  {
+    "event_id": "T011",
+    "timestamp": "2026-09-10T09:01:00-04:00",
+    "event": "AP confirmed that the invoice exception and bank-control branches remained separately unresolved.",
+    "evidence_refs": ["workspace/inbox/INTERNAL_AP_REVIEW_2026-09-10.md"]
+  },
+  {
+    "event_id": "T012",
+    "timestamp": "2026-09-10T09:12:00-04:00",
+    "event": "Procurement confirmed Rev 2 remained the latest authorized price record and did not authorize the vendor's asserted surcharge.",
+    "evidence_refs": ["workspace/inbox/EMAIL_PROCUREMENT_CONTEXT_2026-09-10.md"]
+  }
+]

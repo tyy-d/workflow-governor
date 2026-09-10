@@ -1,0 +1,12 @@
+{
+  "nvid": "NVID-57264",
+  "legal_name": "Silver Birch Supply Co.",
+  "vendor_status": "Active",
+  "vendor_class": "Brand Supplier",
+  "primary_category": "Store operating supplies",
+  "transaction_channel": "APPROVED_EDI",
+  "payment_hold": true,
+  "payment_hold_id": "PH-260909-006",
+  "status_last_updated": "2026-06-18T10:00:00-04:00",
+  "payment_control_note": "Payment Hold is a separate AP control and has not changed vendor standing."
+}

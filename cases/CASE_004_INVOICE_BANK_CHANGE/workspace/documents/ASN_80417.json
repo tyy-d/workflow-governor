@@ -1,0 +1,13 @@
+{
+  "asn_id": "ASN-80417",
+  "status": "ACCEPTED",
+  "submitted_at": "2026-09-03T10:42:00-04:00",
+  "po_number": "PO-80417",
+  "po_revision": 2,
+  "nvid": "NVID-57264",
+  "destination": "HVDC",
+  "item": "ITEM-73118",
+  "quantity_shipped": 10,
+  "uom": "CASE",
+  "expected_arrival_date": "2026-09-04"
+}

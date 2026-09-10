@@ -1,0 +1,13 @@
+{
+  "record_type": "VENDOR_PAYMENT_PROFILE",
+  "nvid": "NVID-57264",
+  "profile_status": "CURRENT_VERIFIED",
+  "payment_method": "ACH",
+  "institution_name": "North Coast Commerce Bank",
+  "routing_identifier": "SYN-ABA-NCCB-01",
+  "account_identifier_masked": "SYN-OLD-8842",
+  "verified_effective_date": "2024-11-01",
+  "last_independent_verification": "2024-10-28",
+  "pending_change_request_id": null,
+  "requested_new_account_effective": false
+}

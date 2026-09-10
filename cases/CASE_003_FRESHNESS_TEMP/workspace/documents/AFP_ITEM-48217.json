@@ -1,0 +1,31 @@
+{
+  "record_type": "Approved Freshness Profile",
+  "profile_id": "AFP-48217-03",
+  "status": "APPROVED_ACTIVE",
+  "effective_date": "2026-06-01",
+  "nvid": "NVID-68421",
+  "seller_of_record": "Green Vale Kitchens LLC",
+  "northstar_item_number": "ITEM-48217",
+  "product": "Green Vale Garden Herb Yogurt Dip, 10 oz",
+  "risk_tier": "R3 Enhanced Food/Safety",
+  "product_class": "Refrigerated packaged food; refrigerated TCS food",
+  "shelf_life_start_event": "pack_date",
+  "declared_total_shelf_life_days": 45,
+  "date_code_type": "open_date",
+  "date_code_meaning": "USE BY is the controlling End-of-Life Date",
+  "decode_instructions": "Read YYYY-MM-DD after USE BY; lot format GVK-YYMMDD-Line",
+  "approved_storage_condition": "Keep refrigerated at 41°F or below",
+  "minimum_remaining_life": {
+    "type": "percentage_of_DTSL",
+    "percentage": 65,
+    "rounding": "round up to next whole calendar day",
+    "absolute_days": null
+  },
+  "receiving_product_temperature_max_f": 41,
+  "supporting_specification": "SPEC-48217-v5",
+  "approvals": {
+    "merchandising": "Maya Chen, Merchandising Manager",
+    "quality_and_regulatory": "Rachel Singh, Director Q&R",
+    "procurement_acknowledgment": "Owen Blake, Procurement Manager"
+  }
+}

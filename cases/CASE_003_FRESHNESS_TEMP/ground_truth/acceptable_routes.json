@@ -1,0 +1,47 @@
+[
+  {
+    "work_type": "Item, profile, lot, shipment, and date-field matching",
+    "acceptable_executors": ["DETERMINISTIC", "MODEL", "HUMAN_WITH_RELEVANT_SKILL", "MULTIPLE_ACCEPTABLE"],
+    "notes": "P004 can perform a narrow comparison when records are explicitly identified; P008 can verify physical lot/date evidence."
+  },
+  {
+    "work_type": "Required MRL calculation, Remaining Life calculation, date comparison, and pass/fail classification",
+    "acceptable_executors": ["DETERMINISTIC"],
+    "notes": "The calculation is ceil(45 × 0.65) = 30 required days and 2026-10-07 minus 2026-09-10 = 27 actual days. A person or model may explain but should not be the sole reasonable calculator."
+  },
+  {
+    "work_type": "Temperature-limit comparison and count of out-of-range readings",
+    "acceptable_executors": ["DETERMINISTIC"],
+    "notes": "Compare each product reading to a maximum of 41°F; do not average readings."
+  },
+  {
+    "work_type": "Physical receiving chronology, evidence sufficiency, expanded sampling, RER, and hold execution",
+    "acceptable_executors": ["MODEL", "HUMAN_WITH_RELEVANT_SKILL", "MULTIPLE_ACCEPTABLE"],
+    "notes": "P008 is the strongest persona fit. P004 may summarize chronology but lacks independent specialist receiving judgment."
+  },
+  {
+    "work_type": "Freshness-versus-safety interpretation and evaluation of the employee recall claim",
+    "acceptable_executors": ["MODEL", "HUMAN_WITH_RELEVANT_SKILL", "MULTIPLE_ACCEPTABLE"],
+    "notes": "P007 is the strongest human fit. P004 may help gather facts but should not settle the technical distinction from memory."
+  },
+  {
+    "work_type": "Technical time/temperature risk assessment and selection among continued hold, restricted disposition, release, or rejection",
+    "acceptable_executors": ["AUTHORIZED_HUMAN"],
+    "notes": "Reserved to the Director Q&R or delegated Q&R authority. P007 holds this authority; P004 and P008 do not."
+  },
+  {
+    "work_type": "Release from Temperature Hold TH-260910-014",
+    "acceptable_executors": ["AUTHORIZED_HUMAN"],
+    "notes": "Only Director Q&R or delegated Q&R authority may release the technical temperature hold."
+  },
+  {
+    "work_type": "Approval of an R3 non-safety short-date Freshness Exception",
+    "acceptable_executors": ["AUTHORIZED_HUMAN"],
+    "notes": "Requires both Merchandising Manager and Director Q&R; no FE exists initially. If promotion or material supply commitment were implicated, Procurement Manager would also be required."
+  },
+  {
+    "work_type": "Shipment-level synthesis and stakeholder summary",
+    "acceptable_executors": ["MODEL", "HUMAN_WITH_RELEVANT_SKILL", "MULTIPLE_ACCEPTABLE"],
+    "notes": "P004 is useful for coordination after verified conclusions are supplied; P007 owns technical conclusions; P008 owns receiving facts."
+  }
+]

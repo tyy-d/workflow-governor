@@ -1,0 +1,17 @@
+{
+  "record_type": "VENDORLINK_INVOICE",
+  "nvid": "NVID-57264",
+  "invoice_number": "INV-SB-10492",
+  "source_channel": "APPROVED_EDI",
+  "received_at": "2026-09-08T09:05:00-04:00",
+  "structural_validation": "PASSED",
+  "duplicate_key_check": "UNIQUE",
+  "invoice_eligible_date": "2026-09-08",
+  "payment_term": "NET_7",
+  "contractual_due_date": "2026-09-15",
+  "match_status": "EXCEPTION_REVIEW",
+  "invoice_status": "Exception Review",
+  "ier_id": "IER-260908-022",
+  "approved_for_payment": false,
+  "scheduled_payment_id": null
+}

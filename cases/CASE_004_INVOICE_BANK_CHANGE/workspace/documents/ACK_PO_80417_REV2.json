@@ -1,0 +1,18 @@
+{
+  "record_type": "PO_ACKNOWLEDGMENT",
+  "po_number": "PO-80417",
+  "revision": 2,
+  "nvid": "NVID-57264",
+  "received_at": "2026-08-25T15:03:00-04:00",
+  "line_acknowledgments": [
+    {
+      "line": 1,
+      "item": "ITEM-73118",
+      "quantity": 10,
+      "uom": "CASE",
+      "unit_price": 20.00,
+      "currency": "USD",
+      "status": "Accepted"
+    }
+  ]
+}

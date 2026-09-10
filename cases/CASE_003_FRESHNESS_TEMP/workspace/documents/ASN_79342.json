@@ -1,0 +1,16 @@
+{
+  "asn_id": "ASN-79342",
+  "submitted_at": "2026-09-08T14:20:00-04:00",
+  "po_number": "PO-79342",
+  "nvid": "NVID-68421",
+  "destination": "HVDC",
+  "carrier": "Pine Ridge Cold Freight",
+  "trailer": "PRCF-2718",
+  "seal": "GV982144",
+  "item": "ITEM-48217",
+  "lot": "GVK-260823-A",
+  "use_by": "2026-10-07",
+  "quantity_cases": 240,
+  "pallets": 8,
+  "temperature_controlled": true
+}
