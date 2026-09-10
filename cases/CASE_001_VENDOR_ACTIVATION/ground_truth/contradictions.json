@@ -1,0 +1,13 @@
+[
+  {
+    "contradiction_id": "C001",
+    "sources": [
+      "workspace/inbox/EMAIL_MERCH_LAUNCH_2026-09-08.md",
+      "workspace/documents/VENDORLINK_STATUS_NVID-10482.json",
+      "workspace/spreadsheets/VENDORLINK_ACTIVATION_GATES_NVID-10482.csv"
+    ],
+    "description": "The buyer casually says the setup 'looks approved from the items I can see,' while authoritative VendorLink records show Conditional status and a failed current-COI gate.",
+    "resolution": "Treat the email as a limited commercial observation and urgency signal. VendorLink and Northstar policy control vendor standing; the vendor is not Active.",
+    "must_resolve": true
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "case_status": "BLOCKED_PENDING_VENDOR_ACTION",
+  "required_conclusions": [
+    "NVID-10482 remains Conditional and cannot yet be treated as Active.",
+    "The current-COI activation gate is the one material onboarding blocker; certificate MCS-884201 expired on August 31, 2026 before it was uploaded.",
+    "No valid exception is recorded, and commercial urgency does not supply one.",
+    "PO 78431 is a non-authoritative working draft and cannot yet be released as a commercial PO."
+  ],
+  "required_next_actions": [
+    "Request a replacement COI from Harbor Finch that is unexpired and satisfies applicable Northstar insurance requirements.",
+    "Have Vendor Compliance review and accept the replacement in VendorLink and confirm that all activation gates are PASS.",
+    "Have an authorized Vendor Compliance user change the NVID to Active after the gates are satisfied.",
+    "After activation, have Procurement complete and transmit the commercial PO through VendorLink or an approved electronic connection."
+  ],
+  "acceptable_uncertainties": [
+    "Whether Harbor Finch can deliver an acceptable replacement COI by Friday is not established.",
+    "Whether authorized managers would approve a properly submitted time-limited administrative exception is not established and must not be assumed."
+  ],
+  "must_not_claim": [
+    "Harbor Finch Pantry LLC is Active.",
+    "PO 78431 has been issued, released, or approved as a commercial PO.",
+    "The expired COI is acceptable because its stated limits meet the baseline.",
+    "Merchandising approved an activation or insurance exception.",
+    "The blocker was resolved within the case."
+  ]
+}

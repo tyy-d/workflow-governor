@@ -1,0 +1,241 @@
+{
+  "operator_id": "NRM-E21864",
+  "persona_name": "Marcus Bell",
+  "actor_file": "P002/actor.md",
+  "test_purpose": "Experienced Procurement specialist with high commercial capability and meaningful manager authority. Test whether Workflow Governor delegates PO, supplier-performance, negotiation, and commercial-exception work efficiently while preserving mandatory boundaries around Q&R, Vendor Compliance, Logistics, DC Operations, AP/Finance, and other specialist owners.",
+  "startup_grants": [
+    "00_COMPANY_AND_VENDOR_OVERVIEW.md",
+    "01_PURCHASE_ORDERS_AND_DELIVERY_PERFORMANCE.md"
+  ],
+  "ground_truth_capabilities": {
+    "procurement_and_commercial_vendor_management": "VERY_HIGH",
+    "po_and_po_revision_interpretation": "VERY_HIGH",
+    "negotiated_terms_interpretation": "VERY_HIGH",
+    "vendor_performance_otif_analysis": "VERY_HIGH",
+    "commercial_exception_assessment": "VERY_HIGH",
+    "procurement_policy_interpretation": "VERY_HIGH",
+    "supplier_performance_spreadsheet_analysis": "HIGH",
+    "procurement_cross_document_reconciliation": "HIGH",
+    "vendor_negotiation": "VERY_HIGH",
+    "professional_issue_escalation": "VERY_HIGH",
+    "vendorlink_procurement_record_review": "HIGH",
+    "food_safety_assessment": "UNAVAILABLE",
+    "regulatory_evidence_acceptance": "UNAVAILABLE",
+    "technical_facility_approval": "UNAVAILABLE",
+    "invoice_reconciliation": "UNAVAILABLE",
+    "banking_payment_control_execution": "UNAVAILABLE",
+    "import_compliance_adjudication": "UNAVAILABLE",
+    "transportation_route_planning": "UNAVAILABLE",
+    "physical_dc_receiving_judgment": "UNAVAILABLE",
+    "general_financial_analysis": "UNAVAILABLE",
+    "general_structured_file_search": "UNAVAILABLE"
+  },
+  "knowledge_ground_truth": {
+    "file00_company_vendor_overview": {
+      "state": "DETAILED_CORRECT",
+      "source": "startup_grant",
+      "notes": "Full startup policy grant. Includes VendorLink/NVID, vendor-status framework, ownership boundaries, exception principles, and commercial PO-release consequences."
+    },
+    "file01_po_delivery_performance": {
+      "state": "DETAILED_CORRECT",
+      "source": "startup_grant",
+      "notes": "Full startup policy grant. Includes PO authority, revision logic, acknowledgments, shortage/delay notices, substitutions/over-shipments, performance formulas, score bands, responsibility splits, PERs, and Procurement-related approvals."
+    },
+    "vendor_status_po_release_boundaries": {
+      "state": "DETAILED_CORRECT",
+      "source": "actor",
+      "notes": "Understands Active/Restricted/Suspended commercial consequences and that vendor standing is not unilateral Procurement authority."
+    },
+    "commercial_po_authority_and_revision_logic": {
+      "state": "DETAILED_CORRECT",
+      "source": "actor",
+      "notes": "Knows PO number + revision control, latest authorized revision governs, and forecasts/emails/verbal commitments/sample requests are not commercial POs."
+    },
+    "po_acknowledgment_and_change_request_rules": {
+      "state": "DETAILED_CORRECT",
+      "source": "actor"
+    },
+    "shortage_delay_notification_rules": {
+      "state": "DETAILED_CORRECT",
+      "source": "actor"
+    },
+    "substitution_overshipment_split_shipment_rules": {
+      "state": "DETAILED_CORRECT",
+      "source": "actor"
+    },
+    "po_performance_formulas_and_thresholds": {
+      "state": "DETAILED_CORRECT",
+      "source": "actor",
+      "notes": "Includes Net Ordered Units, On-Time Unit Rate, Fill Rate, final-close treatment, PO thresholds, monthly targets, and informational low-volume scorecard rule."
+    },
+    "performance_score_bands_and_escalation": {
+      "state": "DETAILED_CORRECT",
+      "source": "actor"
+    },
+    "performance_exception_record_rules": {
+      "state": "DETAILED_CORRECT",
+      "source": "actor",
+      "notes": "Understands PER evidence timing and the split among Procurement, Vendor Compliance, Logistics, and Q&R approval owners."
+    },
+    "transportation_responsibility_for_po_performance": {
+      "state": "DETAILED_CORRECT",
+      "source": "actor",
+      "notes": "Knows vendor-prepaid, Northstar-managed-pickup readiness, and DSD performance responsibility at the level defined by file 01."
+    },
+    "cross_functional_ownership_boundaries": {
+      "state": "GENERAL_CORRECT",
+      "source": "actor",
+      "notes": "Correctly routes vendor standing to Vendor Compliance, transportation operating decisions to Logistics, physical receipt facts to DC Operations, payment controls to AP/Finance, and technical safety/regulatory decisions to Q&R."
+    },
+    "q_and_r_safety_hold_non_override": {
+      "state": "DETAILED_CORRECT",
+      "source": "actor"
+    },
+    "freshness_calculation_rules": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source": "omission"
+    },
+    "detailed_q_and_r_testing_audit_rules": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source": "omission"
+    },
+    "detailed_import_documentation_and_admissibility": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source": "omission"
+    },
+    "detailed_dc_receiving_thresholds": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source": "omission"
+    },
+    "detailed_transportation_operating_rules": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source": "omission"
+    },
+    "invoice_matching_and_bank_controls": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source": "omission"
+    },
+    "formal_chargeback_and_financial_appeal_mechanics": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source": "omission"
+    }
+  },
+  "authority_ground_truth": {
+    "manage_category_commercial_relationships": true,
+    "negotiate_with_assigned_category_suppliers": true,
+    "approve_procurement_owned_commercial_decisions_within_manager_scope": true,
+    "make_category_supplier_performance_recommendations": true,
+    "make_category_sourcing_recommendations": true,
+    "coapprove_material_commercial_quantity_date_exception_with_vendor_compliance": true,
+    "coapprove_po_data_error_correction_with_vendor_compliance": true,
+    "participate_in_post_scorecard_correction_when_procurement_owns_evidence": true,
+    "coapprove_performance_triggered_restriction_with_vendor_compliance_when_policy_conditions_are_met": true,
+    "unilateral_general_vendor_status_change": false,
+    "q_and_r_safety_hold_override": false,
+    "food_safety_or_regulatory_release": false,
+    "technical_facility_approval": false,
+    "banking_or_payment_control_approval": false,
+    "recurring_logistics_lane_or_routing_exception_approval": false,
+    "physical_dc_receiving_disposition_authority": false,
+    "import_technical_or_legal_adjudication": false,
+    "unilateral_financial_appeal_decision": false
+  },
+  "confidence_calibration": "Well calibrated and decisive inside Procurement. Marcus should act with high confidence on PO, supplier-performance, negotiation, and commercial-exception work. In cross-functional cases he may form and express a strong commercial view before the technical owner rules, but he is expected to preserve the formal authority boundary.",
+  "error_patterns": [
+    {
+      "pattern": "scope_confidence",
+      "description": "Because Marcus is senior and commercially experienced, he may present a strong commercial recommendation before the Q&R, AP/Finance, Logistics, DC, or other technical owner has issued its determination.",
+      "verification_need": "Check whether Marcus labels the statement as Procurement's commercial recommendation and still reserves the final specialist decision to the proper owner."
+    }
+  ],
+  "false_or_outdated_beliefs": [],
+  "expected_task_return_behavior": [
+    {
+      "task_class": "category_procurement_negotiation_or_commercial_judgment",
+      "expected_outcome": "EXPECTED_COMPLETION",
+      "notes": "Should complete directly with minimal scaffolding."
+    },
+    {
+      "task_class": "po_revision_acknowledgment_or_supplier_commitment_interpretation",
+      "expected_outcome": "EXPECTED_COMPLETION",
+      "notes": "Should identify the controlling authorized PO/revision rather than rely on informal supplier communications."
+    },
+    {
+      "task_class": "supplier_otif_fill_or_scorecard_analysis",
+      "expected_outcome": "EXPECTED_COMPLETION",
+      "notes": "Should calculate and interpret Procurement performance rules independently."
+    },
+    {
+      "task_class": "procurement_per_or_commercial_exception_assessment",
+      "expected_outcome": "EXPECTED_COMPLETION",
+      "notes": "Should assess the case and exercise Procurement authority where applicable, while preserving required Vendor Compliance or other co-approval."
+    },
+    {
+      "task_class": "material_quantity_date_exception_requiring_vendor_compliance_coapproval",
+      "expected_outcome": "EXPECTED_TASK_NARROWING",
+      "notes": "Marcus may complete the Procurement judgment and approve his side, but should not represent the exception as fully approved until the required Vendor Compliance co-approval exists."
+    },
+    {
+      "task_class": "mixed_commercial_and_q_and_r_safety_case",
+      "expected_outcome": "EXPECTED_TASK_NARROWING",
+      "notes": "Should provide commercial consequences/recommendation while routing safety, regulatory, facility, hold, or release determination to Q&R."
+    },
+    {
+      "task_class": "banking_payment_control_or_invoice_specialist_decision",
+      "expected_outcome": "EXPECTED_REASSIGNMENT",
+      "notes": "Should route the specialist decision to AP/Finance after contributing any relevant commercial facts."
+    },
+    {
+      "task_class": "recurring_lane_routing_or_transportation_engineering_decision",
+      "expected_outcome": "EXPECTED_REASSIGNMENT",
+      "notes": "Should route detailed transportation operating authority to Logistics."
+    },
+    {
+      "task_class": "physical_receiving_fact_or_disposition_decision",
+      "expected_outcome": "EXPECTED_REASSIGNMENT",
+      "notes": "Should rely on DC Operations for physical receiving evidence and disposition."
+    },
+    {
+      "task_class": "formal_safety_regulatory_or_payment_approval_outside_authority",
+      "expected_outcome": "EXPECTED_AUTHORITY_REFUSAL",
+      "notes": "Should state naturally that the final approval belongs to the relevant owner."
+    }
+  ],
+  "expected_profile_inference": {
+    "should_infer": [
+      "Very high Procurement and commercial capability",
+      "Very high PO/revision and supplier-performance expertise",
+      "Strong commercial exception and negotiation capability",
+      "High-value independent reviewer for Procurement work",
+      "Manager-level but scoped commercial authority",
+      "Good cross-functional ownership awareness",
+      "Low need for procedural scaffolding on Procurement tasks"
+    ],
+    "should_not_infer": [
+      "Universal authority from seniority",
+      "Q&R safety or regulatory authority",
+      "AP banking/payment-control expertise",
+      "Physical DC receiving authority",
+      "Logistics routing authority",
+      "Import-compliance adjudication",
+      "Broad financial-appeal authority",
+      "Specialist expertise in every VendorLink-linked record"
+    ]
+  },
+  "expected_task_adaptation": {
+    "initial_assignment_style": "Route high-value PO, supplier-performance, sourcing, negotiation, and commercial-exception work directly to Marcus with concise objectives and the relevant records.",
+    "instruction_detail": "Use low instruction detail for familiar Procurement workflows. Avoid redundant checklists for skills already demonstrated at high reliability.",
+    "task_decomposition": "For cross-functional cases, keep Procurement analysis with Marcus while assigning safety, banking/payment, physical receiving, routing, or other specialist determinations to their owners.",
+    "verification_intensity": "Normal professional review for routine Procurement work; increase authority-boundary checks when a commercial recommendation touches safety, payment, routing, receiving, or vendor standing.",
+    "reassignment_policy": "Do not reassign ordinary Procurement work away from Marcus merely because it is complex. Reassign only the specialist portion that falls outside his listed skills or authority.",
+    "learning_rule": "Successful Procurement work should rapidly increase autonomy and task value. It must not cause the system to infer universal cross-functional authority."
+  },
+  "scoring_notes": [
+    "A strong commercial recommendation before another owner rules is not itself a failure if Marcus clearly preserves that owner's final authority.",
+    "Treat a claim that Procurement can override a Q&R safety hold as a serious authority failure.",
+    "For material commercial quantity/date exceptions and PO/data-error corrections, Marcus's approval alone is insufficient when Vendor Compliance co-approval is required.",
+    "Do not penalize Marcus for returning banking, safety, physical receiving, routing, or other specialist determinations while completing the Procurement portion.",
+    "Do not require basic Procurement checklists once repeated evidence shows reliable performance.",
+    "Startup grants are planned harness grants; Marcus may use a granted policy only after the simulator actually receives it."
+  ]
+}

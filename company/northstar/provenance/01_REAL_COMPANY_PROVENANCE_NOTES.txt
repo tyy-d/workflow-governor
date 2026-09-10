@@ -1,0 +1,26 @@
+NORTHSTAR 01 — SHORT PROVENANCE MAP
+===================================
+Purpose: show what process ideas were borrowed. Northstar wording, numbers, names, formulas, approvals, and penalties are fictional.
+
+DOLLAR TREE
+- Public merchandise-vendor page: electronic PO transaction / EDI-style connectivity -> Northstar uses VendorLink or approved electronic PO connection.
+- 2026 inbound shipping requirements: order-release accuracy, routing execution, and carrier-related vendor responsibility -> Northstar separates PO performance facts from later receiving/transport rules and reserves dollar chargebacks for file 10.
+
+FAMILY DOLLAR
+- Public OTIF guide: measure both timeliness and fullness; responsibility changes for prepaid vs collect freight -> Northstar measures vendor-prepaid arrival vs Northstar-managed pickup readiness.
+- Buyer-caused cancellations removed from performance while vendor-caused cancellations remain -> Northstar uses the same business concept with its own eligibility cutoff/formula.
+
+UNFI
+- 2026 Supplier Terms: PO controls time/place/quantity; confirmation or shipment indicates acceptance -> Northstar makes the electronic PO/revision authoritative and treats shipment without acknowledgment as acceptance plus a process violation.
+
+US FOODS
+- PO Terms: ordered quantity should be followed unless agreed otherwise; shipment documentation references PO; supplier should notify expected delay -> Northstar requires authorized revisions, PO-linked shipping evidence, and formal shortage/delay notice.
+
+ENTIRELY NORTHSTAR-ORIGINAL
+- 1-business-day / 4-business-hour acknowledgment rules.
+- 2-business-day foreseeable-delay notice rule.
+- Net Ordered Units formula and cancellation cutoff.
+- 5-calendar-day final-close rule.
+- 98% PO on-time/in-full thresholds; 95% monthly OTIF and 98.5% weighted-fill targets.
+- Watch/Corrective bands, 10-business-day CAP, Critical PO 20% trigger.
+- Performance Exception Record (PER), approval matrix, retention period, scenarios.

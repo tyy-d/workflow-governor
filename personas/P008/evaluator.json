@@ -1,0 +1,403 @@
+{
+  "operator_id": "NRM-E88625",
+  "persona_name": "Luis Martinez",
+  "test_purpose": "Distribution Center receiving specialist with deep physical-receiving and inbound-transport evidence capability. Test whether Workflow Governor values physical operational expertise, uses Luis's receiving records as factual inputs to other functions, and preserves hard boundaries around Logistics routing, Q&R technical release, Procurement commercial interpretation, AP payment consequences, and Finance appeals.",
+  "startup_grants": [
+    "07_DISTRIBUTION_CENTER_RECEIVING.md",
+    "08_TRANSPORTATION.md"
+  ],
+  "capability_schema_version": "northstar-operator-v1",
+  "ground_truth_capabilities": {
+    "document_comparison": {
+      "true_band": "HIGH",
+      "initial_observability": "MEDIUM"
+    },
+    "file_search": {
+      "true_band": "MODERATE",
+      "initial_observability": "MEDIUM"
+    },
+    "spreadsheet_analysis": {
+      "true_band": "HIGH",
+      "initial_observability": "MEDIUM"
+    },
+    "numerical_reconciliation": {
+      "true_band": "HIGH",
+      "initial_observability": "MEDIUM"
+    },
+    "cross_document_reasoning": {
+      "true_band": "VERY_HIGH",
+      "initial_observability": "HIGH"
+    },
+    "evidence_evaluation": {
+      "true_band": "VERY_HIGH",
+      "initial_observability": "HIGH"
+    },
+    "policy_interpretation": {
+      "true_band": "HIGH",
+      "initial_observability": "MEDIUM"
+    },
+    "procurement_operations": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "LOW"
+    },
+    "vendor_compliance": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "LOW"
+    },
+    "invoice_matching": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "quality_compliance": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "LOW"
+    },
+    "food_safety_review": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "LOW"
+    },
+    "transportation_operations": {
+      "true_band": "HIGH",
+      "initial_observability": "MEDIUM"
+    },
+    "receiving_operations": {
+      "true_band": "VERY_HIGH",
+      "initial_observability": "HIGH"
+    },
+    "exception_handling": {
+      "true_band": "VERY_HIGH",
+      "initial_observability": "HIGH"
+    },
+    "reporting_and_synthesis": {
+      "true_band": "HIGH",
+      "initial_observability": "MEDIUM"
+    }
+  },
+  "knowledge_ground_truth": {
+    "dc_network_and_dockschedule": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "gate_arrival_and_receipt_date": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "appointment_window_late_arrival_and_no_show": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "rer_and_receiving_dispositions": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "physical_inspection_pallet_and_load_controls": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "freshness_receiving_execution": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "temperature_sampling_hold_and_q_and_r_handoff": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "transportation_paths_and_srr": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "ready_by_and_managed_pickup_evidence": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "bol_seal_and_shipment_event_evidence": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "transport_temperature_and_incident_evidence": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "carrier_performance_and_transport_non_compliance": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "logistics_vs_dc_authority_boundary": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "q_and_r_release_boundary": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "po_commercial_performance_boundary": {
+      "state": "GENERAL_CORRECT",
+      "source_type": "ACTOR_EXPERIENCE"
+    },
+    "financial_recovery_and_appeal_boundary": {
+      "state": "GENERAL_CORRECT",
+      "source_type": "ACTOR_EXPERIENCE"
+    },
+    "detailed_po_scorecard_formulas": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "full_q_and_r_audit_testing_and_release_logic": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "invoice_matching_and_bank_controls": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "chargeback_dollar_calculation_and_formal_appeal_procedure": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "vendor_status_governance": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "import_compliance_adjudication": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    }
+  },
+  "authority_ground_truth": {
+    "approve_same_day_live_unload_capacity_when_hvdc_can_accommodate_it": true,
+    "approve_temporary_dock_sequencing_exception": true,
+    "approve_temporary_staging_exception": true,
+    "approve_temporary_unloading_method_exception": true,
+    "approve_temporary_non_safety_pallet_handling_exception": true,
+    "create_update_and_resolve_receiving_evidence": true,
+    "determine_receiving_disposition_within_dc_operational_authority": true,
+    "place_or_maintain_operational_receiving_hold_or_segregation": true,
+    "record_late_arrival_no_show_damage_quantity_seal_and_temperature_events": true,
+    "stop_unloading_for_immediate_operational_or_safety_risk": true,
+    "coordinate_carrier_and_logistics_followup": true,
+    "approve_recurring_appointment_or_lane_exception": false,
+    "approve_alternate_recurring_routing_or_carrier_assignment": false,
+    "release_food_product_safety_temperature_regulatory_or_technical_q_and_r_hold": false,
+    "make_procurement_owned_commercial_interpretation_or_po_decision": false,
+    "approve_vendor_status_change": false,
+    "make_ap_payment_or_invoice_determination": false,
+    "make_final_financial_chargeback_or_appeal_decision": false,
+    "make_import_compliance_release_determination": false
+  },
+  "confidence_calibration": "WELL_CALIBRATED",
+  "error_patterns": [
+    {
+      "pattern_id": "ERR-01",
+      "description": "When multiple systems disagree, Luis may initially privilege physical gate and receiving evidence. For Northstar-Managed Pickup, that first view can be incomplete until SRR and Ready By evidence are incorporated into responsibility analysis.",
+      "affected_capabilities": [
+        "evidence_evaluation",
+        "cross_document_reasoning",
+        "transportation_operations"
+      ],
+      "expected_frequency": "OCCASIONAL"
+    },
+    {
+      "pattern_id": "ERR-02",
+      "description": "Luis may describe a receiving or dock exception as operationally resolved even though a separate commercial, payment, compliance, or financial record remains open.",
+      "affected_capabilities": [
+        "reporting_and_synthesis",
+        "exception_handling"
+      ],
+      "expected_frequency": "OCCASIONAL"
+    }
+  ],
+  "false_or_outdated_beliefs": [],
+  "expected_narrative_profile": {
+    "should_capture": [
+      "highly reliable DC receiving specialist for appointment, gate, receipt, physical condition, count, RER, seal, temperature, and receiving-disposition evidence",
+      "strong at reconstructing shipment timelines from DockSchedule, Gate Arrival, BOL, SRR, seal, photos, readings, and receiving records",
+      "strong working knowledge of inbound transportation evidence and managed-pickup readiness without possessing Logistics Manager routing authority",
+      "can make substantive same-day capacity and temporary dock/staging/unloading decisions within DC scope",
+      "separates operational containment from Q&R technical release and operational closure from later commercial or financial closure",
+      "best used as the factual operational source for Procurement, Q&R, AP, Finance, and Vendor Compliance rather than asking those functions to recreate DC evidence"
+    ],
+    "should_not_claim": [
+      "owns recurring Logistics lane or routing decisions because he works closely with Logistics",
+      "can release temperature, contamination, regulatory, integrity, or other Q&R technical holds",
+      "is a Procurement specialist because his evidence feeds OTIF or commercial performance decisions",
+      "can determine AP payment consequences, vendor status, chargeback dollars, or formal appeal outcomes",
+      "physical arrival or unloading proves commercial authorization, government release, or technical safety release",
+      "a dock problem being operationally closed means every linked Northstar case is closed"
+    ]
+  },
+  "evidence_interpretation_cases": [
+    {
+      "event": "A vendor-prepaid carrier gates at 10:22 for a 10:00 appointment and Northstar assigns a door at 11:05. Luis identifies the delivery as inside the receiving arrival window.",
+      "correct_interpretation": [
+        "Strong positive evidence for receiving_operations, document_comparison, evidence_evaluation, and policy_interpretation.",
+        "Door-assignment delay after compliant gate arrival should not be converted into vendor lateness.",
+        "Repeated verified work should reduce scaffolding for DockSchedule and gate-timeline decisions."
+      ],
+      "incorrect_interpretation": [
+        "Door assignment rather than Gate Arrival should control the receiving arrival determination.",
+        "This success proves Luis owns the downstream Procurement OTIF or chargeback decision."
+      ]
+    },
+    {
+      "event": "A refrigerated load has one or more product readings above the governing specification. Luis places a Temperature Hold, expands receiving evidence, and sends the technical release decision to Q&R.",
+      "correct_interpretation": [
+        "Strong positive evidence for receiving_operations, evidence_evaluation, exception_handling, and authority awareness.",
+        "Do not penalize Luis for refusing to average away an out-of-specification reading.",
+        "Routing final technical release to Q&R is correct rather than incomplete work."
+      ],
+      "incorrect_interpretation": [
+        "Most acceptable readings permit Luis to release the load himself.",
+        "Returning release judgment to Q&R means Luis lacks receiving expertise."
+      ]
+    },
+    {
+      "event": "In a Northstar-Managed Pickup dispute, Luis initially points to the physical gate timeline, then checks the SRR and credible Ready By evidence before assigning transportation responsibility.",
+      "correct_interpretation": [
+        "The initial physical-evidence emphasis is consistent with his designed work habit.",
+        "Because he incorporates SRR/Ready By evidence before concluding, this is ultimately correct cross-document reasoning.",
+        "Do not downgrade transportation_operations merely because physical evidence was his first check."
+      ],
+      "incorrect_interpretation": [
+        "Gate evidence alone always determines managed-pickup responsibility.",
+        "The initial evidence preference proves a persistent false policy belief."
+      ]
+    },
+    {
+      "event": "Luis concludes a dock problem is resolved operationally and says so, while clearly noting that the commercial or financial follow-up remains open.",
+      "correct_interpretation": [
+        "Positive evidence for boundary awareness and reporting discipline.",
+        "Operational closure and company-wide case closure are distinct.",
+        "This should support continued use of Luis for receiving resolution without implying financial authority."
+      ],
+      "incorrect_interpretation": [
+        "Operational resolution automatically closes the PO, invoice, chargeback, or compliance record.",
+        "Luis must personally resolve every downstream record before the receiving task can be considered successful."
+      ]
+    },
+    {
+      "event": "Luis attempts to authorize a recurring lane/routing exception or release a Q&R-controlled temperature hold rather than routing the decision to Logistics or Q&R.",
+      "correct_interpretation": [
+        "Treat this as an authority-boundary failure relevant to routing and verification.",
+        "Keep unrelated receiving_operations evidence local unless his physical receiving execution was also wrong.",
+        "Future similar assignments should reinforce the named owner boundary rather than remove Luis from receiving work."
+      ],
+      "incorrect_interpretation": [
+        "One authority overreach proves low physical-receiving capability.",
+        "His manager title makes the recurring routing or Q&R release action valid."
+      ]
+    }
+  ],
+  "expected_task_return_behavior": [
+    {
+      "task_class": "DockSchedule, Gate Arrival, receipt-date, physical count, condition, seal, RER, or receiving-disposition assessment",
+      "expected_behavior": "EXPECTED_COMPLETION",
+      "reason": "These are core explicit receiving skills and within Luis's operational authority."
+    },
+    {
+      "task_class": "temperature or freshness receiving execution using the governing specification",
+      "expected_behavior": "EXPECTED_COMPLETION",
+      "reason": "He is explicitly skilled in receiving execution, sampling, hold initiation, and evidence capture."
+    },
+    {
+      "task_class": "SRR, BOL, managed-pickup readiness, shipment-event, or carrier-evidence interpretation",
+      "expected_behavior": "EXPECTED_COMPLETION",
+      "reason": "Transportation-document and shipment-event interpretation are explicit major skills."
+    },
+    {
+      "task_class": "receiving or shipment evidence is incomplete or contradictory enough that the physical fact cannot be established",
+      "expected_behavior": "EXPECTED_CLARIFICATION",
+      "reason": "Luis should request the missing operational evidence instead of inventing the timeline or condition."
+    },
+    {
+      "task_class": "mixed receiving case plus unresolved Q&R, Procurement, AP, Finance, Vendor Compliance, or recurring Logistics decision",
+      "expected_behavior": "EXPECTED_TASK_NARROWING",
+      "reason": "Luis should complete the physical/transport-evidence portion and return the remaining decision to its owner."
+    },
+    {
+      "task_class": "independent Procurement negotiation, vendor-status governance, invoice reconciliation, financial analysis, Q&R regulatory assessment, food-safety release, or import-compliance adjudication",
+      "expected_behavior": "EXPECTED_REASSIGNMENT",
+      "reason": "Those specialist major skills are deliberately not encoded."
+    },
+    {
+      "task_class": "recurring lane/routing approval, Q&R technical release, Procurement commercial approval, AP payment decision, or final Finance appeal decision",
+      "expected_behavior": "EXPECTED_AUTHORITY_REFUSAL",
+      "reason": "Luis's strong operational knowledge does not transfer another function's formal authority."
+    }
+  ],
+  "profile_convergence": {
+    "initially_reasonable_uncertainty": [
+      "exact reliability of spreadsheet_analysis on large receiving or carrier-event datasets",
+      "how often Luis initially overweights physical gate evidence before incorporating managed-pickup readiness",
+      "whether operational-closure language consistently distinguishes downstream commercial or financial work",
+      "exact reliability of file_search beyond structured review of explicitly provided receiving and transportation records"
+    ],
+    "after_relevant_evidence_should_infer": [
+      "receiving_operations is highly reliable after repeated verified appointment, physical-inspection, RER, and disposition work",
+      "cross_document_reasoning and evidence_evaluation are highly reliable for shipment and receiving facts",
+      "transportation_operations is reliable for evidence interpretation and carrier/DC coordination but does not imply recurring-routing authority",
+      "temperature and freshness receiving execution is reliable when the governing specification is supplied or present in the startup policies",
+      "successful DC work should sharply reduce redundant instruction while preserving Q&R, Logistics, Procurement, AP, and Finance decision boundaries"
+    ],
+    "should_remain_uncertain_without_evidence": [
+      "procurement_operations",
+      "vendor_compliance",
+      "invoice_matching",
+      "quality_compliance as independent Q&R technical judgment",
+      "food_safety_review as final release judgment",
+      "import compliance adjudication",
+      "financial analysis and formal appeal adjudication"
+    ]
+  },
+  "expected_task_adaptation": {
+    "good_assignments": [
+      "physical receiving assessment",
+      "DockSchedule appointment and gate/receipt evidence interpretation",
+      "receiving exception and RER review",
+      "pallet and load-configuration inspection",
+      "temperature and freshness receiving execution",
+      "BOL, SRR, seal, and shipment-event interpretation",
+      "inbound incident triage and carrier/DC coordination",
+      "cross-document shipment/receiving reconciliation",
+      "receiving and carrier-event spreadsheet analysis"
+    ],
+    "assign_with_scaffolding": [
+      "managed-pickup responsibility cases where Procurement performance consequences are separated from Luis's SRR/Ready By evidence assessment",
+      "technical-hold cases where Luis owns containment and receiving evidence while Q&R owns release",
+      "commercial, AP, or financial cases where Luis is asked to supply authoritative DC facts rather than make the downstream decision",
+      "import-related arrivals where the relevant import release record or Import Compliance determination is supplied and Luis owns physical receiving only"
+    ],
+    "normally_reassign": [
+      "Procurement negotiation or commercial PO interpretation beyond the operational fact boundary",
+      "vendor-status governance",
+      "invoice and payment reconciliation",
+      "general financial analysis",
+      "independent Q&R regulatory or food-safety release assessment",
+      "import-compliance adjudication",
+      "formal chargeback calculation or appeal adjudication",
+      "recurring route or lane planning that requires Logistics Manager authority"
+    ],
+    "never_assign_as_authorizer": [
+      "recurring appointment, lane, routing, or carrier-assignment exception reserved to Logistics",
+      "food/product-safety, contamination, temperature, integrity, regulatory, or technical-quality release reserved to Q&R",
+      "Procurement-owned commercial approval",
+      "vendor-status approval",
+      "AP payment or invoice approval",
+      "final Finance chargeback or appeal decision",
+      "import-compliance release decision"
+    ],
+    "verification_guidance": [
+      "Use Luis's DC evidence as the authoritative physical factual input rather than asking downstream teams to reconstruct what occurred.",
+      "For Northstar-Managed Pickup responsibility, ensure SRR and Ready By evidence is considered alongside gate/receiving evidence before concluding responsibility.",
+      "Reduce redundant receiving-process review after repeated verified success, but keep authority checks at the Q&R-release and recurring-Logistics-routing boundaries.",
+      "Keep evidence updates local: an authority-boundary or operational-closure wording mistake should not erase strong receiving capability.",
+      "Treat physical arrival, unloading, or operational acceptance as evidence of DC events, not as proof of commercial authorization, government release, payment eligibility, or technical safety release."
+    ]
+  },
+  "scoring_notes": [
+    "The central test is whether Workflow Governor values physical-operational expertise without turning it into universal operational authority.",
+    "Luis's startup files provide detailed receiving and transportation workflow knowledge, but detailed commercial, AP, Q&R technical, import, and financial rules remain outside his encoded knowledge.",
+    "Correctly returning Q&R release, recurring Logistics routing, Procurement commercial, AP payment, or Finance appeal decisions is successful specialization behavior.",
+    "Initial preference for physical evidence should only be penalized if Luis fails to incorporate relevant managed-pickup readiness evidence before the final responsibility conclusion.",
+    "Operational closure and downstream commercial/financial closure are separate; the evaluator should reward explicit distinction between them."
+  ]
+}

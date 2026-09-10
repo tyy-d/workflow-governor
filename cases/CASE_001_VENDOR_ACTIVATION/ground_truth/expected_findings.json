@@ -1,0 +1,91 @@
+[
+  {
+    "finding_id": "F001",
+    "finding": "Harbor Finch Pantry LLC is a new Brand Supplier identified by NVID-10482 and classified as R2 Controlled for its proposed shelf-stable food item.",
+    "importance": "REQUIRED",
+    "evidence_refs": [
+      "workspace/documents/VENDOR_PROFILE_NVID-10482.md",
+      "workspace/documents/VENDORLINK_STATUS_NVID-10482.json",
+      "workspace/spreadsheets/ITEM_SETUP_NVID-10482.csv"
+    ]
+  },
+  {
+    "finding_id": "F002",
+    "finding": "VendorLink records the vendor as Conditional, not Active, and explicitly marks it ineligible for commercial POs.",
+    "importance": "REQUIRED",
+    "evidence_refs": [
+      "workspace/documents/VENDORLINK_STATUS_NVID-10482.json"
+    ]
+  },
+  {
+    "finding_id": "F003",
+    "finding": "Nine of the ten listed activation gates pass; the only failed gate is CURRENT_COI.",
+    "importance": "REQUIRED",
+    "evidence_refs": [
+      "workspace/spreadsheets/VENDORLINK_ACTIVATION_GATES_NVID-10482.csv",
+      "workspace/spreadsheets/ONBOARDING_CHECKLIST_NVID-10482.csv"
+    ]
+  },
+  {
+    "finding_id": "F004",
+    "finding": "Certificate MCS-884201 expired on August 31, 2026 and was uploaded on September 3, 2026, so it was not current when submitted for onboarding.",
+    "importance": "REQUIRED",
+    "evidence_refs": [
+      "workspace/documents/COI_NVID-10482_2026.txt",
+      "workspace/misc/ATTACHMENT_REGISTER_NVID-10482.txt"
+    ]
+  },
+  {
+    "finding_id": "F005",
+    "finding": "The expired certificate states CGL and product-liability limits that meet Northstar's baseline; currency, rather than the stated dollar limits, is the material insurance defect.",
+    "importance": "IMPORTANT",
+    "evidence_refs": [
+      "workspace/documents/COI_NVID-10482_2026.txt"
+    ]
+  },
+  {
+    "finding_id": "F006",
+    "finding": "No open or valid exception record exists for NVID-10482.",
+    "importance": "REQUIRED",
+    "evidence_refs": [
+      "workspace/documents/VENDORLINK_STATUS_NVID-10482.json",
+      "workspace/spreadsheets/VENDORLINK_ACTIVATION_GATES_NVID-10482.csv"
+    ]
+  },
+  {
+    "finding_id": "F007",
+    "finding": "Merchandising has authorized SKU PG-48217 and wants a rapid launch, but the messages provide commercial urgency rather than vendor-status or exception authorization.",
+    "importance": "REQUIRED",
+    "evidence_refs": [
+      "workspace/inbox/EMAIL_ITEM_AUTHORIZATION_2026-09-08.md",
+      "workspace/inbox/EMAIL_MERCH_LAUNCH_2026-09-08.md"
+    ]
+  },
+  {
+    "finding_id": "F008",
+    "finding": "PO 78431 exists only as a Procurement working draft and has no VendorLink transmission ID; it is not an authoritative commercial PO.",
+    "importance": "REQUIRED",
+    "evidence_refs": [
+      "workspace/documents/PO_78431_DRAFT.md",
+      "workspace/documents/PROCUREMENT_LAUNCH_NOTE_2026-09-08.md"
+    ]
+  },
+  {
+    "finding_id": "F009",
+    "finding": "The vendor has asked Northstar to specify any insurance correction needed and is positioned to request an updated certificate from its broker.",
+    "importance": "IMPORTANT",
+    "evidence_refs": [
+      "workspace/inbox/EMAIL_VENDOR_FOLLOWUP_2026-09-09.md"
+    ]
+  },
+  {
+    "finding_id": "F010",
+    "finding": "The item and facility records disclose no separate R3, food-safety, or critical Q&R blocker; this is an R2 onboarding issue.",
+    "importance": "IMPORTANT",
+    "evidence_refs": [
+      "workspace/documents/FACILITY_INFORMATION_NVID-10482.md",
+      "workspace/spreadsheets/ITEM_SETUP_NVID-10482.csv",
+      "workspace/spreadsheets/VENDORLINK_ACTIVATION_GATES_NVID-10482.csv"
+    ]
+  }
+]

@@ -1,0 +1,28 @@
+NORTHSTAR 10 — REAL-COMPANY / PUBLIC-POLICY PROVENANCE
+========================================================
+Purpose: quick trace of concepts borrowed as inspiration. Northstar wording, records, deadlines, charge amounts, formulas, and appeal thresholds are original fictional policy.
+
+DOLLAR TREE / FAMILY DOLLAR
+- Public Vendor Resources lists a dedicated Vendor Recall Handbook -> inspired Northstar's dedicated Product Action Record (PAR) workflow and centralized vendor recall coordination.
+- Family Dollar Appendix A Chargeback Policy and routing/shipping guidance -> inspired reason-coded chargebacks, evidence tied to an operational failure, and a staged written dispute/appeal path.
+- NOT copied: Family Dollar dollar amounts, chargeback categories, deadlines, or contact structure.
+
+UNFI
+- July 30, 2026 Supplier Terms -> inspired supplier responsibility for unacceptable product, return/disposal at supplier cost, invoice deductions/offsets, and recovery of recall-related costs.
+- UNFI supplier FAQ -> inspired current recall-contact maintenance and immediate notification/cooperation for recalls and withdrawals.
+
+FDA
+- Industry recall guidance / recall definitions -> inspired separating recalls from market withdrawals, rapid downstream notification, effectiveness checks, documented disposition, and formal closeout.
+- Northstar does NOT treat its internal timing or action labels as FDA legal requirements.
+
+USDA FSIS
+- Directive 8080.1 -> inspired the explicit distinction among recall, market withdrawal, and stock recovery for meat/poultry/egg-product situations.
+
+CPSC
+- Recall Checklist / How to Conduct a Recall -> inspired stop-sale/isolation, distribution-chain notification, consumer remedy, reverse logistics, recall monitoring, and retained effectiveness evidence for general merchandise.
+
+NORTHSTAR-ORIGINAL DESIGN
+- PAR, RRA, CBN, Appeal Case names and workflows.
+- All 4-hour/2-day/3-day/10-day/15-day/30-day/60-day internal deadlines except where the handbook explicitly preserves an earlier Northstar rule.
+- All chargeback amounts, caps, 2% OTIF formula, $2,500 Deduction Hold threshold, $5,000 escalation threshold, and duplicate-recovery rule.
+- Q&R vs Finance appeal authority model and all examples.

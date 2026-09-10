@@ -1,0 +1,17 @@
+{
+  "record_type": "GATE_CHECKIN",
+  "facility": "HVDC",
+  "appointment_id": "DS-99618",
+  "po_number": "78214",
+  "po_revision_presented": 2,
+  "nvid": "NVID-31877",
+  "carrier": "Granite Span Transport LLC",
+  "trailer": "GST-53018",
+  "seal": "GS771604",
+  "shipment_type": "Northstar-Managed Pickup",
+  "gate_arrival_time": "2026-09-17T13:42:00-04:00",
+  "electronic_checkin_time": "2026-09-17T13:49:00-04:00",
+  "door_assigned_time": "2026-09-17T14:08:00-04:00",
+  "arrival_code": "NO_SHOW_THEN_LATE_ARRIVAL",
+  "trailer_visible_condition": "Clean, dry, intact seal; no visible exception"
+}

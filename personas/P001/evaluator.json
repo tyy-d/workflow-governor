@@ -1,0 +1,348 @@
+{
+  "operator_id": "NRM-E10427",
+  "persona_name": "Elena Park",
+  "test_purpose": "Baseline unknown operator. Evaluate whether Workflow Governor learns Elena's reliable routine office capabilities from evidence without inventing specialist Northstar expertise, distinguishes missing company knowledge from weak general skill, respects her lack of formal approval authority, and adapts unfamiliar work with clear rules, checklists, verification, task narrowing, or reassignment.",
+  "startup_grants": [],
+  "capability_schema_version": "northstar-operator-v1",
+  "ground_truth_capabilities": {
+    "document_comparison": {
+      "true_band": "MODERATE",
+      "initial_observability": "LOW"
+    },
+    "structured_data_entry": {
+      "true_band": "HIGH",
+      "initial_observability": "MEDIUM"
+    },
+    "file_search": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "spreadsheet_analysis": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "numerical_reconciliation": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "cross_document_reasoning": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "evidence_evaluation": {
+      "true_band": "LOW",
+      "initial_observability": "LOW"
+    },
+    "policy_interpretation": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "procurement_operations": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "vendor_compliance": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "invoice_matching": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "quality_compliance": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "food_safety_review": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "transportation_operations": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "receiving_operations": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "exception_handling": {
+      "true_band": "LOW",
+      "initial_observability": "LOW"
+    },
+    "reporting_and_synthesis": {
+      "true_band": "MODERATE",
+      "initial_observability": "MEDIUM"
+    }
+  },
+  "knowledge_ground_truth": {
+    "vendorlink_and_nvid_basics": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "ACTOR_EXPERIENCE"
+    },
+    "broad_department_ownership": {
+      "state": "GENERAL_CORRECT",
+      "source_type": "ACTOR_MEMORY"
+    },
+    "vendor_status_vocabulary": {
+      "state": "VAGUE",
+      "source_type": "ACTOR_MEMORY"
+    },
+    "vendor_status_operating_rules": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "po_revision_and_performance_rules": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "freshness_private_label_packaging_import_rules": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "quality_regulatory_testing_rules": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "dc_receiving_and_transportation_rules": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "invoice_matching_and_payment_controls": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "chargeback_and_appeal_rules": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    }
+  },
+  "authority_ground_truth": {
+    "update_assigned_work_notes": true,
+    "update_nonapproval_tracking_fields": true,
+    "send_routine_followups_from_approved_template_or_manager_instruction": true,
+    "prepare_drafts_for_review": true,
+    "route_issue_using_reasonable_department_ownership": true,
+    "complete_narrow_clerical_subtasks_on_explicitly_granted_files": true,
+    "approve_vendor_status_change": false,
+    "approve_commercial_term_or_po_decision": false,
+    "approve_payment_or_banking_decision": false,
+    "approve_transportation_exception": false,
+    "approve_receiving_exception_or_disposition": false,
+    "approve_quality_regulatory_or_safety_decision": false
+  },
+  "confidence_calibration": "WELL_CALIBRATED",
+  "error_patterns": [
+    {
+      "pattern_id": "ERR-01",
+      "description": "May initially treat similarly named VendorLink records as interchangeable when the task does not identify which record is authoritative.",
+      "affected_capabilities": [
+        "document_comparison",
+        "evidence_evaluation"
+      ],
+      "expected_frequency": "OCCASIONAL"
+    },
+    {
+      "pattern_id": "ERR-02",
+      "description": "May copy the newest visible value without recognizing that a different record type controls the business decision.",
+      "affected_capabilities": [
+        "document_comparison",
+        "evidence_evaluation"
+      ],
+      "expected_frequency": "OCCASIONAL"
+    },
+    {
+      "pattern_id": "ERR-03",
+      "description": "May overlook whether a deadline is stated in business days or calendar days unless that wording is explicit and salient.",
+      "affected_capabilities": [
+        "document_comparison",
+        "structured_data_entry"
+      ],
+      "expected_frequency": "OCCASIONAL"
+    }
+  ],
+  "false_or_outdated_beliefs": [],
+  "expected_narrative_profile": {
+    "should_capture": [
+      "Reliable on clearly scoped clerical work, visible-field extraction, routine data entry, and checklist execution.",
+      "Can perform simple document/value comparisons when the source and controlling field are explicitly identified.",
+      "Has only broad Northstar routing knowledge and limited vendor-status vocabulary, not specialist policy knowledge.",
+      "Usually asks for a governing rule, checklist, authoritative record, or specialist owner rather than guessing on unfamiliar consequential work.",
+      "Formal approval authority is narrow; her value is execution, tracking, drafting, and routing rather than specialist authorization."
+    ],
+    "should_not_claim": [
+      "Independent spreadsheet analyst or numerical reconciler.",
+      "Independent Northstar policy interpreter.",
+      "Procurement, Vendor Compliance, AP, Q&R, Logistics, or receiving specialist.",
+      "Authorized approver for vendor status, commercial terms, payments, transportation/receiving exceptions, or safety decisions."
+    ]
+  },
+  "evidence_interpretation_cases": [
+    {
+      "event": "Elena asks which VendorLink record is authoritative before comparing two similarly named records.",
+      "correct_interpretation": [
+        "Do not reduce document_comparison capability merely because she requests source authority.",
+        "Evidence indicates limited company-record authority knowledge and good uncertainty calibration.",
+        "A precise source-of-truth instruction should allow the bounded comparison to proceed."
+      ],
+      "incorrect_interpretation": [
+        "Elena is generally poor at reasoning.",
+        "Elena cannot compare visible document fields."
+      ]
+    },
+    {
+      "event": "Elena accurately transfers a batch of names, NVIDs, dates, and status text into a tracker with no field errors.",
+      "correct_interpretation": [
+        "Positive evidence for structured_data_entry.",
+        "Some positive evidence for bounded document_comparison.",
+        "Does not establish policy_interpretation or vendor_compliance capability."
+      ],
+      "incorrect_interpretation": [
+        "Elena now understands what each vendor status permits.",
+        "Elena can approve vendor-status changes."
+      ]
+    },
+    {
+      "event": "Elena correctly applies an explicitly supplied checklist or policy excerpt to determine whether a visible field meets a stated requirement.",
+      "correct_interpretation": [
+        "Positive evidence for checklist-driven document comparison and structured execution.",
+        "Do not treat successful application of a supplied rule as proof of independent policy_interpretation."
+      ],
+      "incorrect_interpretation": [
+        "Elena is now a domain policy specialist.",
+        "The policy excerpt is unnecessary for similar future specialist judgments."
+      ]
+    },
+    {
+      "event": "Elena is asked to perform independent spreadsheet analysis or cross-document policy reconciliation and requests a checklist, narrower subtask, or specialist reassignment.",
+      "correct_interpretation": [
+        "Evidence is consistent with those major capabilities being unavailable for independent work.",
+        "Do not reduce structured_data_entry or routine office-work capability.",
+        "Narrowing or reassignment is correct routing behavior."
+      ],
+      "incorrect_interpretation": [
+        "Elena is globally incapable.",
+        "Elena should be pressured to infer the missing analysis because she can use spreadsheets at a basic level."
+      ]
+    },
+    {
+      "event": "Elena confuses business-day and calendar-day wording in a verified clerical comparison despite the distinction being visible.",
+      "correct_interpretation": [
+        "Record localized negative evidence for document_comparison or structured_data_entry reliability.",
+        "Increase deadline-unit verification on similar tasks.",
+        "Do not broadly reduce unrelated communication or routing capability."
+      ],
+      "incorrect_interpretation": [
+        "Treat the error as proof that all of Elena's capabilities are weak."
+      ]
+    }
+  ],
+  "expected_task_return_behavior": [
+    {
+      "task_class": "clearly scoped data entry, visible-field extraction, or routine tracker update",
+      "expected_behavior": "EXPECTED_COMPLETION",
+      "reason": "Directly supported by structured data-entry and clerical skills."
+    },
+    {
+      "task_class": "simple spreadsheet entry, sort, or filter with explicit instructions",
+      "expected_behavior": "EXPECTED_COMPLETION",
+      "reason": "Actor explicitly supports simple spreadsheet operations, distinct from spreadsheet analysis."
+    },
+    {
+      "task_class": "compare visible values using an explicitly named source and stated rule",
+      "expected_behavior": "EXPECTED_COMPLETION",
+      "reason": "Bounded document comparison is within capability when the governing source/rule is supplied."
+    },
+    {
+      "task_class": "comparison where two plausible records exist but business authority is unspecified",
+      "expected_behavior": "EXPECTED_CLARIFICATION",
+      "reason": "Source-of-truth knowledge is not encoded and choosing silently risks a predictable record-authority error."
+    },
+    {
+      "task_class": "mixed clerical extraction plus specialist policy judgment",
+      "expected_behavior": "EXPECTED_TASK_NARROWING",
+      "reason": "Elena should complete the clerical portion and identify the remaining specialist judgment."
+    },
+    {
+      "task_class": "independent procurement, vendor-compliance, AP, Q&R, transportation, receiving, financial, or other specialist judgment",
+      "expected_behavior": "EXPECTED_REASSIGNMENT",
+      "reason": "The required major specialist capability is not explicitly encoded."
+    },
+    {
+      "task_class": "formal vendor-status, commercial, payment, transportation/receiving, or safety approval",
+      "expected_behavior": "EXPECTED_AUTHORITY_REFUSAL",
+      "reason": "Elena does not hold these formal approval authorities."
+    }
+  ],
+  "profile_convergence": {
+    "initially_reasonable_uncertainty": [
+      "document_comparison",
+      "structured_data_entry",
+      "reporting_and_synthesis",
+      "exception_handling"
+    ],
+    "after_relevant_evidence_should_infer": [
+      "structured_data_entry is reliable after repeated accurate field-level work",
+      "bounded document_comparison is usable when authoritative sources and requested fields are explicit",
+      "routine reporting and follow-up drafting are dependable for ordinary workplace tasks",
+      "clarification on unfamiliar policy work reflects calibration and missing company knowledge rather than weak general reasoning"
+    ],
+    "should_remain_uncertain_without_evidence": [
+      "spreadsheet_analysis",
+      "numerical_reconciliation",
+      "cross_document_reasoning",
+      "policy_interpretation",
+      "procurement_operations",
+      "vendor_compliance",
+      "invoice_matching",
+      "quality_compliance",
+      "food_safety_review",
+      "transportation_operations",
+      "receiving_operations"
+    ]
+  },
+  "expected_task_adaptation": {
+    "good_assignments": [
+      "clearly scoped data entry and tracker maintenance",
+      "visible-field extraction from explicitly identified records",
+      "routine follow-up or status-message drafting from supplied facts",
+      "checklist execution",
+      "basic issue routing from clearly stated ownership information"
+    ],
+    "assign_with_scaffolding": [
+      "simple document comparison when the authoritative record and controlling field are explicitly identified",
+      "simple spreadsheet sort/filter tasks with precise instructions",
+      "policy-based clerical checks when the governing excerpt, threshold, or checklist is supplied",
+      "unfamiliar workflows reduced to concrete bounded steps"
+    ],
+    "normally_reassign": [
+      "independent policy interpretation",
+      "spreadsheet or financial analysis",
+      "cross-document policy reconciliation",
+      "procurement or vendor-compliance evaluation",
+      "invoice matching and payment-control judgment",
+      "quality/regulatory or food-safety assessment",
+      "transportation planning or physical receiving judgment"
+    ],
+    "never_assign_as_authorizer": [
+      "vendor-status approval",
+      "commercial term or PO approval",
+      "payment or banking approval",
+      "transportation or receiving exception approval",
+      "Q&R safety or regulatory approval"
+    ],
+    "verification_guidance": [
+      "Use normal verification early because P001 is a baseline unknown operator; do not assume hidden strengths or weaknesses without evidence.",
+      "For consequential comparisons, explicitly identify the authoritative record and preserve business-day versus calendar-day wording.",
+      "After repeated verified clerical success, reduce redundant checking on similar low-risk tasks without generalizing that success into specialist policy capability.",
+      "Treat requests for governing rules or reassignment as evidence about company knowledge/scope, not as a global reasoning failure."
+    ]
+  },
+  "scoring_notes": [
+    "Do not penalize Workflow Governor for initially leaving Elena's routine capabilities uncertain when direct evidence has not yet appeared.",
+    "Missing Northstar policy knowledge must not be converted into a broad low reasoning or document-comparison score.",
+    "Correctly applying an explicitly supplied rule is evidence for bounded execution, not independent policy expertise.",
+    "Verified clerical errors should update only relevant capability evidence, not the entire operator profile.",
+    "Clarification, task narrowing, reassignment, and authority refusal are correct outcomes when the requested work exceeds Elena's encoded skill or authority.",
+    "No startup Northstar policy files are available unless dynamically granted later."
+  ]
+}

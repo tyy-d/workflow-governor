@@ -1,0 +1,17 @@
+{
+  "record_type": "ASN",
+  "asn_id": "ASN-BM-260916-017",
+  "transmitted_at": "2026-09-16T08:11:00-04:00",
+  "nvid": "NVID-31877",
+  "po_number": "78214",
+  "po_revision": 2,
+  "srr_id": "SRR-44192",
+  "destination": "HVDC",
+  "freight_term": "Northstar-Managed Pickup",
+  "pallet_count": 9,
+  "carton_count": 900,
+  "gross_weight_lb": 16650,
+  "lines": [
+    {"line": 1, "sku": "NS-447210", "vendor_item": "BM-TS12", "units_shipped": 900}
+  ]
+}

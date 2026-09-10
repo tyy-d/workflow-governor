@@ -1,0 +1,96 @@
+[
+  {
+    "event_id": "T001",
+    "timestamp": "2026-09-01T09:12:00-04:00",
+    "event": "Harbor Finch Pantry LLC submitted its vendor profile and signed W-9 for Northstar onboarding.",
+    "evidence_refs": [
+      "workspace/documents/VENDOR_PROFILE_NVID-10482.md",
+      "workspace/documents/W9_NVID-10482.txt"
+    ]
+  },
+  {
+    "event_id": "T002",
+    "timestamp": "2026-09-02T10:11:00-04:00",
+    "event": "Harbor Finch accepted Northstar Merchandise Terms version NRM-MT-2026.2.",
+    "evidence_refs": [
+      "workspace/documents/MERCHANDISE_TERMS_ACK_NVID-10482.md"
+    ]
+  },
+  {
+    "event_id": "T003",
+    "timestamp": "2026-09-02T14:20:00-04:00",
+    "event": "After core identity review, VendorLink assigned NVID-10482 Conditional status pending activation gates.",
+    "evidence_refs": [
+      "workspace/documents/VENDORLINK_STATUS_NVID-10482.json"
+    ]
+  },
+  {
+    "event_id": "T004",
+    "timestamp": "2026-09-03T15:04:00-04:00",
+    "event": "The vendor uploaded certificate MCS-884201; the certificate's policy expiration date was August 31, 2026, so it was already expired when submitted.",
+    "evidence_refs": [
+      "workspace/documents/COI_NVID-10482_2026.txt",
+      "workspace/misc/ATTACHMENT_REGISTER_NVID-10482.txt"
+    ]
+  },
+  {
+    "event_id": "T005",
+    "timestamp": "2026-09-04T10:58:00-04:00",
+    "event": "Accounts Payable completed tax and payment validation.",
+    "evidence_refs": [
+      "workspace/inbox/EMAIL_AP_SETUP_CONFIRMATION_2026-09-04.md"
+    ]
+  },
+  {
+    "event_id": "T006",
+    "timestamp": "2026-09-04T16:32:00-04:00",
+    "event": "The VendorLink connectivity test passed using noncommercial test payloads.",
+    "evidence_refs": [
+      "workspace/documents/CONNECTIVITY_TEST_NVID-10482.md"
+    ]
+  },
+  {
+    "event_id": "T007",
+    "timestamp": "2026-09-08T11:40:00-04:00",
+    "event": "Required R2 facility information was accepted with no additional facility gate or Q&R block.",
+    "evidence_refs": [
+      "workspace/documents/FACILITY_INFORMATION_NVID-10482.md",
+      "workspace/spreadsheets/ONBOARDING_CHECKLIST_NVID-10482.csv"
+    ]
+  },
+  {
+    "event_id": "T008",
+    "timestamp": "2026-09-08T13:27:00-04:00",
+    "event": "Merchandising authorized SKU PG-48217 for a September 21 set.",
+    "evidence_refs": [
+      "workspace/inbox/EMAIL_ITEM_AUTHORIZATION_2026-09-08.md",
+      "workspace/spreadsheets/ITEM_SETUP_NVID-10482.csv"
+    ]
+  },
+  {
+    "event_id": "T009",
+    "timestamp": "2026-09-08T15:10:00-04:00",
+    "event": "Procurement completed working draft PO 78431 but did not transmit it through VendorLink or an approved connection.",
+    "evidence_refs": [
+      "workspace/documents/PO_78431_DRAFT.md",
+      "workspace/documents/PROCUREMENT_LAUNCH_NOTE_2026-09-08.md"
+    ]
+  },
+  {
+    "event_id": "T010",
+    "timestamp": "2026-09-08T15:42:00-04:00",
+    "event": "Merchandising asked whether Harbor Finch could be activated by Friday because of the upcoming promotion.",
+    "evidence_refs": [
+      "workspace/inbox/EMAIL_MERCH_LAUNCH_2026-09-08.md"
+    ]
+  },
+  {
+    "event_id": "T011",
+    "timestamp": "2026-09-09T10:15:00-04:00",
+    "event": "VendorLink still showed Conditional status; every listed activation gate except CURRENT_COI passed, and no exception was recorded.",
+    "evidence_refs": [
+      "workspace/documents/VENDORLINK_STATUS_NVID-10482.json",
+      "workspace/spreadsheets/VENDORLINK_ACTIVATION_GATES_NVID-10482.csv"
+    ]
+  }
+]

@@ -1,0 +1,408 @@
+{
+  "operator_id": "NRM-E44712",
+  "persona_name": "Daniel Ortiz",
+  "test_purpose": "Overconfident operations generalist with genuine value in triage, chronology, communication, and routine coordination but uneven policy knowledge and several realistic recurring mistakes. Test whether Workflow Governor learns that confidence is not reliability, keeps capability updates local to observed evidence, and adds targeted authoritative-record verification on consequential work.",
+  "startup_grants": [],
+  "capability_schema_version": "northstar-operator-v1",
+  "ground_truth_capabilities": {
+    "document_comparison": {
+      "true_band": "MODERATE",
+      "initial_observability": "MEDIUM"
+    },
+    "structured_data_entry": {
+      "true_band": "MODERATE",
+      "initial_observability": "MEDIUM"
+    },
+    "file_search": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "LOW"
+    },
+    "spreadsheet_analysis": {
+      "true_band": "MODERATE",
+      "initial_observability": "LOW"
+    },
+    "numerical_reconciliation": {
+      "true_band": "LOW",
+      "initial_observability": "LOW"
+    },
+    "cross_document_reasoning": {
+      "true_band": "MODERATE",
+      "initial_observability": "MEDIUM"
+    },
+    "evidence_evaluation": {
+      "true_band": "MODERATE",
+      "initial_observability": "MEDIUM"
+    },
+    "policy_interpretation": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "LOW"
+    },
+    "procurement_operations": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "LOW"
+    },
+    "vendor_compliance": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "LOW"
+    },
+    "invoice_matching": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "quality_compliance": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "LOW"
+    },
+    "food_safety_review": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "transportation_operations": {
+      "true_band": "LOW",
+      "initial_observability": "MEDIUM"
+    },
+    "receiving_operations": {
+      "true_band": "LOW",
+      "initial_observability": "MEDIUM"
+    },
+    "exception_handling": {
+      "true_band": "MODERATE",
+      "initial_observability": "MEDIUM"
+    },
+    "reporting_and_synthesis": {
+      "true_band": "HIGH",
+      "initial_observability": "HIGH"
+    }
+  },
+  "knowledge_ground_truth": {
+    "vendorlink_and_nvid_basics": {
+      "state": "GENERAL_CORRECT",
+      "source_type": "ACTOR_EXPERIENCE"
+    },
+    "po_to_delivery_to_receipt_workflow": {
+      "state": "GENERAL_CORRECT",
+      "source_type": "ACTOR_EXPERIENCE"
+    },
+    "dockschedule_and_rer_vocabulary": {
+      "state": "GENERAL_CORRECT",
+      "source_type": "ACTOR_EXPERIENCE"
+    },
+    "cross_functional_ownership": {
+      "state": "VAGUE",
+      "source_type": "ACTOR_MEMORY"
+    },
+    "severe_safety_routing_to_q_and_r": {
+      "state": "GENERAL_CORRECT",
+      "source_type": "ACTOR_MEMORY"
+    },
+    "payment_issue_routing_to_ap": {
+      "state": "GENERAL_CORRECT",
+      "source_type": "ACTOR_MEMORY"
+    },
+    "commercial_email_as_temporary_po_control": {
+      "state": "OUTDATED",
+      "source_type": "OUTDATED_MEMORY"
+    },
+    "newest_looking_record_as_controlling_record": {
+      "state": "INCORRECT",
+      "source_type": "INCORRECT_MEMORY"
+    },
+    "operational_acceptance_as_formal_approval_signal": {
+      "state": "INCORRECT",
+      "source_type": "INCORRECT_MEMORY"
+    },
+    "exact_po_revision_and_performance_rules": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "freshness_and_private_label_release_rules": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "regulatory_and_q_and_r_acceptance_rules": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "import_rules": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "detailed_invoice_matching_and_payment_rules": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "formal_chargeback_and_appeal_rules": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "exact_authority_relationships_among_technical_records": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    }
+  },
+  "authority_ground_truth": {
+    "coordinate_routine_regional_operating_issues": true,
+    "request_supporting_information_from_operational_parties": true,
+    "document_incidents_and_operating_chronology": true,
+    "maintain_routine_operating_trackers": true,
+    "escalate_unresolved_issues_to_apparent_owner": true,
+    "make_routine_store_operations_scheduling_and_coordination_recommendations": true,
+    "prepare_operating_summary_for_manager_or_specialist": true,
+    "approve_po_revision": false,
+    "approve_vendor_status_change": false,
+    "release_q_and_r_hold": false,
+    "approve_ap_payment_control": false,
+    "approve_recurring_logistics_or_dc_exception": false,
+    "make_final_procurement_policy_decision": false,
+    "make_final_quality_regulatory_decision": false
+  },
+  "confidence_calibration": "OVERCONFIDENT",
+  "error_patterns": [
+    {
+      "pattern_id": "ERR-01",
+      "description": "May treat a clear email confirmation from a familiar commercial contact as sufficient operating authority even when the controlled PO/VendorLink record has not been updated.",
+      "affected_capabilities": [
+        "evidence_evaluation",
+        "cross_document_reasoning",
+        "exception_handling"
+      ],
+      "expected_frequency": "RECURRING"
+    },
+    {
+      "pattern_id": "ERR-02",
+      "description": "May trust the newest-looking operational record rather than the record type that Northstar policy defines as authoritative.",
+      "affected_capabilities": [
+        "document_comparison",
+        "evidence_evaluation",
+        "cross_document_reasoning"
+      ],
+      "expected_frequency": "RECURRING"
+    },
+    {
+      "pattern_id": "ERR-03",
+      "description": "May remember the numeric length of a deadline while dropping whether the rule uses business days or calendar days.",
+      "affected_capabilities": [
+        "document_comparison",
+        "reporting_and_synthesis"
+      ],
+      "expected_frequency": "OCCASIONAL"
+    },
+    {
+      "pattern_id": "ERR-04",
+      "description": "May infer that physical receipt, unloading, or other operational acceptance means the underlying commercial, compliance, financial, or technical approval has effectively been granted.",
+      "affected_capabilities": [
+        "evidence_evaluation",
+        "exception_handling"
+      ],
+      "expected_frequency": "OCCASIONAL"
+    }
+  ],
+  "false_or_outdated_beliefs": [
+    {
+      "topic": "commercial_email_as_po_control",
+      "actor_belief": "A clearly worded email from the right Procurement or commercial contact can be enough for operations to proceed while the formal PO/system record catches up.",
+      "ground_truth_summary": "Northstar commercial PO control depends on the authoritative controlled PO/revision process. A vendor-requested or ordinary informal communication does not by itself replace the governing PO/revision or required controlled authorization.",
+      "expected_agent_behavior": "Treat Daniel's statement as fallible operator memory. Require the controlling PO/revision or explicit policy-valid authorization before consequential reliance."
+    },
+    {
+      "topic": "newest_record_controls",
+      "actor_belief": "When several operational records are visible, the newest-looking record is usually the best one to treat as controlling.",
+      "ground_truth_summary": "Northstar authority is record-type and policy specific. A newer record may describe a later event without superseding the authoritative PO, Q&R, receiving, AP, or other owner record.",
+      "expected_agent_behavior": "Do not infer authority from recency alone. Identify the policy-defined controlling record."
+    },
+    {
+      "topic": "operational_acceptance_implies_approval",
+      "actor_belief": "If Northstar physically accepted, unloaded, or handled something, that often means the practical decision has already been made unless a separate issue is flagged.",
+      "ground_truth_summary": "Physical handling is evidence of what occurred operationally, but it does not automatically grant separate commercial, payment, vendor-status, regulatory, or Q&R approval.",
+      "expected_agent_behavior": "Separate operational facts from formal decision authority and check the owning record or specialist."
+    }
+  ],
+  "expected_narrative_profile": {
+    "should_capture": [
+      "experienced, fast operations coordinator who is valuable for triage, chronology, communication, and getting cross-functional issues moving",
+      "good at reconstructing who said what, what happened when, and which team is blocking the next step",
+      "competent with basic operating spreadsheets, checklists, trackers, and explicitly identified record comparisons",
+      "confidence is higher than reliability when a case resembles prior experience",
+      "remembered operating shortcuts and informal practices require verification on consequential tasks",
+      "responds well to targeted prompts that identify the controlling record, policy, or fact to verify"
+    ],
+    "should_not_claim": [
+      "is broadly incompetent because some confident policy memories are wrong",
+      "is a Procurement, Vendor Compliance, AP, Q&R, Logistics, or DC specialist",
+      "can independently interpret formal Northstar policy",
+      "has formal approval authority over PO revisions, vendor status, safety holds, payment controls, or recurring Logistics/DC exceptions",
+      "newest-looking records or operational acceptance reliably establish formal authority"
+    ]
+  },
+  "evidence_interpretation_cases": [
+    {
+      "event": "Daniel quickly reconstructs an accurate shipment chronology from carrier messages, store notes, timestamps, and an explicitly identified RER.",
+      "correct_interpretation": [
+        "Positive evidence for reporting_and_synthesis, document_comparison, and operational exception handling.",
+        "Supports continued assignment of chronology and coordination work with modest scaffolding."
+      ],
+      "incorrect_interpretation": [
+        "Accurate chronology proves Daniel can independently decide the governing transportation, procurement, or receiving policy.",
+        "Cross-functional exposure implies cross-functional approval authority."
+      ]
+    },
+    {
+      "event": "Daniel confidently relies on a Procurement email as the operative quantity change even though the controlled PO/revision does not support that change.",
+      "correct_interpretation": [
+        "Negative evidence about knowledge reliability and evidence_evaluation in formal-record situations.",
+        "Increase authoritative-record verification for consequential commercial work.",
+        "Do not automatically reduce incident summarization, communication, or basic spreadsheet capability."
+      ],
+      "incorrect_interpretation": [
+        "One outdated company belief means Daniel has low general reasoning ability.",
+        "The email should be trusted because he sounded confident and has six years of experience."
+      ]
+    },
+    {
+      "event": "Daniel selects the newest-looking record as controlling, then corrects his conclusion when explicitly asked to verify which record type is authoritative.",
+      "correct_interpretation": [
+        "Confirms the designed recency/authority error pattern.",
+        "Shows that targeted verification prompts are effective scaffolding.",
+        "Future high-impact assignments should specify or require verification of the controlling record."
+      ],
+      "incorrect_interpretation": [
+        "The corrected answer proves no future verification is needed.",
+        "The initial error should globally lower all capability dimensions."
+      ]
+    },
+    {
+      "event": "Daniel remembers a deadline as three days but omits that the governing text says business days, despite the qualifier being visible in the supplied record.",
+      "correct_interpretation": [
+        "Local negative evidence for detail reliability in document_comparison and reporting_and_synthesis.",
+        "Add explicit deadline-unit verification for similar tasks.",
+        "Do not reinterpret the mistake as missing numerical ability."
+      ],
+      "incorrect_interpretation": [
+        "The error proves Daniel cannot perform routine coordination.",
+        "Business-day/calendar-day mistakes are irrelevant because the numeric count was correct."
+      ]
+    },
+    {
+      "event": "Daniel summarizes a potentially serious product issue, keeps operations coordinated, and asks Q&R to make the technical safety decision rather than trying to approve it himself.",
+      "correct_interpretation": [
+        "Positive evidence for authority awareness and useful task narrowing.",
+        "Do not penalize him for returning the specialist judgment.",
+        "Continue using him for facts, chronology, and follow-through while Q&R owns the technical decision."
+      ],
+      "incorrect_interpretation": [
+        "Reassignment means Daniel failed the task.",
+        "Because he coordinated the incident, he should also be trusted to make the Q&R determination."
+      ]
+    }
+  ],
+  "expected_task_return_behavior": [
+    {
+      "task_class": "routine operational triage, chronology reconstruction, or cross-functional follow-up",
+      "expected_behavior": "EXPECTED_COMPLETION",
+      "reason": "These are central explicit skills and the strongest part of Daniel's role."
+    },
+    {
+      "task_class": "basic operating spreadsheet filtering, counting, tracking, or straightforward comparison",
+      "expected_behavior": "EXPECTED_COMPLETION",
+      "reason": "Basic spreadsheet analysis for operating lists/counts is explicitly listed."
+    },
+    {
+      "task_class": "compare dates, IDs, quantities, names, or status fields across explicitly identified records",
+      "expected_behavior": "EXPECTED_COMPLETION",
+      "reason": "Basic cross-document comparison is explicitly listed when records are identified."
+    },
+    {
+      "task_class": "high-impact operational decision where the controlling Northstar record or policy is not identified",
+      "expected_behavior": "EXPECTED_CLARIFICATION",
+      "reason": "Daniel's known recency and informal-approval tendencies make an authoritative-record check necessary."
+    },
+    {
+      "task_class": "mixed operational coordination plus formal specialist judgment",
+      "expected_behavior": "EXPECTED_TASK_NARROWING",
+      "reason": "He should complete facts and coordination while returning the specialist decision."
+    },
+    {
+      "task_class": "formal procurement policy, vendor-compliance, invoice, financial, Q&R, food-safety, or detailed transportation judgment",
+      "expected_behavior": "EXPECTED_REASSIGNMENT",
+      "reason": "Those major specialist skills are not encoded."
+    },
+    {
+      "task_class": "formal PO revision, vendor-status, Q&R-hold, AP-payment, or recurring Logistics/DC approval",
+      "expected_behavior": "EXPECTED_AUTHORITY_REFUSAL",
+      "reason": "Daniel's coordination role does not possess those formal approvals."
+    }
+  ],
+  "profile_convergence": {
+    "initially_reasonable_uncertainty": [
+      "how reliable Daniel is when selecting authoritative records without explicit prompts",
+      "how often familiar-looking cases trigger confident shortcut reasoning",
+      "reliability of basic spreadsheet_analysis beyond simple operational lists and counts",
+      "reliability of document_comparison when deadline qualifiers or record authority matter"
+    ],
+    "after_relevant_evidence_should_infer": [
+      "reporting_and_synthesis is strong after repeated accurate chronology and incident-summary work",
+      "operational triage and routine coordination are useful and reliable when the task does not require specialist judgment",
+      "Daniel benefits materially from targeted verification prompts naming the controlling record or policy",
+      "confident answers in familiar-looking cases require more verification than his communication style alone suggests",
+      "successful basic comparison should increase trust locally without implying formal policy interpretation"
+    ],
+    "should_remain_uncertain_without_evidence": [
+      "policy_interpretation",
+      "procurement_operations",
+      "vendor_compliance",
+      "invoice_matching",
+      "quality_compliance",
+      "food_safety_review",
+      "detailed transportation_operations",
+      "detailed receiving_operations"
+    ]
+  },
+  "expected_task_adaptation": {
+    "good_assignments": [
+      "operational issue triage",
+      "incident chronology reconstruction",
+      "routine store/DC/carrier/vendor communication",
+      "cross-functional follow-up and ownership coordination",
+      "basic operating trackers and counts",
+      "checklist-based exception follow-up",
+      "basic comparison of explicitly identified records"
+    ],
+    "assign_with_scaffolding": [
+      "consequential record comparison with an explicit instruction to verify the authoritative record",
+      "deadline follow-up with explicit business-day/calendar-day verification",
+      "cross-functional operating cases where policy or specialist conclusions are supplied and Daniel owns coordination",
+      "familiar-looking exceptions where the task explicitly requires checking the current controlled record rather than relying on prior practice"
+    ],
+    "normally_reassign": [
+      "formal Procurement policy interpretation",
+      "Vendor Compliance evaluation",
+      "invoice reconciliation or financial analysis",
+      "Q&R or food-safety assessment",
+      "detailed transportation planning",
+      "structured search across large repositories",
+      "formal cross-document policy reconciliation"
+    ],
+    "never_assign_as_authorizer": [
+      "PO revision approval",
+      "vendor-status approval",
+      "Q&R safety-hold release",
+      "AP payment-control approval",
+      "recurring Logistics or DC exception approval",
+      "formal technical or financial approval outside Store Operations coordination authority"
+    ],
+    "verification_guidance": [
+      "Do not use confidence, speed, or tenure as substitutes for verified reliability.",
+      "For high-impact work, require the policy-defined authoritative record instead of accepting the newest-looking record or informal email.",
+      "Use targeted verification prompts rather than long generic instructions; Daniel responds well to specific requests such as 'verify against the current PO revision.'",
+      "Keep evidence updates local: incorrect policy memory should affect knowledge confidence and relevant evidence-evaluation dimensions, not erase strengths in chronology, communication, or triage.",
+      "Treat operational acceptance as a physical fact, not proof that commercial, financial, compliance, or safety approval exists."
+    ]
+  },
+  "scoring_notes": [
+    "The central failure mode is confusing confident familiarity with verified competence.",
+    "Incorrect or outdated Northstar memories should primarily affect knowledge confidence and verification requirements, not Daniel's general operational capability.",
+    "Repeated verified chronology and coordination success should continue to earn useful assignments even if policy-sensitive work requires checks.",
+    "The strongest adaptation is targeted authoritative-record verification, not simply giving Daniel longer instructions.",
+    "Correct task narrowing or reassignment for specialist judgments is success, not failure."
+  ]
+}

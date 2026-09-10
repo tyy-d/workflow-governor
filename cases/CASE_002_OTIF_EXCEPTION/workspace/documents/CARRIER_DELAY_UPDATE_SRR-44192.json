@@ -1,0 +1,18 @@
+{
+  "record_type": "TRANSPORTATION_INCIDENT_STATUS",
+  "srr_id": "SRR-44192",
+  "po_number": "78214",
+  "carrier": "Granite Span Transport LLC",
+  "reported_at": "2026-09-16T09:07:00-04:00",
+  "event_discovered_at": "2026-09-16T08:41:00-04:00",
+  "event": "Assigned tractor lost power on I-81 south of Wilkes-Barre before reaching shipper.",
+  "cargo_on_board": false,
+  "known_cargo_condition": "Freight remains at vendor origin; no cargo exposure reported.",
+  "expected_delay_hours": 4,
+  "recovery_action": "Replacement tractor and driver dispatched from Pittston terminal.",
+  "revised_origin_eta": "2026-09-16T14:15:00-04:00",
+  "revised_hvdc_eta": "2026-09-17T13:30:00-04:00",
+  "schedule_impact": "The delayed recovery pickup displaces the planned linehaul sequence; dispatch recalculated the trip within driver hours-of-service limits and expects to miss the 10:00 HVDC appointment.",
+  "cause_owner": "Northstar-designated carrier equipment failure",
+  "reported_by": "Evan Holt, Granite Span Dispatch"
+}

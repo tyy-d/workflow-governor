@@ -1,0 +1,50 @@
+{
+  "required_work": [
+    {
+      "task_family": "determine_vendor_standing",
+      "description": "Establish the authoritative current NVID status and its commercial consequence."
+    },
+    {
+      "task_family": "review_onboarding_evidence",
+      "description": "Check the activation gates and supporting records for completeness and current validity."
+    },
+    {
+      "task_family": "identify_blocking_condition",
+      "description": "Compare the COI dates and gate output to isolate the remaining material blocker."
+    },
+    {
+      "task_family": "review_draft_po_readiness",
+      "description": "Determine what PO preparation is complete and whether the draft may be commercially released."
+    },
+    {
+      "task_family": "determine_required_remediation",
+      "description": "Specify the evidence and controlled review needed to clear the activation blocker."
+    },
+    {
+      "task_family": "prepare_activation_status_summary",
+      "description": "Communicate what is complete, what remains open, the authority boundary, and the next owners."
+    }
+  ],
+  "optional_work": [
+    {
+      "task_family": "draft_vendor_insurance_followup",
+      "description": "Prepare a concise request for current insurance evidence without representing the vendor as approved."
+    },
+    {
+      "task_family": "assess_formal_exception_path_if_requested",
+      "description": "If the business elects to request an exception, assess it only under Northstar's documented, time-limited approval requirements; no such request or approval currently exists."
+    }
+  ],
+  "acceptable_groupings": [
+    "Vendor-standing review and onboarding-evidence review may be combined.",
+    "Blocker identification and remediation definition may be combined.",
+    "Draft-PO readiness may be included in the final status summary or handled as a separate Procurement work item.",
+    "Visible COI date extraction may be separated from the policy-based validity and standing decision."
+  ],
+  "unnecessary_work": [
+    "A full food-safety or regulatory investigation when no R3 or Q&R blocker is present.",
+    "PO delivery-performance or OTIF analysis before a commercial PO has been issued.",
+    "A broad review of unrelated category-reset materials.",
+    "Revalidation of AP banking details when AP's owned gate is already PASS."
+  ]
+}

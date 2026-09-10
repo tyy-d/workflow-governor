@@ -1,0 +1,30 @@
+NORTHSTAR 04 — SHORT PROVENANCE MAP
+===================================
+Northstar Regional Markets is fictional. The sources below supplied process ideas only; Northstar names, thresholds, approvals, forms, metrics, and examples are original.
+
+FAMILY DOLLAR / DOLLAR TREE
+- Borrowed concept: standardized master-carton markings, pack/inner distinctions, handling marks, buyer-approved deviations, and consequences for bad markings.
+- Northstar adaptation: APLR-controlled Master Case fields, case-pack approval, handling symbols, and VendorLink exception workflow.
+
+DOLLAR TREE UPC BASICS
+- Borrowed concept: barcode print quality, quiet zones, placement, color/contrast, and pre-shipment scan verification.
+- Northstar adaptation: Consumer GTIN controls plus 10-of-10 decode test and Northstar minimum grade 2.0/C where verifier grading is available.
+
+GS1 US
+- Borrowed concept: GTIN packaging hierarchy, GTIN-14 for shipping cases, GS1-128 logistics labels, and SSCC as a unique logistics-unit identifier.
+- Northstar adaptation: unique SSCC on non-exempt DC pallets and APLR-controlled consumer/case/logistics identifiers.
+
+FDA / USDA-FSIS
+- Borrowed concept: food labels have regulator-specific mandatory identity, quantity, ingredients/allergens, nutrition, handling, inspection, and business information.
+- Northstar adaptation: Q&R label review sits on top of applicable law; Northstar approval is never represented as regulatory approval.
+
+FDA COSMETICS / FTC FPLA / CPSC
+- Borrowed concept: identity, net contents, ingredients/warnings/business information and product-specific consumer/tracking warnings vary by jurisdiction/product class.
+- Northstar adaptation: one cross-category APLR with category-specific legal review rather than pretending all merchandise follows food rules.
+
+NORTHSTAR-ORIGINAL ITEMS
+- Approved Packaging & Label Record (APLR) and Temporary Overlabel Authorization (TOA).
+- 30-day branded-item change notice; private-label 60-day PLCR remains controlling.
+- >5% case dimension/gross-weight master-data correction trigger.
+- 10/10 correct barcode decode rule; 3 Major events in 60 days triggers corrective-action review.
+- Critical/Major/Minor packaging-label severity model and Northstar approval matrix.

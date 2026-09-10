@@ -1,0 +1,44 @@
+[
+  {
+    "decision_id": "D001",
+    "decision": "Use Rev 2 and 1,000 Net Ordered Units for all PO 78214 delivery-performance calculations.",
+    "importance": "REQUIRED",
+    "depends_on": ["F001", "F002", "F003"],
+    "policy_basis": ["company/northstar/handbook/01_PURCHASE_ORDERS_AND_DELIVERY_PERFORMANCE.md"]
+  },
+  {
+    "decision_id": "D002",
+    "decision": "Treat compliant readiness at origin as the vendor-controlled on-time event for this Northstar-Managed Pickup, producing a 90.0% On-Time Unit Rate rather than the preliminary arrival-based 0.0% result.",
+    "importance": "REQUIRED",
+    "depends_on": ["F004", "F006", "F007", "F009", "F012"],
+    "policy_basis": ["company/northstar/handbook/01_PURCHASE_ORDERS_AND_DELIVERY_PERFORMANCE.md", "company/northstar/handbook/08_TRANSPORTATION.md"]
+  },
+  {
+    "decision_id": "D003",
+    "decision": "Do not attribute the late pickup or late HVDC arrival of the 900 timely staged units to the vendor; route the managed-transportation portion of PER-260918-017 to the Logistics Manager for controlled disposition.",
+    "importance": "REQUIRED",
+    "depends_on": ["F004", "F006", "F007", "F008", "F013", "F014"],
+    "policy_basis": ["company/northstar/handbook/01_PURCHASE_ORDERS_AND_DELIVERY_PERFORMANCE.md", "company/northstar/handbook/08_TRANSPORTATION.md"]
+  },
+  {
+    "decision_id": "D004",
+    "decision": "Retain vendor responsibility for the missing 100 units and the resulting 90.0% Fill Rate and 90.0% On-Time Unit Rate; a carrier delay does not excuse product that was never tendered.",
+    "importance": "REQUIRED",
+    "depends_on": ["F003", "F006", "F009", "F010"],
+    "policy_basis": ["company/northstar/handbook/01_PURCHASE_ORDERS_AND_DELIVERY_PERFORMANCE.md", "company/northstar/handbook/08_TRANSPORTATION.md"]
+  },
+  {
+    "decision_id": "D005",
+    "decision": "Do not grant the requested total OTIF waiver; separate the supported managed-transportation correction from the nonexcusable vendor shortage.",
+    "importance": "REQUIRED",
+    "depends_on": ["F009", "F010", "F013", "F014"],
+    "policy_basis": ["company/northstar/handbook/01_PURCHASE_ORDERS_AND_DELIVERY_PERFORMANCE.md"]
+  },
+  {
+    "decision_id": "D006",
+    "decision": "Record the final calculation and any approved adjustment through the controlled PER/scorecard process; do not infer approval from internal discussion or the vendor's request.",
+    "importance": "REQUIRED",
+    "depends_on": ["F012", "F014"],
+    "policy_basis": ["company/northstar/handbook/01_PURCHASE_ORDERS_AND_DELIVERY_PERFORMANCE.md"]
+  }
+]

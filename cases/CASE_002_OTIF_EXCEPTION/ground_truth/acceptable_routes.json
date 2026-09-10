@@ -1,0 +1,37 @@
+[
+  {
+    "work_type": "Explicit revision ordering, identifier matching, and timestamp sequencing",
+    "acceptable_executors": ["DETERMINISTIC", "MULTIPLE_ACCEPTABLE"],
+    "notes": "P003 is also well suited when the record-authority rule is supplied."
+  },
+  {
+    "work_type": "Net Ordered Units, On-Time Unit Rate, Fill Rate, threshold comparison, and Rev 1 counterfactual",
+    "acceptable_executors": ["DETERMINISTIC"],
+    "notes": "Arithmetic must be reproducible; a model or human may explain but should not be the sole reasonable calculator."
+  },
+  {
+    "work_type": "PO revision, acknowledgment, and vendor commercial-responsibility interpretation",
+    "acceptable_executors": ["MODEL", "HUMAN_WITH_RELEVANT_SKILL", "MULTIPLE_ACCEPTABLE"],
+    "notes": "P002 is the strongest persona fit. P003 requires the governing policy criteria."
+  },
+  {
+    "work_type": "SRR, Ready By, carrier-event, gate, and receiving evidence reconstruction",
+    "acceptable_executors": ["MODEL", "HUMAN_WITH_RELEVANT_SKILL", "MULTIPLE_ACCEPTABLE"],
+    "notes": "P008 is the strongest persona fit and should return the final commercial consequence to Procurement/Vendor Compliance."
+  },
+  {
+    "work_type": "Mixed-responsibility synthesis and PER scope recommendation",
+    "acceptable_executors": ["MODEL", "HUMAN_WITH_RELEVANT_SKILL", "MULTIPLE_ACCEPTABLE"],
+    "notes": "The analysis may be prepared by P002 with Logistics evidence, but approval must remain separate."
+  },
+  {
+    "work_type": "Approval of the Northstar-managed transportation or appointment failure portion of PER-260918-017",
+    "acceptable_executors": ["AUTHORIZED_HUMAN"],
+    "notes": "Northstar policy names the Logistics Manager as minimum approver. No approval exists in the initial workspace."
+  },
+  {
+    "work_type": "Post-scorecard correction if the preliminary error has already changed a final monthly result",
+    "acceptable_executors": ["AUTHORIZED_HUMAN"],
+    "notes": "Would require the Vendor Compliance Manager and the manager of the function owning the evidence; the workspace shows only a preliminary export, so this route is conditional."
+  }
+]

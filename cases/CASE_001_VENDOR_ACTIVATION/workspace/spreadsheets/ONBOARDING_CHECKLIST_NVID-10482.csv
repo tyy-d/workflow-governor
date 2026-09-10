@@ -1,0 +1,11 @@
+gate_id,gate_name,owner,status,evidence_reference,last_checked,review_note
+G01,Seller identity,Vendor Compliance,PASS,VENDOR_PROFILE_NVID-10482.md,2026-09-02,Legal entity and seller of record confirmed
+G02,Tax and payment validation,Accounts Payable,PASS,EMAIL_AP_SETUP_CONFIRMATION_2026-09-04.md,2026-09-04,AP validation complete
+G03,Merchandise Terms,Vendor Compliance,PASS,MERCHANDISE_TERMS_ACK_NVID-10482.md,2026-09-02,Version NRM-MT-2026.2 accepted
+G04,Current certificate of insurance,Vendor Compliance,REVIEW,COI_NVID-10482_2026.txt,2026-09-09,Document uploaded September 3; current-validity check pending
+G05,Required contacts,Vendor Compliance,PASS,VENDOR_CONTACTS_NVID-10482.md,2026-09-03,Primary and backup contacts present
+G06,Risk classification,Quality & Regulatory,PASS,ITEM_SETUP_NVID-10482.csv,2026-09-08,R2 Controlled
+G07,Required facility documents,Quality & Regulatory,PASS,FACILITY_INFORMATION_NVID-10482.md,2026-09-08,R2 information accepted; no additional gate
+G08,Critical Q&R block,Quality & Regulatory,PASS,FACILITY_INFORMATION_NVID-10482.md,2026-09-08,None recorded
+G09,Connectivity test,IT / Vendor Compliance,PASS,CONNECTIVITY_TEST_NVID-10482.md,2026-09-04,Test payload passed
+G10,Authorized item,Merchandising,PASS,ITEM_SETUP_NVID-10482.csv,2026-09-08,PG-48217 authorized

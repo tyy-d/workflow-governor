@@ -1,0 +1,2 @@
+exported_at_et,record_status,po_number,po_revision,freight_term,net_ordered_units,on_time_event_used,on_time_units,on_time_unit_rate_pct,fill_units,fill_rate_pct,otif_result,exception_status,system_note
+2026-09-18 08:35,PRELIMINARY,78214,2,Northstar-Managed Pickup,1000,HVDC_GATE_ARRIVAL,0,0.0,900,90.0,FAIL,NOT_APPLIED,Arrival event outside delivery window; managed-pickup responsibility review pending

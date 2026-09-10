@@ -1,0 +1,81 @@
+[
+  {
+    "decision_id": "D001",
+    "decision": "Do not treat NVID-10482 as Active while VendorLink shows Conditional and the current-COI activation gate is failed.",
+    "importance": "REQUIRED",
+    "depends_on": [
+      "F002",
+      "F003",
+      "F004"
+    ],
+    "policy_basis": [
+      "company/northstar/handbook/00_COMPANY_AND_VENDOR_OVERVIEW.md"
+    ]
+  },
+  {
+    "decision_id": "D002",
+    "decision": "Do not release or transmit PO 78431 as a commercial PO until the vendor is Active for the authorized item.",
+    "importance": "REQUIRED",
+    "depends_on": [
+      "F002",
+      "F007",
+      "F008"
+    ],
+    "policy_basis": [
+      "company/northstar/handbook/00_COMPANY_AND_VENDOR_OVERVIEW.md",
+      "company/northstar/handbook/01_PURCHASE_ORDERS_AND_DELIVERY_PERFORMANCE.md"
+    ]
+  },
+  {
+    "decision_id": "D003",
+    "decision": "Identify an accepted, unexpired COI satisfying applicable Northstar limits as the ordinary remediation needed to clear the failed insurance gate.",
+    "importance": "REQUIRED",
+    "depends_on": [
+      "F003",
+      "F004",
+      "F005",
+      "F009"
+    ],
+    "policy_basis": [
+      "company/northstar/handbook/00_COMPANY_AND_VENDOR_OVERVIEW.md"
+    ]
+  },
+  {
+    "decision_id": "D004",
+    "decision": "Commercial urgency and Merchandising item authorization do not by themselves change vendor standing or create an exception.",
+    "importance": "REQUIRED",
+    "depends_on": [
+      "F006",
+      "F007"
+    ],
+    "policy_basis": [
+      "company/northstar/handbook/00_COMPANY_AND_VENDOR_OVERVIEW.md"
+    ]
+  },
+  {
+    "decision_id": "D005",
+    "decision": "Preparatory item and PO work may remain ready, but it must remain non-authorizing until activation; after corrected insurance is accepted and every gate passes, Vendor Compliance may activate the NVID and Procurement may proceed through the controlled PO channel.",
+    "importance": "REQUIRED",
+    "depends_on": [
+      "F002",
+      "F003",
+      "F008"
+    ],
+    "policy_basis": [
+      "company/northstar/handbook/00_COMPANY_AND_VENDOR_OVERVIEW.md",
+      "company/northstar/handbook/01_PURCHASE_ORDERS_AND_DELIVERY_PERFORMANCE.md"
+    ]
+  },
+  {
+    "decision_id": "D006",
+    "decision": "Do not expand the case into a quality-regulatory investigation when the evidence identifies an ordinary R2 administrative activation blocker and no Q&R block.",
+    "importance": "IMPORTANT",
+    "depends_on": [
+      "F001",
+      "F010"
+    ],
+    "policy_basis": [
+      "company/northstar/handbook/00_COMPANY_AND_VENDOR_OVERVIEW.md"
+    ]
+  }
+]

@@ -1,0 +1,5 @@
+po_number,revision,event,timestamp_et,channel,authorized_by,status
+78214,1,TRANSMITTED,2026-09-03 09:12,VendorLink,Owen Price,SUPERSEDED
+78214,1,ACK_RECEIVED,2026-09-03 14:06,VendorLink,Maya Chen,ACCEPTED
+78214,2,TRANSMITTED,2026-09-08 09:18,VendorLink,Owen Price,CURRENT_AUTHORIZED
+78214,2,ACK_RECEIVED,2026-09-08 13:42,VendorLink,Maya Chen,ACCEPTED

@@ -1,0 +1,12 @@
+Historical shipment reference
+PO: 77902 Rev 1
+Vendor: Bright Meadow Foods LLC (NVID-31877)
+SKU: NS-447210
+Freight term: Northstar-Managed Pickup
+Ordered / received: 600 / 600 units
+Ready By: 2026-08-26 09:00 ET
+Carrier pickup: 2026-08-26 08:52 ET
+HVDC receipt date: 2026-08-27
+Status: Closed; no exception
+
+This is a prior shipment and is not part of PO 78214.

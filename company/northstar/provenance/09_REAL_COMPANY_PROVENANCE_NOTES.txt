@@ -1,0 +1,21 @@
+NORTHSTAR FILE 09 — REAL-COMPANY PROVENANCE NOTES
+===================================================
+Northstar is fictional. These sources influenced process design only; Northstar names, deadlines, tolerances, statuses, and controls are original.
+
+DOLLAR TREE / FAMILY DOLLAR
+- Borrowed: merchandise suppliers receiving POs and sending invoices electronically; portal-or-EDI model; connectivity testing; structured PO/invoice validation and supplier visibility.
+- Northstar adaptation: VendorLink + approved EDI/API channels, with one authoritative transaction/status record and original outage/backfill rules.
+
+US FOODS
+- Borrowed: supplier self-service for invoice submission, claims/documentation, and payment-management visibility.
+- Northstar adaptation: invoice, IER, payment-status, remittance, and supporting-document workflows in VendorLink.
+
+SYSCO
+- Borrowed: supplier portals exposing PO, invoice, payment, evidence, and inquiry status.
+- Northstar adaptation: linked transaction history and role-based exception ownership without creating a second portal.
+
+UNFI
+- Borrowed: PO terms remain controlling over supplier invoice language; payment timing linked to invoice/receipt events; deductions and offsets handled within AP settlement.
+- Northstar adaptation: three-way match, Invoice Eligible Date, default Net 30, and separate chargeback/appeal treatment in file 10.
+
+FULL SOURCE URLS ARE LISTED IN 09_VENDOR_PORTAL_AND_INVOICING.md.

@@ -1,0 +1,42 @@
+NORTHSTAR 00 — SHORT PROVENANCE MAP
+===================================
+Purpose: record concept-level influences only. No Northstar rule below is claimed to be a verbatim real-company rule.
+
+DOLLAR TREE / FAMILY DOLLAR FAMILY OF MATERIALS
+- Borrowed concept: retailer vendor resource center split across terms, labeling, logistics, recall, and compliance.
+- Borrowed concept: merchandise vendors transact electronically and use a vendor portal/EDI-style process.
+- Northstar adaptation: one fictional portal, Northstar VendorLink, with original activation/status rules.
+
+UNFI
+- Borrowed concept: onboarding uses a structured package including supplier agreement, COI, tax forms, item/spec data, food-safety audit evidence, certifications, and label files.
+- Borrowed concept: supplier master terms coexist with separate shipping, shelf-life, change, recall, and other operating policies.
+- Northstar adaptation: original document gates, risk tiers, statuses, and timing rules.
+
+SYSCO
+- Borrowed concept: food-supplier facility review considers sanitation, GMPs, traceability, recall readiness, food-safety controls, and production capability.
+- Northstar adaptation: R3 facility review and later Quality & Compliance requirements.
+
+US FOODS
+- Borrowed concept: centralized product master data includes ingredients, allergens, images, and other item information important to selling food accurately.
+- Northstar adaptation: item-master + ingredient/allergen submission requirement.
+
+TARGET
+- Borrowed concept: supplier onboarding/standards can include COI, electronic payments/PO capability, audits, conduct standards, accurate records, and ongoing performance accountability.
+- Northstar adaptation: original Northstar status model, exception authority, insurance amounts, and evidence package.
+
+FDA / USDA-FSIS
+- Borrowed only actual regulatory concepts: food-facility registration where applicable, preventive controls/CGMP framework, allergen labeling responsibilities, and FSIS establishment identity for regulated meat/poultry/egg products.
+- Northstar adaptation: VendorLink attestations and supporting-document requests. These do not replace legal obligations.
+
+GFSI
+- Borrowed concept: use certification against an appropriate GFSI-recognized certification programme as one possible food-safety assurance mechanism.
+- Northstar adaptation: R3 facilities need a recognized certification OR a Northstar-approved alternative audit plan. This is fictional company policy, not law.
+
+ORIGINAL NORTHSTAR ITEMS (NOT BORROWED AS THRESHOLDS)
+- Product Risk Tiers R1/R2/R3.
+- Vendor statuses Applicant/Conditional/Active/Restricted/Suspended/Closed.
+- Northstar VendorLink and NVID terminology.
+- 10-business-day master-data update rule; annual contact recertification; 30-day COI warning.
+- Insurance limits ($2M/$4M CGL, $2M product liability, $1M auto).
+- Seven-year post-closure onboarding/status record retention.
+- Approval matrix, examples, and all exception logic.

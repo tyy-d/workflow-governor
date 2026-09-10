@@ -1,0 +1,51 @@
+NORTHSTAR 03 — REAL-COMPANY PROVENANCE NOTES
+==============================================
+Purpose: concise record of concepts adapted for 03_PRIVATE_LABEL_PRODUCTS.md.
+Northstar names, forms, deadlines, statuses, approval rules, and examples are fictional and original.
+
+FAMILY DOLLAR / DOLLAR TREE
+Source: public Family Dollar Quality & Regulatory Compliance Manual (v2.4, 2022).
+Borrowed concepts:
+- Private-brand products receive stronger quality/regulatory controls than ordinary resale items.
+- Manufacturing locations are disclosed/approved before production; unauthorized subcontracting is serious.
+- Final product specifications are approved before production/PO commitment.
+- Pre-production samples and first-production/production samples can be used as conformity references.
+- Product/specification changes can trigger approval and re-testing.
+Northstar adaptation:
+- Created the PLTF, APS, PPS, FPL, PLCR, 10-business-day PPS lead time, and 60-day material-change rule.
+
+TARGET
+Sources: current Product Safety & Quality Assurance; Food Safety Quality & Regulatory; Standards of Vendor Engagement; Traceability & Transparency.
+Borrowed concepts:
+- Owned-brand controls span the full product lifecycle.
+- Factories are assessed before production and production locations must be disclosed.
+- Detailed food specifications, risk-based production readiness, third-party testing, allergen programs, and lot traceability are central controls.
+Northstar adaptation:
+- Created Production Authorized / Shipping Authorized gates, annual PLTF attestation, and risk-based first-production release.
+
+SYSCO
+Source: current Quality Assurance page.
+Borrowed concepts:
+- Distributor-brand food is evaluated against detailed product specifications.
+- Brand suppliers/facilities undergo initial and ongoing QA oversight.
+Northstar adaptation:
+- Reinforced APS-based conformity and approved-site controls for private-label food.
+
+FDA
+Sources: How to Start a Food Business; Food Allergies.
+Borrowed concepts:
+- Food manufacturers/processors/distributors retain legal responsibility for safe, sanitary, correctly labeled food.
+- Allergen preventive controls are part of applicable food-manufacturing requirements.
+Northstar adaptation:
+- Private-label policy cannot waive legal/safety/allergen obligations; detailed regulatory mechanics are deferred to file 06.
+
+CPSC
+Sources: General Use Products: Certification and Testing; Third Party Testing Guidance.
+Borrowed concepts:
+- Some regulated consumer products require testing/certification, with different legal rules for general-use and children's products.
+- Material changes can matter to continued compliance.
+Northstar adaptation:
+- Northstar uses broader risk-based private-label verification while leaving legally required certificates/testing to the applicable product category and file 06.
+
+KEY POINT
+Northstar did NOT copy real-company thresholds. The PLTF/APS model, 10-business-day PPS lead time, 2-business-day FPL evidence deadline, 60-day planned-change notice, 12-month attestation, 15-day overdue production block, exception matrix, and record-retention trigger are Northstar-original test-environment rules.

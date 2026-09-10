@@ -1,0 +1,360 @@
+{
+  "operator_id": "NRM-E66341",
+  "persona_name": "Noah Kim",
+  "test_purpose": "Narrow Accounts Payable specialist with deep invoice, payment, remittance, and banking-control capability. Test whether Workflow Governor exploits that depth with low scaffolding while preserving hard boundaries around Procurement, Vendor Compliance, Q&R, Logistics, DC Operations, import, and final financial-appeal authority.",
+  "startup_grants": [
+    "09_VENDOR_PORTAL_AND_INVOICING.md"
+  ],
+  "capability_schema_version": "northstar-operator-v1",
+  "ground_truth_capabilities": {
+    "document_comparison": {
+      "true_band": "HIGH",
+      "initial_observability": "MEDIUM"
+    },
+    "file_search": {
+      "true_band": "MODERATE",
+      "initial_observability": "MEDIUM"
+    },
+    "spreadsheet_analysis": {
+      "true_band": "HIGH",
+      "initial_observability": "MEDIUM"
+    },
+    "numerical_reconciliation": {
+      "true_band": "HIGH",
+      "initial_observability": "MEDIUM"
+    },
+    "cross_document_reasoning": {
+      "true_band": "HIGH",
+      "initial_observability": "MEDIUM"
+    },
+    "evidence_evaluation": {
+      "true_band": "VERY_HIGH",
+      "initial_observability": "HIGH"
+    },
+    "policy_interpretation": {
+      "true_band": "HIGH",
+      "initial_observability": "MEDIUM"
+    },
+    "procurement_operations": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "LOW"
+    },
+    "vendor_compliance": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "LOW"
+    },
+    "invoice_matching": {
+      "true_band": "VERY_HIGH",
+      "initial_observability": "HIGH"
+    },
+    "quality_compliance": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "LOW"
+    },
+    "food_safety_review": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "transportation_operations": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "LOW"
+    },
+    "receiving_operations": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "LOW"
+    },
+    "exception_handling": {
+      "true_band": "VERY_HIGH",
+      "initial_observability": "HIGH"
+    },
+    "reporting_and_synthesis": {
+      "true_band": "HIGH",
+      "initial_observability": "MEDIUM"
+    }
+  },
+  "knowledge_ground_truth": {
+    "vendorlink_transaction_model": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "asn_invoice_relationship_for_ap": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "invoice_required_fields_and_duplicate_key": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "three_way_match_logic_and_tolerances": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "invoice_statuses_and_ied_payment_timing": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "ier_workflow_and_owner_routing": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "bank_change_and_payment_hold_controls": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "credit_memo_remittance_and_deduction_relationship": {
+      "state": "GENERAL_CORRECT",
+      "source_type": "ACTOR_EXPERIENCE"
+    },
+    "chargeback_and_formal_appeal_relationship": {
+      "state": "PARTIAL",
+      "source_type": "ACTOR_EXPERIENCE"
+    },
+    "cross_functional_exception_ownership": {
+      "state": "GENERAL_CORRECT",
+      "source_type": "ACTOR_EXPERIENCE"
+    },
+    "detailed_po_performance_scoring": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "freshness_and_packaging_approval_rules": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "import_compliance_rules": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "q_and_r_audit_testing_and_cap_logic": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "dc_receiving_thresholds": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "transportation_incident_and_routing_thresholds": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "full_chargeback_schedule_and_final_appeal_mechanics": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    }
+  },
+  "authority_ground_truth": {
+    "resolve_routine_ap_invoice_exceptions": true,
+    "approve_or_reject_ap_side_corrections_under_established_controls": true,
+    "determine_invoice_validation_and_matching_result": true,
+    "approve_invoice_for_payment_when_required_ap_controls_are_satisfied": true,
+    "require_independent_bank_change_verification": true,
+    "place_or_maintain_ap_payment_hold_when_payment_controls_require_it": true,
+    "reconcile_credit_memos_and_remittance_records": true,
+    "record_ap_consequence_of_approved_deductions": true,
+    "make_procurement_price_or_terms_decision": false,
+    "change_vendor_status": false,
+    "make_final_receipt_quantity_determination": false,
+    "make_logistics_freight_or_routing_determination": false,
+    "make_q_and_r_safety_or_quality_determination": false,
+    "make_import_compliance_determination": false,
+    "make_final_financial_recovery_or_appeal_decision": false
+  },
+  "confidence_calibration": "WELL_CALIBRATED",
+  "error_patterns": [
+    {
+      "pattern_id": "ERR-01",
+      "description": "Because Noah is tightly specialized around AP-valid evidence, he may sometimes return an upstream operational question for owner confirmation even when a clearly authoritative owner record has already been supplied and is sufficient for the AP calculation.",
+      "affected_capabilities": [
+        "cross_document_reasoning",
+        "exception_handling",
+        "evidence_evaluation"
+      ],
+      "expected_frequency": "OCCASIONAL"
+    }
+  ],
+  "false_or_outdated_beliefs": [],
+  "expected_narrative_profile": {
+    "should_capture": [
+      "deep AP specialist who is highly reliable on invoice validation, three-way matching, payment status, remittance, credits, and banking controls",
+      "strong at separating the AP consequence from the upstream business or operational cause",
+      "uses controlled VendorLink, PO, receipt, invoice, IER, and bank-verification evidence rather than informal email narratives",
+      "handles invoice and payment exception queues independently with little procedural scaffolding",
+      "well calibrated about boundaries and appropriately returns price, receipt, freight, safety, or vendor-status facts to their owners",
+      "narrow specialization is a strength and should produce concentrated high-value AP assignments rather than pressure to broaden into unrelated domains"
+    ],
+    "should_not_claim": [
+      "is a broad financial decision maker merely because he works in AP",
+      "owns Procurement pricing or commercial terms",
+      "owns vendor standing",
+      "can determine physical receiving, freight responsibility, import compliance, or Q&R safety facts",
+      "can make the final financial recovery or formal appeal decision",
+      "has weak reasoning simply because he refuses to invent an upstream fact"
+    ]
+  },
+  "evidence_interpretation_cases": [
+    {
+      "event": "Noah detects a duplicate NVID + invoice number and correctly rejects the duplicate submission while preserving the original payable invoice.",
+      "correct_interpretation": [
+        "Strong positive evidence for invoice_matching, evidence_evaluation, and exception_handling.",
+        "Repeated success should justify lower scaffolding for routine AP validation work.",
+        "Do not generalize this evidence into Procurement, Q&R, Logistics, or receiving capability."
+      ],
+      "incorrect_interpretation": [
+        "Duplicate detection proves broad vendor-governance expertise.",
+        "Any ability to view linked records implies authority over those records."
+      ]
+    },
+    {
+      "event": "A vendor emails new bank instructions for a scheduled payment. Noah refuses the email instruction, requires the secure VendorLink workflow and independent verification, and maintains a Payment Hold.",
+      "correct_interpretation": [
+        "Strong positive evidence for evidence_evaluation, exception_handling, and banking-control reliability.",
+        "This supports continued assignment of sensitive payment-control work with minimal scaffolding."
+      ],
+      "incorrect_interpretation": [
+        "The Payment Hold changes the vendor's Active/Restricted/Suspended status.",
+        "Urgency should reduce the independent-verification requirement."
+      ]
+    },
+    {
+      "event": "An invoice exceeds the accepted receipt quantity. Noah states the validated AP consequence and asks DC Operations to determine whether the receipt record should be corrected.",
+      "correct_interpretation": [
+        "Positive evidence for invoice_matching, authority awareness, and well-calibrated task narrowing.",
+        "Returning the physical receipt fact to DC Operations is correct and should not lower AP capability."
+      ],
+      "incorrect_interpretation": [
+        "Noah failed because he did not independently investigate and change the receipt quantity.",
+        "AP should infer the physical receipt from vendor narrative."
+      ]
+    },
+    {
+      "event": "A case already includes a final authoritative DC receipt correction, but Noah still asks DC Operations to reconfirm the same fact before completing the AP calculation.",
+      "correct_interpretation": [
+        "This may be evidence of Noah's designed narrow-specialization tendency and unnecessary upstream handoff.",
+        "Keep core invoice_matching capability high if his AP calculation is otherwise correct.",
+        "Future similar work may explicitly state that the attached owner record is final and may be used for AP processing."
+      ],
+      "incorrect_interpretation": [
+        "One redundant confirmation request proves low AP competence.",
+        "The system should broaden Noah into independent receiving investigation to avoid the handoff."
+      ]
+    },
+    {
+      "event": "Noah correctly posts or reconciles an approved deduction and remittance effect, but leaves the underlying appeal outcome to Finance and the factual owner.",
+      "correct_interpretation": [
+        "Positive evidence for AP credits/deductions handling and authority discipline.",
+        "Do not infer final financial-appeal authority.",
+        "His knowledge of file 10 should remain partial unless additional case evidence or files are granted."
+      ],
+      "incorrect_interpretation": [
+        "Because AP records the deduction, Noah controls the final appeal.",
+        "A financial correction allows AP to rewrite the underlying receiving, PO, vendor-status, or Q&R record."
+      ]
+    }
+  ],
+  "expected_task_return_behavior": [
+    {
+      "task_class": "invoice validation, duplicate review, three-way match, or AP invoice reconciliation",
+      "expected_behavior": "EXPECTED_COMPLETION",
+      "reason": "Core explicit AP skill with detailed file 09 startup knowledge."
+    },
+    {
+      "task_class": "bank-change verification, payment-hold review, payment-status investigation, credit memo, or remittance reconciliation",
+      "expected_behavior": "EXPECTED_COMPLETION",
+      "reason": "These are explicit major AP skills and within his AP role."
+    },
+    {
+      "task_class": "AP exception with a clearly authoritative upstream owner record already supplied",
+      "expected_behavior": "EXPECTED_COMPLETION",
+      "reason": "Noah may use the owner record as an input to determine the AP consequence without re-deciding the underlying fact."
+    },
+    {
+      "task_class": "mixed invoice exception with unresolved price, receipt, freight, or safety fact",
+      "expected_behavior": "EXPECTED_TASK_NARROWING",
+      "reason": "He should complete the AP analysis and request the owning function's factual determination."
+    },
+    {
+      "task_class": "independent Procurement negotiation, vendor-status governance, Q&R assessment, logistics planning, physical receiving, import compliance, or quality CAP adjudication",
+      "expected_behavior": "EXPECTED_REASSIGNMENT",
+      "reason": "Those major specialist skills are deliberately not encoded."
+    },
+    {
+      "task_class": "final commercial, vendor-status, receiving, logistics, Q&R, import, or Finance appeal decision outside AP authority",
+      "expected_behavior": "EXPECTED_AUTHORITY_REFUSAL",
+      "reason": "AP visibility and financial processing do not create authority over the factual owner or final Finance decision."
+    }
+  ],
+  "profile_convergence": {
+    "initially_reasonable_uncertainty": [
+      "exact reliability of spreadsheet_analysis on unusually large AP exception queues",
+      "how often Noah requests redundant owner reconfirmation when an authoritative upstream record is already supplied",
+      "exact depth of chargeback and formal-appeal knowledge beyond AP posting and remittance consequences"
+    ],
+    "after_relevant_evidence_should_infer": [
+      "invoice_matching is highly reliable after repeated verified three-way-match, duplicate, IER, and payment-timing work",
+      "evidence_evaluation is highly reliable for payment and bank-change controls",
+      "exception_handling is highly reliable within AP-owned workflows",
+      "Noah's refusal to invent price, receipt, freight, or safety facts is correct boundary behavior rather than low reasoning ability",
+      "successful AP work should quickly reduce instruction detail and concentrate more sensitive AP tasks with him"
+    ],
+    "should_remain_uncertain_without_evidence": [
+      "procurement_operations",
+      "vendor_compliance",
+      "quality_compliance",
+      "food_safety_review",
+      "transportation_operations",
+      "receiving_operations",
+      "import compliance capability",
+      "full financial appeal adjudication"
+    ]
+  },
+  "expected_task_adaptation": {
+    "good_assignments": [
+      "invoice reconciliation and three-way match analysis",
+      "invoice validation and duplicate review",
+      "IER investigation and AP-side resolution",
+      "bank-change verification and payment-hold review",
+      "payment-status investigation",
+      "credit memo and remittance reconciliation",
+      "invoice/payment exception spreadsheet analysis",
+      "cross-document reconciliation across AP-owned records"
+    ],
+    "assign_with_scaffolding": [
+      "mixed AP cases where the upstream Procurement, DC, Logistics, or Q&R owner determination is attached or separately requested",
+      "chargeback or appeal-related AP processing where Noah is asked to handle deduction, credit, or remittance consequences rather than adjudicate the final appeal",
+      "non-AP linked records when the task explicitly identifies the authoritative owner record to use as an AP input"
+    ],
+    "normally_reassign": [
+      "Procurement price negotiation or commercial-term determination",
+      "vendor-status governance",
+      "food-safety or regulatory assessment",
+      "detailed logistics planning",
+      "physical DC receiving judgment",
+      "import compliance adjudication",
+      "quality CAP adjudication",
+      "final financial recovery or appeal decision"
+    ],
+    "never_assign_as_authorizer": [
+      "Procurement price or terms approval",
+      "vendor-status change",
+      "physical receipt correction or receiving disposition",
+      "Logistics freight or routing determination",
+      "Q&R safety or quality release",
+      "import compliance release",
+      "final Finance recovery or formal appeal decision"
+    ],
+    "verification_guidance": [
+      "Use minimal scaffolding for routine and sensitive AP work once repeated verified performance establishes reliability.",
+      "Keep source ownership explicit: PO pricing comes from Procurement, receipt facts from DC Operations, freight/routing from Logistics, and safety/quality from Q&R.",
+      "Do not penalize correct upstream reassignment; only flag inefficiency when Noah requests reconfirmation despite already having a final authoritative owner record.",
+      "Keep capability updates local: a boundary or handoff issue should not erase strong evidence for invoice matching or banking controls.",
+      "Do not expand his task variety merely for breadth; deep AP specialization is the intended high-value routing pattern."
+    ]
+  },
+  "scoring_notes": [
+    "The central test is specialization: narrow depth should be rewarded rather than mistaken for limited overall usefulness.",
+    "Returning an unresolved upstream fact to its owner is correct behavior and should not lower AP capability.",
+    "File 09 startup knowledge is detailed, while file 10 knowledge remains partial and AP-centered.",
+    "AP may record credits and deductions, but Finance owns final financial recovery and formal appeals.",
+    "The strongest routing success is concentrated delegation of invoice, payment, remittance, and banking-control work with specialist upstream facts supplied separately."
+  ]
+}

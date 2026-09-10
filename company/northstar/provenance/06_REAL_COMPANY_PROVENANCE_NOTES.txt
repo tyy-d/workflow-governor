@@ -1,0 +1,37 @@
+NORTHSTAR 06 — REAL-COMPANY / PUBLIC-SOURCE PROVENANCE NOTES
+==============================================================
+
+Northstar Regional Markets is fictional. These sources supplied process ideas only; Northstar names, thresholds, forms, statuses, deadlines, examples, and exception logic are original.
+
+GFSI (current recognised-programme pages)
+- Borrowed concept: GFSI recognises certification programmes/versions for specific scopes; certification bodies certify sites.
+- Northstar adaptation: R3 food facilities normally need a current certificate under a currently recognised programme/version and matching scope, or an approved alternative audit plan.
+
+Sysco
+- Borrowed concept: initial supplier-facility approval, detailed specifications, ongoing monitoring, annual independent food-safety certification, and more frequent review for higher-risk suppliers.
+- Northstar adaptation: FQR facility approval plus annual R3 status review and risk-triggered audits/testing.
+
+Target
+- Borrowed concept: factory assessment, documented manufacturing/quality systems, risk-based production management, and independent third-party testing across the owned-brand lifecycle.
+- Northstar adaptation: QVP testing plans, competent/independent labs, and testing tied to private-label release gates.
+
+UNFI
+- Borrowed concept: onboarding asks for recent third-party food-safety audit evidence and GMP operation; supplier terms reserve audit/corrective-action rights.
+- Northstar adaptation: audit evidence in the FQR and formal CAP/status consequences.
+
+Family Dollar / Dollar Tree
+- Borrowed concept: retailer-controlled product testing, facility documentation, direct-import food verification, and pre-shipment quality release.
+- Northstar adaptation: lot-linked COA/testing requirements and technical release controls without copying Family Dollar thresholds.
+
+FDA — Preventive Controls / FSVP / Food Defense / Traceability
+- Borrowed concept: hazard analysis, preventive controls, supplier verification via audits/testing/record review, recall/traceability readiness, corrective action, and food-defense planning where applicable.
+- Northstar adaptation: risk-based evidence requirements and a 4-hour Northstar Traceability Challenge.
+- Current-date note: FDA states Food Traceability Rule enforcement will not begin before July 20, 2028; Northstar's present traceability threshold is company policy, not that federal compliance date.
+
+Key Northstar-original numbers in 06
+- Alternative audit: >=85/100 and zero Critical findings.
+- FQR reassessment: R3 every 12 months; approval-controlled R2 every 24 months.
+- Traceability Challenge: 4 hours.
+- Critical CAP package: 5 business days; Major: 10; Minor: 20.
+- Normal action completion: 30 calendar days Critical/Major; 60 Minor.
+- Certification-continuity exception: maximum 45 calendar days after prior certificate expiry.

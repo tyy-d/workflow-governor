@@ -1,0 +1,37 @@
+[
+  {
+    "contradiction_id": "C001",
+    "sources": ["workspace/documents/PO_78214_REV1.md", "workspace/documents/PO_78214_REV2.md"],
+    "description": "The PO revisions state different quantities, Ready By deadlines, and delivery windows.",
+    "resolution": "Rev 2 was later transmitted through VendorLink and is the latest authorized revision; it controls.",
+    "must_resolve": true
+  },
+  {
+    "contradiction_id": "C002",
+    "sources": ["workspace/spreadsheets/BUYER_INBOUND_PLAN_WEEK38.csv", "workspace/documents/PO_78214_REV2.md"],
+    "description": "A copied-forward buyer planning row still shows Rev 1's 800 units and September 15 Ready By date.",
+    "resolution": "The planning sheet explicitly is not a PO system of record; authorized Rev 2 controls.",
+    "must_resolve": true
+  },
+  {
+    "contradiction_id": "C003",
+    "sources": ["workspace/documents/CARRIER_TENDER_SRR-44192.json", "workspace/documents/CARRIER_DELAY_UPDATE_SRR-44192.json", "workspace/documents/PICKUP_CONFIRMATION_SRR-44192.md"],
+    "description": "The tendered pickup window differs from actual carrier arrival and departure milestones.",
+    "resolution": "The carrier incident and pickup confirmation establish the actual delayed milestones and assign the operational cause to the Northstar-designated carrier.",
+    "must_resolve": true
+  },
+  {
+    "contradiction_id": "C004",
+    "sources": ["workspace/spreadsheets/PRELIM_OTIF_EXPORT_2026-09-18.csv", "workspace/documents/PO_78214_REV2.md", "workspace/documents/WAREHOUSE_READY_RECORD_78214.md"],
+    "description": "The preliminary export reports zero on-time units based on destination arrival, while the managed-pickup records show 900 compliant units ready before the deadline.",
+    "resolution": "Northstar policy measures managed-pickup timeliness at compliant Ready By; correct raw on-time units are 900, not zero.",
+    "must_resolve": true
+  },
+  {
+    "contradiction_id": "C005",
+    "sources": ["workspace/inbox/EMAIL_VENDOR_OTIF_DISPUTE_2026-09-18.md", "workspace/documents/ASN_78214.json", "workspace/spreadsheets/RECEIVING_LOG_HVDC_2026-09-17.csv"],
+    "description": "The vendor requests removal of the whole OTIF miss, but ASN and receiving evidence show only 900 of 1,000 units were tendered and received.",
+    "resolution": "The carrier evidence supports only the transportation-timing component; the 100-unit vendor shortage remains in the performance result.",
+    "must_resolve": true
+  }
+]

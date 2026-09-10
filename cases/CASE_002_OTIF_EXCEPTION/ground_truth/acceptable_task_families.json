@@ -1,0 +1,27 @@
+{
+  "required_work": [
+    {"task_family": "identify_governing_po_revision", "description": "Establish the latest authorized PO revision and the effect of the vendor acknowledgments."},
+    {"task_family": "reconstruct_order_and_shipment_timeline", "description": "Order the PO, acknowledgment, routing, readiness, carrier, gate, receipt, and dispute events."},
+    {"task_family": "calculate_net_ordered_units", "description": "Apply the latest-revision and cancellation rules to determine the denominator."},
+    {"task_family": "calculate_delivery_performance_metrics", "description": "Calculate raw On-Time Unit Rate and Fill Rate, compare each with its threshold, and show the stale-Rev-1 counterfactual."},
+    {"task_family": "analyze_transportation_responsibility", "description": "Determine the vendor-controlled event for managed pickup and assess the carrier-delay evidence."},
+    {"task_family": "evaluate_exception_evidence", "description": "Test the timing, scope, support, and approval state of the PER request."},
+    {"task_family": "separate_excusable_and_nonexcusable_failures", "description": "Keep carrier-caused physical lateness separate from the vendor-controlled quantity shortage."},
+    {"task_family": "prepare_otif_disposition_summary", "description": "Prepare a traceable recommendation and next actions without inventing approval."}
+  ],
+  "optional_work": [
+    {"task_family": "reconcile_preliminary_score_export", "description": "Explain why the arrival-based preliminary On-Time result is wrong for managed pickup."},
+    {"task_family": "confirm_receiving_disposition", "description": "Confirm gate, unload, accepted quantity, and RER details from DC evidence."}
+  ],
+  "acceptable_groupings": [
+    "Governing-revision identification and Net Ordered Units determination may be combined.",
+    "Timeline reconstruction and transportation-responsibility analysis may be combined when source lineage remains visible.",
+    "Metric calculation and preliminary-export reconciliation may be combined.",
+    "Exception-evidence review, responsibility separation, and disposition summary may be combined by a qualified policy reviewer."
+  ],
+  "unnecessary_work": [
+    "Chargeback calculation or financial appeal adjudication.",
+    "Food-safety, import, invoice, onboarding, or vendor-banking review.",
+    "Monthly vendor score-band analysis beyond noting that this is a single-PO result."
+  ]
+}

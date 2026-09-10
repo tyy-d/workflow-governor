@@ -1,0 +1,104 @@
+{
+  "company_id": "northstar-regional-markets",
+  "display_name": "Northstar Regional Markets",
+  "fictional": true,
+  "company_version": "1.0.0",
+  "ground_truth_version": "northstar-company-v1",
+  "last_updated": "2026-09-09",
+  "business_profile": {
+    "type": "regional grocery and general-merchandise retailer",
+    "approx_store_count": 35,
+    "distribution_center_count": 2,
+    "approx_employee_count": 1200,
+    "primary_regions": [
+      "New York",
+      "Pennsylvania",
+      "New Jersey"
+    ],
+    "product_categories": [
+      "packaged grocery",
+      "refrigerated and frozen products",
+      "fresh food",
+      "household products",
+      "personal-care products",
+      "private-label merchandise",
+      "limited imported merchandise"
+    ]
+  },
+  "departments": [
+    "Procurement",
+    "Merchandising",
+    "Vendor Compliance",
+    "Quality & Regulatory",
+    "Logistics",
+    "Distribution Center Operations",
+    "Accounts Payable",
+    "Store Operations",
+    "Finance",
+    "Human Resources",
+    "IT"
+  ],
+  "major_systems": [
+    {
+      "system_id": "vendorlink",
+      "display_name": "Northstar VendorLink",
+      "purpose": "vendor-facing system of record for vendor, transaction, exception, and supporting-document workflows"
+    },
+    {
+      "system_id": "dockschedule",
+      "display_name": "Northstar DockSchedule",
+      "purpose": "distribution-center receiving appointment scheduling"
+    }
+  ],
+  "distribution_centers": [
+    {
+      "code": "HVDC",
+      "name": "Hudson Valley Distribution Center",
+      "location": "Newburgh, NY"
+    },
+    {
+      "code": "LVDC",
+      "name": "Lehigh Valley Distribution Center",
+      "location": "Allentown, PA"
+    }
+  ],
+  "paths": {
+    "execution_state": "NORTHSTAR_EXECUTION_STATE.txt",
+    "handbook_directory": "handbook/",
+    "provenance_directory": "provenance/",
+    "shared_directory": "shared/",
+    "schemas_directory": "schemas/"
+  },
+  "handbook": {
+    "status": "complete",
+    "section_count": 11,
+    "files": [
+      "00_COMPANY_AND_VENDOR_OVERVIEW.md",
+      "01_PURCHASE_ORDERS_AND_DELIVERY_PERFORMANCE.md",
+      "02_PRODUCT_FRESHNESS.md",
+      "03_PRIVATE_LABEL_PRODUCTS.md",
+      "04_PACKAGING_AND_LABELING.md",
+      "05_IMPORT_REQUIREMENTS.md",
+      "06_QUALITY_AND_COMPLIANCE.md",
+      "07_DISTRIBUTION_CENTER_RECEIVING.md",
+      "08_TRANSPORTATION.md",
+      "09_VENDOR_PORTAL_AND_INVOICING.md",
+      "10_RETURNS_RECALLS_CHARGEBACKS_AND_APPEALS.md"
+    ]
+  },
+  "provenance": {
+    "status": "complete",
+    "description": "Developer-only notes mapping public real-company reference concepts to original Northstar adaptations.",
+    "runtime_visible": false
+  },
+  "operator_capability_schema": {
+    "status": "not_yet_defined",
+    "planned_path": "schemas/northstar_operator_capability_schema.json"
+  },
+  "source_of_truth": {
+    "company_policy": "handbook/",
+    "compact_canonical_state": "NORTHSTAR_EXECUTION_STATE.txt",
+    "reference_provenance": "provenance/",
+    "rule": "Do not duplicate detailed policy thresholds or authority rules in company.json."
+  }
+}

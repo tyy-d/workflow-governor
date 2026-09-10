@@ -1,0 +1,547 @@
+NORTHSTAR REGIONAL MARKETS — EXECUTION STATE FOR FUTURE HANDBOOK FILES
+=====================================================================
+Updated after creation of 10_RETURNS_RECALLS_CHARGEBACKS_AND_APPEALS.md. HANDBOOK SEQUENCE COMPLETE.
+
+MASTER WORKFLOW
+- Create exactly ONE handbook .md file per execution/turn.
+- Research current official public supplier/vendor sources before writing that file.
+- Borrow process ideas and document/certification concepts only; do not copy wording.
+- All Northstar names, thresholds, penalties, forms, examples, and exception logic must be original.
+- Clearly separate: legal/regulatory requirements vs Northstar policy vs recommended practice.
+- Aim for ~1,500–2,500 words per handbook file.
+- Include deterministic rules + semantic/judgment rules + human approval points when appropriate.
+- End every handbook file with "## Reference basis" containing organization, page/document title, URL, and concept used.
+- After each file, update this execution-state file only with compact facts needed for later consistency.
+- If a later file would contradict an established fact, flag the conflict; do not silently rewrite history.
+
+HANDBOOK SEQUENCE / STATUS
+[x] 00_COMPANY_AND_VENDOR_OVERVIEW.md
+[x] 01_PURCHASE_ORDERS_AND_DELIVERY_PERFORMANCE.md
+[x] 02_PRODUCT_FRESHNESS.md
+[x] 03_PRIVATE_LABEL_PRODUCTS.md
+[x] 04_PACKAGING_AND_LABELING.md
+[x] 05_IMPORT_REQUIREMENTS.md
+[x] 06_QUALITY_AND_COMPLIANCE.md
+[x] 07_DISTRIBUTION_CENTER_RECEIVING.md
+[x] 08_TRANSPORTATION.md
+[x] 09_VENDOR_PORTAL_AND_INVOICING.md
+[x] 10_RETURNS_RECALLS_CHARGEBACKS_AND_APPEALS.md
+
+COMPANY BASELINE
+- Northstar Regional Markets: fictional medium regional grocery/general-merchandise retailer.
+- ~35 stores; 2 regional distribution centers; NY/PA/NJ; ~1,200 employees.
+- Product mix: packaged grocery, refrigerated/frozen, fresh food, household, personal care, private label, limited imports.
+- Departments: Procurement; Merchandising; Vendor Compliance; Quality & Regulatory; Logistics; Distribution Center Operations; Accounts Payable; Store Operations; Finance; Human Resources; IT.
+
+CANONICAL FACTS ESTABLISHED IN FILE 00
+Systems / identifiers
+- Vendor-facing portal: Northstar VendorLink.
+- Vendor identifier: NVID (unique to legal vendor entity).
+
+Vendor roles
+- Brand Supplier.
+- Private-Label Manufacturer.
+- Distributor / Broker-Seller.
+- Import Vendor.
+- Direct-Store-Delivery (DSD) Supplier.
+- Seller of record controls the Northstar vendor relationship.
+
+Product Risk Tier (item/facility level; displayed vendor tier = highest active tier)
+- R1 Standard: non-food, nonhazardous, limited regulatory complexity.
+- R2 Controlled: shelf-stable food, personal care, household chemical, other regulated/label-sensitive goods.
+- R3 Enhanced Food/Safety: refrigerated/frozen/fresh, materially safety-controlled RTE foods, private-label foods, or Q&R-designated high risk.
+- Quality & Regulatory may raise risk tier; Procurement/Merchandising cannot lower it.
+
+Vendor statuses
+- Applicant -> Conditional -> Active; possible Restricted, Suspended, Closed.
+- Only Active vendors may receive commercial POs for approved items.
+- Restricted blocks new PO release unless a written exception is approved.
+- Suspended means no new POs/shipments unless suspension notice expressly permits controlled activity.
+
+Ownership / authority
+- Procurement: commercial relationship and negotiated terms.
+- Merchandising: assortment/item authorization.
+- Vendor Compliance: onboarding, vendor standing, administrative exceptions, CAP coordination.
+- Quality & Regulatory: food/product safety, regulatory docs, facility approval, safety holds.
+- Logistics: network/inbound standards.
+- DC Operations: physical receiving evidence.
+- AP: tax, banking, remittance/payment setup.
+- Store Operations: store execution / DSD feedback.
+- Finance: financial controls/material commercial-risk review.
+- IT: vendor system connectivity/security.
+- Procurement and Merchandising cannot override a Q&R safety hold.
+
+Core onboarding evidence
+- Vendor Profile; W-9 or applicable W-8; Merchandise Terms acknowledgment; banking/payment setup; COI; contact roster; facility list; item master; food ingredient/allergen/specification data; applicable audit/certification evidence; regulatory registration/license attestation where applicable.
+- Food vendor contact roster includes 24/7 recall contact.
+
+Food baseline
+- R3 manufacturing facility: appropriate current GFSI-recognized certification OR written Northstar-approved alternative audit plan.
+- Detailed certification/audit acceptance rules are reserved for 06_QUALITY_AND_COMPLIANCE.md.
+- Do not misstate GFSI: it recognizes certification programmes; it does not itself certify facilities.
+
+Current thresholds from file 00
+- Vendor master changes: within 10 business days after known, unless advance approval required.
+- Controlled legal/tax/bank/site/formulation/allergen/pack changes: follow applicable approval BEFORE changed condition is used.
+- Contacts recertified annually.
+- COI warning at 30 calendar days before expiry; automatic Restricted status the day after expiry if replacement not accepted.
+- R3 facility becomes restricted for affected items if required certification/audit expires without pre-approved Q&R exception.
+- Baseline insurance: CGL $2M occurrence / $4M aggregate; product liability $2M occurrence; auto $1M CSL for vendor-controlled deliveries; workers comp as legally required.
+- Onboarding/approval/exception/status records retained 7 years after NVID Closed unless longer period required.
+
+Exception principles
+- Exceptions live in VendorLink and must identify scope, rule, justification, evidence, approver, start date, expiry.
+- Missing non-safety admin item <=30 days: Vendor Compliance Manager + owning business manager.
+- Connectivity exception: Vendor Compliance Manager + AP or IT.
+- Food-safety certification alternative/lapse: Director, Quality & Regulatory.
+- Shipping while Restricted: Vendor Compliance Manager + owner of restricting condition.
+- Known product-safety risk exception: Director, Quality & Regulatory minimum.
+- No employee may waive law/regulation; no-expiry exception is invalid.
+
+Integrity rule
+- Falsified certificates, concealed manufacturing sites, knowingly false allergen data, shipping during safety suspension, or material recall-investigation misrepresentation may cause immediate Suspension.
+
+CROSS-FILE BOUNDARIES
+- 01: define PO acceptance, fill, delivery performance; do not redefine vendor activation statuses.
+- 02: define shelf-life/remaining-life; do not set it in 00.
+- 03: expand private-label obligations; preserve R3 treatment for private-label food.
+- 04: detailed labels/barcodes/packaging/ingredient/allergen data.
+- 05: detailed import/foreign supplier/customs/COO requirements.
+- 06: detailed audits, GFSI acceptance, testing, regulatory docs, CAP, facility approval.
+- 07: detailed DC receiving/appointment/inspection rules.
+- 08: carrier/transportation requirements; preserve $1M auto baseline unless explicitly raising a category-specific limit.
+- 09: electronic transactions, portal workflows, invoicing/payment; preserve VendorLink and NVID.
+- 10: returns, recalls, chargebacks, appeals; preserve status/safety-hold authority model.
+
+PROVENANCE PRACTICE
+- Maintain a separate short provenance TXT per created section, mapping real-company concept -> Northstar adaptation.
+- Never imply Northstar is affiliated with or reproduces a real company's manual.
+
+
+CANONICAL FACTS ESTABLISHED IN FILE 01
+Purchase-order authority / response
+- Commercial PO is authoritative only when transmitted through VendorLink or an approved electronic connection and identified by PO number + revision.
+- Forecasts, emails, verbal commitments, and sample requests are not commercial POs.
+- Standard new PO/material revision acknowledgement: within 1 Northstar business day; if earliest required performance date is <3 business days away: within 4 business hours.
+- Acknowledgement line statuses: Accepted / Change Requested / Rejected. Requested vendor changes do not modify a PO until Northstar issues a revision. Shipping without acknowledgement is treated as acceptance but remains a process violation.
+- Vendor shortage/delay notice: within 1 business day of discovery and, when foreseeable, at least 2 business days before the affected window.
+
+PO quantity / performance logic
+- Unauthorized substitutions and over-shipments prohibited; split shipments require prior approval unless PO explicitly permits.
+- Net Ordered Units = latest authorized units minus eligible Northstar cancellations.
+- Northstar cancellation reduces denominator only if transmitted before earlier of vendor shipment/formal pickup readiness OR start of controlling window. Vendor-caused cancellations remain in denominator.
+- On-Time Unit Rate = compliant on-time units / Net Ordered Units.
+- Fill Rate = compliant units received by final close / Net Ordered Units. Numerators capped at ordered units.
+- PO final close: 5 calendar days after end of controlling delivery window unless all lines close earlier. Late-but-before-close units may improve Fill Rate, not On-Time Unit Rate.
+- PO On Time >=98.0%; In Full >=98.0%; OTIF Pass requires both.
+- Monthly target: OTIF Pass Rate >=95.0%; weighted Fill Rate >=98.5%.
+- <5 eligible POs in a month = informational scorecard only, except severe/Critical PO events.
+
+Score bands / escalation
+- Meets Standard: OTIF >=95.0% AND fill >=98.5%.
+- Watch: OTIF 90.0-94.99% OR fill 96.0-98.49%.
+- Corrective: OTIF <90.0% OR fill <96.0%, or 2 consecutive Watch months.
+- Corrective status requires CAP within 10 business days.
+- 2 consecutive Corrective months or 3 Corrective months in rolling 6 months triggers formal review; Vendor Compliance Manager + responsible Procurement manager may Restrict affected vendor/item/lane.
+- Critical PO: >20% of Net Ordered Units not on time, or zero-delivery/no-ready without timely notice -> immediate performance review.
+
+Transportation responsibility boundary
+- Vendor-prepaid: vendor measured on compliant arrival within controlling delivery/appointment window.
+- Northstar-managed pickup: vendor measured on product fully staged/conforming/documented/available by PO Ready By deadline; Northstar-carrier delay does not make vendor late if readiness is credibly evidenced.
+- DSD: vendor measured on compliant store delivery within controlling window.
+- Detailed appointment/receiving/carrier/routing rules remain reserved for files 07 and 08.
+
+Exceptions / evidence
+- New recurring record: Performance Exception Record (PER) in VendorLink.
+- PER request normally due within 3 business days after affected event.
+- Approvals: Northstar PO/data error = Vendor Compliance Manager + Procurement manager; Northstar-managed transport/appointment failure = Logistics Manager; material commercial quantity/date exception = Procurement manager + Vendor Compliance Manager; safety/regulatory = Director Q&R; post-scorecard correction = Vendor Compliance Manager + manager owning evidence.
+- PER cannot waive law, authorize known unsafe product, or override Q&R safety hold.
+- PO/performance records retained 7 years after PO final close unless longer retention applies.
+
+New approval-role titles to preserve
+- Procurement manager.
+- Logistics Manager.
+
+CROSS-FILE BOUNDARY UPDATES FROM 01
+- 02 must define freshness/shelf-life independently; freshness rejection can affect compliant-unit counts but 01 metrics remain unchanged.
+- 04 must preserve prohibition on unapproved item/pack substitutions and provide data needed to identify compliant units.
+- 05 may define import-specific transit events but must preserve PO authority, denominator, and revision logic from 01.
+- 06 may determine whether a quality/safety hold is vendor-caused; Q&R retains final safety authority.
+- 07 should define the controlling appointment/gate/receipt evidence used by 01, without changing 01 OTIF formulas.
+- 08 should define detailed prepaid/collect routing and readiness evidence, without changing responsibility split in 01.
+- 09 should preserve VendorLink/electronic PO revision and acknowledgement records; detailed message formats belong there.
+- 10 should set dollar chargebacks/appeal windows; 01 sets performance facts and escalation triggers but no chargeback amount.
+
+
+CANONICAL FACTS ESTABLISHED IN FILE 02
+Freshness data model
+- Item-level authoritative record: Approved Freshness Profile (AFP) in VendorLink.
+- AFP includes DTSL, Shelf-Life Start Event, date-code type/meaning, decode instructions, storage condition, MRL, lot format, specification, and approvals.
+- No routine PO for a freshness-controlled item without an approved AFP.
+- Remaining Life (RL) = controlling End-of-Life Date minus Northstar receipt date; receipt date is day 0.
+- When grouped product contains multiple dates, least remaining life controls unless date groups can be reliably segregated and handled separately.
+- Manufacture/pack code + DTSL may be used to derive ELD only when the AFP contains an approved decode method. Undecodable product goes on Freshness Hold.
+
+Default MRL policy (AFP always controls)
+- Shelf-stable food DTSL >180 days: 70% remaining.
+- Shelf-stable food DTSL 91-180 days: 70% remaining.
+- Shelf-stable food DTSL <=90 days: 65% remaining.
+- Refrigerated packaged food: 65% remaining.
+- Frozen food: 70% remaining.
+- Highly perishable fresh categories: item-specific AFP mandatory; no category default.
+- Dated/stability-controlled non-food: 60% remaining unless item-specific.
+- Percentage MRL rounds up to next whole day; if AFP has percentage + absolute days, greater requirement controls.
+
+Freshness controls / performance
+- Short-dated = not expired but below MRL; ordinarily a commercial freshness failure, not automatically a safety failure.
+- Expired cases are never freshness-compliant; discovery of an expired case places affected lot on Q&R hold pending scope review.
+- Freshness Compliance Rate = compliant cases / freshness-eligible cases. Monthly target >=99.5%.
+- <98.0%, two consecutive Freshness Watch months, expired product, or deliberate date-code manipulation triggers corrective-action review.
+- <100 eligible cases/month = informational percentage, but Critical Freshness Events still escalate.
+- Freshness is scored separately from OTIF.
+
+Freshness changes / exceptions
+- Planned DTSL reduction, shelf-life start change, date-meaning change, or storage-condition change: VendorLink submission >=45 calendar days before affected product ships.
+- Unplanned condition potentially invalidating approved shelf life: notify Q&R + Vendor Compliance within 1 business day of discovery and before further affected shipment where possible.
+- Freshness Exception (FE) must be lot/quantity-specific and approved before shipment where possible; blanket/no-expiry FEs invalid.
+- R1/R2 non-safety short-date FE: Merchandising Manager + Vendor Compliance Manager.
+- R3 non-safety short-date FE: Merchandising Manager + Director, Quality & Regulatory.
+- Promotion/material-supply exception also requires Procurement Manager.
+- No FE may waive law, knowingly unsafe distribution, lost shelf-life validation, or altered/falsified date codes.
+
+Cross-file boundaries added by 02
+- 04 owns date-code placement and detailed labeling/case-marking format; 02 owns what freshness date means and how remaining life is calculated.
+- 06 owns shelf-life validation studies/testing and safety-quality investigation.
+- 07 owns physical receipt timestamp, inspection, temperature evidence, segregation, and execution of holds/rejections.
+- 08 owns in-transit cold-chain/carrier controls.
+- 10 owns disposition costs, deductions, and appeals.
+
+CANONICAL FACTS ESTABLISHED IN FILE 03
+Private-label ownership / data model
+- Private-label foods remain R3 Enhanced Food/Safety under file 00; non-food private label keeps its Q&R-assigned tier.
+- Private Brand Manager is an established role within Merchandising; it owns brand/product intent coordination, while Q&R retains technical/safety/regulatory authority.
+- Authoritative item record: Private Label Technical File (PLTF) in VendorLink.
+- PLTF includes Approved Product Specification (APS), approved manufacturing site, technical/claim evidence, approved samples, linked testing/label/freshness/import records, and change history.
+- New controlled records/terms: Pre-Production Sample (PPS), First Production Lot (FPL), Private Label Change Request (PLCR).
+
+Production / site controls
+- Private-label production only at the Approved Manufacturing Site recorded for the active PLTF version.
+- Unauthorized finished-goods subcontracting is a Critical Private Label Deviation and triggers hold + vendor-status review.
+- New item/new site/Q&R-designated material change: PPS due >=10 Northstar business days before planned production unless a longer category lead time applies.
+- Production may begin only when VendorLink shows Production Authorized for that PLTF version/site.
+- Production Authorized / Shipping Authorized are technical release gates and do not replace a commercial PO or PO revision under file 01.
+- FPL evidence due within 2 business days after lot completion.
+- R3 private-label food and items marked Hold for First-Production Release cannot ship until VendorLink shows Shipping Authorized.
+
+Change / recertification controls
+- Planned Material Change: PLCR >=60 calendar days before planned production; approval required before changed production. Earlier deadlines in another policy still control.
+- Unplanned possible material change/deviation: notify Q&R + Vendor Compliance within 1 business day of discovery and before further affected shipment where reasonably possible.
+- Zero commercial tolerance for unauthorized allergen, legal identity/composition, site, substantiated claim, critical safety process/component, required regulatory certification, Northstar mark, or mandatory warning changes.
+- Active private-label items require Annual Technical Attestation every 12 months. VendorLink opens 30 days before anniversary.
+- Missing at anniversary -> Technical Review Due; still incomplete 15 calendar days later -> new PO production cannot begin until Vendor Compliance + Q&R clearance.
+
+Exception / record controls
+- Emergency private-label change uses PLCR with Emergency flag; blanket/no-expiry exceptions invalid.
+- R3 food formulation/allergen/safety-process/site change requires Director Q&R + Private Brand Manager; Procurement Manager also required when commercial supply is affected.
+- No exception may waive law, knowingly unsafe product, undeclared allergen, falsified evidence, or undisclosed-site production.
+- PLTF approval/change/release records retained 7 years after later of item retirement or last Northstar receipt unless longer retention applies.
+
+Cross-file boundaries added by 03
+- 04 owns detailed artwork, labels, barcodes, case marking, ingredient/allergen display, and packaging specifications; 03 owns the approval/change gate.
+- 05 owns detailed import, foreign-facility, customs, and country-of-origin rules.
+- 06 owns detailed audit/GFSI/testing/verification frequency and CAP mechanics; 03 only requires those controls to be current before applicable release gates.
+- 07 owns physical receipt inspection and execution of holds.
+- 10 owns recall/disposition, cost recovery, deductions, and appeals.
+
+CANONICAL FACTS ESTABLISHED IN FILE 04
+Packaging / label data model
+- Authoritative item packaging record: Approved Packaging & Label Record (APLR) in VendorLink.
+- APLR governs consumer package, shipping hierarchy, GTINs, case configuration, dimensions/weights, controlled label data, lot/date-code placement, and logistics-label requirements.
+- Private-label APLR links to PLTF; APLR approval does not replace Production Authorized / Shipping Authorized from file 03.
+- New controlled record: Temporary Overlabel Authorization (TOA) for approved temporary correction of eligible non-safety label defects.
+
+Identifiers / packaging hierarchy
+- Every Consumer Unit uses the approved Consumer GTIN/barcode unless VendorLink documents a category exception.
+- Case GTIN used where assigned; unauthorized case count/mixed assortment/inner configuration is prohibited.
+- Non-exempt palletized DC shipments require unique SSCC with scannable GS1-128 logistics representation.
+- Pallet label/electronic association includes SSCC, NVID, PO, pallet sequence, case quantity, and sufficient SKU/lot/date information when content is controlled. Detailed ASN mechanics remain file 09.
+
+Lot / date / legal-label controls
+- Applicable law controls mandatory consumer labeling; retailer approval is not regulatory approval.
+- Human-readable lot/batch code required on all R2/R3 foods and private-label personal-care/household-chemical items.
+- Freshness date meaning/calculation remains owned by AFP/file 02; file 04 owns placement/readability.
+- If multiple lot/date groups on a pallet cannot be reliably segregated, file 02 least-fresh-date rule controls.
+
+Packaging / barcode thresholds
+- New or materially changed barcode: production-representative verification before shipment; Northstar private-label minimum verifier grade = ISO/ANSI 2.0 (C) when grade is available; sample must produce 10 correct decodes out of 10.
+- Actual shipping-case gross weight or any outer dimension >5% from active APLR requires corrected data or approved packaging change before next shipment; safety/handling risk may trigger hold regardless of percentage.
+- Planned branded-item controlled packaging/label change: submit >=30 calendar days before first affected shipment unless another policy requires earlier notice.
+- Private-label Material Changes remain subject to 60-day PLCR from file 03; freshness changes remain subject to file 02.
+
+Packaging / label severity and escalation
+- Critical Packaging/Label Event examples: wrong/undeclared allergen, missing mandatory safety warning, GTIN resolving to different item, falsified lot/date code, unauthorized private-label identity, credible safety-risk packaging defect. Default = Q&R hold + immediate escalation.
+- Major examples: wrong case pack, non-scannable barcode, missing required lot code, wrong case/pallet label, missing required SSCC, >5% unreported master-data variance.
+- Three Major events for same NVID/product family in rolling 60 days trigger packaging corrective-action review.
+- Logistics-only exception: Logistics Manager + Vendor Compliance Manager. Regulated/allergen/warning/lot-date/product-contact/safety exception: Director Q&R. Commercial packaging substitution: Procurement Manager + Vendor Compliance Manager (+Q&R when safety/product affected).
+- No exception may waive law, permit knowingly unsafe/misbranded product, hide expired/falsified date, conceal allergen/warning, legitimize unauthorized private-label change, or map one item to another item's GTIN.
+- Packaging/label records retained 7 years after later of item retirement or last Northstar receipt unless longer retention applies.
+
+Cross-file boundaries added by 04
+- 05 owns import records and detailed COO/customs rules; 04 only requires legally/applicably required consumer-label content.
+- 06 owns detailed package/product testing, food-contact evidence, regulatory evidence review, and CAP mechanics.
+- 07 owns physical receiving scan/inspection, hold execution, and receipt disposition; it may use APLR as ground truth but must not redefine it.
+- 08 owns loading, carrier, routing, and hazardous transport execution.
+- 09 owns ASN/electronic transaction and SSCC-to-shipment association while preserving APLR/VendorLink identifiers.
+- 10 owns dollar deductions, returns, cost recovery, and appeals for packaging/label failures.
+
+
+
+CANONICAL FACTS ESTABLISHED IN FILE 05
+Import ownership / records
+- New role: Import Compliance Lead within Vendor Compliance; owns customs-data readiness and coordinates Northstar-authorized customs brokers.
+- Import sourcing models: Northstar Direct Import (NDI) and Vendor-Landed Import (VLI).
+- CBP Importer of Record (IOR) and FDA FSVP Importer are separate roles and must not be inferred from one another.
+- Authoritative item/source/country import record: Import Compliance Record (ICR) in VendorLink.
+- Shipment-specific NDI record: Shipment Import Packet (SIP).
+- New statuses/controls: Import Ready (internal import-data gate) and Import Hold. Import Ready does not replace vendor Active status, a PO, private-label technical release, APLR, or AFP.
+
+Import timing / deterministic thresholds
+- New imported item/source ICR: complete >=15 Northstar business days before first planned foreign cargo-ready date.
+- Planned manufacturer/origin/material-composition change affecting import treatment: updated ICR >=10 business days before affected cargo-ready date unless another policy is earlier.
+- NDI ocean ISF-support data to approved broker: >=96 hours before planned vessel loading.
+- Other complete SIP data: >=2 Northstar business days before planned international departure unless broker/routing requires earlier. Government deadlines always control.
+- Vendor learns of material government detention/hold/exam/refusal/seizure or customs discrepancy: notify Import Compliance Lead + applicable Q&R owner within 4 business hours; official notice/broker evidence within 1 business day when available.
+- Three vendor-controlled Import Documentation Failures in rolling 90 calendar days -> corrective-action review; CAP due within 10 business days after written request.
+
+Regulatory / source controls
+- Imported-food ICR records FSVP status/exemption basis and Prior Notice responsibility. When Northstar is FSVP importer, detailed verification belongs to file 06/Q&R.
+- FSIS-regulated meat/poultry/egg imports require eligible source-country/establishment and applicable certification/reinspection pathway.
+- Covered CPSC imported consumer products require applicable CPC/GCC support and required eFiling; current eFiling effective date noted in file 05 is July 8, 2026.
+- Applicable APHIS/Lacey Act plant/wood data must be available before shipment; unknown species/harvest-country data is unacceptable when legally required unless agency-authorized alternative applies.
+- Potential UFLPA/forced-labor/WRO sourcing -> Import Hold + evidence escalation; supplier may not evade review by substituting exporter identity.
+- Zero-tolerance unresolved conflicts include actual manufacturer/source site, COO, item identity, IOR/FSVP importer identity when required, knowingly false value, required permits/certificates/admissibility, or suspected falsified evidence.
+
+Import exceptions / retention
+- Logistics-only alternate port/routing: Logistics Manager + Import Compliance Lead.
+- Temporary non-regulatory import-data gap: Vendor Compliance Manager + Import Compliance Lead.
+- Food regulatory/FSVP ambiguity: Director, Quality & Regulatory.
+- Material origin/manufacturer/composition change: Import Compliance Lead + Vendor Compliance Manager; Q&R if regulatory/product scope affected.
+- No Northstar exception may waive law, authorize false customs data, bypass government detention, or permit prohibited imports.
+- NDI import records retained 7 years after later of U.S. entry or final disposition unless longer retention applies.
+
+Cross-file boundaries added by 05
+- 06 owns detailed FSVP verification, audits, testing, regulatory evidence review, and quality CAP mechanics.
+- 07 owns physical DC receiving/inspection and execution of Northstar holds after domestic arrival; government release status must not be inferred from physical arrival.
+- 08 owns detailed international/domestic carrier routing and transport execution; preserve NDI/VLI and 96-hour ocean data boundary.
+- 09 owns detailed electronic transaction/ASN/invoice mechanics while preserving ICR/SIP/VendorLink identities.
+- 10 owns import-related chargebacks, demurrage/detention/re-export/destruction cost recovery, and appeals.
+
+CANONICAL FACTS ESTABLISHED IN FILE 06
+Quality / facility data model
+- New authoritative facility record: Facility Quality Record (FQR) in VendorLink.
+- Facility quality statuses: Approved / Conditional / Restricted / Disapproved. These are separate from NVID vendor statuses in file 00.
+- New item/product-family testing record: Quality Verification Plan (QVP).
+- New defined records/terms: Certificate of Analysis (COA), Critical Quality Event (CQE), Corrective Action Plan (CAP), Traceability Challenge.
+- Q&R owns technical facility approval, testing requirements, regulatory evidence, safety holds, and quality finding severity.
+
+R3 certification / audit controls
+- R3 food default: current certificate under a currently GFSI-recognised certification programme/version for the relevant scope, issued through the appropriate certification system, OR Director-Q&R-approved alternative audit plan.
+- GFSI recognition is of programmes/scopes, not direct site certification.
+- Alternative audit acceptance: >=85/100 where scored, zero Critical findings, no unresolved unsafe/illegal condition, accepted CAP for Major findings.
+- Alternative audit at least every 12 months unless Q&R sets shorter.
+- FQR reassessment: R3 at least every 12 months; approval-controlled R2 every 24 months; event-driven review may occur sooner.
+- Certification-continuity exception: Director Q&R only; pre-approved; no open Critical finding; scheduled recertification/alternative audit; normally expires <=45 calendar days after prior certificate expiry.
+
+Testing / COA controls
+- QVP defines test, specification/limit, method, sample source, frequency, laboratory, and release condition.
+- Safety/regulatory testing normally uses an independent ISO/IEC 17025-accredited laboratory for an appropriate scope when reasonably available; Q&R may accept a justified competent alternative.
+- Lot-release COA must identify supplier/facility, item, lot, dates, method, limit/specification, actual result/units, and responsible lab/quality function.
+- A COA from another lot is invalid unless QVP explicitly approves a representative-lot strategy.
+- QVP testing may be part of file 03 private-label technical release and does not replace Production Authorized/Shipping Authorized.
+
+Traceability / FSVP
+- R3 foods and Q&R-designated R2 items must support lot-level traceability.
+- Northstar Traceability Challenge response deadline: 4 hours; failure to complete in 4 hours = Major, inability to bound affected lot population or deliberate falsification = Critical.
+- Northstar's 4-hour traceability rule is company policy. FDA Food Traceability Rule enforcement is not expected before July 20, 2028 as of file 06 research date.
+- When Northstar is FSVP importer, Q&R oversees the applicable risk evaluation/verification; reevaluation at least every 3 years or sooner when legally triggered by new hazard/supplier-performance information.
+
+Quality-event notification / CAP
+- Active recall, stop-sale/stop-distribution, credible serious safety hazard, material government seizure/refusal, or confirmed falsified safety evidence: notify Q&R + Vendor Compliance within 4 business hours.
+- Other material regulatory notice, failed safety-critical test, certification suspension/withdrawal, or likely affected Northstar product: within 1 business day.
+- Critical finding: immediate containment; containment summary 1 business day; CAP/root-cause package 5 business days.
+- Major CAP: 10 business days. Minor CAP when required: 20 business days.
+- Normal action completion: Critical/Major 30 calendar days; Minor 60 calendar days, unless approved extension with interim controls.
+- Disapproved facility may not produce new Northstar product.
+- Quality/compliance records retained 7 years after later of last Northstar receipt from affected facility or affected-item retirement unless longer rule applies.
+
+Cross-file boundaries added by 06
+- 07 owns physical receipt inspection, sampling execution at the DC, receipt evidence, segregation, and execution of Q&R holds; it uses FQR/QVP/APLR/AFP as ground truth but does not redefine them.
+- 08 owns transport sanitation/cold-chain/carrier execution; quality findings may rely on transport evidence without changing responsibility logic from file 01.
+- 09 owns electronic transmission/storage mechanics for VendorLink, COAs, test records, ASN and invoices; file 06 owns technical acceptance.
+- 10 owns recall execution, product disposition, dollar recovery/chargebacks, and appeals; file 06 owns safety investigation, traceability readiness, finding severity, and CAP.
+
+
+
+CANONICAL FACTS ESTABLISHED IN FILE 07
+=======================================
+DC network / appointment system
+- DCs established for handbook use: Hudson Valley Distribution Center (HVDC), Newburgh NY; Lehigh Valley Distribution Center (LVDC), Allentown PA.
+- New appointment system: Northstar DockSchedule.
+- New receiving record: Receiving Exception Record (RER) in VendorLink.
+- Receiving Dispositions: Accepted / Accepted with Exception / Held / Partially Rejected / Rejected.
+
+Receipt / appointment evidence
+- Gate Arrival Time = first presentation at correct DC gate with sufficient shipment identity.
+- Northstar Receipt Date for an ultimately unloaded live delivery = local calendar date of Gate Arrival; accepted drop = date Northstar accepts trailer custody; turned-away pre-unload load has no Receipt Date. File 02 uses this receipt date as day 0.
+- Live unload normally requires confirmed DockSchedule appointment. Prepaid request target >=2 Northstar business days before planned arrival. Same-day requires DC Receiving Manager capacity approval.
+- Normal arrival window = 45 minutes early through 30 minutes late. >30 minutes late = Late Arrival; no gate arrival by +60 minutes without approved reschedule = No Show.
+- For prepaid OTIF, Gate Arrival Time is the controlling DC arrival evidence under file 01; Northstar door delay after compliant gate arrival is not vendor lateness unless vendor/carrier caused it.
+- Onsite receiving/document check-in expected within 15 minutes after gate entry unless directed otherwise.
+
+Pallet / receiving controls
+- Default pallet: 48x40 inch four-way; max gross pallet weight 2,200 lb; max loaded height 66 inches including pallet; no overhang; structurally sound/clean. APLR/PO/lane exception may override.
+- Floor-load requires PO/lane authorization or prior Logistics/DC approval; operational acceptance still creates RER when unauthorized.
+- Unauthorized substitutions are not receivable as ordered item; unordered/overage product cannot enter saleable inventory without PO revision/approved exception.
+- Visible damage >=5 cases OR >=1.0% of presented cases, whichever threshold is reached first, requires RER before receipt close; safety-sensitive damage/contamination triggers RER/hold regardless of quantity.
+
+Freshness / temperature receiving
+- Freshness-controlled receipt sampling default: >=3 cases per item/lot; AFP/file 02 remains authoritative.
+- R3 temperature-controlled food: ambient/setpoint when available + >=3 spatially separated product-temperature readings. R2 temperature-controlled: >=2 product readings unless stricter QVP/AFP.
+- Northstar fallback receiving defaults when no stricter item/legal spec: refrigerated TCS <=41°F; raw shell eggs refrigerated-equipment ambient <=45°F; other refrigerated quality-controlled food <=45°F; frozen hard-frozen/no material thaw-refreeze and product <=10°F.
+- Any out-of-spec temp or credible cold-chain concern -> Temperature Hold; expand to >=6 product readings when safely practicable; Q&R controls disposition. Do not average away an out-of-spec reading.
+
+Hold / escalation / performance
+- Seal mismatch/break on R3 or safety-sensitive load, infestation/material contamination, temperature failure, missing import release/readiness, expired product, or active Q&R hold normally prevents saleable release.
+- DC Receiving Manager may approve temporary operational dock/staging/unloading exceptions; Logistics Manager approves recurring appointment/lane exceptions; Q&R controls safety/temperature/regulatory/technical hold release.
+- Receiving corrective-action review trigger: 3 Major receiving events in rolling 60 days; or 2 Late Arrival/No Show events in 30 days on a lane with >=4 scheduled deliveries; any Critical contamination/infestation/falsification/safety event also escalates.
+- If file 06 classifies the issue as a quality finding, file 06 CAP deadlines control.
+- Receiving/RER records retained 7 years after receipt close unless longer rule applies.
+
+Cross-file boundaries added by 07
+- 08 owns detailed carrier routing, sanitation, seal and cold-chain execution; 07 owns what DC physically observes/records at receipt.
+- 09 owns detailed ASN/electronic transmission mechanics; 07 consumes available ASN/SSCC data for receipt validation.
+- 10 owns dollar chargebacks, returns/disposition cost recovery, and appeals; 07 establishes receiving facts but no dollar amount.
+
+
+CANONICAL FACTS ESTABLISHED IN FILE 08
+=======================================
+Transportation ownership / data model
+- New authoritative shipment-level transportation record: Shipment Routing Record (SRR) in VendorLink.
+- Freight paths: Vendor-Prepaid; Northstar-Managed Pickup; DSD; NDI domestic handoff after lawful U.S. release.
+- Logistics owns routing/carrier assignment/transport operating standards; Q&R owns food-safety/temperature/sanitation disposition; DC Operations owns physical receiving evidence.
+- SRR does not replace PO, ASN, DockSchedule, APLR, AFP, ICR, QVP, or private-label release.
+
+Routing / readiness
+- Northstar-Managed complete SRR request lead time: standard dry LTL >=2 Northstar business days before Ready By; dry TL, refrigerated/frozen TL, regulated hazmat, and NDI domestic handoff >=3 business days.
+- Late routing request does not change PO Ready By.
+- Northstar-Managed freight may not use a vendor-selected substitute carrier without written Logistics approval.
+- SRR shipment data must be updated before pickup for changes to equipment type, hazmat status, temperature requirement, pickup address, or ship date; >10% change in expected gross weight or pallet/carton count also requires update when known.
+- Northstar-Managed readiness means conforming/released product at correct origin, packed/labeled/documented/staged and available by Ready By; credible evidence may include warehouse timestamps, staged-freight records/photos, loader records, or contemporaneous carrier communication.
+- Northstar-carrier delay after credible timely readiness remains Northstar-controlled under file 01 responsibility logic.
+
+Carrier / BOL / insurance
+- Northstar-contracted motor carrier minimums: $1M CSL auto liability (preserves file 00) + $150,000 cargo liability per occurrence unless contract requires more.
+- BOL/equivalent required for every DC shipment; includes shipper/origin, destination, carrier/trailer, freight term, PO, SRR if managed pickup, pallet/carton count/weight, sufficient item identity, seal when required, temperature instruction, and legally required hazmat information.
+- Carriers under government order prohibiting operation may not carry Northstar-controlled freight.
+- Northstar policy never requires HOS/weight/hazmat-law violation to meet schedule.
+
+Food transport / seals / temperature
+- Food equipment must be suitable, clean, sanitary, pest/odor/contaminant free; prior-cargo/cleaning evidence required when needed for suitability.
+- All closed truckload shipments to a Northstar DC are sealed at origin unless mode requires intermediate access; authorized LTL/multi-stop loads use chain-of-custody controls.
+- R3/safety-sensitive Seal Event records include old seal, reason, time/location, actor/authority, and replacement seal. Unexplained R3 seal mismatch/break normally triggers file 07 receiving hold.
+- R3 refrigerated/frozen TL is pre-cooled to specified operating condition and uses continuous refrigeration unless written Q&R/product instruction permits another method.
+- R3 temperature evidence interval <=15 minutes when equipment is capable; requested reefer/equivalent record due within 4 business hours.
+- Known temp excursion, refrigeration failure, accidental shutdown, or suspected logger tampering -> Logistics + Q&R notice within 1 hour.
+- File 07 receiving temperatures are not substitute transit setpoints.
+
+Transportation incidents / performance
+- Collision, theft/hijack attempt, unexplained seal breach, temperature-control failure, contamination, government impoundment, or cargo spill: Logistics notice within 1 hour.
+- Other event expected to delay pickup/delivery >2 hours: notice within 2 hours of learning.
+- Supporting incident evidence added to SRR within 1 Northstar business day when reasonably available.
+- Northstar-contracted carrier scorecard: tender acceptance >=94%; on-time pickup >=95%; required status reporting >=97%; required temperature-record availability 100%.
+- <10 eligible loads/month = informational percentage unless Critical event.
+- Two consecutive months below an applicable carrier standard or any Critical Transportation Event -> Logistics review.
+- Three Major Transportation Events for same vendor/carrier in rolling 60 days -> corrective-action review; transportation CAP due in 10 business days when file 06 Q&R CAP timing does not apply.
+- Transportation records retained 7 years after final delivery or later claim/incident closure unless longer rule applies.
+
+Cross-file boundaries added by 08
+- 09 owns ASN/electronic transaction mechanics and may transport SRR/BOL/status data electronically without redefining transportation requirements.
+- 10 owns cargo claims, freight-cost recovery, detention/demurrage deductions, chargebacks, and appeals; 08 establishes transport facts/performance only.
+
+CANONICAL FACTS ESTABLISHED IN FILE 09
+=======================================
+VendorLink / transaction data model
+- Northstar VendorLink remains the vendor-facing system of record for transaction status, supporting documents, exceptions, and payment visibility; approved EDI/API connections are alternate transmission channels, not separate authorities.
+- Core transaction records: PO/PO Revision; PO Acknowledgment; ASN; Invoice; Credit Memo; Remittance Advice. File 01 continues to own PO commercial authority and acknowledgement timing.
+- New controlled record: Invoice Exception Record (IER) in VendorLink.
+
+ASN controls
+- ASN required for DC-bound merchandise unless VendorLink marks the lane/vendor ASN Exempt.
+- ASN must be accepted before arrival, normally no later than physical departure and >=4 hours before confirmed DC appointment when transit time permits; transit <4 hours requires transmission before departure.
+- ASN links NVID, PO/revision, origin/destination, shipment/carrier/BOL references, pallet/carton quantities, item/line quantities, required SSCCs, and lot/date/temp data when applicable.
+- Latest accepted ASN controls electronic receiving expectations but cannot authorize over-shipment, substitution, destination, or PO-quantity changes.
+
+Invoice / matching controls
+- Merchandise invoice requires NVID, unique invoice number, invoice date, PO, line/item, quantity, unit price, line extension, authorized separate charges, currency, and total.
+- Invoice may be sent after shipment departure; recommended within 2 business days; required no later than 10 calendar days after Northstar Receipt Date unless written terms differ.
+- Duplicate key: same NVID + invoice number cannot coexist as active/paid invoice.
+- Merchandise three-way match compares latest authorized PO, Northstar receipt, and invoice.
+- Auto-match requires cumulative invoiced qty <= accepted receipt qty; unit price variance within BOTH $1.00 per invoice line and 0.25% of PO line value; unauthorized freight/tax/handling/deposit/misc charge = $0; currency/UOM match PO. Tolerance enables automation and does not authorize price changes.
+- VendorLink invoice statuses: Received / Validation Failed / Match Pending / Exception Review / Approved for Payment / Scheduled / Paid / Rejected / Void.
+
+Payment / exception controls
+- Default Northstar merchandise term = Net 30 unless signed agreement/PO states otherwise.
+- DC-merchandise Invoice Eligible Date (IED) = later of valid invoice receipt date or Northstar Receipt Date. Managed-pickup pickup alone does not start AP clock unless agreement says otherwise.
+- Vendor-caused IER response normally due within 5 business days; after 10 business days without response, AP may reject or pay undisputed validated amount as appropriate.
+- Exception ownership: price/terms Procurement; receipt quantity DC Operations; freight/routing Logistics; tax/banking/payment AP/Finance; safety/quality Q&R.
+- VendorLink/Northstar connection outage >2 consecutive hours during time-sensitive window may receive temporary alternate-method approval; authoritative electronic record backfilled within 1 business day after restoration. Vendor-side outage is not an automatic waiver.
+- Bank-account changes require secure VendorLink workflow + independent AP verification through an established contact/control. Email/invoice note/unverified phone instruction alone cannot change banking. AP may impose Payment Hold; Payment Hold does not itself change vendor status.
+- Three vendor-controlled electronic transaction failures of same material type in rolling 60 days -> Vendor Compliance review. Deliberate duplicate billing, false invoice/receipt reference, or payment-redirection fraud may trigger immediate Payment Hold and vendor-status review.
+- Transaction/AP records retained 7 years after final payment or final resolution unless longer rule applies; corrections preserve prior values, actor/system, timestamps, channel, and audit history.
+
+Cross-file boundaries added by 09
+- 10 owns dollar deductions, chargebacks, return/recall cost recovery, credit/offset appeal procedures, and formal appeals; 09 establishes invoice/payment facts and IER handling but not chargeback amounts.
+- File 09 may display/link PO, APLR, ICR/SIP, Q&R, receiving, and SRR evidence without becoming authoritative for those underlying operational/technical decisions.
+
+
+
+CANONICAL FACTS ESTABLISHED IN FILE 10
+=======================================
+Product action / returns data model
+- New VendorLink records: Product Action Record (PAR), Routine Return Authorization (RRA), Chargeback Notice (CBN), and Appeal Case.
+- Q&R owns safety classification, recall/withdrawal scope, holds, technical disposition, and technical closure. Financial review cannot override Q&R safety decisions.
+- AP records credits/deductions; Finance controls final financial recovery/appeals; Vendor Compliance coordinates vendor execution.
+
+Recall / withdrawal execution
+- File 06 notification timing is preserved: urgent recall/stop-sale/serious-safety events within 4 business hours; other material regulatory/failed-safety-test events within 1 business day.
+- For an urgent safety action, usable preliminary scope is due within the same 4-business-hour window when reasonably available; file 06 Traceability Challenge remains 4 hours when invoked.
+- Unknown scope is not treated as zero scope; Q&R may control a broader population until evidence supports narrowing.
+- Urgent actions drive hold/stop-sale, DC quarantine, in-transit control, and store/DC effectiveness checks.
+- Northstar-controlled affected inventory must be reconciled to system-record units as quarantined, returned, destroyed, corrected/released, controlled in transit, previously sold, or documented variance.
+- Financial appeals may remain open after PAR technical closure and never delay a safety action.
+
+Routine return / disposition
+- RRA vendor disposition instruction: 2 business days.
+- Ordinary return pickup: 10 business days; refrigerated/frozen/perishable: 3 business days unless shorter direction applies.
+- Vendor credit after documented receipt/approved destruction: 15 calendar days unless contract differs.
+- Unsafe/recalled/controlled product cannot re-enter commerce merely because vendor requests pickup; Q&R may require destruction.
+
+Chargeback / recovery controls
+- CBN must identify NVID, linked PO/shipment/PAR/RER/SRR/IER, reason code, policy rule, event date, calculation, evidence, owner, issue date, appeal deadline.
+- Same underlying cost cannot be recovered twice.
+- Standard charges established: OTIF failure = 2% of affected late/short unit value (min $100, max $1,500/PO); DC No Show $200; manual ASN correction $75; unauthorized pallet/floor-load/SSCC handling $125; managed-pickup TONU = actual carrier charge + $75; routing/data incremental freight = actual + $100; confirmed vendor-responsible packaging/label/freshness/quality rework = $150 + documented incremental cost; import-document failure = $150 + documented direct import cost; vendor-responsible recall/withdrawal = documented reasonable direct execution cost + $250 PAR coordination charge.
+- Government penalties pass through only when supplier responsibility plus agreement/law permit; broader indemnity/lost-sales/legal damages remain governed by contract/law.
+
+Appeal controls
+- First CBN appeal: 30 calendar days; recall/withdrawal direct-cost charge issued after PAR technical closure: 60 calendar days.
+- First-level review target: 10 business days after complete appeal; one evidence request may give vendor 5 business days.
+- Second-level appeal: within 10 calendar days after first decision; final decision target 15 business days.
+- Final financial review: Finance Manager + Vendor Compliance Manager + owner of underlying factual record; Director Q&R participates when safety/quality/recall scope is disputed.
+- Appeal does not automatically stay deduction. Timely first appeal >$2,500 may receive Finance Manager Deduction Hold only for credible material Northstar error/unresolved factual conflict; hold affects collection only.
+- Formal vendor review triggers include 3 upheld standard chargebacks of same material type in rolling 60 days or aggregate upheld chargebacks >$5,000 in rolling 90 days, subject to stated isolated pass-through exception.
+- File 06 CAP timing controls when the underlying issue is a quality finding.
+- File 10 records retained 7 years after later of final financial resolution or PAR/RRA closure unless longer rule applies.
+
+FINAL HANDBOOK STATUS
+- All 11 files 00 through 10 are complete.
+- No later handbook file is authorized by the original sequence. Future work should treat these files plus this canonical state as the Northstar vendor-handbook ground truth unless the user explicitly requests revision, reconciliation, test-case generation, or an additional artifact.

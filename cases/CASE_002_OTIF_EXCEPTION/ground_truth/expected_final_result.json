@@ -1,0 +1,32 @@
+{
+  "case_status": "MIXED_RESPONSIBILITY_PARTIAL_EXCEPTION_REVIEW",
+  "required_conclusions": [
+    "PO 78214 Rev 2 is the latest authorized revision and controls the performance calculation.",
+    "Net Ordered Units are 1,000, with 900 compliant units ready on time and 900 compliant units received by final close.",
+    "The correct On-Time Unit Rate is 90.0% and the correct Fill Rate is 90.0%; both are below the 98.0% PO thresholds, so the PO fails OTIF.",
+    "The preliminary 0.0% On-Time result incorrectly used destination arrival for Northstar-Managed Pickup.",
+    "The Northstar-selected carrier's documented delay is not attributable to the vendor for the 900 units credibly staged on time.",
+    "The vendor remains responsible for the 100-unit shortage, so the request for a total OTIF waiver is not justified.",
+    "A controlled partial disposition is appropriate: correct/exclude the carrier-caused timing classification only to its supported scope and retain the quantity-related performance failure."
+  ],
+  "required_next_actions": [
+    "Send the managed-transportation portion of PER-260918-017 and its evidence to the Logistics Manager for approval or denial.",
+    "Correct the managed-pickup timeliness event from arrival-based zero units to 900 compliant units ready by deadline, through the controlled PER/scorecard process as applicable.",
+    "Retain 1,000 Net Ordered Units, the 100-unit vendor shortage, 90.0% On-Time, 90.0% Fill, and the PO OTIF failure.",
+    "Communicate to Bright Meadow Foods that the carrier-delay evidence is supported but does not justify a total waiver.",
+    "Preserve the revision, acknowledgment, readiness, carrier, receipt, calculation, and final PER disposition records."
+  ],
+  "acceptable_uncertainties": [
+    "The initial workspace does not contain the Logistics Manager's final PER approval or denial.",
+    "The case does not establish whether this single PO changes a final monthly scorecard or triggers any downstream commercial action."
+  ],
+  "must_not_claim": [
+    "Rev 1 controls or the order quantity is 800 units.",
+    "The correct On-Time Unit Rate is 0.0% or 100.0%.",
+    "The correct Fill Rate is 100.0%.",
+    "The vendor caused the carrier's tractor failure or late HVDC arrival.",
+    "The carrier delay excuses the missing 100 units.",
+    "PER-260918-017 is already approved.",
+    "A chargeback, CAP, vendor restriction, or monthly scorecard correction has been authorized."
+  ]
+}

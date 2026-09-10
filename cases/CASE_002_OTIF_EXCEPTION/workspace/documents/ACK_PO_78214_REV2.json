@@ -1,0 +1,13 @@
+{
+  "record_type": "PO_ACKNOWLEDGMENT",
+  "source_system": "VendorLink",
+  "po_number": "78214",
+  "revision": 2,
+  "nvid": "NVID-31877",
+  "vendor": "Bright Meadow Foods LLC",
+  "received_at": "2026-09-08T13:42:00-04:00",
+  "submitted_by": "Maya Chen <maya.chen@brightmeadow.example>",
+  "lines": [
+    {"line": 1, "sku": "NS-447210", "quantity": 1000, "status": "Accepted", "comment": "Revised quantity and dates confirmed."}
+  ]
+}

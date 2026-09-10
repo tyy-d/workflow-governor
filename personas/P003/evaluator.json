@@ -1,0 +1,364 @@
+{
+  "operator_id": "NRM-E33190",
+  "persona_name": "Priya Nair",
+  "test_purpose": "Strong technical/data analyst with limited encoded Northstar business-domain knowledge. Test whether Workflow Governor correctly distinguishes analytical capability from company knowledge and authority, learns from task evidence locally, and uses Priya as a high-value data transformation and reconciliation layer without inferring specialist business judgment.",
+  "startup_grants": [],
+  "capability_schema_version": "northstar-operator-v1",
+  "ground_truth_capabilities": {
+    "document_comparison": {
+      "true_band": "HIGH",
+      "initial_observability": "MEDIUM"
+    },
+    "file_search": {
+      "true_band": "VERY_HIGH",
+      "initial_observability": "MEDIUM"
+    },
+    "spreadsheet_analysis": {
+      "true_band": "VERY_HIGH",
+      "initial_observability": "MEDIUM"
+    },
+    "numerical_reconciliation": {
+      "true_band": "VERY_HIGH",
+      "initial_observability": "MEDIUM"
+    },
+    "cross_document_reasoning": {
+      "true_band": "HIGH",
+      "initial_observability": "MEDIUM"
+    },
+    "evidence_evaluation": {
+      "true_band": "HIGH",
+      "initial_observability": "MEDIUM"
+    },
+    "exception_handling": {
+      "true_band": "MODERATE",
+      "initial_observability": "LOW"
+    },
+    "reporting_and_synthesis": {
+      "true_band": "HIGH",
+      "initial_observability": "MEDIUM"
+    },
+    "policy_interpretation": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "procurement_operations": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "vendor_compliance": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "invoice_matching": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "quality_compliance": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "food_safety_review": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "transportation_operations": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "receiving_operations": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    }
+  },
+  "knowledge_ground_truth": {
+    "vendorlink_and_nvid_basics": {
+      "state": "GENERAL_CORRECT",
+      "source_type": "ACTOR_EXPERIENCE"
+    },
+    "northstar_record_vocabulary": {
+      "state": "GENERAL_CORRECT",
+      "source_type": "ACTOR_EXPERIENCE"
+    },
+    "department_ownership_map": {
+      "state": "VAGUE",
+      "source_type": "ACTOR_MEMORY"
+    },
+    "record_relationships_when_explicitly_defined": {
+      "state": "PARTIAL",
+      "source_type": "ACTOR_EXPERIENCE"
+    },
+    "po_authority_and_revision_policy": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "po_performance_and_otif_policy": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "vendor_status_and_exception_policy": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "freshness_policy": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "packaging_and_label_policy": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "import_admissibility_policy": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "q_and_r_acceptance_and_testing_policy": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "dc_receiving_thresholds": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "transportation_incident_and_readiness_policy": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "invoice_matching_and_payment_policy": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "chargeback_and_appeal_policy": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    }
+  },
+  "authority_ground_truth": {
+    "produce_analyses_reconciliations_and_exception_lists": true,
+    "produce_data_quality_findings": true,
+    "flag_duplicate_inconsistent_missing_or_malformed_records": true,
+    "correct_authorized_data_processing_issues": true,
+    "document_transformation_logic_and_lineage": true,
+    "recommend_operational_owner_review_of_anomaly": true,
+    "prepare_structured_evidence_for_decision_owner": true,
+    "approve_commercial_decision": false,
+    "approve_vendor_status_change": false,
+    "approve_payment_or_banking_decision": false,
+    "approve_logistics_or_routing_decision": false,
+    "approve_receiving_disposition": false,
+    "approve_q_and_r_safety_or_regulatory_decision": false
+  },
+  "confidence_calibration": "WELL_CALIBRATED",
+  "error_patterns": [
+    {
+      "pattern_id": "ERR-01",
+      "description": "When several plausible records exist and no governing source is identified, Priya may optimize for an internally consistent dataset or technically convenient source rather than the business-authoritative record.",
+      "affected_capabilities": [
+        "file_search",
+        "cross_document_reasoning",
+        "evidence_evaluation"
+      ],
+      "expected_frequency": "OCCASIONAL"
+    },
+    {
+      "pattern_id": "ERR-02",
+      "description": "Priya may initially weight structured and numeric anomalies more heavily than qualitative evidence such as narrative approvals, incident notes, or exception rationale unless those sources are explicitly included in the task.",
+      "affected_capabilities": [
+        "evidence_evaluation",
+        "reporting_and_synthesis"
+      ],
+      "expected_frequency": "OCCASIONAL"
+    }
+  ],
+  "false_or_outdated_beliefs": [],
+  "expected_narrative_profile": {
+    "should_capture": [
+      "strong technical analyst for spreadsheets, structured search, reconciliation, joins, and data-quality work",
+      "reliable at making calculations and transformations reproducible and traceable to source data",
+      "can apply an explicitly supplied business rule accurately without independently owning that policy",
+      "distinguishes data facts and anomalies from business judgments",
+      "asks for governing fields, authoritative records, or policy criteria instead of inventing them",
+      "best used to prepare structured evidence for domain owners rather than replace their judgment"
+    ],
+    "should_not_claim": [
+      "is weak at reasoning because she asks for a missing policy rule",
+      "is a Procurement specialist because she can analyze PO data",
+      "is an AP specialist because she can reconcile invoice datasets",
+      "is a Q&R specialist because she can analyze quality records",
+      "owns Logistics or receiving decisions because she can join shipment records",
+      "has commercial, payment, vendor-status, logistics, receiving, or safety approval authority"
+    ]
+  },
+  "evidence_interpretation_cases": [
+    {
+      "event": "Priya asks which Northstar rule defines the denominator before calculating a performance rate.",
+      "correct_interpretation": [
+        "Do not reduce spreadsheet_analysis or numerical_reconciliation capability.",
+        "Evidence indicates the governing company-policy criterion is not available to her.",
+        "Supplying the rule should allow the analytical task to proceed."
+      ],
+      "incorrect_interpretation": [
+        "Priya is generally poor at quantitative reasoning.",
+        "Priya cannot calculate rates."
+      ]
+    },
+    {
+      "event": "After receiving an explicit rule, Priya correctly reconciles two datasets, identifies mismatched rows, and documents the calculation lineage.",
+      "correct_interpretation": [
+        "Strong positive evidence for spreadsheet_analysis, numerical_reconciliation, cross_document_reasoning, and reporting_and_synthesis.",
+        "Does not by itself prove independent policy_interpretation."
+      ],
+      "incorrect_interpretation": [
+        "Correct application of a supplied rule proves Priya knows the underlying Northstar policy independently.",
+        "The result grants approval authority over the business decision."
+      ]
+    },
+    {
+      "event": "Priya identifies three plausible date fields and asks which one is the authoritative receipt date.",
+      "correct_interpretation": [
+        "Positive evidence for data-lineage discipline and confidence calibration.",
+        "Do not penalize file_search or document_comparison for requesting authoritative-source semantics."
+      ],
+      "incorrect_interpretation": [
+        "Priya lacks document-comparison skill.",
+        "The system should force her to choose the newest date field without clarification."
+      ]
+    },
+    {
+      "event": "Priya produces a technically clean anomaly list but initially omits a supplied narrative approval that changes how several rows should be interpreted.",
+      "correct_interpretation": [
+        "Local negative evidence for evidence_evaluation and reporting_and_synthesis in mixed structured/unstructured cases.",
+        "Do not lower spreadsheet_analysis, file_search, or numerical_reconciliation unless those executions were also wrong.",
+        "Future similar tasks should explicitly include qualitative evidence in the verification checklist."
+      ],
+      "incorrect_interpretation": [
+        "One missed narrative source proves Priya is generally weak at analysis.",
+        "Her numerical skills should be downgraded globally."
+      ]
+    },
+    {
+      "event": "Priya completes invoice, PO, or quality-record reconciliation accurately, then returns the final payability, compliance, or safety judgment to the owning specialist.",
+      "correct_interpretation": [
+        "Positive evidence for analytical capability and authority awareness.",
+        "Reassignment of the specialist judgment is correct behavior.",
+        "Do not infer invoice_matching, quality_compliance, or policy_interpretation as independent specialist capabilities."
+      ],
+      "incorrect_interpretation": [
+        "Returning the decision means she failed the task.",
+        "Accurate record reconciliation proves she should now authorize the domain outcome."
+      ]
+    }
+  ],
+  "expected_task_return_behavior": [
+    {
+      "task_class": "spreadsheet analysis, data cleaning, joins, duplicate detection, or descriptive statistics",
+      "expected_behavior": "EXPECTED_COMPLETION",
+      "reason": "These are explicit major analytical skills."
+    },
+    {
+      "task_class": "structured file search within explicitly granted scope",
+      "expected_behavior": "EXPECTED_COMPLETION",
+      "reason": "Structured search is an explicit major skill when scope is granted."
+    },
+    {
+      "task_class": "cross-document reconciliation with authoritative sources and governing comparison rule supplied",
+      "expected_behavior": "EXPECTED_COMPLETION",
+      "reason": "Priya is explicitly skilled at rule-driven reconciliation."
+    },
+    {
+      "task_class": "business classification where the governing Northstar criterion is missing",
+      "expected_behavior": "EXPECTED_CLARIFICATION",
+      "reason": "Missing company knowledge should trigger a request for the rule rather than guessing."
+    },
+    {
+      "task_class": "multiple plausible source fields or records with no stated business authority",
+      "expected_behavior": "EXPECTED_CLARIFICATION",
+      "reason": "She should request the governing field or record when the distinction can change the result."
+    },
+    {
+      "task_class": "mixed analytical task plus specialist policy judgment",
+      "expected_behavior": "EXPECTED_TASK_NARROWING",
+      "reason": "She should complete the analytical portion and identify the remaining domain judgment."
+    },
+    {
+      "task_class": "independent Procurement, Vendor Compliance, AP, Q&R, Logistics, or receiving judgment",
+      "expected_behavior": "EXPECTED_REASSIGNMENT",
+      "reason": "Those major domain skills are not encoded."
+    },
+    {
+      "task_class": "formal commercial, vendor-status, payment, logistics, receiving, or safety approval",
+      "expected_behavior": "EXPECTED_AUTHORITY_REFUSAL",
+      "reason": "Priya has analytical authority only, not domain approval authority."
+    }
+  ],
+  "profile_convergence": {
+    "initially_reasonable_uncertainty": [
+      "exact reliability of advanced spreadsheet_analysis before direct task evidence",
+      "exact reliability of file_search across large granted scopes",
+      "reliability of mixed structured-and-qualitative evidence evaluation",
+      "how consistently she asks for authoritative record semantics when several sources are plausible"
+    ],
+    "after_relevant_evidence_should_infer": [
+      "spreadsheet_analysis is highly reliable after repeated verified complex spreadsheet work",
+      "numerical_reconciliation is highly reliable after repeated verified reconciliations",
+      "file_search is highly reliable within granted scope after repeated successful retrieval tasks",
+      "cross_document_reasoning is reliable when the governing rule and authoritative sources are supplied",
+      "requesting missing policy criteria is disciplined knowledge-boundary behavior rather than low analytical skill"
+    ],
+    "should_remain_uncertain_without_evidence": [
+      "policy_interpretation",
+      "procurement_operations",
+      "vendor_compliance",
+      "invoice_matching",
+      "quality_compliance",
+      "food_safety_review",
+      "transportation_operations",
+      "receiving_operations"
+    ]
+  },
+  "expected_task_adaptation": {
+    "good_assignments": [
+      "advanced spreadsheet analysis",
+      "structured file search within granted scope",
+      "data cleaning and normalization",
+      "joins, lookups, reconciliation, and duplicate detection",
+      "descriptive statistics and anomaly detection",
+      "rule-driven cross-document reconciliation",
+      "reproducible calculation notes and evidence preparation"
+    ],
+    "assign_with_scaffolding": [
+      "policy-based comparison when the governing rule is explicitly supplied",
+      "cross-domain reconciliation when authoritative record relationships and field semantics are supplied",
+      "mixed structured/unstructured evidence analysis with the relevant narrative approvals or notes explicitly included"
+    ],
+    "normally_reassign": [
+      "independent Procurement judgment",
+      "independent Vendor Compliance evaluation",
+      "independent invoice/payability or banking-control judgment",
+      "independent Q&R or food-safety determination",
+      "transportation planning or routing judgment",
+      "physical receiving judgment",
+      "commercial negotiation"
+    ],
+    "never_assign_as_authorizer": [
+      "commercial approval",
+      "vendor-status approval",
+      "payment or bank-change approval",
+      "logistics routing approval",
+      "receiving disposition approval",
+      "Q&R safety or regulatory approval"
+    ],
+    "verification_guidance": [
+      "Reduce analytical scaffolding as verified task evidence accumulates, but do not infer domain-policy knowledge from analytical success.",
+      "When business semantics matter, explicitly identify the authoritative source, field definition, or governing policy criterion.",
+      "Keep evidence updates local: missing policy knowledge should not reduce analytical capability estimates.",
+      "If a mixed-evidence error occurs, increase verification for qualitative-source inclusion without globally downgrading numerical or spreadsheet skill."
+    ]
+  },
+  "scoring_notes": [
+    "Unknown or missing Northstar policy knowledge is not evidence of low analytical capability.",
+    "Correct execution after a rule is supplied supports analytical capability, not independent policy interpretation.",
+    "Returning specialist judgment or approval is correct when Priya has completed the analytical portion she owns.",
+    "Do not reward a system that broadly promotes Priya into Procurement, AP, Q&R, Logistics, or receiving expertise based only on data work in those domains.",
+    "The strongest adaptation is aggressive use of Priya for computation/reconciliation while preserving explicit policy criteria and specialist authorization boundaries."
+  ]
+}

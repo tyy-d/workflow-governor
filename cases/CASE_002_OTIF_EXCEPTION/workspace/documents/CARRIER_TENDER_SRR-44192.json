@@ -1,0 +1,17 @@
+{
+  "record_type": "CARRIER_TENDER",
+  "srr_id": "SRR-44192",
+  "po_number": "78214",
+  "po_revision": 2,
+  "tendered_by": "Northstar Logistics",
+  "tendered_at": "2026-09-10T16:22:00-04:00",
+  "carrier": "Granite Span Transport LLC",
+  "carrier_scac": "GSNX",
+  "tender_status": "ACCEPTED",
+  "accepted_at": "2026-09-10T16:34:00-04:00",
+  "pickup_window_start": "2026-09-16T09:30:00-04:00",
+  "pickup_window_end": "2026-09-16T10:30:00-04:00",
+  "planned_hvdc_appointment": "2026-09-17T10:00:00-04:00",
+  "equipment": "53-foot dry van",
+  "northstar_designated_carrier": true
+}

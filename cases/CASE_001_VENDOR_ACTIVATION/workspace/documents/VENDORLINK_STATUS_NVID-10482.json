@@ -1,0 +1,17 @@
+{
+  "exported_at": "2026-09-09T10:15:00-04:00",
+  "system": "Northstar VendorLink",
+  "nvid": "NVID-10482",
+  "legal_name": "Harbor Finch Pantry LLC",
+  "primary_role": "Brand Supplier",
+  "displayed_risk_tier": "R2 Controlled",
+  "status": "Conditional",
+  "status_effective_at": "2026-09-02T14:20:00-04:00",
+  "status_reason": "Core identity review passed; activation gates pending",
+  "commercial_po_eligible": false,
+  "authorized_items": [
+    "PG-48217"
+  ],
+  "open_exception_records": [],
+  "last_reviewed_by_function": "Vendor Compliance"
+}

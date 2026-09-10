@@ -1,0 +1,7 @@
+VendorLink attachment register — NVID-10482
+Exported: 2026-09-09 10:17 ET
+
+2026-09-03 15:04 ET | COI_NVID-10482_2026.txt | uploaded by lena.ortiz@harborfinch.example
+2026-09-03 15:09 ET | COI_NVID-10482_2026_COPY.txt | duplicate attachment suppressed | same certificate number MCS-884201
+
+The duplicate upload did not create a separate reviewed insurance record.

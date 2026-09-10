@@ -1,0 +1,86 @@
+[
+  {
+    "finding_id": "F001",
+    "finding": "PO 78214 Rev 2 is the latest authorized revision transmitted through VendorLink; Rev 1 is superseded.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/PO_78214_REV1.md", "workspace/documents/PO_78214_REV2.md", "workspace/spreadsheets/VENDORLINK_PO_TRANSMISSION_LOG_78214.csv"]
+  },
+  {
+    "finding_id": "F002",
+    "finding": "Bright Meadow Foods acknowledged Rev 2 as Accepted at 13:42 on September 8, within one Northstar business day of transmission.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/ACK_PO_78214_REV2.json", "workspace/spreadsheets/VENDORLINK_PO_TRANSMISSION_LOG_78214.csv"]
+  },
+  {
+    "finding_id": "F003",
+    "finding": "Net Ordered Units are 1,000: the latest authorized Rev 2 quantity is 1,000 and no eligible Northstar cancellation or later revision exists.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/PO_78214_REV2.md", "workspace/spreadsheets/VENDORLINK_PO_TRANSMISSION_LOG_78214.csv", "workspace/inbox/EMAIL_VENDOR_SHORTAGE_NOTICE_2026-09-11.md"]
+  },
+  {
+    "finding_id": "F004",
+    "finding": "The shipment used Northstar-Managed Pickup under SRR-44192 and Northstar selected Granite Span Transport.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/PO_78214_REV2.md", "workspace/documents/ROUTING_REQUEST_SRR-44192.json", "workspace/documents/CARRIER_TENDER_SRR-44192.json", "workspace/documents/BOL_78214.md"]
+  },
+  {
+    "finding_id": "F005",
+    "finding": "The vendor submitted a timely and complete routing request for a standard dry truckload.",
+    "importance": "IMPORTANT",
+    "evidence_refs": ["workspace/documents/ROUTING_REQUEST_SRR-44192.json"]
+  },
+  {
+    "finding_id": "F006",
+    "finding": "The vendor credibly staged and documented 900 compliant units by the Rev 2 Ready By deadline, but did not have the remaining 100 units ready.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/WAREHOUSE_READY_RECORD_78214.md", "workspace/documents/ASN_78214.json", "workspace/documents/PACKING_LIST_78214.md"]
+  },
+  {
+    "finding_id": "F007",
+    "finding": "The Northstar-designated carrier experienced a tractor failure and arrived at origin after the vendor had timely staged the 900 tendered units.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/CARRIER_DELAY_UPDATE_SRR-44192.json", "workspace/documents/PICKUP_CONFIRMATION_SRR-44192.md"]
+  },
+  {
+    "finding_id": "F008",
+    "finding": "DockSchedule recorded No Show at 11:00; HVDC Gate Arrival was 13:42 on September 17, after the scheduled appointment tolerance and destination delivery window, and all 900 presented units were accepted as compliant.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/DOCKSCHEDULE_APPOINTMENT_DS-99618.json", "workspace/documents/HVDC_GATE_CHECKIN_2026-09-17.json", "workspace/spreadsheets/RECEIVING_LOG_HVDC_2026-09-17.csv", "workspace/documents/RER-260917-044.md"]
+  },
+  {
+    "finding_id": "F009",
+    "finding": "Correct On-Time Unit Rate is 90.0% (900 compliant units ready by the managed-pickup deadline divided by 1,000 Net Ordered Units), below the 98.0% PO threshold.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/PO_78214_REV2.md", "workspace/documents/WAREHOUSE_READY_RECORD_78214.md", "workspace/documents/ASN_78214.json"]
+  },
+  {
+    "finding_id": "F010",
+    "finding": "Correct Fill Rate is 90.0% (900 compliant units received by final close divided by 1,000 Net Ordered Units), below the 98.0% PO threshold.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/PO_78214_REV2.md", "workspace/spreadsheets/RECEIVING_LOG_HVDC_2026-09-17.csv"]
+  },
+  {
+    "finding_id": "F011",
+    "finding": "Using superseded Rev 1 would cap both 900-unit numerators at 800 and falsely produce 100.0% On-Time and 100.0% Fill, changing the PO from fail to pass.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/documents/PO_78214_REV1.md", "workspace/documents/PO_78214_REV2.md", "workspace/documents/WAREHOUSE_READY_RECORD_78214.md", "workspace/spreadsheets/RECEIVING_LOG_HVDC_2026-09-17.csv"]
+  },
+  {
+    "finding_id": "F012",
+    "finding": "The preliminary export's 0.0% On-Time result is not the correct raw managed-pickup calculation because it uses destination arrival instead of compliant readiness.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/spreadsheets/PRELIM_OTIF_EXPORT_2026-09-18.csv", "workspace/documents/PO_78214_REV2.md", "workspace/documents/WAREHOUSE_READY_RECORD_78214.md"]
+  },
+  {
+    "finding_id": "F013",
+    "finding": "The vendor's dispute was submitted within three business days of the affected event and is supported as to carrier-caused physical lateness, but its request to remove the whole OTIF miss is overbroad because the 100-unit vendor shortage remains.",
+    "importance": "REQUIRED",
+    "evidence_refs": ["workspace/inbox/EMAIL_VENDOR_OTIF_DISPUTE_2026-09-18.md", "workspace/documents/PER_REQUEST_78214.md", "workspace/inbox/EMAIL_VENDOR_SHORTAGE_NOTICE_2026-09-11.md"]
+  },
+  {
+    "finding_id": "F014",
+    "finding": "No Logistics Manager approval or other completed PER disposition is present in the workspace.",
+    "importance": "IMPORTANT",
+    "evidence_refs": ["workspace/documents/PER_REQUEST_78214.md", "workspace/inbox/INTERNAL_PROCUREMENT_LOGISTICS_THREAD_2026-09-18.md"]
+  }
+]

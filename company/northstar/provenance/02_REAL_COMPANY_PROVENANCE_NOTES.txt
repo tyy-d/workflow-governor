@@ -1,0 +1,47 @@
+NORTHSTAR 02 — REAL-COMPANY / PUBLIC-POLICY PROVENANCE NOTES
+============================================================
+Purpose: short trace of external concepts used while designing 02_PRODUCT_FRESHNESS.md.
+Northstar-specific thresholds, forms, names, approval paths, score bands, and examples are fictional.
+
+FAMILY DOLLAR / DOLLAR TREE
+Source: Family Dollar Routing, Shipping, and Packaging Instructions — Freshness Policy.
+Borrowed concept:
+- retailer can negotiate an item-specific guaranteed shelf-life commitment rather than relying only on total shelf life;
+- short-dated product can be rejected despite still being within the manufacturer's total life;
+- where multiple expiration dates are grouped together, the least-fresh date can control.
+Northstar adaptation:
+- "Approved Freshness Profile" (AFP), "Minimum Remaining Life" (MRL), case/lot segregation rules, and Freshness Hold.
+- Family Dollar's actual GSL values/penalties were NOT copied.
+
+UNFI
+Sources: UNFI Supplier Terms & Conditions (updated July 30, 2026); UNFI UpNext Supplier Inquiry.
+Borrowed concept:
+- percentage-of-total-shelf-life requirement at distribution-center receipt;
+- supplier responsibility for meeting that shelf-life requirement;
+- structured capture of shelf life at production plus shipping/selling temperature.
+Northstar adaptation:
+- AFP stores DTSL, MRL, storage condition, date-code meaning, and decode instructions.
+- Northstar's 60%/65%/70% category defaults are original; UNFI's 75% rule was NOT copied.
+
+FDA
+Source: FDA Food Code and retail food-safety guidance.
+Borrowed concept:
+- cold holding and food-safety temperature control are distinct from commercial quality/shelf-life policy.
+Northstar adaptation:
+- 02 defines freshness semantics but reserves receiving-temperature execution for files 07/08.
+
+USDA FSIS
+Source: Food Product Dating.
+Borrowed concept:
+- distinction between open calendar dates and coded/closed dates;
+- most federal food date labels are quality indicators, not universal safety deadlines;
+- specific legal exceptions exist (for example infant formula under FDA requirements).
+Northstar adaptation:
+- explicit legal-vs-company-policy distinction and derived-date/decode workflow.
+
+NOT BORROWED
+- AFP / FE names and workflows.
+- 45-day change notice and 1-business-day emergency notice.
+- category MRL percentages.
+- 99.5% monthly Freshness Compliance target, 98.0% corrective trigger, and 100-case informational rule.
+- approval matrix, record retention, examples, and integrity escalation.

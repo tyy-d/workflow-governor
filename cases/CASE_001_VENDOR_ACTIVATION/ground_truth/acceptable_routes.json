@@ -1,0 +1,67 @@
+[
+  {
+    "work_type": "Extract the COI policy expiration date and compare it with the September 9, 2026 review date.",
+    "acceptable_executors": [
+      "DETERMINISTIC",
+      "MULTIPLE_ACCEPTABLE"
+    ],
+    "notes": "This is a bounded structured comparison. A human such as P001 is also useful when given the source and rule explicitly."
+  },
+  {
+    "work_type": "Check activation-gate results and reconcile NVID, SKU, dates, and visible record fields.",
+    "acceptable_executors": [
+      "DETERMINISTIC",
+      "MULTIPLE_ACCEPTABLE"
+    ],
+    "notes": "Structured validation can be automated or completed by a carefully scaffolded human."
+  },
+  {
+    "work_type": "Synthesize vendor standing, onboarding evidence, policy, and the actual activation blocker.",
+    "acceptable_executors": [
+      "MODEL",
+      "HUMAN_WITH_RELEVANT_SKILL",
+      "MULTIPLE_ACCEPTABLE"
+    ],
+    "notes": "P005 is the strongest persona fit. P001 should receive only the bounded clerical portion unless supplied a governing checklist and asked to route the judgment."
+  },
+  {
+    "work_type": "Interpret the commercial status of draft PO 78431 and explain Procurement consequences.",
+    "acceptable_executors": [
+      "MODEL",
+      "HUMAN_WITH_RELEVANT_SKILL",
+      "MULTIPLE_ACCEPTABLE"
+    ],
+    "notes": "P002 is the strongest persona fit and should narrow final vendor-standing authority to Vendor Compliance."
+  },
+  {
+    "work_type": "Draft a factual request to the vendor for replacement insurance evidence.",
+    "acceptable_executors": [
+      "MODEL",
+      "HUMAN_WITH_RELEVANT_SKILL",
+      "MULTIPLE_ACCEPTABLE"
+    ],
+    "notes": "P001 can complete this with the expired date and requested remediation supplied."
+  },
+  {
+    "work_type": "Evaluate a requested missing-administrative-item exception, if one is later submitted.",
+    "acceptable_executors": [
+      "HUMAN_WITH_RELEVANT_SKILL",
+      "AUTHORIZED_HUMAN"
+    ],
+    "notes": "A decision requires the policy-named Vendor Compliance Manager and owning business manager, with a complete time-limited VendorLink record. The current workspace contains no request or approval."
+  },
+  {
+    "work_type": "Change NVID-10482 from Conditional to Active after all activation gates are satisfied.",
+    "acceptable_executors": [
+      "AUTHORIZED_HUMAN"
+    ],
+    "notes": "Vendor Compliance holds the standing authority; P005 is authorized when the evidence package is complete."
+  },
+  {
+    "work_type": "Release or transmit the first commercial PO after activation.",
+    "acceptable_executors": [
+      "AUTHORIZED_HUMAN"
+    ],
+    "notes": "Procurement owns commercial PO content and release through the controlled channel; P002 may act within Procurement scope only after the vendor is Active."
+  }
+]

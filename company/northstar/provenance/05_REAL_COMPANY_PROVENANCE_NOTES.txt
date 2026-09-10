@@ -1,0 +1,35 @@
+05 IMPORT REQUIREMENTS — REAL-COMPANY / PUBLIC-POLICY PROVENANCE
+================================================================
+Northstar is fictional. This file records concepts borrowed, not copied wording.
+
+FAMILY DOLLAR / DOLLAR TREE
+- Borrowed concept: direct-import suppliers provide structured manufacturer, country-of-origin, HTS, shipment, FDA-related, and ocean/ISF-support data before loading.
+- Northstar adaptation: ICR + SIP records, Import Ready gate, and original 15-day / 10-day / 96-hour / 2-business-day lead times.
+
+U.S. CUSTOMS & BORDER PROTECTION (CBP)
+- Borrowed concept: importer-of-record responsibility, customs-entry support, country-of-origin accuracy, and customs recordkeeping.
+- Northstar adaptation: explicit NDI/VLI models, broker-control rules, Import Hold, and 7-year internal retention (longer than CBP's general 5-year rule for many entry records).
+
+FDA
+- Borrowed concept: FSVP importer is a distinct legal role; covered food imports may require FSVP, facility-registration data, and Prior Notice.
+- Northstar adaptation: FSVP status lives in the ICR; Q&R owns Northstar FSVP verification when Northstar is the FSVP importer.
+
+USDA/FSIS
+- Borrowed concept: eligible countries/foreign establishments, import certification, and reinspection for covered meat/poultry/egg products.
+- Northstar adaptation: source eligibility becomes a pre-shipment import gate.
+
+CPSC
+- Borrowed concept: CPC/GCC certification and mandatory eFiling for covered imported consumer products effective July 8, 2026.
+- Northstar adaptation: eFiling evidence required before Northstar distribution.
+
+USDA APHIS
+- Borrowed concept: plant/wood permits and Lacey Act declarations; 2026 declarations use ACE/LAWGS rather than paper.
+- Northstar adaptation: species/harvest-country/source data included in import readiness when applicable.
+
+DHS / CBP UFLPA
+- Borrowed concept: forced-labor import prohibitions, UFLPA rebuttable presumption, and supply-chain evidence review.
+- Northstar adaptation: mandatory Import Hold and escalation for implicated sourcing.
+
+ORIGINAL NORTHSTAR DESIGN
+- Import Compliance Lead role; ICR; SIP; Import Ready; Import Hold.
+- All internal deadlines, three-failures-in-90-days CAP trigger, approvals, examples, and escalation logic.

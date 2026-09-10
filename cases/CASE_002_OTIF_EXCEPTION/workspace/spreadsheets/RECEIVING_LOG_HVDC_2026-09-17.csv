@@ -1,0 +1,2 @@
+receipt_id,po_number,po_revision,appointment_id,asn_id,carrier,trailer,gate_arrival_et,door_time_et,unload_start_et,unload_end_et,receipt_close_et,sku,ordered_units,presented_units,accepted_units,held_units,rejected_units,disposition,rer_id
+HV-260917-1184,78214,2,DS-99618,ASN-BM-260916-017,Granite Span Transport,GST-53018,2026-09-17 13:42,2026-09-17 14:08,2026-09-17 14:22,2026-09-17 15:09,2026-09-17 15:16,NS-447210,1000,900,900,0,0,Accepted with Exception,RER-260917-044

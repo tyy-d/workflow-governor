@@ -1,0 +1,16 @@
+{
+  "record_type": "DockSchedule appointment",
+  "appointment_id": "DS-99618",
+  "status": "CONFIRMED",
+  "facility": "HVDC",
+  "appointment_time": "2026-09-17T10:00:00-04:00",
+  "normal_arrival_window_start": "2026-09-17T09:15:00-04:00",
+  "normal_arrival_window_end": "2026-09-17T10:30:00-04:00",
+  "po_number": "78214",
+  "po_revision": 2,
+  "srr_id": "SRR-44192",
+  "asn_id": "ASN-BM-260916-017",
+  "carrier": "Granite Span Transport LLC",
+  "shipment_type": "Northstar-Managed Pickup / live unload",
+  "reschedule_approved": false
+}

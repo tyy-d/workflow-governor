@@ -1,0 +1,365 @@
+{
+  "operator_id": "NRM-E55208",
+  "persona_name": "Aisha Rahman",
+  "test_purpose": "Cautious but highly capable Vendor Compliance manager with strong governance knowledge and meaningful cross-functional awareness. Test whether Workflow Governor distinguishes disciplined evidence-seeking from low competence, continues assigning high-value governance work, and preserves the separation between Vendor Compliance authority and the technical, commercial, financial, transportation, and receiving decisions owned by other functions.",
+  "startup_grants": [
+    "00_COMPANY_AND_VENDOR_OVERVIEW.md"
+  ],
+  "capability_schema_version": "northstar-operator-v1",
+  "ground_truth_capabilities": {
+    "document_comparison": {
+      "true_band": "HIGH",
+      "initial_observability": "MEDIUM"
+    },
+    "file_search": {
+      "true_band": "HIGH",
+      "initial_observability": "MEDIUM"
+    },
+    "spreadsheet_analysis": {
+      "true_band": "MODERATE",
+      "initial_observability": "MEDIUM"
+    },
+    "numerical_reconciliation": {
+      "true_band": "MODERATE",
+      "initial_observability": "LOW"
+    },
+    "cross_document_reasoning": {
+      "true_band": "HIGH",
+      "initial_observability": "MEDIUM"
+    },
+    "evidence_evaluation": {
+      "true_band": "VERY_HIGH",
+      "initial_observability": "HIGH"
+    },
+    "policy_interpretation": {
+      "true_band": "VERY_HIGH",
+      "initial_observability": "HIGH"
+    },
+    "procurement_operations": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "LOW"
+    },
+    "vendor_compliance": {
+      "true_band": "VERY_HIGH",
+      "initial_observability": "HIGH"
+    },
+    "invoice_matching": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "quality_compliance": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "LOW"
+    },
+    "food_safety_review": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "NONE"
+    },
+    "transportation_operations": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "LOW"
+    },
+    "receiving_operations": {
+      "true_band": "UNAVAILABLE",
+      "initial_observability": "LOW"
+    },
+    "exception_handling": {
+      "true_band": "VERY_HIGH",
+      "initial_observability": "HIGH"
+    },
+    "reporting_and_synthesis": {
+      "true_band": "HIGH",
+      "initial_observability": "MEDIUM"
+    }
+  },
+  "knowledge_ground_truth": {
+    "vendorlink_nvid_and_vendor_lifecycle": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "vendor_activation_gates": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "vendor_status_commercial_consequences": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "vendor_compliance_ownership": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "vendorlink_exception_record_requirements": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "administrative_exception_and_restricted_shipping_approvals": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "cross_functional_ownership_boundaries": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "ACTOR_EXPERIENCE"
+    },
+    "q_and_r_safety_non_override": {
+      "state": "DETAILED_CORRECT",
+      "source_type": "STARTUP_GRANT"
+    },
+    "vendor_status_vs_facility_quality_status": {
+      "state": "GENERAL_CORRECT",
+      "source_type": "ACTOR_EXPERIENCE"
+    },
+    "chargeback_and_appeal_coordination": {
+      "state": "PARTIAL",
+      "source_type": "ACTOR_EXPERIENCE"
+    },
+    "final_financial_review_ownership": {
+      "state": "GENERAL_CORRECT",
+      "source_type": "ACTOR_EXPERIENCE"
+    },
+    "detailed_q_and_r_testing_and_audit_criteria": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "product_specific_freshness_calculation": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "detailed_private_label_release_rules": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "import_technical_admissibility": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "transport_temperature_and_routing_rules": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "invoice_matching_tolerances_and_bank_verification": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    },
+    "complete_chargeback_schedule_and_appeal_mechanics": {
+      "state": "NO_ENCODED_KNOWLEDGE",
+      "source_type": "NONE"
+    }
+  },
+  "authority_ground_truth": {
+    "perform_vendor_compliance_onboarding_and_standing_decisions_within_policy": true,
+    "set_vendor_active_when_required_activation_gates_are_satisfied": true,
+    "approve_vendor_compliance_side_of_administrative_exceptions": true,
+    "coapprove_missing_non_safety_administrative_item_exception_with_owning_business_manager": true,
+    "coapprove_shipping_while_restricted_with_owner_of_restricting_condition": true,
+    "participate_as_named_vendor_compliance_approver_in_performance_or_commercial_exceptions": true,
+    "coordinate_caps_and_formal_vendor_reviews": true,
+    "participate_in_final_financial_review_with_finance_and_factual_owner": true,
+    "make_final_financial_recovery_decision": false,
+    "make_procurement_owned_commercial_decision": false,
+    "release_q_and_r_safety_hold": false,
+    "make_final_q_and_r_technical_or_regulatory_decision": false,
+    "approve_ap_bank_or_payment_control_change": false,
+    "approve_logistics_routing_or_transportation_decision": false,
+    "approve_physical_dc_receiving_disposition": false
+  },
+  "confidence_calibration": "CAUTIOUS",
+  "error_patterns": [
+    {
+      "pattern_id": "ERR-01",
+      "description": "In borderline cross-functional cases, Aisha may request one additional piece of evidence or specialist confirmation even when a less cautious expert might already proceed.",
+      "affected_capabilities": [
+        "evidence_evaluation",
+        "exception_handling",
+        "vendor_compliance"
+      ],
+      "expected_frequency": "OCCASIONAL"
+    }
+  ],
+  "false_or_outdated_beliefs": [],
+  "expected_narrative_profile": {
+    "should_capture": [
+      "highly reliable Vendor Compliance manager for onboarding, vendor standing, administrative exceptions, CAP coordination, and governance evidence review",
+      "strong at determining whether a governance package is complete and whether the correct owner and approvals are present",
+      "careful cross-functional coordinator who distinguishes Vendor Compliance governance from the technical or commercial fact owned elsewhere",
+      "moderate spreadsheet capability sufficient for compliance tracking but not a general analytics specialist",
+      "frequent evidence requests are usually disciplined risk control rather than signs of low competence",
+      "can make substantive Vendor Compliance decisions independently once the required evidence and owner determinations are present"
+    ],
+    "should_not_claim": [
+      "is indecisive or low-skill merely because she asks for supporting evidence",
+      "is a food-safety or regulatory-science specialist",
+      "can independently execute AP banking verification",
+      "can independently plan transportation or decide physical receiving facts",
+      "owns Procurement commercial negotiation",
+      "can reverse Q&R safety determinations or make the final financial recovery decision"
+    ]
+  },
+  "evidence_interpretation_cases": [
+    {
+      "event": "Aisha receives a Restricted-vendor shipment request and asks for the owner of the restricting condition to provide its determination before she co-approves the Vendor Compliance side.",
+      "correct_interpretation": [
+        "Positive evidence for vendor_compliance, policy_interpretation, evidence_evaluation, and authority awareness.",
+        "Do not interpret the owner-confirmation request as inability to make the Vendor Compliance decision.",
+        "The correct routing consequence is to supply the missing owner determination, not replace Aisha."
+      ],
+      "incorrect_interpretation": [
+        "Aisha lacks confidence and should no longer receive vendor-status work.",
+        "Because she is a manager, she should approve the entire cross-functional exception alone."
+      ]
+    },
+    {
+      "event": "Aisha rejects or pauses an exception because its scope, approver, evidence, start date, or expiration is missing, then approves promptly once the package is complete.",
+      "correct_interpretation": [
+        "Strong positive evidence for evidence_evaluation, exception_handling, and policy_interpretation.",
+        "The initial non-approval is correct governance behavior rather than task failure.",
+        "Repeated verified performance should reduce oversight while preserving evidence requirements."
+      ],
+      "incorrect_interpretation": [
+        "Any delay in approval indicates low capability.",
+        "The system should omit evidence requirements to make Aisha faster."
+      ]
+    },
+    {
+      "event": "Aisha correctly completes vendor-standing governance after Q&R supplies a technical determination, without attempting to second-guess the underlying safety conclusion.",
+      "correct_interpretation": [
+        "Positive evidence for cross_document_reasoning, vendor_compliance, and cross-functional boundary discipline.",
+        "Do not infer food_safety_review or quality_compliance capability from her correct use of the Q&R determination."
+      ],
+      "incorrect_interpretation": [
+        "Using a Q&R decision correctly proves Aisha can independently perform Q&R technical review.",
+        "Returning technical judgment to Q&R is evidence of weak governance skill."
+      ]
+    },
+    {
+      "event": "Aisha requests one additional specialist confirmation in a borderline case where the available evidence would likely have been sufficient for another experienced reviewer.",
+      "correct_interpretation": [
+        "Consistent with the designed cautious calibration pattern.",
+        "Do not globally downgrade vendor_compliance or evidence_evaluation.",
+        "If this becomes recurrent and materially inefficient, the profile may note conservative evidence thresholds while still assigning high-value governance work."
+      ],
+      "incorrect_interpretation": [
+        "One extra evidence request proves low competence.",
+        "Caution should cause immediate reassignment of all governance tasks."
+      ]
+    },
+    {
+      "event": "Aisha participates in a financial appeal review, verifies the governance and factual-owner evidence, but leaves the final recovery decision to Finance and does not permit the appeal to alter a Q&R safety action.",
+      "correct_interpretation": [
+        "Positive evidence for authority awareness, cross-functional reasoning, and partial appeal-process knowledge.",
+        "Do not infer final financial authority or Q&R authority.",
+        "This is an appropriate high-value coordination assignment for Aisha."
+      ],
+      "incorrect_interpretation": [
+        "Participation in final review means Aisha owns the final financial decision.",
+        "A successful appeal can be used to reverse a Q&R safety determination."
+      ]
+    }
+  ],
+  "expected_task_return_behavior": [
+    {
+      "task_class": "vendor onboarding, activation, vendor-standing, or governance review within Vendor Compliance policy",
+      "expected_behavior": "EXPECTED_COMPLETION",
+      "reason": "Core Vendor Compliance skill, detailed policy knowledge, and role authority."
+    },
+    {
+      "task_class": "administrative exception assessment with the required evidence and co-approvals available",
+      "expected_behavior": "EXPECTED_COMPLETION",
+      "reason": "Administrative exception assessment is an explicit major skill and policy-authorized responsibility."
+    },
+    {
+      "task_class": "governance package with missing required evidence, owner determination, scope, or expiration",
+      "expected_behavior": "EXPECTED_CLARIFICATION",
+      "reason": "Requesting the missing governance evidence is correct control behavior."
+    },
+    {
+      "task_class": "cross-functional case combining vendor standing with an unresolved technical, commercial, financial, transportation, or receiving fact",
+      "expected_behavior": "EXPECTED_TASK_NARROWING",
+      "reason": "Aisha should complete the governance portion while requesting the factual owner's determination."
+    },
+    {
+      "task_class": "independent food-safety, regulatory-science, AP banking, transportation-planning, or physical receiving judgment",
+      "expected_behavior": "EXPECTED_REASSIGNMENT",
+      "reason": "Those specialist major skills are deliberately not encoded."
+    },
+    {
+      "task_class": "final decision reserved to Q&R, Finance, Procurement, AP, Logistics, or DC Operations",
+      "expected_behavior": "EXPECTED_AUTHORITY_REFUSAL",
+      "reason": "Vendor Compliance capability and knowledge do not replace another function's hard authority."
+    }
+  ],
+  "profile_convergence": {
+    "initially_reasonable_uncertainty": [
+      "how conservative Aisha's evidence threshold is in borderline cases",
+      "exact reliability of spreadsheet_analysis beyond ordinary compliance tracking",
+      "exact speed of cross_document_reasoning in large or unusually complex governance packages",
+      "how much file 10 appeal detail she can recall without a case-specific grant"
+    ],
+    "after_relevant_evidence_should_infer": [
+      "vendor_compliance is highly reliable after repeated verified onboarding, status, exception, and CAP work",
+      "policy_interpretation is highly reliable for Vendor Compliance-owned procedures",
+      "evidence_evaluation is a core strength rather than a symptom of hesitation",
+      "clarification requests often indicate missing evidence or owner input rather than missing capability",
+      "successful cross-functional governance work should reduce supervision while preserving required specialist determinations"
+    ],
+    "should_remain_uncertain_without_evidence": [
+      "food_safety_review",
+      "quality_compliance",
+      "invoice_matching",
+      "transportation_operations",
+      "receiving_operations",
+      "procurement_operations",
+      "deep financial appeal mechanics beyond her encoded coordination knowledge"
+    ]
+  },
+  "expected_task_adaptation": {
+    "good_assignments": [
+      "vendor onboarding and activation review",
+      "vendor-standing and status governance",
+      "administrative exception assessment",
+      "VendorLink governance evidence review",
+      "CAP coordination and formal vendor review",
+      "cross-document reconciliation across vendor master, status, exception, and supporting records",
+      "compliance tracking spreadsheets",
+      "cross-functional governance coordination"
+    ],
+    "assign_with_scaffolding": [
+      "cross-functional vendor-status cases when the technical or commercial owner's determination is attached or explicitly requested",
+      "appeal and chargeback coordination when factual-owner and Finance/Q&R responsibilities are clearly separated",
+      "specialist-record governance checks where Aisha is asked to verify presence/completeness rather than independently decide technical sufficiency"
+    ],
+    "normally_reassign": [
+      "independent food-safety scientific assessment",
+      "independent Q&R regulatory evidence acceptance",
+      "detailed AP banking verification execution",
+      "carrier routing or transport planning",
+      "physical DC inspection or receiving judgment",
+      "deep commercial negotiation",
+      "detailed import technical admissibility",
+      "full invoice-matching analysis"
+    ],
+    "never_assign_as_authorizer": [
+      "Q&R safety-hold release",
+      "final Q&R technical or regulatory disposition",
+      "final Finance recovery decision",
+      "AP banking or payment-control approval",
+      "Logistics routing decision",
+      "physical DC receiving disposition",
+      "Procurement-owned commercial decision where Vendor Compliance is not the named owner or co-approver"
+    ],
+    "verification_guidance": [
+      "Do not lower capability simply because Aisha requests supporting evidence or an owning-function determination.",
+      "Reduce redundant oversight after repeated reliable governance decisions, but preserve mandatory evidence and co-approval requirements.",
+      "When she asks for another function's determination, route that missing input to her rather than reassigning the entire case.",
+      "Keep updates local: excessive caution may affect speed or calibration notes without erasing evidence of strong Vendor Compliance capability.",
+      "Do not infer specialist Q&R, AP, Logistics, receiving, or Procurement capability from Aisha's ability to coordinate those records."
+    ]
+  },
+  "scoring_notes": [
+    "The central distinction is caution versus competence: evidence-seeking is usually a positive control behavior for Aisha.",
+    "Temporary non-approval because required evidence is incomplete is an expected successful outcome.",
+    "Startup file 00 supports detailed Vendor Compliance policy knowledge but does not create authority over other functions.",
+    "Repeated verified governance success should increase autonomy even if Aisha remains conservative at cross-functional boundaries.",
+    "The strongest routing behavior is to keep Aisha on the governance task while separately obtaining the specialist fact or approval she correctly requests."
+  ]
+}

@@ -1,0 +1,36 @@
+NORTHSTAR 07 — SHORT PROVENANCE MAP
+=====================================
+Northstar is fictional. The items below are process ideas only; Northstar names, systems,
+thresholds, approval rules, examples, and consequences are original.
+
+FAMILY DOLLAR — current Vendor Resources + Part 8 Distribution Requirements
+- Borrowed concept: explicit DC receiving rules for pallet condition/size, stable loads,
+  product grouping, pallet labels, packing-list placement, and receiving identification.
+- Northstar adaptation: 48x40 default pallets, Northstar-specific 2,200-lb/66-in limits,
+  APLR/SSCC checks, RER evidence, and original hold/escalation rules.
+
+DOLLAR TREE — Logistics + Inbound Shipping Requirements
+- Borrowed concept: separate shipment-release/appointment workflow, confirmed appointment
+  numbers, BOL/packing data, and measurable arrival expectations.
+- Northstar adaptation: DockSchedule; 2-business-day request target; -45/+30 minute normal
+  arrival window; 60-minute No Show threshold; Gate Arrival Time as the evidence used by OTIF.
+
+FDA — FSMA Sanitary Transportation rule/guidance
+- Borrowed concept: receivers assess sanitary condition and possible temperature abuse;
+  potentially unsafe food is not distributed until appropriately evaluated.
+- Northstar adaptation: trailer-condition checks, Temperature Hold, expanded sampling, and
+  Q&R-controlled disposition.
+
+FDA — 2022 Food Code receiving-temperature concepts
+- Borrowed concept: 41°F receiving criterion for refrigerated TCS food and 45°F ambient
+  criterion for raw shell eggs, subject to product-specific law.
+- Northstar adaptation: DC sampling matrix plus separate company defaults for other
+  refrigerated and frozen products.
+
+NOT BORROWED FROM ANY ONE COMPANY
+- Hudson Valley / Lehigh Valley DC names and codes
+- Northstar DockSchedule and Receiving Exception Record (RER)
+- Northstar Receipt Date definition
+- all appointment, sampling, pallet-weight/height, damage-event, repeat-event, and retention
+  thresholds
+- all approval authorities and scenario examples

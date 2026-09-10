@@ -1,0 +1,110 @@
+[
+  {
+    "event_id": "T001",
+    "timestamp": "2026-09-03T09:12:00-04:00",
+    "event": "PO 78214 Rev 1 for 800 units is transmitted through VendorLink.",
+    "evidence_refs": ["workspace/documents/PO_78214_REV1.md", "workspace/spreadsheets/VENDORLINK_PO_TRANSMISSION_LOG_78214.csv"]
+  },
+  {
+    "event_id": "T002",
+    "timestamp": "2026-09-03T14:06:00-04:00",
+    "event": "Bright Meadow Foods acknowledges every Rev 1 line as Accepted.",
+    "evidence_refs": ["workspace/documents/ACK_PO_78214_REV1.json"]
+  },
+  {
+    "event_id": "T003",
+    "timestamp": "2026-09-08T09:18:00-04:00",
+    "event": "Northstar transmits authorized Rev 2, increasing quantity to 1,000 and moving Ready By and delivery dates.",
+    "evidence_refs": ["workspace/documents/PO_78214_REV2.md", "workspace/spreadsheets/VENDORLINK_PO_TRANSMISSION_LOG_78214.csv"]
+  },
+  {
+    "event_id": "T004",
+    "timestamp": "2026-09-08T13:42:00-04:00",
+    "event": "Bright Meadow Foods acknowledges every Rev 2 line as Accepted within one Northstar business day.",
+    "evidence_refs": ["workspace/documents/ACK_PO_78214_REV2.json"]
+  },
+  {
+    "event_id": "T005",
+    "timestamp": "2026-09-10T11:05:00-04:00",
+    "event": "Vendor submits a complete dry-truckload SRR request more than three Northstar business days before the Rev 2 Ready By time.",
+    "evidence_refs": ["workspace/documents/ROUTING_REQUEST_SRR-44192.json"]
+  },
+  {
+    "event_id": "T006",
+    "timestamp": "2026-09-10T16:22:00-04:00",
+    "event": "Northstar tenders the shipment to Granite Span Transport with a September 16 pickup window.",
+    "evidence_refs": ["workspace/documents/CARRIER_TENDER_SRR-44192.json"]
+  },
+  {
+    "event_id": "T007",
+    "timestamp": "2026-09-11T10:00:00-04:00",
+    "event": "Vendor confirms a production shortfall and determines only 900 of the acknowledged 1,000 units will be available.",
+    "evidence_refs": ["workspace/inbox/EMAIL_VENDOR_SHORTAGE_NOTICE_2026-09-11.md"]
+  },
+  {
+    "event_id": "T008",
+    "timestamp": "2026-09-11T10:27:00-04:00",
+    "event": "Vendor gives timely shortage notice and requests a 100-unit reduction; Northstar issues no further PO revision.",
+    "evidence_refs": ["workspace/inbox/EMAIL_VENDOR_SHORTAGE_NOTICE_2026-09-11.md", "workspace/spreadsheets/VENDORLINK_PO_TRANSMISSION_LOG_78214.csv"]
+  },
+  {
+    "event_id": "T009",
+    "timestamp": "2026-09-16T08:18:00-04:00",
+    "event": "Nine hundred conforming units are staged, documented, released, and available at the approved origin before the 10:00 Ready By deadline; the missing 100 units are not ready.",
+    "evidence_refs": ["workspace/documents/WAREHOUSE_READY_RECORD_78214.md", "workspace/documents/ASN_78214.json", "workspace/documents/PACKING_LIST_78214.md"]
+  },
+  {
+    "event_id": "T010",
+    "timestamp": "2026-09-16T09:07:00-04:00",
+    "event": "Granite Span reports that Northstar's assigned tractor has failed and pickup will be delayed more than two hours.",
+    "evidence_refs": ["workspace/documents/CARRIER_DELAY_UPDATE_SRR-44192.json"]
+  },
+  {
+    "event_id": "T011",
+    "timestamp": "2026-09-16T14:21:00-04:00",
+    "event": "Replacement tractor arrives at the vendor origin.",
+    "evidence_refs": ["workspace/documents/PICKUP_CONFIRMATION_SRR-44192.md"]
+  },
+  {
+    "event_id": "T012",
+    "timestamp": "2026-09-16T14:48:00-04:00",
+    "event": "Carrier signs the BOL and departs with 900 units.",
+    "evidence_refs": ["workspace/documents/BOL_78214.md", "workspace/documents/PICKUP_CONFIRMATION_SRR-44192.md"]
+  },
+  {
+    "event_id": "T013",
+    "timestamp": "2026-09-17T13:42:00-04:00",
+    "event": "After DockSchedule records No Show at 11:00, the carrier gates at HVDC at 13:42, after both the appointment tolerance and the Rev 2 destination delivery window ending at 12:00.",
+    "evidence_refs": ["workspace/documents/DOCKSCHEDULE_APPOINTMENT_DS-99618.json", "workspace/documents/HVDC_GATE_CHECKIN_2026-09-17.json"]
+  },
+  {
+    "event_id": "T014",
+    "timestamp": "2026-09-17T15:16:00-04:00",
+    "event": "HVDC completes receipt of all 900 presented units as compliant and Accepted with Exception; no later units arrive by final close.",
+    "evidence_refs": ["workspace/spreadsheets/RECEIVING_LOG_HVDC_2026-09-17.csv", "workspace/documents/RER-260917-044.md"]
+  },
+  {
+    "event_id": "T015",
+    "timestamp": "2026-09-18T08:35:00-04:00",
+    "event": "A preliminary score export incorrectly uses destination arrival for managed-pickup timeliness and reports 0.0% On-Time and 90.0% Fill.",
+    "evidence_refs": ["workspace/spreadsheets/PRELIM_OTIF_EXPORT_2026-09-18.csv"]
+  },
+  {
+    "event_id": "T016",
+    "timestamp": "2026-09-18T10:12:00-04:00",
+    "event": "Vendor timely requests a PER removing the entire OTIF failure based on the Northstar carrier delay.",
+    "evidence_refs": ["workspace/inbox/EMAIL_VENDOR_OTIF_DISPUTE_2026-09-18.md", "workspace/documents/PER_REQUEST_78214.md"]
+  },
+  {
+    "event_id": "T017",
+    "timestamp": "2026-09-18T15:40:00-04:00",
+    "event": "Procurement and Logistics identify separate carrier-timing and vendor-quantity components; no approval is granted in the discussion.",
+    "evidence_refs": ["workspace/inbox/INTERNAL_PROCUREMENT_LOGISTICS_THREAD_2026-09-18.md"]
+  },
+  {
+    "event_id": "T018",
+    "timestamp": "2026-09-22T12:00:00-04:00",
+    "event": "PO final close occurs five calendar days after the controlling delivery window ends, with 900 compliant units received.",
+    "evidence_refs": ["workspace/documents/PO_78214_REV2.md", "workspace/spreadsheets/RECEIVING_LOG_HVDC_2026-09-17.csv"]
+  }
+]

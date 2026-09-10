@@ -1,0 +1,12 @@
+FORM W-9 — VENDOR COPY (synthetic case record)
+
+Name: Harbor Finch Pantry LLC
+Business name/disregarded entity name: [blank]
+Federal tax classification: Limited liability company — C corporation
+Address: 18 Lantern Mill Road, Fairhaven, PA 19001
+Taxpayer identification number: XX-XXX4821
+Signature: Lena Ortiz, Authorized Officer
+Signature date: 2026-09-01
+
+VendorLink record: NVID-10482
+AP validation reference: APV-2026-44718
