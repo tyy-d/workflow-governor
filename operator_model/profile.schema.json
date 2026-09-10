@@ -1,0 +1,300 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Northstar Learned Operator Profile",
+  "description": "Validation contract for the compact, evidence-backed runtime profile of one Northstar human operator. The narrative is the primary LLM-facing representation; capability vectors are secondary routing aids. Knowledge, authority, and access remain separate.",
+  "type": "object",
+  "required": [
+    "profile_version",
+    "operator_id",
+    "company_id",
+    "capability_schema_version",
+    "capabilities",
+    "capability_evidence",
+    "stable_summary",
+    "recent_notes",
+    "knowledge",
+    "authority",
+    "access",
+    "evidence_stats",
+    "last_updated"
+  ],
+  "properties": {
+    "profile_version": {
+      "const": "operator-profile-v1",
+      "description": "Version of this learned-profile data contract."
+    },
+    "operator_id": {
+      "$ref": "#/$defs/operator_id"
+    },
+    "company_id": {
+      "const": "northstar-regional-markets"
+    },
+    "capability_schema_version": {
+      "const": "northstar-operator-v1",
+      "description": "The external company/northstar/schemas/northstar_operator_capability_schema.json file is canonical for capability identities and vector position semantics."
+    },
+    "capabilities": {
+      "description": "Current estimates in the exact dimension_order of the external northstar-operator-v1 capability schema. A score of 0.5 with corresponding evidence confidence 0.0 represents unknown, not average capability.",
+      "$ref": "#/$defs/capability_vector"
+    },
+    "capability_evidence": {
+      "description": "Evidence confidence for each corresponding capability estimate, using the identical position mapping from the external northstar-operator-v1 capability schema.",
+      "$ref": "#/$defs/capability_vector"
+    },
+    "stable_summary": {
+      "type": "string",
+      "maxLength": 1600,
+      "description": "Primary LLM-facing narrative of durable, evidence-backed operational patterns and uncertainty."
+    },
+    "recent_notes": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Recent material observations not yet suitable for stable-summary consolidation; an empty string is valid."
+    },
+    "knowledge": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/knowledge_record"
+      }
+    },
+    "authority": {
+      "type": "array",
+      "description": "Categorical authority facts or claims. Authority is not a capability score and cannot be inferred from one.",
+      "items": {
+        "$ref": "#/$defs/authority_record"
+      }
+    },
+    "access": {
+      "type": "array",
+      "description": "Compact current grant or restriction context; the authoritative security system remains controlling.",
+      "items": {
+        "$ref": "#/$defs/access_record"
+      }
+    },
+    "evidence_stats": {
+      "$ref": "#/$defs/evidence_stats"
+    },
+    "recent_evidence_ids": {
+      "type": "array",
+      "description": "Bounded references to recent ledger events; full events are not embedded in the profile.",
+      "maxItems": 50,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/event_id"
+      }
+    },
+    "last_updated": {
+      "$ref": "#/$defs/timestamp"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "operator_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Stable company-scoped operator identifier; Northstar identifiers commonly resemble NRM-E0417."
+    },
+    "event_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "nonempty_string": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512
+    },
+    "source_refs": {
+      "type": "array",
+      "maxItems": 50,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/nonempty_string"
+      }
+    },
+    "capability_vector": {
+      "type": "array",
+      "minItems": 19,
+      "maxItems": 19,
+      "items": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      }
+    },
+    "knowledge_record": {
+      "type": "object",
+      "required": [
+        "topic",
+        "level",
+        "confidence",
+        "status",
+        "basis_type",
+        "basis_event_ids"
+      ],
+      "properties": {
+        "topic": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "level": {
+          "enum": [
+            "UNKNOWN",
+            "VAGUE",
+            "GENERAL",
+            "DETAILED",
+            "SPECIALIST"
+          ]
+        },
+        "confidence": {
+          "enum": [
+            "LOW",
+            "MEDIUM",
+            "HIGH"
+          ]
+        },
+        "status": {
+          "enum": [
+            "CURRENT",
+            "UNCERTAIN",
+            "CONTRADICTED",
+            "POSSIBLY_STALE"
+          ]
+        },
+        "basis_type": {
+          "enum": [
+            "TRUSTED_INITIAL_CONTEXT",
+            "OBSERVED_TASK",
+            "CONVERSATION",
+            "CORRECTION",
+            "DOCUMENT_INTERACTION"
+          ]
+        },
+        "basis_event_ids": {
+          "type": "array",
+          "maxItems": 50,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/event_id"
+          }
+        },
+        "last_observed": {
+          "$ref": "#/$defs/timestamp"
+        }
+      },
+      "additionalProperties": false
+    },
+    "authority_record": {
+      "type": "object",
+      "required": [
+        "authority_id",
+        "state",
+        "basis",
+        "source_refs"
+      ],
+      "properties": {
+        "authority_id": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "state": {
+          "enum": [
+            "VERIFIED_GRANTED",
+            "VERIFIED_DENIED",
+            "CLAIMED",
+            "UNKNOWN"
+          ]
+        },
+        "scope": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "basis": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "source_refs": {
+          "$ref": "#/$defs/source_refs"
+        }
+      },
+      "additionalProperties": false
+    },
+    "access_record": {
+      "type": "object",
+      "required": [
+        "resource",
+        "state",
+        "scope",
+        "basis",
+        "source_refs"
+      ],
+      "properties": {
+        "resource": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "state": {
+          "enum": [
+            "GRANTED",
+            "NOT_GRANTED",
+            "UNKNOWN"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "CURRENT_WORKFLOW",
+            "CURRENT_TASK",
+            "TEMPORARY",
+            "ONGOING"
+          ]
+        },
+        "basis": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "expires_at": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "source_refs": {
+          "$ref": "#/$defs/source_refs"
+        }
+      },
+      "additionalProperties": false
+    },
+    "evidence_stats": {
+      "type": "object",
+      "required": [
+        "total_events"
+      ],
+      "properties": {
+        "total_events": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "verified_successes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "verified_errors": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "task_returns": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "clarification_requests": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "operator_corrected_ai": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "last_event_id": {
+          "$ref": "#/$defs/event_id"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

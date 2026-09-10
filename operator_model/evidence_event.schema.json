@@ -1,0 +1,309 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Northstar Operator Evidence Event",
+  "description": "Validation contract for one append-only operator evidence observation. Events preserve observation, verification, attribution, and qualitative implications without encoding profile-update formulas or numeric score deltas.",
+  "type": "object",
+  "required": [
+    "event_id",
+    "operator_id",
+    "timestamp",
+    "event_type",
+    "source",
+    "observation",
+    "task_context",
+    "capability_implications",
+    "knowledge_implications",
+    "attribution",
+    "verification",
+    "profile_significance",
+    "source_refs"
+  ],
+  "properties": {
+    "event_id": {
+      "$ref": "#/$defs/event_id"
+    },
+    "operator_id": {
+      "$ref": "#/$defs/operator_id"
+    },
+    "timestamp": {
+      "$ref": "#/$defs/timestamp"
+    },
+    "event_type": {
+      "enum": [
+        "TASK_COMPLETED",
+        "TASK_VERIFIED_CORRECT",
+        "TASK_VERIFIED_INCORRECT",
+        "TASK_RETURNED",
+        "CLARIFICATION_REQUESTED",
+        "TASK_NARROWED",
+        "REASSIGNMENT_REQUESTED",
+        "OPERATOR_CORRECTED_AI",
+        "AI_CORRECTED_OPERATOR",
+        "KNOWLEDGE_DEMONSTRATED",
+        "KNOWLEDGE_CORRECTED",
+        "AUTHORITY_DECLINED",
+        "AUTHORITY_VERIFIED",
+        "ACCESS_UNAVAILABLE",
+        "SELF_REPORT"
+      ]
+    },
+    "source": {
+      "enum": [
+        "TASK_EXECUTION",
+        "CONVERSATION",
+        "SELF_REPORT",
+        "CORRECTION",
+        "SYSTEM_OBSERVATION",
+        "AUTHORITY_RECORD",
+        "ACCESS_CONTROL"
+      ]
+    },
+    "observation": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000,
+      "description": "Concise factual account of what was observed, including the outcome or boundary behavior when relevant."
+    },
+    "task_context": {
+      "$ref": "#/$defs/task_context"
+    },
+    "capability_implications": {
+      "type": "array",
+      "maxItems": 19,
+      "description": "Qualitative evidence about only the canonical capabilities materially implicated. Empty is valid for returns, clarifications, authority, access, and other non-capability events.",
+      "items": {
+        "$ref": "#/$defs/capability_implication"
+      }
+    },
+    "knowledge_implications": {
+      "type": "array",
+      "maxItems": 50,
+      "items": {
+        "$ref": "#/$defs/knowledge_implication"
+      }
+    },
+    "attribution": {
+      "enum": [
+        "OPERATOR_ERROR",
+        "AI_ERROR",
+        "SOURCE_CONTRADICTION",
+        "AMBIGUOUS_INSTRUCTION",
+        "MISSING_INFORMATION",
+        "TOOL_ERROR",
+        "POLICY_AMBIGUITY",
+        "NO_ERROR",
+        "UNRESOLVED"
+      ],
+      "description": "Material-cause attribution. Negative capability evidence must be interpreted in this context; the schema does not define update behavior."
+    },
+    "verification": {
+      "$ref": "#/$defs/verification"
+    },
+    "profile_significance": {
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH"
+      ]
+    },
+    "source_refs": {
+      "type": "array",
+      "maxItems": 50,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/nonempty_string"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "event_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "operator_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Stable company-scoped operator identifier; Northstar identifiers commonly resemble NRM-E0417."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "nonempty_string": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512
+    },
+    "task_context": {
+      "type": "object",
+      "properties": {
+        "workflow_id": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "task_id": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "case_id": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "task_family": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "difficulty": {
+          "enum": [
+            "LOW",
+            "MODERATE",
+            "HIGH"
+          ]
+        },
+        "consequence_level": {
+          "enum": [
+            "LOW",
+            "MODERATE",
+            "HIGH",
+            "CRITICAL"
+          ]
+        },
+        "scaffolding_level": {
+          "enum": [
+            "NONE",
+            "LIGHT",
+            "STRUCTURED",
+            "STEP_BY_STEP"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "capability_id": {
+      "description": "Canonical capability ID from the external northstar-operator-v1 schema, which remains authoritative for identities and order.",
+      "enum": [
+        "document_comparison",
+        "structured_data_handling",
+        "file_search",
+        "spreadsheet_analysis",
+        "numerical_reconciliation",
+        "cross_document_reasoning",
+        "evidence_evaluation",
+        "policy_interpretation",
+        "reporting_and_synthesis",
+        "procurement_operations",
+        "vendor_compliance",
+        "vendor_performance_otif",
+        "transportation_operations",
+        "receiving_operations",
+        "product_freshness",
+        "quality_compliance",
+        "invoice_matching",
+        "payment_controls",
+        "exception_handling"
+      ]
+    },
+    "capability_implication": {
+      "type": "object",
+      "required": [
+        "capability_id",
+        "effect",
+        "strength"
+      ],
+      "properties": {
+        "capability_id": {
+          "$ref": "#/$defs/capability_id"
+        },
+        "effect": {
+          "enum": [
+            "POSITIVE",
+            "NEGATIVE",
+            "NEUTRAL"
+          ]
+        },
+        "strength": {
+          "enum": [
+            "WEAK",
+            "MODERATE",
+            "STRONG"
+          ]
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        }
+      },
+      "additionalProperties": false
+    },
+    "knowledge_implication": {
+      "type": "object",
+      "required": [
+        "topic",
+        "effect",
+        "strength"
+      ],
+      "properties": {
+        "topic": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "effect": {
+          "enum": [
+            "SUPPORTS",
+            "WEAKENS",
+            "CONTRADICTS",
+            "NO_CHANGE"
+          ]
+        },
+        "strength": {
+          "enum": [
+            "WEAK",
+            "MODERATE",
+            "STRONG"
+          ]
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        }
+      },
+      "additionalProperties": false
+    },
+    "verification": {
+      "type": "object",
+      "required": [
+        "status",
+        "method",
+        "verifier"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "UNVERIFIED",
+            "PARTIALLY_VERIFIED",
+            "VERIFIED",
+            "DISPUTED"
+          ]
+        },
+        "method": {
+          "enum": [
+            "DETERMINISTIC",
+            "MODEL_REVIEW",
+            "HUMAN_REVIEW",
+            "AUTHORITATIVE_SOURCE",
+            "CROSS_CHECK",
+            "NONE"
+          ]
+        },
+        "verifier": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "details": {
+          "type": "string",
+          "maxLength": 1000
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

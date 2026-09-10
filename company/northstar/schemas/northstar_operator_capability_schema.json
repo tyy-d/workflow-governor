@@ -1,0 +1,437 @@
+{
+  "schema_version": "northstar-operator-v1",
+  "company_id": "northstar-regional-markets",
+  "display_name": "Northstar Operator Capability Schema",
+  "status": "finalized_for_initial_case_suite",
+  "design": {
+    "purpose": "Provide one shared fixed-dimensional capability vector for all Northstar operators as a secondary routing aid alongside a short narrative profile and an evidence ledger.",
+    "dimension_count": 19,
+    "max_dimensions": 20,
+    "shared_across_all_operators": true,
+    "vector_is_primary_profile": false,
+    "narrative_profile_is_primary_for_llm_reasoning": true,
+    "capability_vector_is_secondary_for_routing": true,
+    "knowledge_is_separate": true,
+    "authority_is_separate": true,
+    "access_is_separate": true,
+    "confidence_style_is_separate": true
+  },
+  "numeric_model": {
+    "capability_score": {
+      "range": [
+        0.0,
+        1.0
+      ],
+      "default_prior": 0.5,
+      "meaning": "Estimated task-execution capability on this dimension. A value near 0.5 with no evidence means unknown, not mediocre."
+    },
+    "evidence_confidence": {
+      "range": [
+        0.0,
+        1.0
+      ],
+      "default": 0.0,
+      "meaning": "How much verified evidence supports the current capability estimate."
+    },
+    "unknown_representation": {
+      "capability_score": 0.5,
+      "evidence_confidence": 0.0
+    },
+    "storage_rule": "All operator profiles use the same dimension order defined by dimension_order."
+  },
+  "dimension_order": [
+    "document_comparison",
+    "structured_data_handling",
+    "file_search",
+    "spreadsheet_analysis",
+    "numerical_reconciliation",
+    "cross_document_reasoning",
+    "evidence_evaluation",
+    "policy_interpretation",
+    "reporting_and_synthesis",
+    "procurement_operations",
+    "vendor_compliance",
+    "vendor_performance_otif",
+    "transportation_operations",
+    "receiving_operations",
+    "product_freshness",
+    "quality_compliance",
+    "invoice_matching",
+    "payment_controls",
+    "exception_handling"
+  ],
+  "dimensions": [
+    {
+      "id": "document_comparison",
+      "category": "general",
+      "label": "Document Comparison and Review",
+      "description": "Reliably inspect ordinary business documents and identify relevant fields, dates, statuses, identifiers, and visible discrepancies.",
+      "includes": [
+        "field checking",
+        "date/status extraction",
+        "basic document comparison"
+      ],
+      "excludes": [
+        "specialist policy interpretation",
+        "regulatory judgment"
+      ]
+    },
+    {
+      "id": "structured_data_handling",
+      "category": "general",
+      "label": "Structured Data Handling",
+      "description": "Work accurately with tabular or structured records such as CSV, JSON, forms, and system exports.",
+      "includes": [
+        "row/field matching",
+        "identifier joins",
+        "structured record validation"
+      ],
+      "excludes": [
+        "advanced spreadsheet modeling",
+        "domain-specific approval"
+      ]
+    },
+    {
+      "id": "file_search",
+      "category": "general",
+      "label": "File Search and Retrieval",
+      "description": "Locate relevant files or records within an authorized workspace using names, metadata, keywords, and contextual clues.",
+      "includes": [
+        "targeted file lookup",
+        "version/location search",
+        "evidence retrieval"
+      ],
+      "excludes": [
+        "access to ungranted files",
+        "policy interpretation"
+      ]
+    },
+    {
+      "id": "spreadsheet_analysis",
+      "category": "general",
+      "label": "Spreadsheet Analysis",
+      "description": "Use spreadsheets to filter, compare, calculate, trace, and analyze business data beyond simple visible-field lookup.",
+      "includes": [
+        "formulas",
+        "filters",
+        "joins",
+        "variance checks",
+        "multi-row analysis"
+      ],
+      "excludes": [
+        "specialist accounting authority",
+        "general policy interpretation"
+      ]
+    },
+    {
+      "id": "numerical_reconciliation",
+      "category": "general",
+      "label": "Numerical Reconciliation",
+      "description": "Perform and verify quantitative comparisons, rates, thresholds, date arithmetic, and reconciliation calculations.",
+      "includes": [
+        "percentages",
+        "tolerance tests",
+        "unit reconciliation",
+        "date calculations"
+      ],
+      "excludes": [
+        "deciding which policy rule applies when that requires specialist knowledge"
+      ]
+    },
+    {
+      "id": "cross_document_reasoning",
+      "category": "general",
+      "label": "Cross-Document Reasoning",
+      "description": "Combine multiple records, versions, or sources to identify which facts agree, conflict, supersede others, or remain unresolved.",
+      "includes": [
+        "revision comparison",
+        "PO-receipt-invoice joins",
+        "timeline reconstruction",
+        "source conflict resolution"
+      ],
+      "excludes": [
+        "authority to approve resulting action"
+      ]
+    },
+    {
+      "id": "evidence_evaluation",
+      "category": "general",
+      "label": "Evidence Evaluation",
+      "description": "Judge the reliability, provenance, completeness, and relevance of business evidence without assuming every statement is authoritative.",
+      "includes": [
+        "distinguishing claims from records",
+        "recognizing stale evidence",
+        "identifying unsupported assertions"
+      ],
+      "excludes": [
+        "specialist regulatory conclusions without required domain knowledge"
+      ]
+    },
+    {
+      "id": "policy_interpretation",
+      "category": "general",
+      "label": "Policy Interpretation",
+      "description": "Read an explicitly provided policy or rule and correctly apply its conditions, thresholds, exceptions, and authority boundaries to a case.",
+      "includes": [
+        "rule application",
+        "exception interpretation",
+        "authority-boundary reading"
+      ],
+      "excludes": [
+        "memorized Northstar knowledge not supplied or otherwise possessed",
+        "legal/regulatory expertise beyond the policy"
+      ]
+    },
+    {
+      "id": "reporting_and_synthesis",
+      "category": "general",
+      "label": "Reporting and Synthesis",
+      "description": "Turn verified facts, calculations, open questions, and decisions into concise operational summaries or handoff-ready work products without inventing missing conclusions.",
+      "includes": [
+        "case summaries",
+        "handoff notes",
+        "status synthesis",
+        "clear next-action reporting"
+      ],
+      "excludes": [
+        "authority to make specialist decisions",
+        "filling unresolved facts by assumption"
+      ]
+    },
+    {
+      "id": "procurement_operations",
+      "category": "northstar_domain",
+      "label": "Procurement Operations",
+      "description": "Execute and reason about Northstar purchasing workflows, purchase-order authority, revisions, commercial readiness, and procurement-side decisions.",
+      "includes": [
+        "PO revision control",
+        "commercial readiness",
+        "procurement responsibility"
+      ],
+      "excludes": [
+        "vendor activation authority owned elsewhere",
+        "Q&R technical release",
+        "AP banking controls"
+      ]
+    },
+    {
+      "id": "vendor_compliance",
+      "category": "northstar_domain",
+      "label": "Vendor Compliance and Onboarding",
+      "description": "Handle Northstar vendor onboarding, standing, required evidence, status transitions, exception records, and related compliance coordination.",
+      "includes": [
+        "Applicant/Conditional/Active interpretation",
+        "onboarding evidence review",
+        "status and exception workflow"
+      ],
+      "excludes": [
+        "technical product-safety disposition",
+        "commercial PO ownership"
+      ]
+    },
+    {
+      "id": "vendor_performance_otif",
+      "category": "northstar_domain",
+      "label": "Vendor Performance and OTIF",
+      "description": "Evaluate Northstar vendor delivery performance, OTIF/fill concepts, responsibility attribution, and performance-exception evidence.",
+      "includes": [
+        "latest-revision performance basis",
+        "OTIF/fill interpretation",
+        "performance exception reasoning"
+      ],
+      "excludes": [
+        "raw transportation operations where logistics expertise is required",
+        "chargeback finance authority"
+      ]
+    },
+    {
+      "id": "transportation_operations",
+      "category": "northstar_domain",
+      "label": "Transportation Operations",
+      "description": "Interpret and work with Northstar routing, managed pickup, carrier events, readiness, shipment status, and transportation responsibility.",
+      "includes": [
+        "routing records",
+        "managed pickup",
+        "carrier delay analysis",
+        "shipment event reconstruction"
+      ],
+      "excludes": [
+        "DC physical receiving disposition",
+        "Q&R technical disposition"
+      ]
+    },
+    {
+      "id": "receiving_operations",
+      "category": "northstar_domain",
+      "label": "Distribution Center Receiving",
+      "description": "Work with Northstar DC appointment, gate, receipt, quantity, damage, temperature, and receiving-exception procedures.",
+      "includes": [
+        "receipt timing",
+        "accepted quantities",
+        "receiving logs",
+        "temperature sampling procedure"
+      ],
+      "excludes": [
+        "final Q&R technical release",
+        "transportation ownership outside receiving evidence"
+      ]
+    },
+    {
+      "id": "product_freshness",
+      "category": "northstar_domain",
+      "label": "Product Freshness Assessment",
+      "description": "Apply Northstar freshness profiles, shelf-life definitions, remaining-life calculations, and freshness exception/disposition concepts.",
+      "includes": [
+        "AFP selection",
+        "MRL calculation",
+        "short-dated vs expired distinction"
+      ],
+      "excludes": [
+        "automatic safety/recall determination",
+        "broader Q&R technical authority"
+      ]
+    },
+    {
+      "id": "quality_compliance",
+      "category": "northstar_domain",
+      "label": "Quality and Regulatory Compliance",
+      "description": "Evaluate Northstar product-quality, food-safety, regulatory, hold, traceability, and technical-disposition issues within the operator's authority.",
+      "includes": [
+        "quality event interpretation",
+        "technical hold reasoning",
+        "Q&R disposition support",
+        "safety escalation"
+      ],
+      "excludes": [
+        "commercial procurement authority",
+        "AP payment authority"
+      ]
+    },
+    {
+      "id": "invoice_matching",
+      "category": "northstar_domain",
+      "label": "Invoice Matching and Reconciliation",
+      "description": "Perform and interpret Northstar invoice, PO, receipt, duplicate, quantity, price, UOM, currency, and exception matching work.",
+      "includes": [
+        "three-way match",
+        "invoice tolerance analysis",
+        "IER-related reconciliation"
+      ],
+      "excludes": [
+        "bank-master verification",
+        "commercial price authority owned by Procurement"
+      ]
+    },
+    {
+      "id": "payment_controls",
+      "category": "northstar_domain",
+      "label": "Payment Controls",
+      "description": "Handle Northstar payment-release controls, banking-change verification, Payment Holds, remittance controls, and AP security procedures.",
+      "includes": [
+        "secure bank-change workflow",
+        "independent verification",
+        "payment hold interpretation"
+      ],
+      "excludes": [
+        "invoice arithmetic itself",
+        "vendor standing changes unless separately authorized"
+      ]
+    },
+    {
+      "id": "exception_handling",
+      "category": "cross_functional",
+      "label": "Exception Handling and Coordination",
+      "description": "Coordinate bounded business exceptions across evidence, owners, timelines, unresolved questions, handoffs, and required follow-up without silently overriding specialist authority.",
+      "includes": [
+        "case coordination",
+        "handoff management",
+        "tracking unresolved issues",
+        "separating parallel issue branches"
+      ],
+      "excludes": [
+        "specialist authority merely because the operator coordinates the case"
+      ]
+    }
+  ],
+  "evidence_principles": [
+    "Capability and evidence confidence are updated separately.",
+    "No observed evidence must not be interpreted as poor capability.",
+    "A request for a governing rule may indicate missing company knowledge and must not automatically reduce the relevant general capability.",
+    "A task return caused by absent specialist knowledge should not broadly penalize unrelated skills.",
+    "Verified success should update only dimensions materially exercised by the task.",
+    "Verified error should update only dimensions materially implicated by the error.",
+    "Authority, access permission, company knowledge, and confidence style must never be inferred solely from capability scores.",
+    "Narrative profile language should remain the primary representation supplied to an LLM for nuanced operator reasoning."
+  ],
+  "initial_case_coverage": {
+    "CASE_001_VENDOR_ACTIVATION": [
+      "document_comparison",
+      "cross_document_reasoning",
+      "policy_interpretation",
+      "procurement_operations",
+      "vendor_compliance",
+      "exception_handling",
+      "reporting_and_synthesis"
+    ],
+    "CASE_002_OTIF_EXCEPTION": [
+      "structured_data_handling",
+      "numerical_reconciliation",
+      "cross_document_reasoning",
+      "evidence_evaluation",
+      "policy_interpretation",
+      "procurement_operations",
+      "vendor_performance_otif",
+      "transportation_operations",
+      "receiving_operations",
+      "exception_handling",
+      "reporting_and_synthesis"
+    ],
+    "CASE_003_FRESHNESS_TEMP": [
+      "document_comparison",
+      "numerical_reconciliation",
+      "cross_document_reasoning",
+      "evidence_evaluation",
+      "policy_interpretation",
+      "receiving_operations",
+      "product_freshness",
+      "quality_compliance",
+      "exception_handling",
+      "reporting_and_synthesis"
+    ],
+    "CASE_004_INVOICE_BANK_CHANGE": [
+      "structured_data_handling",
+      "numerical_reconciliation",
+      "cross_document_reasoning",
+      "evidence_evaluation",
+      "policy_interpretation",
+      "procurement_operations",
+      "invoice_matching",
+      "payment_controls",
+      "exception_handling",
+      "reporting_and_synthesis"
+    ]
+  },
+  "excluded_from_vector": {
+    "company_knowledge": "Store separately as topic-level knowledge references or narrative evidence.",
+    "authority": "Store separately as hard policy/role facts.",
+    "file_access": "Store separately as explicit permissions or grants.",
+    "confidence_calibration": "Represent in narrative/evidence, not as a task capability.",
+    "communication_style": "Represent in narrative profile.",
+    "personality": "Do not encode unless a future use case demonstrates direct operational value."
+  },
+  "aliases": {
+    "document_review": "document_comparison",
+    "structured_data_entry": "structured_data_handling",
+    "file_search_and_retrieval": "file_search",
+    "cross_document_reconciliation": "cross_document_reasoning",
+    "evidence_assessment": "evidence_evaluation",
+    "vendor_compliance_and_onboarding": "vendor_compliance",
+    "distribution_center_receiving": "receiving_operations",
+    "product_freshness_assessment": "product_freshness",
+    "quality_and_regulatory_assessment": "quality_compliance",
+    "quality_regulatory": "quality_compliance",
+    "food_safety_review": "quality_compliance",
+    "invoice_reconciliation": "invoice_matching",
+    "exception_case_management": "exception_handling"
+  }
+}

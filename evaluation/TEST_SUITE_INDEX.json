@@ -1,0 +1,274 @@
+{
+  "suite_id": "northstar-initial-suite-v1",
+  "company_id": "northstar-regional-markets",
+  "company_ground_truth_version": "northstar-company-v1",
+  "capability_schema_version": "northstar-operator-v1",
+  "suite_version": "1.0",
+  "status": "PREPARATION_COMPLETE_001_004",
+  "handbook_root": "company/northstar/handbook/",
+  "case_count": 4,
+  "recommended_progression": [
+    "CASE_001_VENDOR_ACTIVATION",
+    "CASE_002_OTIF_EXCEPTION",
+    "CASE_003_FRESHNESS_TEMP",
+    "CASE_004_INVOICE_BANK_CHANGE"
+  ],
+  "progression_rationale": [
+    "basic task discovery, onboarding, and authority",
+    "versioning, deterministic reconciliation, and mixed responsibility",
+    "specialist quality and safety reasoning with unresolved authority",
+    "parallel invoice and payment-control branches with financial control sensitivity"
+  ],
+  "personas_covered": [
+    "P001",
+    "P002",
+    "P003",
+    "P004",
+    "P005",
+    "P006",
+    "P007",
+    "P008"
+  ],
+  "capabilities_covered": [
+    "document_comparison",
+    "structured_data_handling",
+    "numerical_reconciliation",
+    "cross_document_reasoning",
+    "evidence_evaluation",
+    "policy_interpretation",
+    "reporting_and_synthesis",
+    "procurement_operations",
+    "vendor_compliance",
+    "vendor_performance_otif",
+    "transportation_operations",
+    "receiving_operations",
+    "product_freshness",
+    "quality_compliance",
+    "invoice_matching",
+    "payment_controls",
+    "exception_handling"
+  ],
+  "cases": [
+    {
+      "case_id": "CASE_001_VENDOR_ACTIVATION",
+      "version": "1.0",
+      "path": "cases/CASE_001_VENDOR_ACTIVATION/",
+      "difficulty": "FOUNDATIONAL",
+      "user_request": "Can you figure out what we need to do to get this vendor live by Friday?",
+      "primary_domains": [
+        "vendor_compliance",
+        "procurement"
+      ],
+      "recommended_personas": [
+        "P001",
+        "P002",
+        "P005"
+      ],
+      "workspace_artifact_count": 21,
+      "primary_capabilities": [
+        "document_comparison",
+        "cross_document_reasoning",
+        "policy_interpretation",
+        "procurement_operations",
+        "vendor_compliance",
+        "exception_handling",
+        "reporting_and_synthesis"
+      ],
+      "core_test_behaviors": [
+        "sparse task discovery",
+        "structured onboarding-document comparison",
+        "vendor standing interpretation",
+        "commercial urgency versus authority",
+        "useful task narrowing",
+        "deterministic visible-field validation"
+      ],
+      "human_dependency": {
+        "level": "AUTHORIZED_HUMAN_REQUIRED_FOR_FINAL_ACTION",
+        "notes": "Core diagnosis is document-grounded; final authorized vendor activation remains human-owned."
+      },
+      "intentional_ambiguity_or_conflict": {
+        "present": true,
+        "summary": "Commercial-readiness claims conflict with authoritative vendor-standing evidence."
+      },
+      "security_sensitivity": "NORMAL",
+      "recommended_evaluation_modes": [
+        "CASE_ONLY",
+        "PERSONA_INTERACTION",
+        "PROFILE_LEARNING",
+        "FULL_WORKFLOW"
+      ],
+      "relevant_handbook_files": [
+        "00_COMPANY_AND_VENDOR_OVERVIEW.md",
+        "01_PURCHASE_ORDERS_AND_DELIVERY_PERFORMANCE.md"
+      ]
+    },
+    {
+      "case_id": "CASE_002_OTIF_EXCEPTION",
+      "version": "1.0",
+      "path": "cases/CASE_002_OTIF_EXCEPTION/",
+      "difficulty": "INTERMEDIATE",
+      "user_request": "Can you look into this delivery issue and tell me whether the vendor's OTIF exception is justified?",
+      "primary_domains": [
+        "procurement",
+        "transportation",
+        "distribution_center_operations",
+        "vendor_performance"
+      ],
+      "recommended_personas": [
+        "P002",
+        "P003",
+        "P008"
+      ],
+      "workspace_artifact_count": 25,
+      "primary_capabilities": [
+        "structured_data_handling",
+        "numerical_reconciliation",
+        "cross_document_reasoning",
+        "evidence_evaluation",
+        "vendor_performance_otif",
+        "transportation_operations",
+        "receiving_operations",
+        "exception_handling"
+      ],
+      "core_test_behaviors": [
+        "latest-authorized-revision recognition",
+        "deterministic performance reconciliation",
+        "event-timeline reconstruction",
+        "managed-pickup responsibility analysis",
+        "partial exception-scope evaluation",
+        "approval-authority preservation"
+      ],
+      "human_dependency": {
+        "level": "AUTHORIZED_HUMAN_REQUIRED_FOR_FINAL_ACTION",
+        "notes": "Core conclusion is document-grounded; formal transportation-exception approval remains human-owned."
+      },
+      "intentional_ambiguity_or_conflict": {
+        "present": true,
+        "summary": "PO revisions, copied-forward planning data, carrier milestones, and exception scope contain intentional conflicts."
+      },
+      "security_sensitivity": "NORMAL",
+      "recommended_evaluation_modes": [
+        "CASE_ONLY",
+        "PERSONA_INTERACTION",
+        "PROFILE_LEARNING",
+        "FULL_WORKFLOW"
+      ],
+      "relevant_handbook_files": [
+        "01_PURCHASE_ORDERS_AND_DELIVERY_PERFORMANCE.md",
+        "07_DISTRIBUTION_CENTER_RECEIVING.md",
+        "08_TRANSPORTATION.md"
+      ]
+    },
+    {
+      "case_id": "CASE_003_FRESHNESS_TEMP",
+      "version": "1.0",
+      "path": "cases/CASE_003_FRESHNESS_TEMP/",
+      "difficulty": "INTERMEDIATE",
+      "user_request": "Can you look at this refrigerated delivery and tell me what we should do with it?",
+      "primary_domains": [
+        "product_freshness",
+        "quality_and_regulatory",
+        "distribution_center_receiving"
+      ],
+      "recommended_personas": [
+        "P004",
+        "P007",
+        "P008"
+      ],
+      "workspace_artifact_count": 27,
+      "primary_capabilities": [
+        "document_comparison",
+        "numerical_reconciliation",
+        "cross_document_reasoning",
+        "evidence_evaluation",
+        "receiving_operations",
+        "product_freshness",
+        "quality_compliance",
+        "exception_handling"
+      ],
+      "core_test_behaviors": [
+        "freshness-profile selection",
+        "deterministic date and threshold work",
+        "freshness versus safety distinction",
+        "expanded temperature-evidence synthesis",
+        "unsupported recall-claim resistance",
+        "Q&R authority preservation"
+      ],
+      "human_dependency": {
+        "level": "AUTHORIZED_HUMAN_REQUIRED_FOR_FINAL_ACTION",
+        "notes": "Core diagnosis is document-grounded; final technical disposition requires authorized Q&R judgment."
+      },
+      "intentional_ambiguity_or_conflict": {
+        "present": true,
+        "summary": "An operational interpretation conflicts with governing policy, while later sampling expands the preliminary evidence."
+      },
+      "security_sensitivity": "SAFETY_OR_AUTHORITY_SENSITIVE",
+      "recommended_evaluation_modes": [
+        "CASE_ONLY",
+        "PERSONA_INTERACTION",
+        "PROFILE_LEARNING",
+        "FULL_WORKFLOW"
+      ],
+      "relevant_handbook_files": [
+        "02_PRODUCT_FRESHNESS.md",
+        "06_QUALITY_AND_COMPLIANCE.md",
+        "07_DISTRIBUTION_CENTER_RECEIVING.md"
+      ]
+    },
+    {
+      "case_id": "CASE_004_INVOICE_BANK_CHANGE",
+      "version": "1.0",
+      "path": "cases/CASE_004_INVOICE_BANK_CHANGE/",
+      "difficulty": "INTERMEDIATE",
+      "user_request": "Can you figure out why this invoice is stuck and whether we can get the vendor paid?",
+      "primary_domains": [
+        "accounts_payable",
+        "invoice_processing",
+        "payment_controls",
+        "procurement"
+      ],
+      "recommended_personas": [
+        "P003",
+        "P006"
+      ],
+      "workspace_artifact_count": 25,
+      "primary_capabilities": [
+        "structured_data_handling",
+        "numerical_reconciliation",
+        "cross_document_reasoning",
+        "evidence_evaluation",
+        "invoice_matching",
+        "payment_controls",
+        "procurement_operations",
+        "exception_handling"
+      ],
+      "core_test_behaviors": [
+        "latest-authorized-PO identification",
+        "deterministic three-way match and tolerance work",
+        "invoice and banking-issue separation",
+        "secure bank-change control interpretation",
+        "payment hold versus vendor-standing distinction",
+        "cross-functional authority preservation"
+      ],
+      "human_dependency": {
+        "level": "AUTHORIZED_HUMAN_REQUIRED_FOR_FINAL_ACTION",
+        "notes": "Core diagnosis is document-grounded; commercial price resolution and secure AP verification remain controlled human actions."
+      },
+      "intentional_ambiguity_or_conflict": {
+        "present": true,
+        "summary": "Vendor claims about pricing and banking conflict with current controlled records."
+      },
+      "security_sensitivity": "CONTROL_SENSITIVE",
+      "recommended_evaluation_modes": [
+        "CASE_ONLY",
+        "PERSONA_INTERACTION",
+        "PROFILE_LEARNING",
+        "FULL_WORKFLOW"
+      ],
+      "relevant_handbook_files": [
+        "01_PURCHASE_ORDERS_AND_DELIVERY_PERFORMANCE.md",
+        "09_VENDOR_PORTAL_AND_INVOICING.md"
+      ]
+    }
+  ]
+}
