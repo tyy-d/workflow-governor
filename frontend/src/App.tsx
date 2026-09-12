@@ -1,68 +1,74 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { api } from './api'
-import type { EvidenceAction, HumanAction, HumanInput, NewWorkflowInput, WorkflowViewModel } from './types'
-import { AppTopbar, WorkflowHeader } from './components/WorkflowHeader'
-import { PlanPanel } from './components/PlanPanel'
+import type { HumanAction, HumanInput, NewWorkflowInput, WorkflowViewModel } from './types'
 import { TaskWorkspace } from './components/TaskWorkspace'
-import { EvidencePanel } from './components/EvidencePanel'
-import { BottomDrawer } from './components/BottomDrawer'
-import { WorkflowHome } from './components/WorkflowHome'
 import { NewWorkflow } from './components/NewWorkflow'
-import { PlanningEmptyState } from './components/PlanningEmptyState'
-import { PlanSummary } from './components/PlanSummary'
+import { Icon } from './components/Icon'
 
+const date = (value: string) => new Date(value).toLocaleString([], {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})
+const planLabel = (state: string) => ({NOT_PROPOSED:'No plan yet',PROPOSED:'Awaiting approval',APPROVED:'Approved',REVISION_REQUESTED:'Revision requested',SUPERSEDED:'Previous version'}[state] || 'Review required')
 export function App() {
-  const initial = window.location.hash.slice(1)
-  const [view, setView] = useState<'home'|'detail'|'new'>(initial ? 'detail' : 'home')
-  const [workflows, setWorkflows] = useState<WorkflowViewModel[]>([])
-  const [selectedWorkflowId, setSelectedWorkflowId] = useState(initial)
-  const [selectedTaskId, setSelectedTaskId] = useState('')
-  const [selectedEvidenceId, setSelectedEvidenceId] = useState('')
-  const [drawerExpanded, setDrawerExpanded] = useState(true)
-  const [busy, setBusy] = useState(false)
-  const [error, setError] = useState('')
-  const [connected, setConnected] = useState(false)
-  const workflow = workflows.find(w => w.id === selectedWorkflowId)
-  const task = workflow?.tasks.find(t => t.id === selectedTaskId) ?? workflow?.tasks[0]
-  const reload = async () => { const values = await api<WorkflowViewModel[]>('/workflows'); setWorkflows(values); setConnected(true) }
-  useEffect(() => {
-    const update = () => { reload().catch(e => { setConnected(false); setError(String(e)) }) }
-    update(); const timer = setInterval(update, 2500); return () => clearInterval(timer)
-  }, [])
-  const home = () => { setView('home'); window.location.hash = '' }
-  const open = (id: string) => { setSelectedWorkflowId(id); setSelectedTaskId(''); setSelectedEvidenceId(''); setView('detail'); window.location.hash = id }
-  const act = async (path: string, data: unknown = {}) => {
-    setBusy(true); setError('')
-    try { const w = await api<WorkflowViewModel>(path, data); setWorkflows(old => [w, ...old.filter(x => x.id !== w.id)]); return w }
-    catch(e) { setError(e instanceof Error ? e.message : String(e)) }
-    finally { setBusy(false) }
-  }
-  const start = async (input: NewWorkflowInput) => { const w = await act('/workflows', input); if(w) open(w.id) }
-  const selectTask = (id: string, keepEvidence=false) => { setSelectedTaskId(id); if(!keepEvidence) setSelectedEvidenceId(workflow?.tasks.find(t=>t.id===id)?.evidenceIds[0] ?? '') }
-  const human = (action: HumanAction, input: HumanInput) => { if(workflow && task) void act(`/workflows/${workflow.id}/tasks/${task.id}/human`, {action,...input}) }
-  const evidenceAction = (action: EvidenceAction) => { if(workflow) void act(`/workflows/${workflow.id}/evidence/${selectedEvidenceId || task?.evidenceIds[0] || workflow.evidence[0]?.id}`, {action}) }
-  const locked = busy || Boolean(workflow?.operation)
-  return <div className="app-shell">
-    <AppTopbar currentView={view} onHome={home} onNew={()=>setView('new')} />
-    <div className="runtime-banner" role="status">{connected ? 'GB10 · Local Qwen · persistent workflow state' : 'Connecting to local backend…'}{workflow?.operation && ` · ${workflow.operation} — processing; you can refresh safely`}</div>
-    {error && <div className="runtime-error" role="alert">{error}<button onClick={()=>setError('')}>Dismiss</button></div>}
-    {view==='home' && <WorkflowHome workflows={workflows} onSelect={open} onNew={()=>setView('new')} />}
-    {view==='new' && <fieldset className="runtime-fieldset" disabled={busy}><NewWorkflow onCancel={home} onStart={start} /></fieldset>}
-    {view==='detail' && workflow && <>
-      <nav className="workflow-breadcrumb"><button onClick={home}>← Workflows</button><strong>{workflow.name}</strong><span>LOCAL EXECUTION</span></nav>
-      <WorkflowHeader workflow={workflow}/>
-      {workflow.error && <div className="runtime-error" role="alert">{workflow.error}</div>}
-      {task && workflow.operator ? <>
-        <fieldset className="runtime-fieldset" disabled={locked}>
-          <PlanSummary workflow={workflow} onApprove={()=>void act(`/workflows/${workflow.id}/approve`)} onRequestRevision={note=>void act(`/workflows/${workflow.id}/revise`,{note})}/>
-        </fieldset>
-        <div className="workspace-grid">
-          <PlanPanel tasks={workflow.tasks} selectedTaskId={task.id} planState={workflow.planState} onSelect={selectTask}/>
-          <TaskWorkspace key={`${workflow.id}-${task.id}`} task={task} tasks={workflow.tasks} evidence={workflow.evidence} operator={workflow.operator} planState={workflow.planState==='NOT_PROPOSED'?'PROPOSED':workflow.planState} busy={locked} onEvidenceSelect={setSelectedEvidenceId} onHumanAction={human} onExecute={()=>void act(`/workflows/${workflow.id}/tasks/${task.id}/execute`)} onResume={note=>void act(`/workflows/${workflow.id}/tasks/${task.id}/resume`,{note})}/>
-          <EvidencePanel evidence={workflow.evidence} tasks={workflow.tasks} selectedId={selectedEvidenceId || task.evidenceIds[0]} selectedTaskId={task.id} usedIds={task.evidenceIds} operator={workflow.operator} onSelect={setSelectedEvidenceId} onTaskSelect={id=>selectTask(id,true)} onAction={evidenceAction}/>
-        </div>
-        <BottomDrawer workflow={workflow} expanded={drawerExpanded} onToggle={()=>setDrawerExpanded(x=>!x)} onEvidenceSelect={setSelectedEvidenceId}/>
-      </> : <PlanningEmptyState workflow={workflow} onRetry={()=>void act(`/workflows/${workflow.id}/plan`)}/>}
+ const [route,setRoute]=useState(location.hash.slice(1))
+ const [workflows,setWorkflows]=useState<WorkflowViewModel[]>([])
+ const [loaded,setLoaded]=useState(false),[connected,setConnected]=useState(true)
+ const [error,setError]=useState(''),[busy,setBusy]=useState(false)
+ const [sidebar,setSidebar]=useState(innerWidth>760),[search,setSearch]=useState('')
+ const [taskId,setTaskId]=useState(''),[evidenceId,setEvidenceId]=useState(''),[line,setLine]=useState(0)
+ const [tab,setTab]=useState('tasks'),[revision,setRevision]=useState(false),[note,setNote]=useState('')
+ const [health,setHealth]=useState<Record<string,unknown>>({})
+ const searchRef=useRef<HTMLInputElement>(null),dialogRef=useRef<HTMLDialogElement>(null),lastFocus=useRef<HTMLElement|null>(null)
+ const creating=useRef(false)
+ const workflow=workflows.find(w=>w.id===route),task=workflow?.tasks.find(t=>t.id===taskId)
+ const evidence=workflow?.evidence.find(e=>e.id===evidenceId)
+ const navigate=(to:string)=>{location.hash=to;setTaskId('');setEvidenceId('');setTab('tasks');if(innerWidth<=760)setSidebar(false)}
+ const reload=async()=>{try{setWorkflows(await api<WorkflowViewModel[]>('/workflows'));setConnected(true)}catch(e){setConnected(false);if(!loaded)setError(String(e))}finally{setLoaded(true)}}
+ useEffect(()=>{const changed=()=>{setRoute(location.hash.slice(1));setTaskId('');setEvidenceId('')};window.addEventListener('hashchange',changed);void reload();const timer=setInterval(()=>void reload(),2500);return()=>{clearInterval(timer);window.removeEventListener('hashchange',changed)}},[])
+ useEffect(()=>{const resize=()=>{if(innerWidth<=760)setSidebar(false)};window.addEventListener('resize',resize);return()=>window.removeEventListener('resize',resize)},[])
+ useEffect(()=>{if(route==='settings')api<Record<string,unknown>>('/health').then(setHealth).catch(e=>setError(String(e)))},[route])
+ useEffect(()=>{const d=dialogRef.current;if(task||evidence){if(!d?.open){lastFocus.current=document.activeElement as HTMLElement;d?.showModal()}}else if(d?.open){d.close();lastFocus.current?.focus()}},[task?.id,evidence?.id])
+ useEffect(()=>{if(line&&evidence)document.getElementById(`evidence-line-${line}`)?.scrollIntoView({block:'center'})},[line,evidence?.id])
+ const close=()=>{if(evidenceId){setEvidenceId('');setLine(0)}else setTaskId('')}
+ const act=async(path:string,data:unknown={})=>{if(creating.current)return;creating.current=true;setBusy(true);setError('');try{const w=await api<WorkflowViewModel>(path,data);setWorkflows(old=>[w,...old.filter(x=>x.id!==w.id)]);return w}catch(e){setError(e instanceof Error?e.message:String(e))}finally{creating.current=false;setBusy(false)}}
+ const start=async(input:NewWorkflowInput)=>{const w=await act('/workflows',input);if(w)navigate(w.id)}
+ const human=(action:HumanAction,input:HumanInput)=>{if(workflow&&task)void act(`/workflows/${workflow.id}/tasks/${task.id}/human`,{action,...input})}
+ const citation=(id:string,n=0)=>{setEvidenceId(id);setLine(n)}
+ const locked=busy||!connected||Boolean(workflow?.operation)||Boolean(workflow?.readOnly)
+ const filtered=workflows.filter(w=>(w.name+' '+w.objective).toLowerCase().includes(search.toLowerCase()))
+ return <div className={`workbench ${sidebar?'':'sidebar-hidden'}`}>
+  <a className="skip-link" href="#main-content" onClick={e=>{e.preventDefault();document.getElementById('main-content')?.focus()}}>Skip to content</a>
+  <aside className="sidebar" aria-label="Workspace navigation">
+   <div className="workspace-name"><Icon name="workflow"/><strong>Workflow Governor</strong><button className="icon-button" aria-label="Collapse sidebar" onClick={()=>setSidebar(false)}>«</button></div>
+   <label className="search-box"><Icon name="search"/><input ref={searchRef} aria-label="Search workflows" placeholder="Search" value={search} onChange={e=>{setSearch(e.target.value);if(route)navigate('')}}/></label>
+   <button className={!route?'nav-active':''} onClick={()=>navigate('')}><Icon name="panel"/>All workflows</button>
+   <button onClick={()=>navigate('new')}><span className="plus">+</span>New workflow</button>
+   <p className="nav-caption">Workflows</p><nav className="workflow-nav">{filtered.map(w=><button key={w.id} className={route===w.id?'nav-active':''} title={w.name} onClick={()=>navigate(w.id)}><Icon name="file"/><span>{w.name}</span></button>)}{loaded&&!filtered.length&&<p className="muted">{search?'No matches':'No workflows yet'}</p>}</nav>
+   <button className="settings-link" onClick={()=>navigate('settings')}><Icon name="shield"/>Settings & connection</button>
+  </aside>
+  {sidebar&&<button className="sidebar-scrim" aria-label="Close navigation" onClick={()=>setSidebar(false)}/>}
+  <div className="main-shell">
+   <header className="topbar"><button className="icon-button" aria-label="Toggle sidebar" aria-expanded={sidebar} onClick={()=>setSidebar(v=>!v)}><Icon name="panel"/></button><nav aria-label="Breadcrumb"><button onClick={()=>navigate('')}>Workflows</button>{route&&<><span>/</span><span>{workflow?.name||(route==='new'?'New workflow':route==='settings'?'Settings':'Loading…')}</span></>}</nav><span className="save-state" role="status">{busy?'Saving…':!connected?'Offline':loaded?'Saved locally':'Connecting…'}</span></header>
+   {!connected&&<div className="notice danger" role="alert">Connection lost. Saved work is retained. <button onClick={()=>void reload()}>Reconnect</button></div>}
+   {error&&<div className="notice danger" role="alert">{error}<button onClick={()=>setError('')}>Dismiss</button></div>}
+   <main id="main-content" tabIndex={-1} className="document">
+    {!loaded&&<p className="empty" role="status">Loading your workspace…</p>}
+    {loaded&&!route&&<><div className="page-icon"><Icon name="panel" size={32}/></div><div className="title-row"><h1>Workflows</h1><button className="primary-action" onClick={()=>navigate('new')}>+ New workflow</button></div><p className="page-description">Your goals, plans, and saved work.</p><div className="table-wrap"><table><thead><tr><th>Name</th><th>Status</th><th>Updated</th></tr></thead><tbody>{filtered.map(w=><tr key={w.id}><td><button className="page-link" onClick={()=>navigate(w.id)}><Icon name="file"/>{w.name}</button></td><td><span className={`status-text status-${w.status.toLowerCase().replaceAll(' ','-')}`}>{w.status}</span></td><td className="muted">{date(w.updatedAt||w.createdAt)}</td></tr>)}</tbody></table></div>{!filtered.length&&<div className="empty"><h2>{search?'No matching workflows':'A place to start your next piece of work'}</h2><p>{search?'Try a different name or goal.':'Create a workflow and select the materials it may use.'}</p><button onClick={()=>search?setSearch(''):navigate('new')}>{search?'Clear search':'Create workflow'}</button></div>}</>}
+    {route==='new'&&<fieldset disabled={busy||!connected}><NewWorkflow onCancel={()=>navigate('')} onStart={start}/></fieldset>}
+    {route==='settings'&&<><h1>Settings</h1><h2>Local model connection</h2><p>Model requests run on this machine. Your browser uses the application backend.</p><dl className="properties"><dt>Model</dt><dd>{String(health.model||'Checking…')}</dd><dt>Protocol</dt><dd>OpenAI-compatible chat completions</dd><dt>Service reachable</dt><dd>{health.modelReachable===true?'Yes':health.modelReachable===false?'Unavailable — check the existing model service':'Checking…'}</dd><dt>Inference</dt><dd>Each workflow records its own validated results and run history.</dd><dt>Human routing</dt><dd>Operator assignment is not connected. Human tasks wait for an authorized operator.</dd></dl><button onClick={()=>api<Record<string,unknown>>('/health').then(setHealth).catch(e=>setError(String(e)))}>Check connection</button></>}
+    {loaded&&route&&!['new','settings'].includes(route)&&!workflow&&<div className="empty"><h1>Workflow unavailable</h1><p>The workflow could not be loaded. Reconnect or return to the list.</p><button onClick={()=>navigate('')}>All workflows</button></div>}
+    {workflow&&<><div className="page-icon"><Icon name="file" size={32}/></div><h1>{workflow.name}</h1><p className="objective">{workflow.objective}</p><dl className="properties"><dt>Status</dt><dd>{workflow.status}</dd><dt>Workspace</dt><dd>{workflow.workspace}</dd><dt>Plan</dt><dd>{planLabel(workflow.planState)} {workflow.planVersion&&`· ${workflow.planVersion}`}</dd></dl>
+     {workflow.readOnly&&<div className="notice">This saved workflow is available for inspection. {workflow.readOnly}</div>}
+     {workflow.operation&&<div className="notice" role="status"><span className="spinner"/> {workflow.operation}. You can leave this page and return.<small>Closing this page does not cancel model inference.</small></div>}
+     {workflow.error&&<div className="notice danger" role="alert"><strong>Work needs attention</strong><p>{workflow.error}</p>{!workflow.operation&&['NOT_PROPOSED','REVISION_REQUESTED'].includes(workflow.planState)&&<button disabled={locked} onClick={()=>void act(`/workflows/${workflow.id}/plan`)}>Retry planning</button>}</div>}
+     <div className="page-actions">{!workflow.tasks.length&&!workflow.operation&&!workflow.error&&<button className="primary-action" disabled={locked} onClick={()=>void act(`/workflows/${workflow.id}/plan`)}>Generate plan</button>}{workflow.planState==='PROPOSED'&&<><button className="primary-action" disabled={locked} onClick={()=>void act(`/workflows/${workflow.id}/approve`)}>Approve plan</button><button disabled={locked} onClick={()=>setRevision(v=>!v)}>Request revision</button><span className="muted">Approve local work only; business authority is separate.</span></>}</div>
+     {revision&&<form className="revision-form" onSubmit={e=>{e.preventDefault();void act(`/workflows/${workflow.id}/revise`,{note}).then(w=>{if(w){setRevision(false);setNote('')}})}}><label>What should change?<textarea autoFocus required value={note} onChange={e=>setNote(e.target.value)}/></label><button disabled={locked||!note.trim()} className="primary-action">Submit revision</button><button type="button" onClick={()=>setRevision(false)}>Cancel</button></form>}
+     <nav className="tabs" aria-label="Workflow sections">{['tasks','evidence','results','history'].map(t=><button key={t} aria-current={tab===t?'page':undefined} onClick={()=>setTab(t)}>{t[0].toUpperCase()+t.slice(1)}{t==='tasks'&&workflow.tasks.length?` · ${workflow.tasks.length}`:''}</button>)}</nav>
+     {tab==='tasks'&&<>{!workflow.tasks.length?<div className="empty"><h2>{workflow.operation?'Preparing your plan':'No plan yet'}</h2><p>{workflow.operation?'Selecting authorized evidence and validating the proposed tasks.':'Generate a plan from your selected materials, then review it before execution.'}</p></div>:<div className="table-wrap"><table className="task-table"><thead><tr><th>Task</th><th>Handled by</th><th>Status</th></tr></thead><tbody>{workflow.tasks.map(t=><tr key={t.id}><td><button className="page-link" onClick={()=>setTaskId(t.id)}><Icon name="file"/><span>{t.title}</span></button></td><td>{t.executor==='Local AI'?'Local model':t.executor==='Deterministic'?'Automatic tool':'Human review'}</td><td><span className={`status-text status-${t.status.toLowerCase().replaceAll(' ','-')}`}>{t.status}</span></td></tr>)}</tbody></table></div>}<details><summary>Assumptions and open questions</summary>{[...(workflow.assumptions||[]),...(workflow.questions||[])].map((v,i)=><p key={i}>{v}</p>)}{!workflow.assumptions?.length&&!workflow.questions?.length&&<p>None recorded yet.</p>}</details></>}
+     {tab==='evidence'&&<section><p className="muted">Saved source extracts used by this workflow.</p>{workflow.evidence.map(e=><button className="evidence-row" key={e.id} onClick={()=>citation(e.id)}><Icon name="file"/><span>{e.title}</span><small>{e.status}</small></button>)}{!workflow.evidence.length&&<p className="empty">No evidence has been retrieved yet.</p>}</section>}
+     {tab==='results'&&<section>{Object.entries(workflow.finalState).map(([key,values])=><section className="result-section" key={key}><h2>{{findings:'Findings',blockers:'Unresolved work',nextActions:'Next actions',authorityDecisions:'Authority & decisions'}[key]||key}</h2>{values.length?values.map((v,i)=><p key={i}>{v.split(/(\[[^\]]+:L\d+\])/g).map((s,j)=>{const m=s.match(/^\[([^:]+):L(\d+)\]$/);return m?<button className="citation" key={j} onClick={()=>citation(m[1],Number(m[2]))}>{s}</button>:s})}</p>):<p className="muted">None recorded.</p>}</section>)}</section>}
+     {tab==='history'&&<section><details><summary>Plan versions and run records</summary><p className="muted">All saved revisions and attempts are retained. Historical results do not trigger execution.</p><button onClick={()=>api<{records:unknown[]}>(`/workflows/${workflow.id}/history`).then(v=>setHealth({history:v.records})).catch(e=>setError(String(e)))}>Load saved versions</button>{Array.isArray(health.history)&&health.history.map((item: {file:string;record:Record<string,unknown>})=><p key={item.file}><strong>{item.file.replace('.json','')}</strong> · {String(item.record.phase||item.record.state||'Saved plan record')} {item.record.finishedAt?date(String(item.record.finishedAt)):''}</p>)}</details>{workflow.activity.slice().reverse().map(e=><article className="history-row" key={e.id}><small>{date(e.time)}</small><div><strong>{e.title}</strong><p>{e.description}</p></div></article>)}</section>}
     </>}
+   </main>
   </div>
+  <dialog ref={dialogRef} className="detail-sheet" onCancel={e=>{e.preventDefault();close()}}><div className="sheet-toolbar"><span>{evidence?'Evidence':'Task details'}</span><button aria-label="Close details" onClick={close}>×</button></div>{error&&<div className="notice danger" role="alert">{error}</div>}{evidence?<article className="evidence-detail"><h1>{evidence.title}</h1><p className="muted">{evidence.source}</p><div className="page-actions"><button disabled={locked} onClick={()=>void act(`/workflows/${route}/evidence/${evidence.id}`,{action:'Mark Reviewed'})}>Mark reviewed</button><button disabled={locked} onClick={()=>void act(`/workflows/${route}/evidence/${evidence.id}`,{action:'Flag Conflict'})}>Flag conflict</button></div><p>{evidence.status}</p><div className="source-lines">{evidence.preview.map((text,i)=>{const m=text.match(/^L(\d+):/);const n=m?Number(m[1]):i+1;return <p id={`evidence-line-${n}`} className={n===line?'highlight':''} key={i}>{text}</p>})}</div><details><summary>Source properties</summary>{evidence.metadata.map(m=><p key={m.label}>{m.label}: {m.value}</p>)}</details></article>:task&&workflow&&<TaskWorkspace key={`${route}-${task.id}`} task={task} tasks={workflow.tasks} evidence={workflow.evidence} operator={workflow.operator!} planState={workflow.planState==='NOT_PROPOSED'?'PROPOSED':workflow.planState} busy={locked} onEvidenceSelect={citation} onHumanAction={human} onExecute={()=>void act(`/workflows/${route}/tasks/${task.id}/execute`)} onResume={note=>void act(`/workflows/${route}/tasks/${task.id}/resume`,{note})}/>}</dialog>
+ </div>
 }

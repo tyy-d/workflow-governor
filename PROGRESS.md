@@ -15,3 +15,14 @@
 
 Inspect Git status and this record, then run `.venv/bin/python -u -m pytest -v --durations=0 -o log_cli=true -o addopts=''`.
 Next: preserve the existing integration in a baseline commit; merge current upstream; build document workbench and wire shared persistence.
+
+## Document workbench and persistence
+
+- Replaced the production mock-driven workspace layout with a collapsible sidebar, workflow database list, document page, task/evidence dialog, and results/history sections.
+- Server-authorized file selection; explicit create / generate / approve / execute steps.
+- New workflows use Track A ArtifactStore / WorkflowStateLoader and Thomas's shared planner, validator, runner, context and result contracts. Historical workflow files are read-only; no implicit migration.
+- New human tasks wait honestly for the missing operator routing module.
+- Creation idempotency survives a lost response; execution readiness and operation locking reject duplicate task execution. Model concurrency is bounded to two and requests time out after 240 seconds.
+- Preview service: workflow-governor-preview.service on loopback 8081, separate runtime and frontend build.
+- 76 backend tests pass; frontend typecheck and build pass. Real Chromium acceptance is running; progress logs are in runtime/workbench-preview/browser.log.
+- User confirmed GitHub permissions cannot be fixed now; continue local code and deployment only.

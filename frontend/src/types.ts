@@ -135,6 +135,9 @@ export interface ActivityEvent {
 }
 
 export interface WorkflowViewModel {
+  readOnly?: string
+  runId?: string
+
   assumptions?: string[]
   questions?: string[]
   operation?: string | null
@@ -164,6 +167,7 @@ export interface WorkflowViewModel {
 
 
 export interface NewWorkflowInput {
+  sourceIds?: string[]
   name?: string
   objective: string
   workspace: string
