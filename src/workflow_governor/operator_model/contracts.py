@@ -10,4 +10,3 @@ class AcceptedObservationNotification:
     workflow_id: str
     task_id: str
     accepted_at: str
-
