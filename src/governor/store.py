@@ -9,7 +9,7 @@ from workflow_governor.core.config import RuntimeConfig, confined
 from workflow_governor.core.models import PlanStatus
 from workflow_governor.core.substrate import WorkspaceGrant
 
-STATUSES = {'Pending':'PENDING','Ready':'READY','Running':'RUNNING','Needs Human':'PENDING_HUMAN','Completed':'COMPLETED','Blocked':'BLOCKED'}
+STATUSES = {'Pending':'PENDING','Ready':'READY','Running':'IN_PROGRESS','Needs Human':'PENDING_HUMAN','Completed':'COMPLETED','Blocked':'BLOCKED'}
 
 class Store:
     def __init__(self, root, repo=None, grants=None):
@@ -25,7 +25,7 @@ class Store:
 
     def read(self, identity):
         with self.lock:
-            manifest=json.loads(confined(self.directory(identity),'manifest.json').read_text())
+            manifest=json.loads(confined(self.directory(identity),'manifest.json').read_text(encoding='utf-8'))
             if 'id' in manifest:
                 if self.grants is not None:manifest['readOnly']='Historical format. Preserved without migration; create a new workflow to run again.'
                 return manifest

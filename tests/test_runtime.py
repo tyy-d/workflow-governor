@@ -11,7 +11,9 @@ from governor.model import validate_citations
 class Boundaries(unittest.TestCase):
  def test_access_and_symlink(self):
   with tempfile.TemporaryDirectory() as d:
-   root=Path(d);(root/'allowed').mkdir();(root/'allowed/a.txt').write_text('source');(root/'allowed/leak.txt').symlink_to('/etc/passwd')
+   root=Path(d);(root/'allowed').mkdir();(root/'allowed/a.txt').write_text('source')
+   try:(root/'allowed/leak.txt').symlink_to('/etc/passwd')
+   except OSError as exc:self.skipTest(f'symlink creation unavailable: {exc}')
    ws=Workspace(root,{'x':{'root':'allowed','policies':[]}})
    self.assertEqual(len(ws.inventory('x')),1)
    for p in ['../secret','/etc/passwd','cases/a/ground_truth/answer.json','company/provenance/data.txt','personas/P001/actor.md','allowed/leak.txt']:

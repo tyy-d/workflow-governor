@@ -36,7 +36,9 @@ def generate(goal, revision, sources, directory):
         tasks.append({'id':f'T{i+1}','title':task['title'],'objective':task['objective'],
                       'executor':ROLES[i],'dependencyIds':list(DEPENDENCIES[i]),
                       'evidenceIds':list(dict.fromkeys(sources[n]['id'] for n in task['sources'])),
-                      'rationale':task['objective'],'expectedOutput':OUTPUTS[i]})
+                      'rationale':task['objective'],'expectedOutput':OUTPUTS[i],
+                      'authorityRequirement':None,
+                      'requestedDecisionAuthorityScope':'ANALYSIS_OR_RECOMMENDATION' if ROLES[i]=='Human' else 'NO_DECISION'})
     result={'tasks':tasks,'assumptions':draft['assumptions'],'questions':draft['questions']}
     Draft202012Validator(model.PLAN_SCHEMA).validate(result)
     return result

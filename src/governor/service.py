@@ -7,6 +7,12 @@ from . import model, bridge
 from .store import STATUSES
 from workflow_governor.core.substrate import RetrievedEvidence, WorkspaceGrant
 from workflow_governor.core.models import EvidenceRef
+from workflow_governor.core.models import ExecutionStatus, PlanStatus
+from workflow_governor.execution.runner import HumanHandoff, MinimalTaskRunner, RunState, TaskExecutionState
+from workflow_governor.human.contracts import human_response_from_mapping
+from workflow_governor.integration.adapters import ArtifactExecutionEventSink
+from workflow_governor.integration.human import apply_validated_human_response
+from workflow_governor.planning.lifecycle import PlanRecord
 from workflow_governor.workspace import WorkspaceScout, DiscoveryLimits
 
 
@@ -24,6 +30,11 @@ def validate_plan(plan, sources):
             raise ValueError('Task IDs must be distinct T1, T2, ...')
         if not set(task['dependencyIds'])<=seen:raise ValueError('Dependencies must reference earlier tasks; cycles are not allowed')
         if not set(task['evidenceIds'])<=evidence:raise ValueError('Task refers to ungranted evidence')
+        scope=task.get('requestedDecisionAuthorityScope','NO_DECISION')
+        if scope not in ['NO_DECISION','ANALYSIS_OR_RECOMMENDATION','AUTHORITY_DECISION']:
+            raise ValueError('Task has an invalid decision-authority scope')
+        if scope=='AUTHORITY_DECISION' and not task.get('authorityRequirement'):
+            raise ValueError('Authority-decision tasks require an explicit authority requirement')
         seen.add(task['id'])
     if not {'Deterministic','Local AI','Human'} <= {t['executor'] for t in tasks}:
         raise ValueError('The proposed plan must include deterministic, local-model and human review work')
@@ -32,8 +43,11 @@ def validate_plan(plan, sources):
     return plan
 
 class Service:
-    def __init__(self,store,workspace):
+    def __init__(self,store,workspace,*,human_validator=None,human_interactions=None):
         self.store=store;self.workspace=workspace
+        # Identity and authority providers are deliberately injected. The web
+        # projection must never manufacture either capability.
+        self.human_validator=human_validator;self.human_interactions=human_interactions
         for w in store.list():
             if w.get('operation') and not w.get('readOnly'):
                 w['error']='Server interrupted the operation. Review state and retry; completed results were preserved.'
@@ -44,6 +58,15 @@ class Service:
 
     def save(self,w):
         self.refresh(w)
+        if w.get('storageVersion')==2 and w.get('planState')=='APPROVED':
+            pending=[t for t in w['tasks'] if t['executor']=='Human' and t['status']=='Needs Human' and not t.get('humanHandoff')]
+            if pending:
+                record=PlanRecord(bridge.shared_plan(w),PlanStatus.APPROVED)
+                specs={task.task_id:task for task in record.plan.tasks}
+                for task in pending:
+                    handoff=MinimalTaskRunner.create_handoff(record,w['id'],specs[task['id']],created_at=w.get('approvedAt') or w['updatedAt'])
+                    if self.human_interactions is not None:self.human_interactions.write_handoff(handoff)
+                    task['humanHandoff']=handoff.to_dict()
         if not (self.store.directory(w['id'])/'manifest.json').exists():self.store.save(w)
         d=self.store.directory(w['id'])
         if w.get('storageVersion')==2:
@@ -171,7 +194,7 @@ class Service:
                 w['evidence']=[self.evidence_view(s,tasks) for s in sources]
                 event(w,'Local model proposed plan',f"{len(tasks)} tasks; {len(selected)+len(followed)}/{len(inventory)} workspace files retrieved ({len(followed)} explicit pending-record references followed), plus {len(self.workspace.grants[key]['policies'])} scoped policies. Model {model.MODEL}. Approval required.")
                 self.store.write_json(plan_dir/f'v{version}.json',dict(taskplan,state='PROPOSED'))
-                (plan_dir/'plan.md').write_text('# Proposed plan\n\n'+w['objective']+'\n\n'+'\n'.join(f"- {t['id']}: {t['title']} ({t['executor']})" for t in tasks))
+                (plan_dir/'plan.md').write_text('# Proposed plan\n\n'+w['objective']+'\n\n'+'\n'.join(f"- {t['id']}: {t['title']} ({t['executor']})" for t in tasks),encoding='utf-8')
                 self.store.commit_plan(w,core_plan,'PROPOSED')
                 self.save(w)
         return self.launch(identity,'Selecting authorized evidence',work)
@@ -222,15 +245,58 @@ class Service:
                 event(w,'Task completed',t['title']+' — '+t['executor']+' result saved.','task');self.save(w)
         return self.launch(identity,'Execute '+task_id,work,task_id=task_id)
 
-    def human(self,identity,task_id,data):
+    def human_handoff(self,identity,task_id):
+        """Return the canonical Track C handoff, creating it idempotently."""
+        with self.store.lock:
+            w=self.store.read(identity);t=next(t for t in w['tasks'] if t['id']==task_id)
+            if w.get('storageVersion')!=2:raise ValueError('Canonical handoffs require the current storage format')
+            if w.get('operation') or w['planState']!='APPROVED' or t['executor']!='Human' or t['status']!='Needs Human':
+                raise ValueError('Human task is not ready')
+            record=PlanRecord(bridge.shared_plan(w),PlanStatus.APPROVED)
+            task=next(item for item in record.plan.tasks if item.task_id==task_id)
+            if t.get('humanHandoff'):
+                stored=HumanHandoff.from_dict(t['humanHandoff'])
+                expected=MinimalTaskRunner.create_handoff(record,identity,task,created_at=stored.created_at)
+                if stored!=expected:raise ValueError('Persisted human handoff does not match the approved plan')
+                return stored
+            handoff=MinimalTaskRunner.create_handoff(record,identity,task,created_at=w.get('approvedAt') or w['updatedAt'])
+            if self.human_interactions is not None:self.human_interactions.write_handoff(handoff)
+            t['humanHandoff']=handoff.to_dict();self.save(w)
+            return handoff
+
+    def human(self,identity,task_id,data,*,session_id=''):
         if self.store.read(identity).get('storageVersion')==2:
-            raise ValueError('Authorized human routing is not connected. This task remains waiting; no operator identity or decision is fabricated.')
+            if self.human_validator is None or self.human_interactions is None:
+                raise ValueError('Authorized human routing is not connected. This task remains waiting; no operator identity or decision is fabricated.')
+            # Parse strictly before any runtime mutation. Valid but rejected
+            # submissions are retained for audit while the task stays pending.
+            try:response=human_response_from_mapping(data)
+            except (KeyError,TypeError,ValueError) as exc:raise ValueError('Malformed canonical human response') from exc
+            handoff=self.human_handoff(identity,task_id)
+            self.human_interactions.write_submission(response)
+            validation=self.human_validator.validate(handoff,response,session_id=session_id)
+            self.human_interactions.write_validation(response,validation)
+            with self.store.lock:
+                w=self.store.read(identity);t=next(t for t in w['tasks'] if t['id']==task_id)
+                record=PlanRecord(bridge.shared_plan(w),PlanStatus.APPROVED)
+                state=RunState(identity,{task_id:TaskExecutionState(task_id,status=ExecutionStatus.PENDING_HUMAN,human_handoff=handoff)},mock_assisted=False)
+                applied=apply_validated_human_response(MinimalTaskRunner({}),record,state,validation,ArtifactExecutionEventSink(self.store.artifacts))
+                if not applied:return w
+                result=state.task_states[task_id].result
+                t['status']='Completed';t['humanResponse']=response.response_id;t['humanState']=response.response_disposition.value
+                t['result']={'summary':result.rationale or 'Human response accepted','findings':[],
+                             'blockers':list(result.unresolved),'nextActions':list(result.unresolved),
+                             'authorityDecisions':[json.dumps(result.output.get('decision'),ensure_ascii=False)]}
+                event(w,'Validated human response applied',response.response_id+' completed '+task_id,'human');self.save(w);return w
         with self.store.lock:
             w=self.store.read(identity);t=next(t for t in w['tasks'] if t['id']==task_id)
             if w.get('operation') or w['planState']!='APPROVED' or t['executor']!='Human' or t['status']!='Needs Human':raise ValueError('Human task is not ready')
-            action=data.get('action');judgment=data.get('judgment','').strip();reason=data.get('reason','').strip();operator=data.get('operator','').strip()
-            if action not in ['Complete','Ask Clarification','Narrow Task','Request Reassignment','Decline Authority'] or not judgment or not reason or not operator:
-                raise ValueError('Operator name, judgment and reason are required')
+            action=data.get('action');judgment=data.get('judgment','').strip();reason=data.get('reason','').strip()
+            # Legacy snapshots predate Track C and retain their original local
+            # review field for read/write compatibility only.
+            operator=((w.get('operator') or {}).get('name') or data.get('operator','')).strip()
+            if action not in ['Complete','Ask Clarification','Partial','Narrow Task','Request Reassignment','Decline Authority'] or not judgment or not reason or not operator:
+                raise ValueError('A bound operator, judgment and reason are required')
             if max(len(judgment),len(reason),len(operator))>8000:raise ValueError('Human input too long')
             record={'action':action,'judgment':judgment,'reason':reason,'operator':operator,'timestamp':now(),'authorityVerified':False}
             self.store.write_json(self.store.directory(identity)/'artifacts'/'human'/f'{task_id}-{uuid.uuid4().hex[:8]}.json',record)

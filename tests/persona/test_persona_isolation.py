@@ -94,7 +94,10 @@ def test_symlink_escape_is_rejected(tmp_path) -> None:
     outside.write_text("hidden", encoding="utf-8")
     actor = tmp_path / "personas/P001/actor.md"
     actor.unlink()
-    actor.symlink_to(outside)
+    try:
+        actor.symlink_to(outside)
+    except OSError as exc:
+        pytest.skip(f"symlink creation unavailable: {exc}")
     with pytest.raises(PersonaContextError):
         PersonaContextAssembler(tmp_path).render(session(), handoff())
 
@@ -105,6 +108,9 @@ def test_symlink_to_hidden_source_inside_repository_is_rejected(tmp_path) -> Non
     hidden.write_text('{"hidden": true}', encoding="utf-8")
     actor = tmp_path / "personas/P001/actor.md"
     actor.unlink()
-    actor.symlink_to(hidden)
+    try:
+        actor.symlink_to(hidden)
+    except OSError as exc:
+        pytest.skip(f"symlink creation unavailable: {exc}")
     with pytest.raises(PersonaContextError):
         PersonaContextAssembler(tmp_path).render(session(), handoff())

@@ -5,7 +5,7 @@ MinimalTaskRunner receives a one-task projection plus durable predecessor states
 from dataclasses import asdict
 from datetime import datetime
 from enum import Enum
-from workflow_governor.core.models import (EvidenceRef,EvidenceContent,FileRecord,WorkspaceMap,TaskSpec,TaskContext,TaskResult,WorkflowPlan,ExecutorType,ExecutionStatus,PlanStatus)
+from workflow_governor.core.models import (EvidenceRef,EvidenceContent,FileRecord,WorkspaceMap,TaskSpec,TaskContext,TaskResult,WorkflowPlan,ExecutorType,ExecutionStatus,PlanStatus,DecisionAuthorityScope)
 from workflow_governor.planning.planner import Planner,PlanningRequest
 from workflow_governor.planning.validation import PlanValidator
 from workflow_governor.planning.lifecycle import PlanLifecycle,PlanRecord
@@ -24,10 +24,15 @@ def serial(value):
 
 def spec(t,sources):
     selected=[s for s in sources if s['id'] in t['evidenceIds']]
+    try:scope=DecisionAuthorityScope(t.get('requestedDecisionAuthorityScope','NO_DECISION'))
+    except ValueError as exc:raise ValueError('Task has an invalid decision-authority scope') from exc
+    requirement=t.get('authorityRequirement')
+    if scope is DecisionAuthorityScope.AUTHORITY_DECISION and not requirement:
+        raise ValueError('Authority-decision tasks require an explicit authority requirement')
     return TaskSpec(t['id'],t['title'],t['objective'],EXECUTORS[t['executor']],tuple(t['dependencyIds']),
         tuple(EvidenceRef(s['path'],artifact_id=s['id']) for s in selected if not s.get('policy')),
         tuple(EvidenceRef(s['path'],artifact_id=s['id']) for s in selected if s.get('policy')),
-        (t['expectedOutput'],),authority_requirement='Local review only. External corporate authority is not verified.',
+        (t['expectedOutput'],),authority_requirement=requirement,requested_decision_authority_scope=scope,
         operation='inspect_records' if t['executor']=='Deterministic' else None)
 
 def shared_plan(w,draft=None,sources=None):
@@ -87,7 +92,7 @@ def execute_bounded(w,t,sources,previous,directory,payload=None,artifact_store=N
     from pathlib import Path
     import json
     Path(directory).mkdir(parents=True,exist_ok=True)
-    Path(directory,'core-execution.json').write_text(json.dumps({'runner':'MinimalTaskRunner','mock_assisted':False,'events':sink.events,'result':serial(result)},ensure_ascii=False,indent=2))
+    Path(directory,'core-execution.json').write_text(json.dumps({'runner':'MinimalTaskRunner','mock_assisted':False,'events':sink.events,'result':serial(result)},ensure_ascii=False,indent=2),encoding='utf-8')
     if artifact_store is not None:
         artifact_store.save_context(w['id'],context)
         if result is not None and result.status==ExecutionStatus.COMPLETED:artifact_store.save_result(w['id'],result)

@@ -217,7 +217,10 @@ def test_file_adapter_rejects_symlinked_interaction_paths(tmp_path) -> None:
     outside.mkdir()
     linked = tmp_path / "workflows/W001/artifacts/human"
     linked.parent.mkdir(parents=True)
-    linked.symlink_to(outside, target_is_directory=True)
+    try:
+        linked.symlink_to(outside, target_is_directory=True)
+    except OSError as exc:
+        pytest.skip(f"symlink creation unavailable: {exc}")
     with pytest.raises(ValueError, match="unsafe human interaction path"):
         store.write_submission(response())
 

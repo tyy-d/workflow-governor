@@ -34,7 +34,16 @@ export function App() {
  const close=()=>{if(evidenceId){setEvidenceId('');setLine(0)}else setTaskId('')}
  const act=async(path:string,data:unknown={})=>{if(creating.current)return;creating.current=true;setBusy(true);setError('');try{const w=await api<WorkflowViewModel>(path,data);setWorkflows(old=>[w,...old.filter(x=>x.id!==w.id)]);return w}catch(e){setError(e instanceof Error?e.message:String(e))}finally{creating.current=false;setBusy(false)}}
  const start=async(input:NewWorkflowInput)=>{const w=await act('/workflows',input);if(w)navigate(w.id)}
- const human=(action:HumanAction,input:HumanInput)=>{if(workflow&&task)void act(`/workflows/${workflow.id}/tasks/${task.id}/human`,{action,...input})}
+ const human=(action:HumanAction,input:HumanInput)=>{
+  const handoff=task?.humanHandoff,operator=workflow?.operator
+  if(!workflow||!task||!handoff||!operator?.actorId||!operator.authorityValidation)return
+  const disposition:Record<HumanAction,string>={Complete:'COMPLETE','Ask Clarification':'NEEDS_INFORMATION',Partial:'PARTIAL','Narrow Task':'TASK_NARROWED','Request Reassignment':'REASSIGNMENT_REQUESTED','Decline Authority':'AUTHORITY_DECLINED'}
+  void act(`/workflows/${workflow.id}/tasks/${task.id}/human`,{
+   response_id:crypto.randomUUID(),handoff_id:handoff.handoff_id,workflow_id:handoff.workflow_id,plan_id:handoff.plan_id,plan_version:handoff.plan_version,task_id:handoff.task_id,
+   actor_id:operator.actorId,response_disposition:disposition[action],actual_decision_authority_scope:action==='Complete'?handoff.requested_decision_authority_scope:'NO_DECISION',
+   authority_validation:operator.authorityValidation,decision:{action,judgment:input.judgment},rationale:input.reason,evidence_refs:[],corrections:[],unresolved_questions:action==='Complete'?[]:[input.reason],submitted_at:new Date().toISOString()
+  })
+ }
  const citation=(id:string,n=0)=>{setEvidenceId(id);setLine(n)}
  const locked=busy||!connected||Boolean(workflow?.operation)||Boolean(workflow?.readOnly)
  const filtered=workflows.filter(w=>(w.name+' '+w.objective).toLowerCase().includes(search.toLowerCase()))

@@ -36,7 +36,9 @@ RESULT_SCHEMA = object_schema({'summary': TEXT, 'findings': arr(FINDING, minItem
 TASK_SCHEMA = object_schema({'id': TEXT, 'title': TEXT, 'objective': TEXT,
     'executor': {'enum': ['Deterministic', 'Local AI', 'Human']},
     'dependencyIds': arr(TEXT), 'evidenceIds': arr(TEXT, minItems=1),
-    'rationale': TEXT, 'expectedOutput': TEXT})
+    'rationale': TEXT, 'expectedOutput': TEXT,
+    'authorityRequirement': {'type':['string','null']},
+    'requestedDecisionAuthorityScope': {'enum':['NO_DECISION','ANALYSIS_OR_RECOMMENDATION','AUTHORITY_DECISION']}})
 PLAN_SCHEMA = object_schema({'assumptions': arr(TEXT, maxItems=4), 'questions': arr(TEXT, maxItems=4),
                              'tasks': arr(TASK_SCHEMA, minItems=3, maxItems=5)})
 
@@ -55,7 +57,7 @@ def _call(system, payload, schema, directory, label, max_tokens=2200):
                'chat_template_kwargs': {'enable_thinking': False},
                'response_format': {'type':'json_schema', 'json_schema': {'name':'governor', 'strict':True, 'schema':schema}}}
     # Record bounded inputs, output and usage; never request/persist hidden reasoning.
-    (directory / f'{label}-request.json').write_text(json.dumps(request, ensure_ascii=False, indent=2))
+    (directory / f'{label}-request.json').write_text(json.dumps(request, ensure_ascii=False, indent=2),encoding='utf-8')
     t = time.monotonic()
     req = urllib.request.Request(BASE+'/chat/completions', json.dumps(request).encode(), {'Content-Type':'application/json'})
     try:
@@ -67,12 +69,12 @@ def _call(system, payload, schema, directory, label, max_tokens=2200):
         value = json.loads(choice['message']['content'])
         Draft202012Validator(schema).validate(value)
         record = {'model':data.get('model'), 'seconds':time.monotonic()-t, 'usage':data.get('usage'), 'output':value}
-        (directory/f'{label}-response.json').write_text(json.dumps(record,ensure_ascii=False,indent=2))
+        (directory/f'{label}-response.json').write_text(json.dumps(record,ensure_ascii=False,indent=2),encoding='utf-8')
         print(json.dumps({'event':'local_model_completed','label':label,'seconds':record['seconds'],'usage':record['usage']}),flush=True)
         return value
     except Exception as e:
         message = e.read().decode()[:1600] if isinstance(e, urllib.error.HTTPError) else str(e)
-        (directory/f'{label}-error.json').write_text(json.dumps({'error':message,'seconds':time.monotonic()-t}))
+        (directory/f'{label}-error.json').write_text(json.dumps({'error':message,'seconds':time.monotonic()-t}),encoding='utf-8')
         raise RuntimeError('Local model failed: '+message) from e
 
 def validate_citations(result, sources):

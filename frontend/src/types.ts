@@ -56,7 +56,7 @@ export type ExecutorClass = (typeof EXECUTOR_CLASSES)[number]
 export type PlanState = (typeof PLAN_STATES)[number]
 export type VerificationLevel = (typeof VERIFICATION_LEVELS)[number]
 export type WorkflowStatus = (typeof WORKFLOW_STATUSES)[number]
-export type HumanAction = 'Complete' | 'Ask Clarification' | 'Narrow Task' | 'Request Reassignment' | 'Decline Authority'
+export type HumanAction = 'Complete' | 'Ask Clarification' | 'Partial' | 'Narrow Task' | 'Request Reassignment' | 'Decline Authority'
 export type EvidenceKind = (typeof EVIDENCE_KINDS)[number]
 export type EvidenceStatus = (typeof EVIDENCE_STATUSES)[number]
 export type EvidenceSourceRole = (typeof EVIDENCE_SOURCE_ROLES)[number]
@@ -92,12 +92,18 @@ export interface EvidenceViewModel {
   requestState?: 'Not requested' | 'Requested'
 }
 
-export interface HumanInput { operator: string; judgment: string; reason: string }
+export interface HumanInput { judgment: string; reason: string }
+export interface HumanHandoffView {
+  handoff_id: string; workflow_id: string; plan_id: string; plan_version: number; task_id: string
+  objective: string; evidence_refs: unknown[]; authority_requirement: string | null
+  requested_decision_authority_scope: 'NO_DECISION' | 'ANALYSIS_OR_RECOMMENDATION' | 'AUTHORITY_DECISION'
+  completion_criteria: string[]; unresolved_questions: string[]; created_at: string
+}
 export interface TaskResultView { blockers?: string[]; nextActions?: string[]; authorityDecisions?: string[]; summary: string; findings: { statement: string; citations: { sourceId: string; line: number; quote: string }[] }[] }
 
 export interface TaskViewModel {
   result?: TaskResultView
-  humanResponse?: HumanInput & { action: string; timestamp: string }
+  humanResponse?: string | (HumanInput & { action: string; timestamp: string })
   id: string
   sequence: number
   title: string
@@ -116,6 +122,9 @@ export interface TaskViewModel {
   consequenceLabel?: 'Authorization Required' | 'Human Decision' | 'Mandatory Verification'
   humanRequest?: string
   humanState?: string
+  humanHandoff?: HumanHandoffView
+  authorityRequirement?: string
+  requestedDecisionAuthorityScope?: 'NO_DECISION' | 'ANALYSIS_OR_RECOMMENDATION' | 'AUTHORITY_DECISION'
 }
 
 export interface OperatorViewModel {
@@ -124,6 +133,8 @@ export interface OperatorViewModel {
   role: string
   evidenceState: string
   scaffolding: string
+  actorId?: string
+  authorityValidation?: { status: 'NOT_REQUIRED' | 'SATISFIED' | 'NOT_SATISFIED' | 'UNVERIFIED'; declared_requirement: string | null; basis_refs: unknown[]; reason: string | null }
 }
 
 export interface ActivityEvent {

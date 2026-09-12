@@ -11,11 +11,12 @@ from .store import Store
 from .workspace import Workspace
 from .service import Service
 from .model import BASE,MODEL
+from workflow_governor.human.interaction import FileHumanInteractionStore
 
 REPO=Path(__file__).resolve().parents[2]
 RUNTIME=Path(os.getenv('GOVERNOR_RUNTIME',str(REPO/'runtime')))
-GRANTS=json.loads((REPO/'config/workspaces.json').read_text())
-SERVICE=Service(Store(RUNTIME/'workflows',REPO,GRANTS),Workspace(REPO,GRANTS))
+GRANTS=json.loads((REPO/'config/workspaces.json').read_text(encoding='utf-8'))
+SERVICE=Service(Store(RUNTIME/'workflows',REPO,GRANTS),Workspace(REPO,GRANTS),human_interactions=FileHumanInteractionStore(RUNTIME))
 
 class Handler(BaseHTTPRequestHandler):
     def send_json(self,status,value):
@@ -30,7 +31,7 @@ class Handler(BaseHTTPRequestHandler):
                     with urllib.request.build_opener(urllib.request.ProxyHandler({})).open(BASE+'/models',timeout=3) as response:
                         reachable=any(m['id']==MODEL for m in json.load(response)['data'])
                 except Exception:pass
-                return self.send_json(200,{'ok':True,'model':MODEL,'modelReachable':reachable,'protocol':'OpenAI-compatible','humanRouting':False})
+                return self.send_json(200,{'ok':True,'model':MODEL,'modelReachable':reachable,'protocol':'OpenAI-compatible','humanRouting':SERVICE.human_validator is not None})
             if path=='/api/workspaces':return self.send_json(200,[{'id':k,'label':v['label']} for k,v in GRANTS.items()])
             if path=='/api/workflows':return self.send_json(200,SERVICE.store.list())
             parts=path.strip('/').split('/')
@@ -42,9 +43,11 @@ class Handler(BaseHTTPRequestHandler):
                 records=[]
                 for folder in ['artifacts/runs','artifacts/plans']:
                     for p in sorted(confined(root,folder).glob('*.json')):
-                        records.append({'file':p.name,'record':json.loads(confined(root,p.relative_to(root).as_posix()).read_text())})
+                        records.append({'file':p.name,'record':json.loads(confined(root,p.relative_to(root).as_posix()).read_text(encoding='utf-8'))})
                 return self.send_json(200,{'records':records})
             if len(parts)==3 and parts[:2]==['api','workflows']:return self.send_json(200,SERVICE.store.read(parts[2]))
+            if len(parts)==6 and parts[:2]==['api','workflows'] and parts[3]=='tasks' and parts[5]=='handoff':
+                return self.send_json(200,SERVICE.human_handoff(parts[2],parts[4]).to_dict())
             if path.startswith('/api/'):return self.send_json(404,{'error':'Not found'})
             root=Path(os.getenv('GOVERNOR_FRONTEND_DIR',str(REPO/'frontend/dist'))).resolve();file=confined(root,path.lstrip('/') or 'index.html')
             if not file.is_relative_to(root):raise ValueError('Invalid static path')
@@ -82,7 +85,7 @@ class Handler(BaseHTTPRequestHandler):
             elif action=='tasks' and len(parts)==6:
                 task=parts[4]
                 if parts[5]=='execute':value=SERVICE.execute(identity,task)
-                elif parts[5]=='human':value=SERVICE.human(identity,task,data)
+                elif parts[5]=='human':value=SERVICE.human(identity,task,data,session_id=self.headers.get('X-Session-Id',''))
                 elif parts[5]=='resume':value=SERVICE.resume(identity,task,data['note'])
                 else:raise ValueError('Unsupported task action')
             else:raise ValueError('Unsupported workflow action')

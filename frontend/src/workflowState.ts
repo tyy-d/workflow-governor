@@ -66,6 +66,7 @@ export function updateHumanTask(workflow: WorkflowViewModel, taskId: string, act
   const states: Record<HumanAction, string> = {
     Complete: 'Completed locally',
     'Ask Clarification': 'Clarification requested',
+    Partial: 'Partial response recorded',
     'Narrow Task': 'Narrowing requested',
     'Request Reassignment': 'Reassignment requested',
     'Decline Authority': 'Authority declined',
