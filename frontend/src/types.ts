@@ -93,7 +93,7 @@ export interface EvidenceViewModel {
 }
 
 export interface HumanInput { operator: string; judgment: string; reason: string }
-export interface TaskResultView { summary: string; findings: { statement: string; citations: { sourceId: string; line: number; quote: string }[] }[] }
+export interface TaskResultView { blockers?: string[]; nextActions?: string[]; authorityDecisions?: string[]; summary: string; findings: { statement: string; citations: { sourceId: string; line: number; quote: string }[] }[] }
 
 export interface TaskViewModel {
   result?: TaskResultView

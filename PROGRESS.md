@@ -56,3 +56,12 @@ Next: preserve the existing integration in a baseline commit; merge current upst
 ## Additive contract compatibility fix
 
 The final teammate merge added `TaskSpec.requested_decision_authority_scope` while retaining durable schema version 1. Strict loading initially rejected prior TaskSpec records. Rolled the application back before repair. The codec now accepts exactly that formerly absent field as `NO_DECISION` in memory; all other missing/unknown fields remain invalid. Existing plan files and hashes are unchanged. Regression includes a least-privilege, non-mutating compatibility test, and strict loading of the real saved workflow passes.
+
+## Business overview for judges
+
+- Added a business-facing default dashboard within the existing Notion-style workbench. All workflows remain available through a separate functional navigation item.
+- The featured example is selected from current, readable workflows with saved AI analysis. Historical acceptance runs are excluded from dashboard totals; no invented ROI, time saved, production volume, or authority claims.
+- The overview explains the product, summarizes actual work delivered, source documents and cited findings, shows task allocation, and makes remaining issues and proposed follow-up visible.
+- Source references open the exact saved evidence line. Saved analysis, human handoff, full workflow, activity and new-workflow actions use existing live screens and APIs.
+- Chromium acceptance verified API-to-display counts, evidence drill-down, analysis, waiting human handoff, draft state, all-workflow navigation, refresh and 1440/1280/1024/390 widths. Screenshots/logs: runtime/business-dashboard/.
+- No backend, data model, model configuration, or workflow records were changed for this dashboard.

@@ -10,7 +10,7 @@ let id=process.env.GOVERNOR_TEST_WORKFLOW
 const state=async()=>await(await fetch(base+'/api/workflows/'+id)).json()
 async function settle(){for(let i=0;i<150;i++){const w=await state();if(!w.operation){if(w.error)throw Error(w.error);return w}if(i%5===0)console.log(new Date().toISOString(),w.operation);await new Promise(r=>setTimeout(r,2000))}throw Error('Run timeout')}
 try{
- await page.goto(base);await page.getByRole('heading',{name:'Workflows',exact:true}).waitFor();await page.screenshot({path:report+'/after-home-1440.png',fullPage:true})
+ await page.goto(base+'/#workflows');await page.getByRole('heading',{name:'Workflows',exact:true}).waitFor();await page.screenshot({path:report+'/after-home-1440.png',fullPage:true})
  if(!id){
   await page.getByRole('button',{name:'+ New workflow',exact:true}).last().click()
   await page.getByLabel('Goal',{exact:true}).fill('Review the selected vendor status and readiness records. Extract facts, identify unresolved work, and propose a bounded evidence review. Do not perform external activation or infer unavailable company policy.')

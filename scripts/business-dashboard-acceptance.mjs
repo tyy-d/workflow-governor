@@ -1,0 +1,45 @@
+import {chromium} from '../runtime/browser/node_modules/playwright/index.mjs'
+import fs from 'node:fs'
+const base=process.env.GOVERNOR_TEST_URL||'http://127.0.0.1:8081'
+const dir=process.env.GOVERNOR_TEST_REPORT_DIR||'runtime/business-dashboard'
+fs.mkdirSync(dir,{recursive:true})
+const browser=await chromium.launch({headless:true})
+const page=await browser.newPage({viewport:{width:1440,height:1100}})
+const errors=[];page.on('pageerror',e=>errors.push(String(e)))
+try {
+ await page.goto(base)
+ await page.getByRole('heading',{name:'From business question to accountable action.'}).waitFor()
+ const selected=await page.getByLabel('Featured workflow').inputValue()
+ const w=await(await fetch(base+'/api/workflows/'+selected)).json()
+ const done=w.tasks.filter(t=>t.status==='Completed'&&t.result)
+ const analysis=[...done].reverse().find(t=>t.executor==='Local AI')
+ if(!analysis)throw Error('A real saved analysis is required for this acceptance run')
+ const counts=await page.locator('.run-facts dd').allTextContents()
+ if(!counts[0].startsWith(String(done.length))||!counts[1].startsWith(String(w.evidence.length))||!counts[2].startsWith(String(analysis.result.findings.filter(f=>f.citations.length).length)))throw Error('Summary counts do not match API results')
+ await page.screenshot({path:dir+'/overview-1440.png',fullPage:true})
+ await page.screenshot({path:dir+'/overview-first-screen.png'})
+ await page.getByRole('button',{name:'Inspect source for finding 1, line '+analysis.result.findings[0].citations[0].line,exact:true}).click()
+ await page.locator('dialog[open] .source-lines .highlight').waitFor()
+ if(!(await page.locator('.source-lines .highlight').innerText()).includes(analysis.result.findings[0].citations[0].quote))throw Error('Wrong source line displayed')
+ await page.screenshot({path:dir+'/source-drilldown.png',fullPage:true})
+ await page.getByRole('button',{name:'Close details',exact:true}).click()
+ await page.goto(base)
+ await page.getByRole('button',{name:'View saved analysis',exact:false}).click()
+ await page.getByRole('heading',{name:'Saved execution result',exact:true}).waitFor()
+ await page.getByRole('button',{name:'Close details',exact:true}).click()
+ await page.goto(base)
+ await page.getByRole('button',{name:'Inspect the handoff',exact:false}).click()
+ await page.getByRole('heading',{name:'Waiting for an authorized operator',exact:true}).waitFor()
+ await page.getByRole('button',{name:'Close details',exact:true}).click()
+ await page.goto(base)
+ await page.getByRole('button',{name:'Browse all workflows',exact:true}).click()
+ await page.getByRole('heading',{name:'Workflows',exact:true}).waitFor()
+ await page.goto(base)
+ const rows=await(await fetch(base+'/api/workflows')).json();const draft=rows.find(x=>!x.readOnly&&!x.tasks.length)
+ if(draft){await page.getByLabel('Featured workflow').selectOption(draft.id);await page.getByRole('heading',{name:'Ready to put the plan to work',exact:true}).waitFor();const text=await page.locator('.run-facts').innerText();if(!text.includes('0'))throw Error('Draft values did not reset');await page.screenshot({path:dir+'/draft-overview.png',fullPage:true});await page.getByLabel('Featured workflow').selectOption(selected)}
+ for(const width of [1280,1024,390]){await page.setViewportSize({width,height:1000});await page.screenshot({path:dir+`/overview-${width}.png`,fullPage:true});if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth))throw Error(`Overflow at ${width}`)}
+ await page.reload();await page.getByRole('heading',{name:'From business question to accountable action.'}).waitFor()
+ if(errors.length)throw Error(errors.join('\n'))
+ fs.writeFileSync(dir+'/checks.json',JSON.stringify({workflow:selected,counts,sourceDrilldown:true,savedAnalysis:true,humanHandoff:true,allWorkflows:true,draftState:Boolean(draft),widths:[1440,1280,1024,390],browserErrors:errors},null,2))
+ console.log('PASS: live values, source line, saved analysis, human handoff, navigation, draft and four widths')
+}finally{await browser.close()}
