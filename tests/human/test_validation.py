@@ -181,10 +181,37 @@ def test_file_adapter_keeps_submissions_distinct_and_idempotent(tmp_path) -> Non
     assert validator().validate_payload(handoff(), payload, session_id="S001").status is ValidationStatus.ACCEPTED
     assert store.write_submission(second).name == "R002.json"
     artifact = store.register_artifact(first, "note.txt", b"bounded human note")
-    assert store.is_registered("H001", "R001", artifact)
+    assert store.is_registered("W001", "H001", "R001", artifact)
     accepted = response(response_id="R001", evidence=(GRANT, artifact))
     result = validator(artifacts=store).validate(handoff(), accepted, session_id="S001")
     assert result.status is ValidationStatus.ACCEPTED
+
+
+def test_artifact_registration_is_bound_to_exact_workflow_path(tmp_path) -> None:
+    store = FileHumanInteractionStore(tmp_path)
+    artifact = store.register_artifact(response(), "note.txt", b"bounded human note")
+    assert not store.is_registered("OTHER", "H001", "R001", artifact)
+
+    misleading = tmp_path / "workflows/OTHER/artifacts/human/H001/responses/R001/artifacts"
+    misleading.mkdir(parents=True)
+    misleading_path = misleading / f"{artifact.artifact_id}-note.txt"
+    misleading_path.write_bytes(b"unrelated workflow artifact")
+    misleading_ref = EvidenceRef(
+        misleading_path.relative_to(tmp_path).as_posix(),
+        artifact_id=artifact.artifact_id,
+    )
+    assert not store.is_registered("W001", "H001", "R001", misleading_ref)
+
+
+def test_file_adapter_rejects_symlinked_interaction_paths(tmp_path) -> None:
+    store = FileHumanInteractionStore(tmp_path)
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    linked = tmp_path / "workflows/W001/artifacts/human"
+    linked.parent.mkdir(parents=True)
+    linked.symlink_to(outside, target_is_directory=True)
+    with pytest.raises(ValueError, match="unsafe human interaction path"):
+        store.write_submission(response())
 
 
 def test_malformed_wire_payload_returns_typed_rejection() -> None:

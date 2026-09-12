@@ -4,6 +4,8 @@ from dataclasses import dataclass, replace
 from pathlib import Path, PurePosixPath
 from typing import Iterable
 
+from workflow_governor.core.config import confined
+from workflow_governor.core.errors import ContractValidationError, WorkspaceAccessError
 from workflow_governor.core.models import EvidenceContent
 from workflow_governor.core.security import is_forbidden_runtime_source
 from workflow_governor.execution.runner import HumanHandoff
@@ -94,9 +96,10 @@ class PersonaContextAssembler:
 
     def _read(self, source: str) -> str:
         normalized = _normalize(source)
-        candidate = (self._root / normalized).resolve()
-        if not candidate.is_relative_to(self._root):
-            raise PersonaContextError(f"source escapes repository root: {source}")
+        try:
+            candidate = confined(self._root, normalized)
+        except (ContractValidationError, WorkspaceAccessError) as exc:
+            raise PersonaContextError(f"unsafe authorized source: {source}") from exc
         if not candidate.is_file():
             raise PersonaContextError(f"authorized source does not exist: {source}")
         return candidate.read_text(encoding="utf-8")

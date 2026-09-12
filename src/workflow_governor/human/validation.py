@@ -29,7 +29,13 @@ class AuthorityProvider(Protocol):
 
 
 class HumanArtifactRegistry(Protocol):
-    def is_registered(self, handoff_id: str, response_id: str, evidence_ref: EvidenceRef) -> bool: ...
+    def is_registered(
+        self,
+        workflow_id: str,
+        handoff_id: str,
+        response_id: str,
+        evidence_ref: EvidenceRef,
+    ) -> bool: ...
 
 
 @dataclass(frozen=True, slots=True)
@@ -41,7 +47,13 @@ class BoundIdentityProvider:
 
 
 class EmptyArtifactRegistry:
-    def is_registered(self, handoff_id: str, response_id: str, evidence_ref: EvidenceRef) -> bool:
+    def is_registered(
+        self,
+        workflow_id: str,
+        handoff_id: str,
+        response_id: str,
+        evidence_ref: EvidenceRef,
+    ) -> bool:
         return False
 
 
@@ -113,7 +125,12 @@ class HumanResponseValidator:
             if not isinstance(ref, EvidenceRef):
                 issues.append(self._issue(ValidationIssueCode.MALFORMED_RESPONSE, "evidence collections must contain canonical EvidenceRef values", field))
                 continue
-            if ref not in granted and not self._artifacts.is_registered(handoff.handoff_id, response.response_id, ref):
+            if ref not in granted and not self._artifacts.is_registered(
+                handoff.workflow_id,
+                handoff.handoff_id,
+                response.response_id,
+                ref,
+            ):
                 code = ValidationIssueCode.INVALID_ARTIFACT_ATTRIBUTION if ref.artifact_id else ValidationIssueCode.EVIDENCE_OUTSIDE_GRANT
                 issues.append(self._issue(code, f"evidence is not granted or attributable: {ref.source}", field))
 

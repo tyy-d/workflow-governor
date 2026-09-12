@@ -7,6 +7,8 @@ from pathlib import Path
 import re
 from typing import Any
 
+from workflow_governor.core.config import confined
+from workflow_governor.core.errors import ContractValidationError, WorkspaceAccessError
 from workflow_governor.core.models import EvidenceRef
 from workflow_governor.core.serialization import to_primitive
 from workflow_governor.execution.runner import HumanHandoff
@@ -27,15 +29,15 @@ class FileHumanInteractionStore:
         return self._write_idempotent(directory / "handoff.json", to_primitive(handoff))
 
     def write_submission(self, response: HumanTaskResponse) -> Path:
-        directory = self._interaction_dir(response.workflow_id, response.handoff_id) / "responses"
+        directory = self._interaction_path(response.workflow_id, response.handoff_id, "responses")
         return self._write_idempotent(directory / f"{self._safe(response.response_id)}.json", to_primitive(response))
 
     def read_submission(self, workflow_id: str, handoff_id: str, response_id: str) -> dict[str, Any]:
-        path = self._interaction_dir(workflow_id, handoff_id) / "responses" / f"{self._safe(response_id)}.json"
+        path = self._interaction_path(workflow_id, handoff_id, "responses", f"{self._safe(response_id)}.json")
         return json.loads(path.read_text(encoding="utf-8"))
 
     def write_validation(self, response: HumanTaskResponse, result: ResponseValidationResult) -> Path:
-        directory = self._interaction_dir(response.workflow_id, response.handoff_id) / "validation"
+        directory = self._interaction_path(response.workflow_id, response.handoff_id, "validation")
         return self._write_idempotent(directory / f"{self._safe(response.response_id)}.json", to_primitive(result))
 
     def register_artifact(self, response: HumanTaskResponse, filename: str, content: bytes) -> EvidenceRef:
@@ -44,7 +46,13 @@ class FileHumanInteractionStore:
             raise ValueError("artifact filename must be a simple basename")
         digest = sha256(response.response_id.encode() + b"\0" + safe_name.encode() + b"\0" + content).hexdigest()
         artifact_id = f"HA-{digest[:20]}"
-        directory = self._interaction_dir(response.workflow_id, response.handoff_id) / "responses" / self._safe(response.response_id) / "artifacts"
+        directory = self._interaction_path(
+            response.workflow_id,
+            response.handoff_id,
+            "responses",
+            self._safe(response.response_id),
+            "artifacts",
+        )
         path = directory / f"{artifact_id}-{safe_name}"
         directory.mkdir(parents=True, exist_ok=True)
         if path.exists() and path.read_bytes() != content:
@@ -54,23 +62,52 @@ class FileHumanInteractionStore:
         relative = path.relative_to(self._root).as_posix()
         return EvidenceRef(source=relative, artifact_id=artifact_id, label=safe_name)
 
-    def is_registered(self, handoff_id: str, response_id: str, evidence_ref: EvidenceRef) -> bool:
+    def is_registered(
+        self,
+        workflow_id: str,
+        handoff_id: str,
+        response_id: str,
+        evidence_ref: EvidenceRef,
+    ) -> bool:
         if not evidence_ref.artifact_id:
             return False
         try:
+            workflow = self._safe(workflow_id)
             handoff = self._safe(handoff_id)
             response = self._safe(response_id)
         except ValueError:
             return False
-        expected_parent = self._root / "workflows"
-        candidate = (self._root / evidence_ref.source).resolve()
+        try:
+            expected_parent = self._interaction_path(
+                workflow,
+                handoff,
+                "responses",
+                response,
+                "artifacts",
+            ).resolve()
+            candidate = confined(self._root, evidence_ref.source).resolve()
+        except (ContractValidationError, WorkspaceAccessError, ValueError):
+            return False
         if not candidate.is_relative_to(expected_parent) or not candidate.is_file():
             return False
-        parts = candidate.parts
-        return handoff in parts and response in parts and candidate.name.startswith(f"{evidence_ref.artifact_id}-")
+        return candidate.parent == expected_parent and candidate.name.startswith(f"{evidence_ref.artifact_id}-")
 
     def _interaction_dir(self, workflow_id: str, handoff_id: str) -> Path:
-        return self._root / "workflows" / self._safe(workflow_id) / "artifacts" / "human" / self._safe(handoff_id)
+        return self._interaction_path(workflow_id, handoff_id)
+
+    def _interaction_path(self, workflow_id: str, handoff_id: str, *parts: str) -> Path:
+        relative = "/".join((
+            "workflows",
+            self._safe(workflow_id),
+            "artifacts",
+            "human",
+            self._safe(handoff_id),
+            *parts,
+        ))
+        try:
+            return confined(self._root, relative)
+        except (ContractValidationError, WorkspaceAccessError) as exc:
+            raise ValueError("unsafe human interaction path") from exc
 
     @staticmethod
     def _safe(value: str) -> str:

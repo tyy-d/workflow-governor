@@ -97,3 +97,14 @@ def test_symlink_escape_is_rejected(tmp_path) -> None:
     actor.symlink_to(outside)
     with pytest.raises(PersonaContextError):
         PersonaContextAssembler(tmp_path).render(session(), handoff())
+
+
+def test_symlink_to_hidden_source_inside_repository_is_rejected(tmp_path) -> None:
+    setup_repository(tmp_path)
+    hidden = tmp_path / "personas/P001/evaluator.json"
+    hidden.write_text('{"hidden": true}', encoding="utf-8")
+    actor = tmp_path / "personas/P001/actor.md"
+    actor.unlink()
+    actor.symlink_to(hidden)
+    with pytest.raises(PersonaContextError):
+        PersonaContextAssembler(tmp_path).render(session(), handoff())
