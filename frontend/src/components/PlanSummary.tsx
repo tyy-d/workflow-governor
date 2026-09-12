@@ -47,13 +47,14 @@ export function PlanSummary({ workflow, onApprove, onRequestRevision }: Props) {
         <button className="primary-action" onClick={onApprove}>Approve Plan</button>
         <button onClick={() => { setShowRevision((value) => !value); setError('') }}>Request Revision</button>
       </div>}
-      {workflow.planState === 'REVISION_REQUESTED' && <div className="plan-pause"><strong>Execution paused</strong><span>Awaiting replanning in a future runtime milestone.</span></div>}
+      {workflow.planState === 'REVISION_REQUESTED' && <div className="plan-pause"><strong>Execution paused</strong><span>The local model is preparing a revised proposal.</span></div>}
       {showRevision && <form className="revision-form" onSubmit={submitRevision}>
         <label htmlFor="revision-note">What should the plan reconsider?</label>
         <textarea id="revision-note" autoFocus value={note} onChange={(event) => { setNote(event.target.value); setError('') }} placeholder="The insurance review should happen before commercial readiness." />
         {error && <p role="alert">{error}</p>}
         <div><button type="button" onClick={() => setShowRevision(false)}>Cancel</button><button className="primary-action" type="submit">Submit Request</button></div>
       </form>}
+      {Boolean(workflow.assumptions?.length || workflow.questions?.length) && <details><summary>Assumptions and unresolved questions</summary>{workflow.assumptions?.map((s,i)=><p key={`a${i}`}>Assumption: {s}</p>)}{workflow.questions?.map((s,i)=><p key={`q${i}`}>Question: {s}</p>)}</details>}
       {workflow.revisionNote && <div className="revision-note"><strong>Requested change</strong><span>{workflow.revisionNote}</span></div>}
     </section>
   )

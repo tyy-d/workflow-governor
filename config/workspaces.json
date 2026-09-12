@@ -1,0 +1,26 @@
+{
+  "vendor-activation": {
+    "label": "Northstar \u2014 Vendor Activation",
+    "root": "cases/CASE_001_VENDOR_ACTIVATION/workspace",
+    "policies": [
+      {
+        "path": "company/northstar/handbook/00_COMPANY_AND_VENDOR_OVERVIEW.md",
+        "sections": [
+          "1.",
+          "4.",
+          "5.",
+          "6.",
+          "7."
+        ]
+      },
+      {
+        "path": "company/northstar/handbook/01_PURCHASE_ORDERS_AND_DELIVERY_PERFORMANCE.md",
+        "sections": [
+          "1.",
+          "2.",
+          "4.1"
+        ]
+      }
+    ]
+  }
+}

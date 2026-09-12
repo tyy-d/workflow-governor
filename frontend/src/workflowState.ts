@@ -68,6 +68,7 @@ export function updateHumanTask(workflow: WorkflowViewModel, taskId: string, act
     'Ask Clarification': 'Clarification requested',
     'Narrow Task': 'Narrowing requested',
     'Request Reassignment': 'Reassignment requested',
+    'Decline Authority': 'Authority declined',
   }
   let tasks = workflow.tasks.map((item) => item.id === taskId ? {
     ...item,

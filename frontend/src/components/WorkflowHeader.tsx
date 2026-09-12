@@ -6,7 +6,7 @@ export function AppTopbar({ currentView, onHome, onNew }: { currentView: 'home' 
     <header className="app-topbar">
       <button className="brand" onClick={onHome} aria-label="Open workflow home"><span className="brand-mark"><Icon name="workflow" size={19} /></span><span>Workflow <strong>Governor</strong></span><span className="demo-tag">DEMO</span></button>
       <nav className="app-navigation" aria-label="Application"><button className={currentView === 'home' ? 'active' : ''} onClick={onHome}>Workflows</button><button className={currentView === 'new' ? 'active' : ''} onClick={onNew}>+ New Workflow</button></nav>
-      <div className="topbar-meta"><span className="boundary-label"><Icon name="shield" size={14} /> Bounded evidence</span><span className="runtime-pill"><i /> LOCAL <em>mock state</em></span></div>
+      <div className="topbar-meta"><span className="boundary-label"><Icon name="shield" size={14} /> Bounded evidence</span><span className="runtime-pill"><i /> LOCAL <em>live state</em></span></div>
     </header>
   )
 }

@@ -56,7 +56,7 @@ export type ExecutorClass = (typeof EXECUTOR_CLASSES)[number]
 export type PlanState = (typeof PLAN_STATES)[number]
 export type VerificationLevel = (typeof VERIFICATION_LEVELS)[number]
 export type WorkflowStatus = (typeof WORKFLOW_STATUSES)[number]
-export type HumanAction = 'Complete' | 'Ask Clarification' | 'Narrow Task' | 'Request Reassignment'
+export type HumanAction = 'Complete' | 'Ask Clarification' | 'Narrow Task' | 'Request Reassignment' | 'Decline Authority'
 export type EvidenceKind = (typeof EVIDENCE_KINDS)[number]
 export type EvidenceStatus = (typeof EVIDENCE_STATUSES)[number]
 export type EvidenceSourceRole = (typeof EVIDENCE_SOURCE_ROLES)[number]
@@ -92,7 +92,12 @@ export interface EvidenceViewModel {
   requestState?: 'Not requested' | 'Requested'
 }
 
+export interface HumanInput { operator: string; judgment: string; reason: string }
+export interface TaskResultView { summary: string; findings: { statement: string; citations: { sourceId: string; line: number; quote: string }[] }[] }
+
 export interface TaskViewModel {
+  result?: TaskResultView
+  humanResponse?: HumanInput & { action: string; timestamp: string }
   id: string
   sequence: number
   title: string
@@ -130,6 +135,10 @@ export interface ActivityEvent {
 }
 
 export interface WorkflowViewModel {
+  assumptions?: string[]
+  questions?: string[]
+  operation?: string | null
+  error?: string | null
   id: string
   name: string
   objective: string
