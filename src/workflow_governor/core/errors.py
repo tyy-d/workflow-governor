@@ -21,3 +21,15 @@ class BlockedExecution(WorkflowGovernorError):
 class AdapterUnavailable(BlockedExecution):
     """The configured local-model adapter is unavailable."""
 
+
+class ConfigurationError(WorkflowGovernorError):
+    """Local runtime configuration is invalid."""
+
+
+class PersistenceError(WorkflowGovernorError):
+    """Durable state could not be read or written safely."""
+
+    def __init__(self, message, diagnostics=()):
+        super().__init__(message)
+        self.diagnostics = tuple(diagnostics)
+
