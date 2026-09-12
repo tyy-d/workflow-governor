@@ -5,6 +5,7 @@ change request during parallel development.
 """
 
 from .models import (
+    DecisionAuthorityScope,
     EvidenceContent,
     EvidenceRef,
     ExecutionStatus,
@@ -19,6 +20,7 @@ from .models import (
 )
 
 __all__ = [
+    "DecisionAuthorityScope",
     "EvidenceContent",
     "EvidenceRef",
     "ExecutionStatus",
@@ -31,4 +33,3 @@ __all__ = [
     "WorkflowPlan",
     "WorkspaceMap",
 ]
-

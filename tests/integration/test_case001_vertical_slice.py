@@ -6,6 +6,7 @@ import re
 from datetime import datetime
 
 from workflow_governor.core.models import (
+    DecisionAuthorityScope,
     EvidenceContent,
     EvidenceRef,
     ExecutionStatus,
@@ -56,7 +57,7 @@ class ReviewedPlanBackend:
                 TaskSpec("standing", "Inspect standing", "Extract selected status fields", ExecutorType.DETERMINISTIC, evidence_requirements=(EvidenceRef(STATUS),), completion_criteria=("Return cited status fields",), operation="extract_fields"),
                 TaskSpec("insurance", "Check evidence date", "Compare the supplied expiration and review dates", ExecutorType.DETERMINISTIC, evidence_requirements=(EvidenceRef(COI), EvidenceRef(STATUS)), completion_criteria=("Return the exact date relationship",), operation="compare_dates"),
                 TaskSpec("po", "Inspect transmission state", "Check whether a transmission identifier is present", ExecutorType.DETERMINISTIC, evidence_requirements=(EvidenceRef(PO),), completion_criteria=("Return the exact transmission comparison",), operation="structured_equal"),
-                TaskSpec("activate", "Complete authorized activation", "Review the evidence and perform only the authorized status action", ExecutorType.HUMAN, dependencies=("standing", "insurance", "po"), evidence_requirements=(EvidenceRef(STATUS), EvidenceRef(COI), EvidenceRef(PO)), policy_requirements=(EvidenceRef(POLICY),), completion_criteria=("Record an authorized decision",), authority_requirement="Vendor Compliance activation authority"),
+                TaskSpec("activate", "Complete authorized activation", "Review the evidence and perform only the authorized status action", ExecutorType.HUMAN, dependencies=("standing", "insurance", "po"), evidence_requirements=(EvidenceRef(STATUS), EvidenceRef(COI), EvidenceRef(PO)), policy_requirements=(EvidenceRef(POLICY),), completion_criteria=("Record an authorized decision",), authority_requirement="Vendor Compliance activation authority", requested_decision_authority_scope=DecisionAuthorityScope.AUTHORITY_DECISION),
             ),
             unresolved_questions=("Whether acceptable replacement evidence will be provided",),
         )

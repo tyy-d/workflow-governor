@@ -3,9 +3,11 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Mapping, Protocol
+from uuid import uuid4
 
 from workflow_governor.core.models import (
     EvidenceRef,
+    DecisionAuthorityScope,
     ExecutionStatus,
     ExecutorType,
     PlanStatus,
@@ -47,12 +49,18 @@ class ExecutionEvent:
 
 @dataclass(frozen=True, slots=True)
 class HumanHandoff:
+    handoff_id: str
+    workflow_id: str
+    plan_id: str
+    plan_version: int
     task_id: str
     objective: str
     evidence_refs: tuple[EvidenceRef, ...]
     authority_requirement: str | None
+    requested_decision_authority_scope: DecisionAuthorityScope
     completion_criteria: tuple[str, ...]
     unresolved_questions: tuple[str, ...]
+    created_at: str
 
 
 class ExecutionEventSink(Protocol):
@@ -79,8 +87,16 @@ class MinimalTaskRunner:
         ExecutionStatus.PENDING_HUMAN,
     }
 
-    def __init__(self, executors: Mapping[ExecutorType, TaskExecutor]) -> None:
+    def __init__(
+        self,
+        executors: Mapping[ExecutorType, TaskExecutor],
+        *,
+        handoff_id_factory=None,
+        clock=None,
+    ) -> None:
         self._executors = dict(executors)
+        self._handoff_id_factory = handoff_id_factory or (lambda: f"H-{uuid4()}")
+        self._clock = clock or (lambda: datetime.now(timezone.utc))
 
     def run(
         self,
@@ -114,12 +130,18 @@ class MinimalTaskRunner:
                 self._transition(run_state, state, ExecutionStatus.READY, event_sink)
                 if task.executor_type is ExecutorType.HUMAN:
                     handoff = HumanHandoff(
-                        task.task_id,
-                        task.objective,
-                        task.evidence_requirements + task.policy_requirements,
-                        task.authority_requirement,
-                        task.completion_criteria,
-                        plan.unresolved_questions,
+                        handoff_id=self._handoff_id_factory(),
+                        workflow_id=run_state.workflow_id,
+                        plan_id=plan.plan_id,
+                        plan_version=plan.version,
+                        task_id=task.task_id,
+                        objective=task.objective,
+                        evidence_refs=task.evidence_requirements + task.policy_requirements,
+                        authority_requirement=task.authority_requirement,
+                        requested_decision_authority_scope=task.requested_decision_authority_scope,
+                        completion_criteria=task.completion_criteria,
+                        unresolved_questions=plan.unresolved_questions,
+                        created_at=self._clock().isoformat(),
                     )
                     state.human_handoff = handoff
                     if handoff_sink is not None:

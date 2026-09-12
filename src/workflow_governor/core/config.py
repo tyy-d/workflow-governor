@@ -17,14 +17,15 @@ def confined(root: Path, relative: str) -> Path:
     """
     logical_path(relative)
     root = Path(root)
-    # Include the root itself: replacing a configured root with a link is unsafe.
-    for ancestor in (root, *root.parents):
-        try:
-            info = ancestor.lstat()
-        except FileNotFoundError:
-            continue
-        if stat.S_ISLNK(info.st_mode) or getattr(info, "st_file_attributes", 0) & 0x400:
-            raise WorkspaceAccessError("Linked root is not allowed")
+    # Reject a linked configured root, but do not reject trusted OS aliases above
+    # it (for example macOS /var -> /private/var). Requested descendants are
+    # checked individually below and resolved containment remains mandatory.
+    try:
+        root_info = root.lstat()
+    except FileNotFoundError:
+        root_info = None
+    if root_info and (stat.S_ISLNK(root_info.st_mode) or getattr(root_info, "st_file_attributes", 0) & 0x400):
+        raise WorkspaceAccessError("Linked root is not allowed")
     current = root
     for part in relative.split("/"):
         current = current / part

@@ -15,7 +15,7 @@ REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "src"))
 
 from workflow_governor.artifacts import ArtifactStore, WorkflowStateLoader
-from workflow_governor.core.config import RuntimeConfig
+from workflow_governor.core.config import RuntimeConfig, confined
 from workflow_governor.core.errors import ContractValidationError, PersistenceError, WorkspaceAccessError
 from workflow_governor.core.models import (
     EvidenceContent, EvidenceRef, ExecutionStatus, ExecutorType, PlanStatus,
@@ -200,6 +200,21 @@ class TrackATest(unittest.TestCase):
         self.assertEqual(len(found.files), 5)
         with self.assertRaises(WorkspaceAccessError):
             self.scout.retrieve(found, ["escape/secret.txt"], RetrievalLimits())
+
+    def test_symlinked_ancestor_is_allowed_but_linked_root_is_rejected(self):
+        real_parent = self.root / "real-parent"
+        concrete_root = real_parent / "repository"
+        (concrete_root / "workspace").mkdir(parents=True)
+        alias = self.root / "system-alias"
+        self.make_link(real_parent, alias, True)
+        self.assertEqual(
+            confined(alias / "repository", "workspace"),
+            alias / "repository" / "workspace",
+        )
+        linked_root = self.root / "linked-root"
+        self.make_link(concrete_root, linked_root, True)
+        with self.assertRaises(WorkspaceAccessError):
+            confined(linked_root, "workspace")
 
     def test_symlink_swapped_after_discovery(self):
         outside = self.root / "secret.txt"
