@@ -34,3 +34,15 @@ Next: preserve the existing integration in a baseline commit; merge current upst
 - Deployed initial shared-store release `2c20f13` through the existing systemd user service. Original model service unchanged. Saved workflow is available on the deployed instance.
 - Final polish: mobile rows keep status visible; request identity generation works on LAN HTTP as well as localhost.
 - Operational recovery/deployment/replay commands: docs/WORKBENCH_DEPLOYMENT.md. Baseline recovery script rehearsed in an independent directory.
+
+## Final verification — 2026-09-12
+
+- 77 backend tests passed in 2.68 seconds; TypeScript and production build passed.
+- Real model plan and semantic execution completed; deterministic result and exact citations verified against the saved source lines. Network API state and artifact state agree.
+- Fresh Chromium session on the LAN address passed for the persisted workflow at four widths. Mobile status is visible without horizontal scrolling. Save-failure and offline states were checked using browser-only network injection.
+- Baseline restore, compatible application rollback/return with identical runtime SHA-256, and new replay draft creation all passed. No side-effecting task was replayed.
+- User systemd lingering is enabled so the application can start without an interactive login. The existing Qwen service remains untouched.
+- Local stage commits: 4101045 (baseline), 1fed5cd (upstream merge), 432859b (workbench), 2c20f13 (integration), 2ef8d51 (verified deployment and mobile polish).
+- Deployed application release: 2ef8d51. Operations: docs/WORKBENCH_DEPLOYMENT.md. Live service port 8080; independent preview service port 8081.
+- GitHub write access remains unavailable and the user asked to proceed locally. No main push was attempted or claimed.
+- Remaining limits: human routing/authority module, external actions and multi-user authentication are unavailable; historical manifests are read-only. Full business evaluation, host reboot, prolonged load and exhaustive fault scenarios were not performed.

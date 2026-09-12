@@ -22,6 +22,7 @@ try{
   await page.getByRole('button',{name:'Generate plan',exact:true}).waitFor();await page.screenshot({path:report+'/empty-workflow.png',fullPage:true})
   await page.getByRole('button',{name:'Generate plan',exact:true}).click();await page.getByText(/Generating and validating plan|Selecting authorized evidence/).first().waitFor();await page.screenshot({path:report+'/loading.png',fullPage:true})
  }
+ if(id){await page.goto(base+'/#'+id);await page.getByRole('heading',{name:(await state()).name,exact:true}).waitFor()}
  let w=await settle();console.log('Plan',w.planState,w.tasks.map(t=>[t.id,t.title,t.executor]));
  if(w.planState==='PROPOSED'){await page.getByRole('button',{name:'Approve plan',exact:true}).waitFor();await page.screenshot({path:report+'/after-plan-1440.png',fullPage:true});await page.getByRole('button',{name:'Approve plan',exact:true}).click();await page.waitForTimeout(1500)}
  w=await state()
