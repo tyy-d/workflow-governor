@@ -52,3 +52,7 @@ Next: preserve the existing integration in a baseline commit; merge current upst
 - Fetched and merged remote main `8e39566`, including Frank's human/operator modules and isolation hardening, without conflicts or overwriting local integration.
 - Full combined regression: 117 passed in 3.00 seconds. Human submission is still unavailable in this deployment because trusted operator assignment and authorization are not configured; the new native modules are preserved for that integration.
 - Original main remains at teammate commit `8e39566`; this work is local only, as agreed with the user.
+
+## Additive contract compatibility fix
+
+The final teammate merge added `TaskSpec.requested_decision_authority_scope` while retaining durable schema version 1. Strict loading initially rejected prior TaskSpec records. Rolled the application back before repair. The codec now accepts exactly that formerly absent field as `NO_DECISION` in memory; all other missing/unknown fields remain invalid. Existing plan files and hashes are unchanged. Regression includes a least-privilege, non-mutating compatibility test, and strict loading of the real saved workflow passes.

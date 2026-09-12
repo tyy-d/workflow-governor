@@ -76,3 +76,14 @@ def test_failed_task_can_be_retried_without_false_corruption(app):
     assert w['tasks'][1]['status']=='Blocked' and not w.get('readOnly')
     app.resume(w['id'],'T2','Model connection restored; retry requested')
     assert app.store.read(w['id'])['tasks'][1]['status']=='Ready'
+
+def test_pre_human_task_record_reads_without_granting_authority():
+    from workflow_governor.core.models import TaskSpec,ExecutorType,DecisionAuthorityScope
+    task=TaskSpec('T1','Review','Read selected evidence',ExecutorType.LOCAL_MODEL)
+    old=task.to_dict();old.pop('requested_decision_authority_scope')
+    original=json.dumps(old,sort_keys=True)
+    restored=TaskSpec.from_dict(old)
+    assert restored.requested_decision_authority_scope==DecisionAuthorityScope.NO_DECISION
+    assert json.dumps(old,sort_keys=True)==original
+    old.pop('objective')
+    with pytest.raises(Exception):TaskSpec.from_dict(old)

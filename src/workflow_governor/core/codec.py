@@ -109,6 +109,11 @@ def from_dict(cls, value):
     if type(value) is not dict or type(value.get("schema_version")) is not int or value["schema_version"] != 1:
         raise ContractValidationError("Unsupported or missing schema_version")
     names = {f.name for f in fields(cls)}
+    # Read pre-human-integration TaskSpec records without rewriting their files.
+    # The added field has the least-privileged meaning: no decision authority.
+    if (cls.__module__ == "workflow_governor.core.models" and cls.__name__ == "TaskSpec"
+            and set(value) == (names - {"requested_decision_authority_scope"}) | {"schema_version"}):
+        value = dict(value, requested_decision_authority_scope="NO_DECISION")
     if set(value) != names | {"schema_version"}:
         raise ContractValidationError("Unknown or missing contract fields")
     hints = get_type_hints(cls)
