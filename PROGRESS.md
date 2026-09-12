@@ -65,3 +65,11 @@ The final teammate merge added `TaskSpec.requested_decision_authority_scope` whi
 - Source references open the exact saved evidence line. Saved analysis, human handoff, full workflow, activity and new-workflow actions use existing live screens and APIs.
 - Chromium acceptance verified API-to-display counts, evidence drill-down, analysis, waiting human handoff, draft state, all-workflow navigation, refresh and 1440/1280/1024/390 widths. Screenshots/logs: runtime/business-dashboard/.
 - No backend, data model, model configuration, or workflow records were changed for this dashboard.
+
+## Simplified pages and custom colors
+
+- Removed the overview's repeated product introduction, explanation row and duplicate calls to action. Findings and open issues expand on demand; the plan and saved result remain visible.
+- Added six page-color presets and an arbitrary custom color picker. Colors are saved per page in this browser and affect covers, icons and section accents, never business status.
+- Workflow properties and the full brief now expand on demand. No saved business data was removed or rewritten.
+- Browser checks passed for exact evidence drill-down, real counts, saved analysis, human handoff, all-workflow navigation, draft state, four widths, preset/custom color persistence and independent page colors. Production build/typecheck passed.
+- GitHub permissions were rechecked: the connected account now has push access to the original repository. Delivery targets main, preserving all local stage history and archives.

@@ -5,11 +5,13 @@ import { TaskWorkspace } from './components/TaskWorkspace'
 import { NewWorkflow } from './components/NewWorkflow'
 import { Icon } from './components/Icon'
 import { BusinessDashboard } from './components/BusinessDashboard'
+import { usePageColor } from './components/PageColor'
 
 const date = (value: string) => new Date(value).toLocaleString([], {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})
 const planLabel = (state: string) => ({NOT_PROPOSED:'No plan yet',PROPOSED:'Awaiting approval',APPROVED:'Approved',REVISION_REQUESTED:'Revision requested',SUPERSEDED:'Previous version'}[state] || 'Review required')
 export function App() {
  const [route,setRoute]=useState(location.hash.slice(1))
+ const pageColor=usePageColor(route||'overview')
  const [workflows,setWorkflows]=useState<WorkflowViewModel[]>([])
  const [loaded,setLoaded]=useState(false),[connected,setConnected]=useState(true)
  const [error,setError]=useState(''),[busy,setBusy]=useState(false)
@@ -36,7 +38,7 @@ export function App() {
  const citation=(id:string,n=0)=>{setEvidenceId(id);setLine(n)}
  const locked=busy||!connected||Boolean(workflow?.operation)||Boolean(workflow?.readOnly)
  const filtered=workflows.filter(w=>(w.name+' '+w.objective).toLowerCase().includes(search.toLowerCase()))
- return <div className={`workbench ${sidebar?'':'sidebar-hidden'}`}>
+ return <div className={`workbench ${sidebar?'':'sidebar-hidden'}`} style={pageColor.style}>
   <a className="skip-link" href="#main-content" onClick={e=>{e.preventDefault();document.getElementById('main-content')?.focus()}}>Skip to content</a>
   <aside className="sidebar" aria-label="Workspace navigation">
    <div className="workspace-name"><Icon name="workflow"/><strong>Workflow Governor</strong><button className="icon-button" aria-label="Collapse sidebar" onClick={()=>setSidebar(false)}>«</button></div>
@@ -49,17 +51,18 @@ export function App() {
   </aside>
   {sidebar&&<button className="sidebar-scrim" aria-label="Close navigation" onClick={()=>setSidebar(false)}/>}
   <div className="main-shell">
-   <header className="topbar"><button className="icon-button" aria-label="Toggle sidebar" aria-expanded={sidebar} onClick={()=>setSidebar(v=>!v)}><Icon name="panel"/></button><nav aria-label="Breadcrumb"><button onClick={()=>navigate('')}>Business overview</button>{route&&<><span>/</span><span>{workflow?.name||(route==='new'?'New workflow':route==='settings'?'Settings':route==='workflows'?'Workflows':'Loading…')}</span></>}</nav><span className="save-state" role="status">{busy?'Saving…':!connected?'Offline':loaded?'Saved locally':'Connecting…'}</span></header>
+   <header className="topbar"><button className="icon-button" aria-label="Toggle sidebar" aria-expanded={sidebar} onClick={()=>setSidebar(v=>!v)}><Icon name="panel"/></button><nav aria-label="Breadcrumb"><button onClick={()=>navigate('')}>Business overview</button>{route&&<><span>/</span><span>{workflow?.name||(route==='new'?'New workflow':route==='settings'?'Settings':route==='workflows'?'Workflows':'Loading…')}</span></>}</nav>{pageColor.control}<span className="save-state" role="status">{busy?'Saving…':!connected?'Offline':loaded?'Saved locally':'Connecting…'}</span></header>
    {!connected&&<div className="notice danger" role="alert">Connection lost. Saved work is retained. <button onClick={()=>void reload()}>Reconnect</button></div>}
    {error&&<div className="notice danger" role="alert">{error}<button onClick={()=>setError('')}>Dismiss</button></div>}
+   <div className="page-cover" aria-hidden="true"/>
    <main id="main-content" tabIndex={-1} className={`document ${!route?'dashboard-document':''}`}>
     {!loaded&&<p className="empty" role="status">Loading your workspace…</p>}
     {loaded&&!route&&<BusinessDashboard workflows={workflows} onNew={()=>navigate('new')} onAll={()=>navigate('workflows')} onOpen={(id,tab='tasks',taskId,evidenceId,line)=>{requestedView.current={tab,taskId,evidenceId,line};navigate(id)}}/>}
-    {loaded&&route==='workflows'&&<><div className="page-icon"><Icon name="panel" size={32}/></div><div className="title-row"><h1>Workflows</h1><button className="primary-action" onClick={()=>navigate('new')}>+ New workflow</button></div><p className="page-description">Your goals, plans, and saved work.</p><div className="table-wrap"><table><thead><tr><th>Name</th><th>Status</th><th>Updated</th></tr></thead><tbody>{filtered.map(w=><tr key={w.id}><td><button className="page-link" onClick={()=>navigate(w.id)}><Icon name="file"/>{w.name}</button></td><td><span className={`status-text status-${w.status.toLowerCase().replaceAll(' ','-')}`}>{w.status}</span></td><td className="muted">{date(w.updatedAt||w.createdAt)}</td></tr>)}</tbody></table></div>{!filtered.length&&<div className="empty"><h2>{search?'No matching workflows':'A place to start your next piece of work'}</h2><p>{search?'Try a different name or goal.':'Create a workflow and select the materials it may use.'}</p><button onClick={()=>search?setSearch(''):navigate('new')}>{search?'Clear search':'Create workflow'}</button></div>}</>}
+    {loaded&&route==='workflows'&&<><div className="page-icon"><Icon name="panel" size={32}/></div><div className="title-row"><h1>Workflows</h1><button className="primary-action" onClick={()=>navigate('new')}>+ New workflow</button></div><div className="table-wrap"><table><thead><tr><th>Name</th><th>Status</th><th>Updated</th></tr></thead><tbody>{filtered.map(w=><tr key={w.id}><td><button className="page-link" onClick={()=>navigate(w.id)}><Icon name="file"/>{w.name}</button></td><td><span className={`status-text status-${w.status.toLowerCase().replaceAll(' ','-')}`}>{w.status}</span></td><td className="muted">{date(w.updatedAt||w.createdAt)}</td></tr>)}</tbody></table></div>{!filtered.length&&<div className="empty"><h2>{search?'No matching workflows':'A place to start your next piece of work'}</h2><p>{search?'Try a different name or goal.':'Create a workflow and select the materials it may use.'}</p><button onClick={()=>search?setSearch(''):navigate('new')}>{search?'Clear search':'Create workflow'}</button></div>}</>}
     {route==='new'&&<fieldset disabled={busy||!connected}><NewWorkflow onCancel={()=>navigate('')} onStart={start}/></fieldset>}
     {route==='settings'&&<><h1>Settings</h1><h2>Local model connection</h2><p>Model requests run on this machine. Your browser uses the application backend.</p><dl className="properties"><dt>Model</dt><dd>{String(health.model||'Checking…')}</dd><dt>Protocol</dt><dd>OpenAI-compatible chat completions</dd><dt>Service reachable</dt><dd>{health.modelReachable===true?'Yes':health.modelReachable===false?'Unavailable — check the existing model service':'Checking…'}</dd><dt>Inference</dt><dd>Each workflow records its own validated results and run history.</dd><dt>Human routing</dt><dd>Operator assignment is not connected. Human tasks wait for an authorized operator.</dd></dl><button onClick={()=>api<Record<string,unknown>>('/health').then(setHealth).catch(e=>setError(String(e)))}>Check connection</button></>}
     {loaded&&route&&!['new','settings','workflows'].includes(route)&&!workflow&&<div className="empty"><h1>Workflow unavailable</h1><p>The workflow could not be loaded. Reconnect or return to the list.</p><button onClick={()=>navigate('')}>All workflows</button></div>}
-    {workflow&&<><div className="page-icon"><Icon name="file" size={32}/></div><h1>{workflow.name}</h1><p className="objective">{workflow.objective}</p><dl className="properties"><dt>Status</dt><dd>{workflow.status}</dd><dt>Workspace</dt><dd>{workflow.workspace}</dd><dt>Plan</dt><dd>{planLabel(workflow.planState)} {workflow.planVersion&&`· ${workflow.planVersion}`}</dd></dl>
+    {workflow&&<><div className="page-icon"><Icon name="file" size={32}/></div><h1>{workflow.name}</h1><p className="objective">{workflow.objective.split(/(?<=[.!?])\s/)[0]}</p><details className="workflow-properties"><summary>{workflow.status} · {planLabel(workflow.planState)}</summary><p>{workflow.objective}</p><dl className="properties"><dt>Status</dt><dd>{workflow.status}</dd><dt>Workspace</dt><dd>{workflow.workspace}</dd><dt>Plan</dt><dd>{planLabel(workflow.planState)} {workflow.planVersion&&`· ${workflow.planVersion}`}</dd></dl></details>
      {workflow.readOnly&&<div className="notice">This saved workflow is available for inspection. {workflow.readOnly}</div>}
      {workflow.operation&&<div className="notice" role="status"><span className="spinner"/> {workflow.operation}. You can leave this page and return.<small>Closing this page does not cancel model inference.</small></div>}
      {workflow.error&&<div className="notice danger" role="alert"><strong>Work needs attention</strong><p>{workflow.error}</p>{!workflow.operation&&['NOT_PROPOSED','REVISION_REQUESTED'].includes(workflow.planState)&&<button disabled={locked} onClick={()=>void act(`/workflows/${workflow.id}/plan`)}>Retry planning</button>}</div>}

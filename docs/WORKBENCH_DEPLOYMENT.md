@@ -54,4 +54,4 @@ GOVERNOR_TEST_URL=http://127.0.0.1:8081 node scripts/workbench-acceptance.mjs
 
 The real browser slice selects two CASE_001 workspace files, proposes and approves a plan, executes deterministic and local-model tasks, inspects evidence, and refreshes. It deliberately stops at the human task: authorized operator routing is not available. This is a structural workflow verification, not a hidden-answer business evaluation. Existing historical workflows remain visible and read-only without migration. Multi-user authentication and external business connectors are not provided. Use the existing trusted GB10 network.
 
-Screenshots, real model records, test logs, and restart checks are under `runtime/workbench-preview/` and `runtime/workbench-deployed/`. Original GitHub main remains unchanged because the connected account has no push permission; local staged commits are preserved.
+Screenshots, real model records, test logs, and restart checks are under `runtime/workbench-preview/` and `runtime/workbench-deployed/`. Source delivery targets the original `tyy-d/workflow-governor` main branch. Local stage commits and restore bundles are retained independently.
