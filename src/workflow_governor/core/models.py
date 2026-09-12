@@ -28,6 +28,14 @@ class PlanStatus(StrEnum):
     SUPERSEDED = "SUPERSEDED"
 
 
+class DecisionAuthorityScope(StrEnum):
+    """Maximum authority-bearing scope requested by an approved task."""
+
+    NO_DECISION = "NO_DECISION"
+    ANALYSIS_OR_RECOMMENDATION = "ANALYSIS_OR_RECOMMENDATION"
+    AUTHORITY_DECISION = "AUTHORITY_DECISION"
+
+
 @dataclass(frozen=True, slots=True)
 class EvidenceRef:
     source: str
@@ -74,6 +82,7 @@ class TaskSpec:
     consequence: str | None = None
     risk: str | None = None
     authority_requirement: str | None = None
+    requested_decision_authority_scope: DecisionAuthorityScope = DecisionAuthorityScope.NO_DECISION
     operation: str | None = None
 
 
@@ -110,4 +119,3 @@ class WorkflowPlan:
     tasks: tuple[TaskSpec, ...]
     assumptions: tuple[str, ...] = ()
     unresolved_questions: tuple[str, ...] = ()
-

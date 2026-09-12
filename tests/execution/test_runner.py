@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from workflow_governor.core.models import (
+    DecisionAuthorityScope,
     ExecutionStatus,
     ExecutorType,
     PlanStatus,
@@ -54,6 +55,9 @@ def spec(task_id, executor=ExecutorType.DETERMINISTIC, dependencies=(), authorit
         dependencies=dependencies,
         completion_criteria=("Return a result",),
         authority_requirement=authority,
+        requested_decision_authority_scope=(
+            DecisionAuthorityScope.AUTHORITY_DECISION if authority else DecisionAuthorityScope.NO_DECISION
+        ),
         operation="structured_equal" if executor is ExecutorType.DETERMINISTIC else None,
     )
 
@@ -69,7 +73,10 @@ def test_runner_continues_independent_work_and_preserves_states() -> None:
     record = PlanRecord(plan, PlanStatus.APPROVED)
     executor = Executor({"fails": ExecutionStatus.FAILED})
     events, handoffs = RecordingSink(), HandoffSink()
-    state = MinimalTaskRunner({ExecutorType.DETERMINISTIC: executor}).run(
+    state = MinimalTaskRunner(
+        {ExecutorType.DETERMINISTIC: executor},
+        handoff_id_factory=lambda: "H-001",
+    ).run(
         record, RunState("W"), Contexts(), events, handoffs
     )
     assert state.task_states["fails"].status is ExecutionStatus.FAILED
@@ -78,6 +85,8 @@ def test_runner_continues_independent_work_and_preserves_states() -> None:
     assert state.task_states["human"].status is ExecutionStatus.PENDING_HUMAN
     assert executor.calls == ["fails", "independent"]
     assert handoffs.handoffs[0].authority_requirement == "Vendor Compliance activation authority"
+    assert handoffs.handoffs[0].handoff_id == "H-001"
+    assert handoffs.handoffs[0].requested_decision_authority_scope is DecisionAuthorityScope.AUTHORITY_DECISION
     assert events.events
 
 
