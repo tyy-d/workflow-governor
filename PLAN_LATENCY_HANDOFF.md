@@ -17,4 +17,11 @@ Proof is in this worktree under `runtime/plan-speed-check/plan-request.json`, `p
 PYTHONPATH=src "$HOME/workflow-governor/.venv/bin/python" -m pytest tests/test_compact_plan.py tests/test_workbench.py tests/test_bridge.py -q
 ```
 
-The patch is isolated on `fix/local-qwen-plan-latency`, in `$HOME/workflow-governor-plan-speed`. The production service runs an immutable release under `$HOME/.local/state/workflow-governor/releases/`, not the main checkout. Merely changing the checkout will not apply it. Merge/cherry-pick into the deployment branch and build a new release through the existing deploy workflow, retaining the frontend build. Switch the web application only when no workflow operation is active; Qwen and OpenClaw require no restart. This session has not restarted or switched any service.
+The patch is isolated on `fix/local-qwen-plan-latency`, in `$HOME/workflow-governor-plan-speed`. The production service runs an immutable release under `$HOME/.local/state/workflow-governor/releases/`, not the main checkout. Merely changing the checkout will not apply it. Merge/cherry-pick into the deployment branch and build a new release through the existing deploy workflow, retaining the frontend build. Switch the web application only when no workflow operation is active; Qwen and OpenClaw require no restart. After explicit user approval, the web backend was switched as recorded below; the model and OpenClaw services were not restarted.
+
+
+## Live deployment verified
+
+Deployed release `0dd1e660d6497fa534c3a2abe4327afb6af913bd` to the existing port 8080. Preserved the frontend build byte-for-byte and all five existing workflows. Backup: `$HOME/.local/state/workflow-governor/change-archives/plan-speed-20260912T204904Z`. The deployment record retains the previous release for rollback. Only the web backend was restarted, with no workflow operation in flight.
+
+A fresh request through the production HTTP API created verification workflow `WF-69b457fa669d` and completed in **28.41 seconds**, with four validated tasks, `planState=PROPOSED`, no error, and actual local `qwen-local` inference. The verification plan is left unapproved; no execution or external action was triggered. Evidence: this worktree's `runtime/plan-speed-check/live-deployment.json` and the production runtime's `workflows/WF-69b457fa669d/model/` request/response logs. All three services (web backend, OpenClaw gateway, OpenClaw adapter) are active.
