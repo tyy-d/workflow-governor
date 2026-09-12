@@ -30,7 +30,7 @@ def settle(app,w):
 def plan(app,w):
     evidence=app.workspace.inventory('selected')[0]['id']
     tasks=[{'id':f'T{i}','title':f'Review {i}','objective':'Review the selected record','executor':executor,'dependencyIds':[f'T{j}' for j in range(1,i)],'evidenceIds':[evidence],'rationale':'Bounded record review','expectedOutput':'Cited findings'} for i,executor in enumerate(['Deterministic','Local AI','Human','Local AI'],1)]
-    with patch('governor.model.call',return_value={'tasks':tasks,'assumptions':[],'questions':[]}):
+    with patch('governor.compact_plan.generate',return_value={'tasks':tasks,'assumptions':[],'questions':[]}):
         app.plan(w['id']);w=settle(app,w)
     assert not w.get('error'),w.get('error')
     return w

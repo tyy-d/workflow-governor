@@ -152,8 +152,8 @@ class Service:
                 self.store.artifacts.save_evidence(identity,[RetrievedEvidence(EvidenceRef(s['path'],artifact_id=s['id']),s['sha256'],s['sha256'],'unchanged',s['content'],False,now()) for s in sources])
             with self.store.lock:
                 progress=self.store.read(identity);progress['operation']='Generating and validating plan';self.save(progress)
-            taskplan=model.call('Propose a compact 4-task plan: T1 Deterministic record extraction and date checks; T2 Local AI evidence/policy synthesis depending on T1; T3 Human bounded review/judgment (not external approval) depending on T2; T4 Local AI final synthesis depending on T1,T2,T3. Tailor titles, instructions, evidence IDs, rationale and expected results to the goal. Keep each title under 8 words, each objective under 30 words, and rationale/expectedOutput under 20 words each; avoid repeating source contents. The final task must reconcile actual results, unresolved blockers and authority, not assert external completion. No case-specific answer templates. Each task must cite only evidence IDs provided. Deterministic executor supports inspect_records only.',
-                {'goal':w['objective'],'revision':w.get('revisionNote'),'sources':[{'id':s['id'],'path':s['path'],'policy':s['policy'],'content':s['content']} for s in sources]},model.PLAN_SCHEMA,logdir,'plan',2000)
+            from .compact_plan import generate
+            taskplan=generate(w['objective'],w.get('revisionNote'),sources,logdir)
             validate_plan(taskplan,sources)
             core_plan=bridge.validate_generated(dict(w,planNumber=version),taskplan,sources,inventory)
             plan_dir=d/('artifacts/plans' if w.get('storageVersion')==2 else 'plans')
