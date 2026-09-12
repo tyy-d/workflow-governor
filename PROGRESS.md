@@ -46,3 +46,9 @@ Next: preserve the existing integration in a baseline commit; merge current upst
 - Deployed application release: 2ef8d51. Operations: docs/WORKBENCH_DEPLOYMENT.md. Live service port 8080; independent preview service port 8081.
 - GitHub write access remains unavailable and the user asked to proceed locally. No main push was attempted or claimed.
 - Remaining limits: human routing/authority module, external actions and multi-user authentication are unavailable; historical manifests are read-only. Full business evaluation, host reboot, prolonged load and exhaustive fault scenarios were not performed.
+
+## Teammate synchronization at delivery
+
+- Fetched and merged remote main `8e39566`, including Frank's human/operator modules and isolation hardening, without conflicts or overwriting local integration.
+- Full combined regression: 117 passed in 3.00 seconds. Human submission is still unavailable in this deployment because trusted operator assignment and authorization are not configured; the new native modules are preserved for that integration.
+- Original main remains at teammate commit `8e39566`; this work is local only, as agreed with the user.
