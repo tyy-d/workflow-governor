@@ -73,3 +73,7 @@ The final teammate merge added `TaskSpec.requested_decision_authority_scope` whi
 - Workflow properties and the full brief now expand on demand. No saved business data was removed or rewritten.
 - Browser checks passed for exact evidence drill-down, real counts, saved analysis, human handoff, all-workflow navigation, draft state, four widths, preset/custom color persistence and independent page colors. Production build/typecheck passed.
 - GitHub permissions were rechecked: the connected account now has push access to the original repository. Delivery targets main, preserving all local stage history and archives.
+
+### GitHub upload attempt
+
+The repository metadata now reports push=true. However both Git tree creation and blob creation through the connected GitHub integration return HTTP 403, `Resource not accessible by integration`. Local Git has no HTTPS credentials or SSH agent identity. No remote ref was changed. The user was informed that connector reauthorization or local Git authentication is still required. Deployed UI release: 6ec6769; all local code and stage commits remain available.
