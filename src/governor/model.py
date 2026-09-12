@@ -1,6 +1,7 @@
 import json
 import os
 import time
+import threading
 import urllib.request
 import urllib.error
 from urllib.parse import urlparse
@@ -39,7 +40,14 @@ TASK_SCHEMA = object_schema({'id': TEXT, 'title': TEXT, 'objective': TEXT,
 PLAN_SCHEMA = object_schema({'assumptions': arr(TEXT, maxItems=4), 'questions': arr(TEXT, maxItems=4),
                              'tasks': arr(TASK_SCHEMA, minItems=3, maxItems=5)})
 
-def call(system, payload, schema, directory, label, max_tokens=2200):
+_SLOTS=threading.BoundedSemaphore(2)
+
+def call(system,payload,schema,directory,label,max_tokens=2200):
+    if not _SLOTS.acquire(blocking=False):raise RuntimeError('Local model is busy. Retry when another run finishes.')
+    try:return _call(system,payload,schema,directory,label,max_tokens)
+    finally:_SLOTS.release()
+
+def _call(system, payload, schema, directory, label, max_tokens=2200):
     directory = Path(directory); directory.mkdir(parents=True, exist_ok=True)
     request = {'model': MODEL, 'messages': [{'role':'system','content':SYSTEM+'\n'+system},
                 {'role':'user','content':json.dumps(payload, ensure_ascii=False)}],
@@ -51,7 +59,7 @@ def call(system, payload, schema, directory, label, max_tokens=2200):
     t = time.monotonic()
     req = urllib.request.Request(BASE+'/chat/completions', json.dumps(request).encode(), {'Content-Type':'application/json'})
     try:
-        with urllib.request.urlopen(req, timeout=600) as response:
+        with urllib.request.build_opener(urllib.request.ProxyHandler({})).open(req, timeout=float(os.getenv('GOVERNOR_MODEL_TIMEOUT','240'))) as response:
             data = json.load(response)
         choice = data['choices'][0]
         if choice['finish_reason'] != 'stop':

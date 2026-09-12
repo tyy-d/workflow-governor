@@ -4,6 +4,10 @@ import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from . import model, bridge
+from .store import STATUSES
+from workflow_governor.core.substrate import RetrievedEvidence, WorkspaceGrant
+from workflow_governor.core.models import EvidenceRef
+from workflow_governor.workspace import WorkspaceScout, DiscoveryLimits
 
 
 def now():return datetime.now(timezone.utc).isoformat()
@@ -31,7 +35,7 @@ class Service:
     def __init__(self,store,workspace):
         self.store=store;self.workspace=workspace
         for w in store.list():
-            if w.get('operation'):
+            if w.get('operation') and not w.get('readOnly'):
                 w['error']='Server interrupted the operation. Review state and retry; completed results were preserved.'
                 w['operation']=None;w['status']='Blocked'
                 for t in w['tasks']:
@@ -39,15 +43,21 @@ class Service:
                 event(w,'Interrupted operation',w['error']);self.save(w)
 
     def save(self,w):
-        self.refresh(w);self.store.save(w)
+        self.refresh(w)
+        if not (self.store.directory(w['id'])/'manifest.json').exists():self.store.save(w)
         d=self.store.directory(w['id'])
-        # Manifest is authoritative; task files are inspectable mirrors.
-        for t in w['tasks']:
-            self.store.write_json(d/'tasks'/t['id']/'task.json',t)
-            if t.get('result'):self.store.write_json(d/'tasks'/t['id']/'result.json',t['result'])
-        self.store.write_json(d/'final'/'summary.json',w['finalState'])
-        (d/'final'/'summary.md').write_text('# '+w['name']+'\n\nStatus: '+w['status']+'\n\n'+
-            '\n\n'.join('## '+key+'\n'+'\n'.join('- '+str(x) for x in value) for key,value in w['finalState'].items()))
+        if w.get('storageVersion')==2:
+            for t in w['tasks']:
+                self.store.artifacts.save_task_status(w['id'],t['id'],STATUSES.get(t['status'],t['status']))
+            self.store.artifacts.save_final_artifact(w['id'],'summary.json',__import__('json').dumps(w['finalState'],ensure_ascii=False))
+            self.store.save(w)
+        else:
+            # Compatibility writes retain the original legacy schema, without migration.
+            for t in w['tasks']:
+                self.store.write_json(d/'tasks'/t['id']/'task.json',t)
+                if t.get('result'):self.store.write_json(d/'tasks'/t['id']/'result.json',t['result'])
+            self.store.write_json(d/'final'/'summary.json',w['finalState'])
+            self.store.save(w)
 
     def refresh(self,w):
         if w['planState']=='APPROVED':
@@ -78,25 +88,30 @@ class Service:
     def create(self,data):
         key=data['workspace'];objective=data['objective'].strip()
         if key not in self.workspace.grants or not objective or len(objective)>4000:raise ValueError('Select an authorized workspace and a bounded objective')
-        identity='WF-'+uuid.uuid4().hex[:12]
+        identity=data.get('_identity') or 'WF-'+uuid.uuid4().hex[:12]
+        selected=data.get('sourceIds',[])
+        if selected:self.workspace.selected(key,selected)
         w={'id':identity,'name':data.get('name') or objective[:65],'objective':objective,'workspace':self.workspace.grants[key]['label'],
            'workspaceKey':key,'status':'Planning','stage':'Discovering authorized evidence','createdAt':now(),'updatedAt':now(),
            'planState':'NOT_PROPOSED','tasks':[],'evidence':[],'sources':[],'activity':[], 'finalState':{},'operation':None,
            'operator':{'id':'local-reviewer','name':'Local reviewer','role':'Review only; corporate authority not verified','evidenceState':'No capability assessment','scaffolding':'Evidence and reasons required'},'error':None}
+        if self.store.grants is not None:
+            w.update(storageVersion=2,selectedSourceIds=selected,operator=None,status='Draft',stage='Ready to plan')
         with self.store.lock:
             event(w,'Workflow created','Authorized workspace selected; no external systems will be modified.');self.save(w)
-        return self.plan(identity)
+        return w if w.get('storageVersion')==2 else self.plan(identity)
 
     def launch(self,identity,label,work,task_id=None):
         with self.store.lock:
             w=self.store.read(identity)
+            if w.get('readOnly'):raise ValueError('Saved artifacts require repair before execution')
             if w.get('operation'):raise ValueError('Another operation is running; wait for it to finish')
             if task_id is not None:
                 task=next(t for t in w['tasks'] if t['id']==task_id)
                 if w['planState']!='APPROVED' or task['status']!='Ready' or task['executor']=='Human':raise ValueError('Task is not approved and ready')
                 task['status']='Running'
                 event(w,'Task started',task['title'],'task')
-            w['operation']=label;w['error']=None;event(w,'Operation started',label);self.save(w)
+            w['operation']=label;w['runId']='run-'+uuid.uuid4().hex;w['error']=None;event(w,'Operation started',label);self.save(w)
         def run():
             try:work()
             except Exception as e:
@@ -108,7 +123,9 @@ class Service:
                 print('operation_failed',identity,label,str(e),flush=True)
             finally:
                 with self.store.lock:
-                    w=self.store.read(identity);w['operation']=None;self.save(w)
+                    w=self.store.read(identity);w['operation']=None
+                    self.store.write_json(self.store.directory(identity)/'artifacts'/'runs'/(w['runId']+'.json'),{'runId':w['runId'],'phase':label,'finishedAt':now(),'error':w.get('error'),'planVersion':w.get('planVersion'),'sourceHashes':{s['id']:s.get('sha256') for s in w.get('sources',[])},'model':model.MODEL,'temperature':0,'thinking':False})
+                    self.save(w)
         threading.Thread(target=run,daemon=True).start()
         return self.store.read(identity)
 
@@ -121,22 +138,30 @@ class Service:
             version=int(w.get('planNumber',0))+1;logdir=d/'model'/f'plan-{version}-{uuid.uuid4().hex[:6]}'
             inventory=self.workspace.inventory(key)
             self.store.write_json(d/'input'/'workspace-map.json',inventory)
-            selection=model.call('Choose up to 8 relevant available source IDs from filenames and metadata for the objective. Prefer primary status records, required-document evidence, structured checklists, governing transaction artifacts and communications; avoid brochures and duplicate/noise files. Do not guess contents.',
+            selection={'sourceIds':w['selectedSourceIds']} if w.get('selectedSourceIds') else model.call('Choose up to 8 relevant available source IDs from filenames and metadata for the objective. Prefer primary status records, required-document evidence, structured checklists, governing transaction artifacts and communications; avoid brochures and duplicate/noise files. Do not guess contents.',
                 {'goal':w['objective'],'files':inventory},model.object_schema({'sourceIds':model.arr(model.TEXT,minItems=1,maxItems=8)}),logdir,'discovery',450)
             selected=self.workspace.selected(key,selection['sourceIds'])
-            followed=self.workspace.referenced_pending(key,selected)
+            followed=[] if w.get('selectedSourceIds') else self.workspace.referenced_pending(key,selected)
             sources=selected+followed+self.workspace.policies(key)
             if sum(len(s['content']) for s in sources)>44000:raise ValueError('Selected evidence exceeds bounded context budget; narrow the goal')
             self.store.write_json(d/'input'/'sources.json',sources)
+            if w.get('storageVersion')==2:
+                grant=WorkspaceGrant(key,self.workspace.grants[key]['root'])
+                scout=WorkspaceScout(self.store.artifacts.config,grants=(grant,))
+                self.store.artifacts.save_workspace_map(identity,scout.discover(grant,DiscoveryLimits(max_preview_chars=0)))
+                self.store.artifacts.save_evidence(identity,[RetrievedEvidence(EvidenceRef(s['path'],artifact_id=s['id']),s['sha256'],s['sha256'],'unchanged',s['content'],False,now()) for s in sources])
+            with self.store.lock:
+                progress=self.store.read(identity);progress['operation']='Generating and validating plan';self.save(progress)
             taskplan=model.call('Propose a compact 4-task plan: T1 Deterministic record extraction and date checks; T2 Local AI evidence/policy synthesis depending on T1; T3 Human bounded review/judgment (not external approval) depending on T2; T4 Local AI final synthesis depending on T1,T2,T3. Tailor titles, instructions, evidence IDs, rationale and expected results to the goal. Keep each title under 8 words, each objective under 30 words, and rationale/expectedOutput under 20 words each; avoid repeating source contents. The final task must reconcile actual results, unresolved blockers and authority, not assert external completion. No case-specific answer templates. Each task must cite only evidence IDs provided. Deterministic executor supports inspect_records only.',
                 {'goal':w['objective'],'revision':w.get('revisionNote'),'sources':[{'id':s['id'],'path':s['path'],'policy':s['policy'],'content':s['content']} for s in sources]},model.PLAN_SCHEMA,logdir,'plan',2000)
             validate_plan(taskplan,sources)
             core_plan=bridge.validate_generated(dict(w,planNumber=version),taskplan,sources,inventory)
-            self.store.write_json(d/'plans'/f'v{version}-core.json',bridge.serial(core_plan))
+            plan_dir=d/('artifacts/plans' if w.get('storageVersion')==2 else 'plans')
+            self.store.write_json(plan_dir/f'v{version}-core.json',bridge.serial(core_plan))
             with self.store.lock:
                 w=self.store.read(identity)
                 if w['tasks']:
-                    self.store.write_json(d/'plans'/f"v{w['planNumber']}-superseded.json",dict(tasks=w['tasks'],state='SUPERSEDED'))
+                    self.store.write_json(plan_dir/f"v{w['planNumber']}-superseded.json",dict(tasks=w['tasks'],state='SUPERSEDED'))
                 tasks=[]
                 for i,t in enumerate(taskplan['tasks']):
                     tasks.append(dict(t,sequence=i+1,status='Pending',stage=t['title'],
@@ -145,10 +170,11 @@ class Service:
                 w.update(tasks=tasks,sources=sources,planNumber=version,planVersion=f'v{version}',planState='PROPOSED',status='Planning',stage='Awaiting user plan approval',assumptions=taskplan['assumptions'],questions=taskplan['questions'])
                 w['evidence']=[self.evidence_view(s,tasks) for s in sources]
                 event(w,'Local model proposed plan',f"{len(tasks)} tasks; {len(selected)+len(followed)}/{len(inventory)} workspace files retrieved ({len(followed)} explicit pending-record references followed), plus {len(self.workspace.grants[key]['policies'])} scoped policies. Model {model.MODEL}. Approval required.")
-                self.store.write_json(d/'plans'/f'v{version}.json',dict(taskplan,state='PROPOSED'))
-                (d/'plan.md').write_text('# Proposed plan\n\n'+w['objective']+'\n\n'+'\n'.join(f"- {t['id']}: {t['title']} ({t['executor']})" for t in tasks))
+                self.store.write_json(plan_dir/f'v{version}.json',dict(taskplan,state='PROPOSED'))
+                (plan_dir/'plan.md').write_text('# Proposed plan\n\n'+w['objective']+'\n\n'+'\n'.join(f"- {t['id']}: {t['title']} ({t['executor']})" for t in tasks))
+                self.store.commit_plan(w,core_plan,'PROPOSED')
                 self.save(w)
-        return self.launch(identity,'Planning with local model',work)
+        return self.launch(identity,'Selecting authorized evidence',work)
 
     def evidence_view(self,s,tasks):
         kind='Policy' if s.get('policy') else 'Human Input' if s.get('human') else 'Spreadsheet' if s['path'].endswith('.csv') else 'Record' if s['path'].endswith('.json') else 'Document'
@@ -163,15 +189,17 @@ class Service:
             w=self.store.read(identity)
             if w.get('operation') or w['planState']!='PROPOSED':raise ValueError('A finished proposed plan is required')
             core_approval=bridge.approve(w)
-            self.store.write_json(self.store.directory(identity)/'plans'/f"v{w['planNumber']}-core-approval.json",bridge.serial(core_approval))
+            self.store.write_json(self.store.directory(identity)/('artifacts/plans' if w.get('storageVersion')==2 else 'plans')/f"v{w['planNumber']}-core-approval.json",bridge.serial(core_approval))
+            self.store.commit_plan(w,bridge.shared_plan(w),'APPROVED')
             w['planState']='APPROVED';w['approvedAt']=now();event(w,'Plan approved','User approved this plan version for local evidence work; not a vendor/PO authorization.','human');self.save(w)
-            self.store.write_json(self.store.directory(identity)/'plans'/f"v{w['planNumber']}-approved.json",dict(tasks=w['tasks'],state='APPROVED',approvedAt=w['approvedAt']))
+            self.store.write_json(self.store.directory(identity)/('artifacts/plans' if w.get('storageVersion')==2 else 'plans')/f"v{w['planNumber']}-approved.json",dict(tasks=w['tasks'],state='APPROVED',approvedAt=w['approvedAt']))
             return w
 
     def revise(self,identity,note):
         with self.store.lock:
             w=self.store.read(identity)
             if w.get('operation') or w['planState']!='PROPOSED' or not note.strip():raise ValueError('Only unapproved plans can be revised with a reason')
+            if w.get('storageVersion')==2:self.store.artifacts.append_correction(identity,{'kind':'plan_revision','note':note,'planVersion':w.get('planVersion'),'timestamp':now()})
             w['planState']='REVISION_REQUESTED';w['revisionNote']=note.strip();event(w,'Revision requested',note,'correction');self.save(w)
         return self.plan(identity)
 
@@ -186,7 +214,7 @@ class Service:
             sources=[s for s in w['sources'] if s['id'] in set(t['evidenceIds'])|inherited or s.get('policy') or s.get('human')]
             self.store.write_json(d/'context.json',{'instruction':t['objective'],'sources':[s['id'] for s in sources],'previous':previous})
             payload={'goal':w['objective'],'instruction':t['objective'],'sources':[{'id':s['id'],'policy':s.get('policy',False),'content':s['content']} for s in sources],'previousResults':previous}
-            result=bridge.execute_bounded(w,t,sources,previous,d/'attempts'/uuid.uuid4().hex[:8],payload)
+            result=bridge.execute_bounded(w,t,sources,previous,d/'attempts'/uuid.uuid4().hex[:8],payload,**({'artifact_store':self.store.artifacts} if w.get('storageVersion')==2 else {}))
 
             with self.store.lock:
                 w=self.store.read(identity);t=next(t for t in w['tasks'] if t['id']==task_id)
@@ -195,6 +223,8 @@ class Service:
         return self.launch(identity,'Execute '+task_id,work,task_id=task_id)
 
     def human(self,identity,task_id,data):
+        if self.store.read(identity).get('storageVersion')==2:
+            raise ValueError('Authorized human routing is not connected. This task remains waiting; no operator identity or decision is fabricated.')
         with self.store.lock:
             w=self.store.read(identity);t=next(t for t in w['tasks'] if t['id']==task_id)
             if w.get('operation') or w['planState']!='APPROVED' or t['executor']!='Human' or t['status']!='Needs Human':raise ValueError('Human task is not ready')

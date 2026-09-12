@@ -2,6 +2,8 @@ import hashlib
 import json
 import re
 from pathlib import Path
+from workflow_governor.core.config import RuntimeConfig
+from workflow_governor.workspace import WorkspaceScout, WorkspaceGrant, DiscoveryLimits, RetrievalLimits
 
 SUPPORTED = {'.md', '.txt', '.json', '.csv'}
 FORBIDDEN = {'ground_truth', 'provenance', 'personas', 'persona_memory'}
@@ -21,18 +23,13 @@ class Workspace:
         return resolved
 
     def inventory(self, key):
-        grant = self.grants[key]
-        root = self.safe(grant['root'])
-        files = []
-        for p in sorted(root.rglob('*')):
-            if not p.is_file() or p.is_symlink():
-                continue
-            relative = p.relative_to(self.repo).as_posix()
-            self.safe(relative)
-            files.append({'id': 'E-' + hashlib.sha256(relative.encode()).hexdigest()[:10],
-                          'path': relative, 'name': p.name, 'size': p.stat().st_size,
-                          'extractable': p.suffix.lower() in SUPPORTED and p.stat().st_size <= 60000})
-        return files
+        grant=WorkspaceGrant(key,self.grants[key]['root'])
+        scout=WorkspaceScout(RuntimeConfig(self.repo),grants=(grant,))
+        workspace_map=scout.discover(grant,DiscoveryLimits(max_files=500,max_bytes_per_file=60000,max_total_bytes=2000000,max_preview_chars=0))
+        return [{'id':'E-'+hashlib.sha256((grant.root+'/'+f.relative_path).encode()).hexdigest()[:10],
+                 'path':grant.root+'/'+f.relative_path,'name':f.name,'size':f.size,
+                 'extractable':Path(f.relative_path).suffix.lower() in SUPPORTED and f.size<=60000}
+                for f in workspace_map.files]
 
     def extract(self, record, sections=None):
         p = self.safe(record['path'])
