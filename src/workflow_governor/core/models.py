@@ -4,6 +4,8 @@ from dataclasses import dataclass, field
 from enum import StrEnum
 from typing import Any, Mapping
 
+from .codec import DurableModel
+
 
 class ExecutorType(StrEnum):
     DETERMINISTIC = "DETERMINISTIC"
@@ -29,7 +31,7 @@ class PlanStatus(StrEnum):
 
 
 @dataclass(frozen=True, slots=True)
-class EvidenceRef:
+class EvidenceRef(DurableModel):
     source: str
     location: str | None = None
     artifact_id: str | None = None
@@ -37,14 +39,14 @@ class EvidenceRef:
 
 
 @dataclass(frozen=True, slots=True)
-class EvidenceContent:
+class EvidenceContent(DurableModel):
     ref: EvidenceRef
     content: str
     untrusted_document: bool = True
 
 
 @dataclass(frozen=True, slots=True)
-class FileRecord:
+class FileRecord(DurableModel):
     relative_path: str
     name: str
     media_type: str | None = None
@@ -54,7 +56,7 @@ class FileRecord:
 
 
 @dataclass(frozen=True, slots=True)
-class WorkspaceMap:
+class WorkspaceMap(DurableModel):
     root: str
     files: tuple[FileRecord, ...] = ()
     metadata: Mapping[str, Any] = field(default_factory=dict)
@@ -62,7 +64,7 @@ class WorkspaceMap:
 
 
 @dataclass(frozen=True, slots=True)
-class TaskSpec:
+class TaskSpec(DurableModel):
     task_id: str
     objective: str
     description: str
@@ -78,7 +80,7 @@ class TaskSpec:
 
 
 @dataclass(frozen=True, slots=True)
-class TaskContext:
+class TaskContext(DurableModel):
     task_id: str
     evidence: tuple[EvidenceContent, ...] = ()
     policy: tuple[EvidenceContent, ...] = ()
@@ -89,7 +91,7 @@ class TaskContext:
 
 
 @dataclass(frozen=True, slots=True)
-class TaskResult:
+class TaskResult(DurableModel):
     task_id: str
     status: ExecutionStatus
     executor_type: ExecutorType
@@ -103,7 +105,7 @@ class TaskResult:
 
 
 @dataclass(frozen=True, slots=True)
-class WorkflowPlan:
+class WorkflowPlan(DurableModel):
     plan_id: str
     version: int
     objective: str
