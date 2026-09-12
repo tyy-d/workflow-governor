@@ -68,3 +68,11 @@ def test_new_human_route_is_honestly_unavailable(app):
 def test_unknown_model_task_fields_rejected():
     from jsonschema import Draft202012Validator,ValidationError
     with pytest.raises(ValidationError):Draft202012Validator(model.PLAN_SCHEMA).validate({'tasks':[],'assumptions':[],'questions':[],'secret':'not allowed'})
+
+def test_failed_task_can_be_retried_without_false_corruption(app):
+    w=plan(app,create(app));app.approve(w['id']);app.execute(w['id'],'T1');settle(app,w)
+    with patch('governor.model.call',side_effect=RuntimeError('Model unavailable')):
+        app.execute(w['id'],'T2');w=settle(app,w)
+    assert w['tasks'][1]['status']=='Blocked' and not w.get('readOnly')
+    app.resume(w['id'],'T2','Model connection restored; retry requested')
+    assert app.store.read(w['id'])['tasks'][1]['status']=='Ready'

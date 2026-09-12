@@ -90,6 +90,6 @@ def execute_bounded(w,t,sources,previous,directory,payload=None,artifact_store=N
     Path(directory,'core-execution.json').write_text(json.dumps({'runner':'MinimalTaskRunner','mock_assisted':False,'events':sink.events,'result':serial(result)},ensure_ascii=False,indent=2))
     if artifact_store is not None:
         artifact_store.save_context(w['id'],context)
-        if result is not None:artifact_store.save_result(w['id'],result)
+        if result is not None and result.status==ExecutionStatus.COMPLETED:artifact_store.save_result(w['id'],result)
     if result is None or result.status!=ExecutionStatus.COMPLETED:raise ValueError(result.error or '; '.join(result.unresolved) if result else 'Missing core result')
     return details

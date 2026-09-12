@@ -26,3 +26,11 @@ Next: preserve the existing integration in a baseline commit; merge current upst
 - Preview service: workflow-governor-preview.service on loopback 8081, separate runtime and frontend build.
 - 76 backend tests pass; frontend typecheck and build pass. Real Chromium acceptance is running; progress logs are in runtime/workbench-preview/browser.log.
 - User confirmed GitHub permissions cannot be fixed now; continue local code and deployment only.
+
+## Verified browser slice and deployment
+
+- Browser-created `WF-07cf0279bdcb`: real Qwen proposal, explicit approval, deterministic T1 and Qwen T2 completed with citations. T3 waits for an authorized human; T4 remains pending.
+- Chromium verified 1440/1280/1024/390 widths, evidence opening and page refresh. Preview backend restart restored the same results.
+- Deployed initial shared-store release `2c20f13` through the existing systemd user service. Original model service unchanged. Saved workflow is available on the deployed instance.
+- Final polish: mobile rows keep status visible; request identity generation works on LAN HTTP as well as localhost.
+- Operational recovery/deployment/replay commands: docs/WORKBENCH_DEPLOYMENT.md. Baseline recovery script rehearsed in an independent directory.
