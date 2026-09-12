@@ -61,6 +61,8 @@ class HumanTaskResponse:
     response_id: str
     handoff_id: str
     workflow_id: str
+    plan_id: str
+    plan_version: int
     task_id: str
     actor_id: str
     response_disposition: ResponseDisposition
@@ -100,7 +102,8 @@ def human_response_from_mapping(value: Mapping[str, Any]) -> HumanTaskResponse:
     """Parse the canonical wire form without accepting silent extra fields."""
 
     required = {
-        "response_id", "handoff_id", "workflow_id", "task_id", "actor_id",
+        "response_id", "handoff_id", "workflow_id", "plan_id", "plan_version",
+        "task_id", "actor_id",
         "response_disposition", "actual_decision_authority_scope",
         "authority_validation", "decision", "rationale", "submitted_at",
     }
@@ -123,6 +126,8 @@ def human_response_from_mapping(value: Mapping[str, Any]) -> HumanTaskResponse:
         response_id=value["response_id"],
         handoff_id=value["handoff_id"],
         workflow_id=value["workflow_id"],
+        plan_id=value["plan_id"],
+        plan_version=value["plan_version"],
         task_id=value["task_id"],
         actor_id=value["actor_id"],
         response_disposition=ResponseDisposition(value["response_disposition"]),

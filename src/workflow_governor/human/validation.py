@@ -106,7 +106,7 @@ class HumanResponseValidator:
         issues: list[ValidationIssue] = []
         self._validate_shape(response, issues)
 
-        for field in ("handoff_id", "workflow_id", "task_id"):
+        for field in ("handoff_id", "workflow_id", "plan_id", "plan_version", "task_id"):
             if getattr(response, field) != getattr(handoff, field):
                 issues.append(self._issue(ValidationIssueCode.CORRELATION_MISMATCH, f"{field} does not match the handoff", field))
 
@@ -174,10 +174,12 @@ class HumanResponseValidator:
 
     @staticmethod
     def _validate_shape(response: HumanTaskResponse, issues: list[ValidationIssue]) -> None:
-        for field in ("response_id", "handoff_id", "workflow_id", "task_id", "actor_id", "rationale", "submitted_at"):
+        for field in ("response_id", "handoff_id", "workflow_id", "plan_id", "task_id", "actor_id", "rationale", "submitted_at"):
             value = getattr(response, field)
             if not isinstance(value, str) or not value.strip():
                 issues.append(HumanResponseValidator._issue(ValidationIssueCode.MALFORMED_RESPONSE, f"{field} must be a non-empty string", field))
+        if not isinstance(response.plan_version, int) or isinstance(response.plan_version, bool) or response.plan_version < 1:
+            issues.append(HumanResponseValidator._issue(ValidationIssueCode.MALFORMED_RESPONSE, "plan_version must be a positive integer", "plan_version"))
         if isinstance(response.submitted_at, str):
             try:
                 datetime.fromisoformat(response.submitted_at.replace("Z", "+00:00"))

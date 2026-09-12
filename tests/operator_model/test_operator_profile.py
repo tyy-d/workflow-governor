@@ -28,7 +28,7 @@ def schema():
 
 def response():
     return HumanTaskResponse(
-        "R001", "H001", "W001", "T001", "P001", ResponseDisposition.COMPLETE,
+        "R001", "H001", "W001", "P001", 1, "T001", "P001", ResponseDisposition.COMPLETE,
         DecisionAuthorityScope.NO_DECISION, AuthorityValidation(AuthorityStatus.NOT_REQUIRED, None),
         {"outcome": "reviewed"}, "Completed bounded review.", submitted_at=NOW,
     )

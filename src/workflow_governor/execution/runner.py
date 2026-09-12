@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+import hashlib
+from dataclasses import dataclass, field, replace
 from datetime import datetime, timezone
 from typing import Mapping, Protocol
-from uuid import uuid4
 
+from workflow_governor.core.codec import DurableModel
 from workflow_governor.core.models import (
     EvidenceRef,
     DecisionAuthorityScope,
@@ -15,6 +16,7 @@ from workflow_governor.core.models import (
     TaskResult,
     TaskSpec,
 )
+from workflow_governor.core.persistence_json import json_text
 from workflow_governor.planning.lifecycle import PlanRecord
 
 
@@ -48,7 +50,7 @@ class ExecutionEvent:
 
 
 @dataclass(frozen=True, slots=True)
-class HumanHandoff:
+class HumanHandoff(DurableModel):
     handoff_id: str
     workflow_id: str
     plan_id: str
@@ -86,6 +88,11 @@ class MinimalTaskRunner:
         ExecutionStatus.BLOCKED,
         ExecutionStatus.PENDING_HUMAN,
     }
+    _EXECUTOR_TERMINAL = {
+        ExecutionStatus.COMPLETED,
+        ExecutionStatus.FAILED,
+        ExecutionStatus.BLOCKED,
+    }
 
     def __init__(
         self,
@@ -95,7 +102,7 @@ class MinimalTaskRunner:
         clock=None,
     ) -> None:
         self._executors = dict(executors)
-        self._handoff_id_factory = handoff_id_factory or (lambda: f"H-{uuid4()}")
+        self._handoff_id_factory = handoff_id_factory
         self._clock = clock or (lambda: datetime.now(timezone.utc))
 
     def run(
@@ -109,6 +116,7 @@ class MinimalTaskRunner:
         if plan_record.status is not PlanStatus.APPROVED:
             raise ValueError("minimal task runner requires an approved plan")
         plan = plan_record.plan
+        serialized_plan = json_text(plan.to_dict())
         states = run_state.task_states
         for task in plan.tasks:
             states.setdefault(task.task_id, TaskExecutionState(task.task_id))
@@ -129,20 +137,7 @@ class MinimalTaskRunner:
                     continue
                 self._transition(run_state, state, ExecutionStatus.READY, event_sink)
                 if task.executor_type is ExecutorType.HUMAN:
-                    handoff = HumanHandoff(
-                        handoff_id=self._handoff_id_factory(),
-                        workflow_id=run_state.workflow_id,
-                        plan_id=plan.plan_id,
-                        plan_version=plan.version,
-                        task_id=task.task_id,
-                        objective=task.objective,
-                        evidence_refs=task.evidence_requirements + task.policy_requirements,
-                        authority_requirement=task.authority_requirement,
-                        requested_decision_authority_scope=task.requested_decision_authority_scope,
-                        completion_criteria=task.completion_criteria,
-                        unresolved_questions=plan.unresolved_questions,
-                        created_at=self._clock().isoformat(),
-                    )
+                    handoff = self._create_handoff(plan_record, run_state.workflow_id, task)
                     state.human_handoff = handoff
                     if handoff_sink is not None:
                         handoff_sink.emit(handoff)
@@ -154,16 +149,92 @@ class MinimalTaskRunner:
                     self._finish_blocked(run_state, task, state, event_sink, f"executor unavailable: {task.executor_type}")
                     progress = True
                     continue
+                context = context_provider.get_context(task, run_state)
                 self._transition(run_state, state, ExecutionStatus.IN_PROGRESS, event_sink)
                 state.attempts += 1
                 state.started_at = state.started_at or datetime.now(timezone.utc)
-                result = executor.execute(task, context_provider.get_context(task, run_state))
+                try:
+                    result = executor.execute(task, context)
+                    result = self._validated_result(task, result)
+                except Exception as exc:
+                    result = self._failed_result(task, f"executor raised {type(exc).__name__}: {exc}")
                 state.result = result
                 state.error = result.error
                 state.finished_at = datetime.now(timezone.utc)
                 self._transition(run_state, state, result.status, event_sink, result=result)
                 progress = True
+        if json_text(plan.to_dict()) != serialized_plan:
+            raise RuntimeError("approved plan changed during execution")
         return run_state
+
+    @staticmethod
+    def handoff_id(workflow_id: str, plan_id: str, plan_version: int, task_id: str) -> str:
+        correlation = f"{workflow_id}\0{plan_id}\0{plan_version}\0{task_id}".encode("utf-8")
+        return f"H-{hashlib.sha256(correlation).hexdigest()[:32]}"
+
+    @classmethod
+    def create_handoff(
+        cls,
+        plan_record: PlanRecord,
+        workflow_id: str,
+        task: TaskSpec,
+        *,
+        created_at: datetime | str | None = None,
+    ) -> HumanHandoff:
+        plan = plan_record.plan
+        timestamp = created_at or datetime.now(timezone.utc)
+        if isinstance(timestamp, datetime):
+            timestamp = timestamp.isoformat()
+        return HumanHandoff(
+            cls.handoff_id(workflow_id, plan.plan_id, plan.version, task.task_id),
+            workflow_id,
+            plan.plan_id,
+            plan.version,
+            task.task_id,
+            task.objective,
+            task.evidence_requirements + task.policy_requirements,
+            task.authority_requirement,
+            task.requested_decision_authority_scope,
+            task.completion_criteria,
+            plan.unresolved_questions,
+            timestamp,
+        )
+
+    def _create_handoff(self, plan_record: PlanRecord, workflow_id: str, task: TaskSpec) -> HumanHandoff:
+        handoff = self.create_handoff(
+            plan_record,
+            workflow_id,
+            task,
+            created_at=self._clock(),
+        )
+        if self._handoff_id_factory is not None:
+            handoff = replace(handoff, handoff_id=self._handoff_id_factory())
+        return handoff
+
+    @classmethod
+    def _validated_result(cls, task: TaskSpec, result: object) -> TaskResult:
+        if not isinstance(result, TaskResult):
+            return cls._failed_result(task, "executor contract violation: expected TaskResult")
+        violations = []
+        if result.task_id != task.task_id:
+            violations.append("task ID mismatch")
+        if result.executor_type is not task.executor_type:
+            violations.append("executor type mismatch")
+        if result.status not in cls._EXECUTOR_TERMINAL:
+            violations.append(f"invalid terminal status {result.status}")
+        if violations:
+            return cls._failed_result(task, f"executor contract violation: {', '.join(violations)}")
+        return result
+
+    @staticmethod
+    def _failed_result(task: TaskSpec, error: str) -> TaskResult:
+        return TaskResult(
+            task.task_id,
+            ExecutionStatus.FAILED,
+            task.executor_type,
+            evidence_refs=task.evidence_requirements + task.policy_requirements,
+            error=error,
+        )
 
     @staticmethod
     def _transition(

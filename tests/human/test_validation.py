@@ -61,6 +61,8 @@ def response(
         response_id=response_id,
         handoff_id="H001",
         workflow_id="W001",
+        plan_id="P001",
+        plan_version=1,
         task_id="T001",
         actor_id="P001",
         response_disposition=disposition,
@@ -170,6 +172,12 @@ def test_identity_correlation_and_grant_failures_are_typed() -> None:
         ValidationIssueCode.UNIDENTIFIED_RESPONDER,
         ValidationIssueCode.EVIDENCE_OUTSIDE_GRANT,
     }.issubset(codes(result))
+
+
+@pytest.mark.parametrize("field,value", [("plan_id", "OTHER"), ("plan_version", 2)])
+def test_plan_correlation_mismatch_is_rejected(field, value) -> None:
+    result = validator().validate(handoff(), replace(response(), **{field: value}), session_id="S001")
+    assert ValidationIssueCode.CORRELATION_MISMATCH in codes(result)
 
 
 def test_file_adapter_keeps_submissions_distinct_and_idempotent(tmp_path) -> None:
