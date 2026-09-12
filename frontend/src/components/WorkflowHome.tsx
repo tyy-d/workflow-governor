@@ -16,7 +16,7 @@ export function WorkflowHome({ workflows, onSelect, onNew }: { workflows: Workfl
   return (
     <main className="workflow-home">
       <section className="home-hero">
-        <div><span className="section-kicker">Local Runtime · Frontend mock state</span><h1>Workflow Governor</h1><p>Choose an inspectable workflow or begin with a sparse objective.</p></div>
+        <div><span className="section-kicker">Local Runtime · Saved workflows</span><h1>Workflow Governor</h1><p>Choose an inspectable workflow or begin with a sparse objective.</p></div>
         <button className="new-workflow-button" onClick={onNew}>+ New Workflow</button>
       </section>
       <section className="workflow-index" aria-labelledby="recent-workflows-title">

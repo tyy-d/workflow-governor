@@ -1,42 +1,17 @@
-import { useState, type FormEvent } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import type { NewWorkflowInput } from '../types'
-
-const WORKSPACES = [
-  'Northstar — Vendor Activation',
-  'Northstar — OTIF Exception',
-  'Northstar — Freshness Review',
-  'Northstar — Invoice Review',
-  'Demo Workspace',
-]
-
-export function NewWorkflow({ onCancel, onStart }: { onCancel: () => void; onStart: (input: NewWorkflowInput) => void }) {
-  const [objective, setObjective] = useState('')
-  const [name, setName] = useState('')
-  const [workspace, setWorkspace] = useState(WORKSPACES[0])
-  const [error, setError] = useState('')
-
-  const submit = (event: FormEvent) => {
-    event.preventDefault()
-    if (!objective.trim()) {
-      setError('Enter an objective before starting the workflow.')
-      return
-    }
-    onStart({ name: name.trim() || undefined, objective: objective.trim(), workspace })
-  }
-
-  return (
-    <main className="new-workflow-page">
-      <button className="back-link" type="button" onClick={onCancel}>← Workflows</button>
-      <section className="new-workflow-intro"><span className="section-kicker">New local workflow</span><h1>What do you need done?</h1><p>Start with a sparse objective. This demo creates frontend state only and does not inspect the selected workspace.</p></section>
-      <form className="new-workflow-form" onSubmit={submit} noValidate>
-        <label className="form-field"><span>Objective <b>Required</b></span><textarea autoFocus rows={5} value={objective} onChange={(event) => { setObjective(event.target.value); setError('') }} placeholder="Can you figure out what we need to do to get this vendor live by Friday?" aria-describedby={error ? 'objective-error' : undefined} aria-invalid={Boolean(error)} /></label>
-        {error && <p className="form-error" id="objective-error" role="alert">{error}</p>}
-        <div className="form-grid">
-          <label className="form-field"><span>Workspace / Context Source <b>Required</b></span><select value={workspace} onChange={(event) => setWorkspace(event.target.value)}>{WORKSPACES.map((item) => <option key={item}>{item}</option>)}</select><small>Mock selection · no filesystem access occurs.</small></label>
-          <label className="form-field"><span>Workflow name <em>Optional</em></span><input value={name} onChange={(event) => setName(event.target.value)} placeholder="Generated from the objective if blank" /></label>
-        </div>
-        <div className="form-actions"><button type="button" onClick={onCancel}>Cancel</button><button className="primary-action" type="submit">Start Workflow</button></div>
-      </form>
-    </main>
-  )
+import { api } from '../api'
+export function NewWorkflow({onCancel,onStart}:{onCancel:()=>void;onStart:(input:NewWorkflowInput)=>void}) {
+ const [objective,setObjective]=useState(''),[name,setName]=useState(''),[workspace,setWorkspace]=useState('')
+ const [grants,setGrants]=useState<{id:string;label:string}[]>([]),[files,setFiles]=useState<{id:string;name:string;extractable:boolean}[]>([])
+ const [selected,setSelected]=useState<string[]>([]),[error,setError]=useState(''),[loading,setLoading]=useState(true)
+ useEffect(()=>{api<{id:string;label:string}[]>('/workspaces').then(v=>{setGrants(v);setWorkspace(v[0]?.id||'')}).catch(e=>{setError(String(e));setLoading(false)})},[])
+ useEffect(()=>{if(!workspace)return;setLoading(true);setSelected([]);api<typeof files>(`/workspaces/${workspace}/files`).then(setFiles).catch(e=>setError(String(e))).finally(()=>setLoading(false))},[workspace])
+ const submit=(e:FormEvent)=>{e.preventDefault();if(!selected.length){setError('Select at least one authorized file.');return}onStart({name:name.trim()||undefined,objective:objective.trim(),workspace,sourceIds:selected})}
+ return <><h1>New workflow</h1><p className="page-description">Start with a goal. Select the materials this workflow may use.</p><form className="new-workflow-form" onSubmit={submit}>
+ <label className="form-field"><span>Goal</span><textarea autoFocus required maxLength={4000} rows={4} value={objective} onChange={e=>setObjective(e.target.value)} placeholder="What do you need to work out?"/></label>
+ <label className="form-field"><span>Name <em>Optional</em></span><input maxLength={160} value={name} onChange={e=>setName(e.target.value)} placeholder="Use a short, recognizable name"/></label>
+ <label className="form-field"><span>Authorized workspace</span><select required value={workspace} onChange={e=>setWorkspace(e.target.value)}>{grants.map(g=><option key={g.id} value={g.id}>{g.label}</option>)}</select><small>Only files in the selected server-authorized workspace are available.</small></label>
+ <fieldset className="file-selection"><legend>Materials · select up to 8 files</legend>{loading?<p role="status">Loading available files…</p>:files.filter(f=>f.extractable).map(f=><label key={f.id}><input type="checkbox" checked={selected.includes(f.id)} disabled={selected.length>=8&&!selected.includes(f.id)} onChange={e=>setSelected(old=>e.target.checked?[...old,f.id]:old.filter(x=>x!==f.id))}/><span>{f.name}</span></label>)}{!loading&&!files.length&&<p>No authorized files available.</p>}</fieldset>
+ {error&&<p role="alert" className="form-error">{error}</p>}<div className="form-actions"><button type="button" onClick={onCancel}>Cancel</button><button className="primary-action" disabled={loading||!selected.length}>Create workflow</button></div></form></>
 }

@@ -7,3 +7,12 @@ htmlcov/
 .venv/
 runtime/
 
+
+runtime/
+.venv/
+__pycache__/
+.pytest_cache/
+node_modules/
+frontend/dist/
+*.tsbuildinfo
+.env

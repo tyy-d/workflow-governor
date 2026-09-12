@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import type { EvidenceAction, EvidenceKind, EvidenceViewModel, OperatorViewModel, TaskViewModel } from '../types'
+import type { EvidenceAction, EvidenceViewModel, OperatorViewModel, TaskViewModel } from '../types'
 import { Icon } from './Icon'
 
 type EvidenceFilter = 'All' | 'Documents' | 'Policy' | 'Human' | 'Derived' | 'Conflicts' | 'Missing'
@@ -28,16 +28,9 @@ function matchesFilter(item: EvidenceViewModel, filter: EvidenceFilter) {
   return item.status === 'Missing'
 }
 
-function kindCode(kind: EvidenceKind) {
-  const codes: Record<EvidenceKind, string> = { Document: 'DOC', Spreadsheet: 'XLS', Record: 'REC', Policy: 'POL', Email: 'EML', Calculation: 'CAL', 'Human Input': 'HUM', 'System Result': 'SYS' }
-  return codes[kind]
-}
 
 function EvidencePreview({ item }: { item: EvidenceViewModel }) {
-  if (item.kind === 'Spreadsheet') {
-    return <div className="mock-sheet" role="table" aria-label={`${item.title} mock preview`}>{item.preview.map((line) => { const [label, ...value] = line.split(': '); return <div role="row" key={line}><span role="cell">{label}</span><strong role="cell">{value.join(': ')}</strong></div> })}</div>
-  }
-  return <dl className="preview-fields">{item.preview.map((line) => { const [term, ...value] = line.split(': '); return <div key={line}><dt>{term}</dt><dd>{value.join(': ') || '—'}</dd></div> })}</dl>
+  return <pre className="source-content" aria-label={`${item.title} source content`}>{item.preview.join('\n')}</pre>
 }
 
 function RelationButton({ item, label, onSelect }: { item?: EvidenceViewModel; label: string; onSelect: (id: string) => void }) {
@@ -63,7 +56,7 @@ export function EvidencePanel({ evidence, tasks, selectedId, selectedTaskId, use
   return (
     <aside className="right-column">
       <section className="panel evidence-panel">
-        <div className="panel-heading evidence-heading"><div><span className="section-kicker">Evidence workspace</span><h2>Evidence {evidence.length}</h2></div><span className="scope-chip"><Icon name="shield" size={12} /> Mock · scoped</span></div>
+        <div className="panel-heading evidence-heading"><div><span className="section-kicker">Evidence workspace</span><h2>Evidence {evidence.length}</h2></div><span className="scope-chip"><Icon name="shield" size={12} /> Granted · scoped</span></div>
         <div className="evidence-toolbar">
           <label className="evidence-search"><span className="sr-only">Search evidence</span><Icon name="search" size={15} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search evidence" aria-label="Search evidence" /></label>
           <div className="evidence-filter-row" aria-label="Evidence filters">{FILTERS.map((item) => <button key={item} className={filter === item ? 'active' : ''} aria-pressed={filter === item} onClick={() => setFilter(item)}>{item}</button>)}</div>
@@ -74,18 +67,18 @@ export function EvidencePanel({ evidence, tasks, selectedId, selectedTaskId, use
           {filtered.length ? filtered.map((item) => {
             const relevant = usedIds.includes(item.id)
             return <button key={item.id} className={`${item.id === selectedId ? 'selected' : ''} ${relevant ? 'task-relevant' : ''} ${item.status === 'Superseded' ? 'superseded' : ''}`} onClick={() => onSelect(item.id)} aria-pressed={item.id === selectedId}>
-              <span className={`file-kind kind-${item.kind.toLowerCase().replaceAll(' ', '-')}`}>{kindCode(item.kind)}</span>
+              <span className={`file-kind kind-${item.kind.toLowerCase().replaceAll(' ', '-')}`}>{item.kind.slice(0,3).toUpperCase()}</span>
               <span className="evidence-row-main"><strong>{item.title}</strong><small>{item.kind} · {item.source}</small><span className={`evidence-status status-${item.status.toLowerCase().replaceAll(' ', '-')}`}>{item.status}</span>{item.version && <em>{item.version}</em>}</span>
               <span className="task-use">{relevant ? <><i className="used-dot" />Used</> : `${item.taskIds.length} task${item.taskIds.length === 1 ? '' : 's'}`}</span>
             </button>
           }) : <div className="evidence-empty"><strong>No evidence matches</strong><p>Clear the search or change the filter to inspect other workflow evidence.</p></div>}
         </div>
         {selected ? <div className={`evidence-inspector inspector-${selected.status.toLowerCase().replaceAll(' ', '-')}`}>
-          <div className="inspector-head"><div><span className="section-kicker">Selected evidence</span><h3>{selected.title}</h3><div className="inspector-badges"><span>{selected.kind}</span><span className={`evidence-status status-${selected.status.toLowerCase().replaceAll(' ', '-')}`}>{selected.status}</span><span>{selected.inspected ? 'Inspected' : 'Not inspected'}</span></div></div><span className="mock-label">MOCK PREVIEW</span></div>
+          <div className="inspector-head"><div><span className="section-kicker">Selected evidence</span><h3>{selected.title}</h3><div className="inspector-badges"><span>{selected.kind}</span><span className={`evidence-status status-${selected.status.toLowerCase().replaceAll(' ', '-')}`}>{selected.status}</span><span>{selected.inspected ? 'Inspected' : 'Not inspected'}</span></div></div><span className="mock-label">SOURCE EXTRACT</span></div>
           {selected.status === 'Missing' && <div className="evidence-alert missing-alert"><strong>Missing evidence</strong><p>{selected.summary}</p><span>{selected.requestState ?? 'Not requested'}</span></div>}
           {selected.status === 'Conflicting' && <div className="evidence-alert conflict-alert"><strong>Conflict detected</strong><p>{selected.conflictNote}</p></div>}
           <div className="inspector-summary"><label>What this evidence supports</label><p>{selected.summary}</p></div>
-          <div className="preview-surface"><div className="preview-title"><span>{selected.filename ?? selected.sourceType}</span><small>Read-only fixture</small></div><EvidencePreview item={selected} /></div>
+          <div className="preview-surface"><div className="preview-title"><span>{selected.filename ?? selected.sourceType}</span><small>Persisted source snapshot</small></div><EvidencePreview item={selected} /></div>
           <dl className="evidence-facts"><div><dt>Source</dt><dd>{selected.source}</dd></div><div><dt>Source type</dt><dd>{selected.sourceType}</dd></div><div><dt>Source role</dt><dd>{selected.sourceRole}</dd></div><div><dt>Version</dt><dd>{selected.version ?? 'Not versioned'}</dd></div><div><dt>Updated</dt><dd>{selected.updatedAt}</dd></div>{selected.metadata.map((fact) => <div key={fact.label}><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}</dl>
           {derivedInputs.length > 0 && <section className="lineage-section"><label>Evidence lineage</label><div className="lineage-inputs">{derivedInputs.map((item) => <button key={item.id} onClick={() => onSelect(item.id)}>{item.title}</button>)}</div><div className="lineage-arrow">↓</div><strong>{selected.title}</strong></section>}
           {(related.length > 0 || selected.supersedesId || selected.supersededById) && <section className="relationship-section"><label>Related evidence</label>{selected.supersedesId && <RelationButton item={evidence.find((item) => item.id === selected.supersedesId)} label="Supersedes" onSelect={onSelect} />}{selected.supersededById && <RelationButton item={evidence.find((item) => item.id === selected.supersededById)} label="Current replacement" onSelect={onSelect} />}{related.filter((item) => selected.conflictsWithIds?.includes(item.id)).map((item) => <RelationButton key={item.id} item={item} label="Conflicts with" onSelect={onSelect} />)}</section>}

@@ -1,0 +1,7 @@
+{
+  "vendor-activation": {
+    "label": "Northstar \u2014 Vendor Activation workspace",
+    "root": "cases/CASE_001_VENDOR_ACTIVATION/workspace",
+    "policies": []
+  }
+}

@@ -1,12 +1,7 @@
-# Workflow Governor interface
+# Workflow Governor frontend
 
-Static frontend shell for the Workflow Governor workflow navigator and coordination console. It supports workflow home, workflow detail, and new-workflow states using local React state. All displayed workflow, task, evidence, operator, and activity data is typed demo data from `src/mock/workflow.ts`; workflows created in the interface reset on refresh.
+Thomas's interface is now connected to the local same-origin `/api` backend. Production runtime imports no mock workflow data. Plans and task results come from persisted backend workflows; local AI work calls the existing Qwen GPU service. Human tasks capture judgment/reason, and blocked tasks offer recovery.
 
-This package performs no persistence, filesystem access, model calls, runtime execution, or backend requests.
+Run `npm ci` and `npm run build`, then start the Python server described in the repository README. Vite development mode can use an `/api` proxy to the local backend if configured; production is served directly from `dist/` by the backend.
 
-```bash
-npm install
-npm run dev
-```
-
-Use `npm run build` for a production build and `npm run typecheck` for a standalone type check.
+The historical `src/mock/` and old pure demo-state helpers are retained for reference but are not imported by the application runtime.
